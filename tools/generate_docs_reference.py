@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections.abc import Iterable
 from pathlib import Path
@@ -12,6 +13,90 @@ ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
 DOCS = ROOT / "docs"
 GENERATED = DOCS / "reference" / "generated"
+
+
+class StableHelpFormatter(argparse.HelpFormatter):
+    """Render checked-in CLI help independently of terminals and Python minors."""
+
+    def __init__(self, prog: str) -> None:
+        super().__init__(prog, width=78)
+
+    def _format_action_invocation(self, action: argparse.Action) -> str:
+        if not action.option_strings:
+            default = self._get_default_metavar_for_positional(action)
+            return " ".join(self._metavar_formatter(action, default)(1))
+        if action.nargs == 0:
+            return ", ".join(action.option_strings)
+        default = self._get_default_metavar_for_optional(action)
+        args_string = self._format_args(action, default)
+        return ", ".join("%s %s" % (option, args_string) for option in action.option_strings)
+
+    def _format_usage(self, usage, actions, groups, prefix):
+        """Use the stable pre-3.13 wrapping algorithm with a fixed width."""
+
+        if prefix is None:
+            prefix = "usage: "
+        if usage is not None:
+            usage = usage % {"prog": self._prog}
+        elif not actions:
+            usage = self._prog
+        else:
+            prog = self._prog
+            optionals = [action for action in actions if action.option_strings]
+            positionals = [action for action in actions if not action.option_strings]
+            format_actions = self._format_actions_usage
+            action_usage = format_actions(optionals + positionals, groups)
+            usage = " ".join(part for part in (prog, action_usage) if part)
+
+            text_width = self._width - self._current_indent
+            if len(prefix) + len(usage) > text_width:
+                part_pattern = r"\(.*?\)+(?=\s|$)|\[.*?\]+(?=\s|$)|\S+"
+                optional_usage = format_actions(optionals, groups)
+                positional_usage = format_actions(positionals, groups)
+                optional_parts = re.findall(part_pattern, optional_usage)
+                positional_parts = re.findall(part_pattern, positional_usage)
+                if " ".join(optional_parts) != optional_usage:
+                    raise RuntimeError("could not deterministically wrap optional CLI usage")
+                if " ".join(positional_parts) != positional_usage:
+                    raise RuntimeError("could not deterministically wrap positional CLI usage")
+
+                def wrapped_lines(parts, indent, first_prefix=None):
+                    lines: list[str] = []
+                    line: list[str] = []
+                    indent_length = len(indent)
+                    line_length = len(first_prefix) - 1 if first_prefix is not None else indent_length - 1
+                    for part in parts:
+                        if line_length + 1 + len(part) > text_width and line:
+                            lines.append(indent + " ".join(line))
+                            line = []
+                            line_length = indent_length - 1
+                        line.append(part)
+                        line_length += len(part) + 1
+                    if line:
+                        lines.append(indent + " ".join(line))
+                    if first_prefix is not None:
+                        lines[0] = lines[0][indent_length:]
+                    return lines
+
+                if len(prefix) + len(prog) <= 0.75 * text_width:
+                    indent = " " * (len(prefix) + len(prog) + 1)
+                    if optional_parts:
+                        lines = wrapped_lines([prog] + optional_parts, indent, prefix)
+                        lines.extend(wrapped_lines(positional_parts, indent))
+                    elif positional_parts:
+                        lines = wrapped_lines([prog] + positional_parts, indent, prefix)
+                    else:
+                        lines = [prog]
+                else:
+                    indent = " " * len(prefix)
+                    parts = optional_parts + positional_parts
+                    lines = wrapped_lines(parts, indent)
+                    if len(lines) > 1:
+                        lines = wrapped_lines(optional_parts, indent)
+                        lines.extend(wrapped_lines(positional_parts, indent))
+                    lines = [prog] + lines
+                usage = "\n".join(lines)
+        return "%s%s\n\n" % (prefix, usage)
 
 
 CLI_COMMANDS: Sequence[Sequence[str]] = (
@@ -314,6 +399,7 @@ def _cli_help(command: Sequence[str]) -> str:
         if subparser_action is None or part not in subparser_action.choices:
             raise RuntimeError("could not find CLI parser for command: noema %s" % " ".join(command))
         parser = subparser_action.choices[part]
+    parser.formatter_class = StableHelpFormatter
     return parser.format_help()
 
 

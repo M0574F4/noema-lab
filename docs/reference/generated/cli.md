@@ -8,7 +8,8 @@ The command help below is captured from the installed Noema CLI entry point.
 
 ```text
 usage: noema [-h] [--version] [--workspace WORKSPACE] [--adapter ADAPTER]
-             {ops,data,recipe,template,research,suite,benchmark,submission,adapter,runs,differentiable,dataset-capture,ui} ...
+             {ops,data,recipe,template,research,suite,benchmark,submission,adapter,runs,differentiable,dataset-capture,ui}
+             ...
 
 Run learned-communication experiment contracts and inspect protocol-to-plot
 evidence.
@@ -172,7 +173,8 @@ options:
 
 ```text
 usage: noema recipe [-h]
-                    {validate,lint,specs,graph,expand-matrix,run,run-matrix} ...
+                    {validate,lint,specs,graph,expand-matrix,run,run-matrix}
+                    ...
 
 positional arguments:
   {validate,lint,specs,graph,expand-matrix,run,run-matrix}
@@ -313,7 +315,8 @@ options:
 
 ```text
 usage: noema research [-h]
-                      {catalog,datasets,tasks,metrics,show,validate-recipe} ...
+                      {catalog,datasets,tasks,metrics,show,validate-recipe}
+                      ...
 
 positional arguments:
   {catalog,datasets,tasks,metrics,show,validate-recipe}
@@ -445,7 +448,8 @@ options:
 
 ```text
 usage: noema benchmark [-h]
-                       {list,show,validate,run,results,result,export,publish,verify,plot} ...
+                       {list,show,validate,run,results,result,export,publish,verify,plot}
+                       ...
 
 positional arguments:
   {list,show,validate,run,results,result,export,publish,verify,plot}
@@ -591,8 +595,8 @@ options:
 ## `noema benchmark plot`
 
 ```text
-usage: noema benchmark plot [-h]
-                            --plot {graceful-degradation,packet-success,channel-uses}
+usage: noema benchmark plot [-h] --plot
+                            {graceful-degradation,packet-success,channel-uses}
                             --out OUT [--y-metric Y_METRIC] [--x X_METRIC]
                             [--y Y_METRIC_EXPLICIT] [--group GROUP]
                             [--method-order METHOD_ORDER]
@@ -822,7 +826,7 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --replacement, --optimizable STEP_IDS
+  --replacement STEP_IDS, --optimizable STEP_IDS
                         Optional comma-separated replacement step ids to
                         inspect against the selected loss. --optimizable is
                         retained as a compatibility alias.
@@ -840,8 +844,8 @@ options:
 usage: noema differentiable export [-h] [--training-plan TRAINING_PLAN]
                                    [--replacement STEP_IDS]
                                    [--route-loss ROUTE_LOSS]
-                                   [--framework {torch-sionna,torch}]
-                                   --out OUT [--force] [--json]
+                                   [--framework {torch-sionna,torch}] --out
+                                   OUT [--force] [--json]
                                    path
 
 positional arguments:
@@ -852,7 +856,7 @@ options:
   --training-plan TRAINING_PLAN
                         Optional separate training-plan YAML/JSON overlay; the
                         source recipe remains unchanged.
-  --replacement, --optimizable STEP_IDS
+  --replacement STEP_IDS, --optimizable STEP_IDS
                         Comma-separated replacement-target step ids, for
                         example sender,receiver. May instead be supplied as
                         selected_steps in --training-plan; --optimizable is a
@@ -886,9 +890,9 @@ options:
 ## `noema dataset-capture run`
 
 ```text
-usage: noema dataset-capture run [-h] [--training-plan TRAINING_PLAN]
-                                 --out OUT [--force] [--json] [--progress |
-                                 --no-progress]
+usage: noema dataset-capture run [-h] [--training-plan TRAINING_PLAN] --out
+                                 OUT [--force] [--json]
+                                 [--progress | --no-progress]
                                  path
 
 positional arguments:
