@@ -1,0 +1,57 @@
+schema_version: 1
+execution_profile:
+  id: beamforming_link_evaluation
+  version: 1
+name: single_user_miso_beamforming
+description: Single-user MISO beamforming with selectable MRT and DFT-codebook reference methods on seeded flat-fading channels.
+suite:
+  id: beamforming_precoding
+  name: Beamforming / Precoding
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: sionna_backed_expansion
+  channel_enabled: true
+  channel_mode: ai_phy_synthetic
+  wireless_backend: auto
+  seed: 23
+  ui_configured: true
+  research:
+    dataset:
+      id: synthetic_beamforming
+      modality: wireless
+      version: synthetic-beamforming-v1
+      split: fixed_seed
+    task:
+      id: beamforming_precoding
+      kind: link_optimization
+      modality: wireless
+      metrics:
+        - beamforming.spectral_efficiency_bps_hz
+        - task.score
+        - channel.snr_db
+    metrics:
+        - beamforming.spectral_efficiency_bps_hz
+        - task.score
+        - channel.snr_db
+steps:
+  - id: data
+    op: source.beamforming_scenario
+    params:
+      example_count: 32
+      tx_antennas: 8
+      snr_db: 10
+      seed: 23
+
+  - id: beamformer
+    op: model.beamforming_adapter
+    inputs:
+      problem: data.problem
+    params:
+      mode: codebook_sweep_reference
+
+  - id: evaluation
+    op: metrics.beamforming
+    inputs:
+      problem: data.problem
+      decision: beamformer.decision

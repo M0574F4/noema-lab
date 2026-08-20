@@ -1,0 +1,823 @@
+:root {
+  --hosted-max-width: 1480px;
+}
+
+body {
+  min-height: 100%;
+}
+
+a {
+  color: var(--accent-strong);
+}
+
+.hosted-app-shell {
+  min-height: 100vh;
+}
+
+.hosted-topbar {
+  grid-template-columns: auto auto minmax(220px, 1fr) auto;
+}
+
+.hosted-brand {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hosted-brand > span:last-child {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.hosted-brand strong {
+  color: var(--text);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.hosted-brand small {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.hosted-action {
+  min-width: 86px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.hosted-action:hover,
+.hosted-action:focus-visible {
+  border-color: var(--accent);
+}
+
+.hosted-action.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #07130f;
+}
+
+.hosted-workspace {
+  width: 100%;
+  max-width: var(--hosted-max-width);
+  margin: 0 auto;
+}
+
+.hosted-results-toolbar {
+  min-height: 54px;
+  height: auto;
+  padding-block: 7px;
+}
+
+.hosted-results-toolbar h1 {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hosted-results-toolbar .toolbar-title-group > span {
+  max-width: min(820px, 58vw);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hosted-experiment-picker {
+  width: 100%;
+  min-width: 0;
+  max-width: 460px;
+  display: grid;
+  grid-template-columns: auto minmax(170px, 1fr);
+  align-items: center;
+  justify-self: stretch;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hosted-experiment-picker select {
+  height: 32px;
+  border-color: var(--line-strong);
+  background: var(--panel-alt);
+}
+
+.hosted-loading {
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+}
+
+.hosted-primary-view {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.hosted-primary-view[hidden] {
+  display: none;
+}
+
+#resultsView .results-comparison {
+  min-width: 0;
+}
+
+.hosted-graph-view,
+.hosted-graph-loading {
+  min-width: 0;
+  min-height: 0;
+}
+
+.hosted-graph-loading {
+  flex: 1;
+  display: flex;
+}
+
+.hosted-graph-shell {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 316px;
+  background: var(--panel-alt);
+}
+
+.hosted-graph-stage {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hosted-graph-toolbar {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 95%, transparent);
+}
+
+.hosted-graph-provenance {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.hosted-graph-provenance strong,
+.hosted-graph-provenance > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hosted-graph-provenance strong {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.hosted-graph-provenance > span:last-child {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.hosted-graph-readonly {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel-alt);
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hosted-graph-zoom {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hosted-graph-zoom .compact-button {
+  min-width: 30px;
+  padding-inline: 8px;
+}
+
+.hosted-graph-zoom-value {
+  width: 42px;
+  color: var(--muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.hosted-graph-surface {
+  min-height: 430px;
+  cursor: default;
+}
+
+.hosted-recipe-svg {
+  max-width: none;
+  display: block;
+  overflow: visible;
+  font-family: inherit;
+  transition: width 120ms ease, height 120ms ease;
+}
+
+.hosted-recipe-node {
+  cursor: pointer;
+}
+
+.hosted-recipe-node rect {
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.16));
+}
+
+.hosted-recipe-node.model rect {
+  stroke: var(--accent);
+}
+
+.hosted-recipe-node.metrics rect {
+  stroke: var(--amber);
+}
+
+.hosted-recipe-node.channel rect,
+.hosted-recipe-node.wireless rect,
+.hosted-recipe-node.modulation rect,
+.hosted-recipe-node.demodulation rect {
+  stroke: var(--cyan);
+}
+
+.hosted-node-family {
+  fill: var(--muted);
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hosted-recipe-node.source .hosted-node-family {
+  fill: var(--cyan);
+}
+
+.hosted-recipe-node.model .hosted-node-family {
+  fill: var(--accent-strong);
+}
+
+.hosted-recipe-node.metrics .hosted-node-family {
+  fill: var(--amber);
+}
+
+.hosted-recipe-edge .edge {
+  stroke-width: 1.6;
+}
+
+.hosted-edge-arrow {
+  fill: var(--axis-line);
+}
+
+.hosted-recipe-inspector {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  border-left: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.hosted-recipe-inspector .panel-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: color-mix(in srgb, var(--panel) 96%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.hosted-recipe-inspector-body {
+  min-width: 0;
+}
+
+.hosted-recipe-summary {
+  display: grid;
+  gap: 7px;
+}
+
+.hosted-recipe-summary h2 {
+  color: var(--text);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.hosted-recipe-summary p,
+.hosted-inspector-help,
+.hosted-inspector-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.hosted-recipe-summary code {
+  width: fit-content;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: var(--accent-strong);
+  font-size: 10px;
+}
+
+.hosted-inspector-eyebrow {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hosted-recipe-facts {
+  display: grid;
+  gap: 8px;
+}
+
+.hosted-inspector-fact {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.hosted-inspector-fact span {
+  color: var(--muted);
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.hosted-inspector-fact strong {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hosted-recipe-inspector .inspector-section h3 {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 11px;
+}
+
+.hosted-inspector-list {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+}
+
+.hosted-inspector-list > div {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(84px, 0.7fr) minmax(0, 1.3fr);
+  gap: 8px;
+  padding: 6px 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel-alt);
+}
+
+.hosted-inspector-list dt,
+.hosted-inspector-list dd {
+  min-width: 0;
+  margin: 0;
+  font-size: 9.5px;
+}
+
+.hosted-inspector-list dt {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.hosted-inspector-list dd {
+  overflow: hidden;
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hosted-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  background: var(--panel);
+}
+
+.hosted-chart-frame {
+  min-width: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.hosted-chart-frame:nth-child(odd) {
+  border-right: 1px solid var(--line);
+}
+
+.hosted-chart-frame:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  border-right: 0;
+}
+
+.hosted-chart-frame .noema-doc-chart {
+  --pst-color-text-base: var(--text);
+  --pst-color-text-muted: var(--muted);
+  --pst-color-border: var(--line);
+  --pst-color-background: var(--panel);
+  --pst-color-surface: var(--panel-alt);
+  --pst-color-primary: var(--accent);
+  --noema-chart-text: var(--text);
+  --noema-chart-muted: var(--muted);
+  --noema-chart-grid: var(--tick-line);
+  --noema-chart-axis: var(--axis-line);
+  --noema-chart-background: var(--panel);
+  --noema-chart-tooltip-background: color-mix(in srgb, var(--panel-raised) 94%, black);
+  --noema-chart-tooltip-text: var(--text);
+  height: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--panel);
+  box-shadow: none;
+}
+
+.hosted-chart-frame .noema-chart-heading {
+  min-height: 66px;
+  border-color: var(--line);
+  padding: 10px 12px 8px;
+}
+
+.hosted-chart-frame .noema-chart-title {
+  color: var(--text);
+  font-size: 13px;
+}
+
+.hosted-chart-frame .noema-chart-description {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.hosted-chart-frame .noema-chart-control {
+  min-height: 30px;
+  height: 30px;
+  border-color: var(--line-strong);
+  border-radius: 6px;
+  background: var(--panel-alt);
+  color: var(--text);
+  font-size: 11px;
+}
+
+.hosted-chart-frame .noema-chart-legend {
+  border-color: var(--line);
+  padding-inline: 12px;
+}
+
+.hosted-chart-frame .noema-chart-legend-item {
+  height: auto;
+  color: var(--text);
+  font-size: 10px;
+}
+
+.hosted-chart-frame .noema-chart-stage {
+  min-height: 300px;
+}
+
+.hosted-chart-frame .noema-chart-interaction-hint {
+  border-color: var(--line);
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.hosted-table-section,
+.hosted-evidence-section {
+  min-height: 0;
+  background: var(--panel);
+}
+
+.hosted-table-toolbar {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.hosted-table-toolbar > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.hosted-table-toolbar strong {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.hosted-table-toolbar small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hosted-table-toolbar label {
+  min-width: min(420px, 48vw);
+  display: grid;
+  grid-template-columns: auto minmax(180px, 1fr);
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.hosted-table-toolbar select {
+  height: 30px;
+  background: var(--panel-alt);
+  font-size: 11px;
+}
+
+.hosted-table-wrap {
+  max-height: none;
+  min-height: 220px;
+}
+
+.hosted-table-wrap table {
+  font-variant-numeric: tabular-nums;
+}
+
+.hosted-table-wrap th,
+.hosted-table-wrap td {
+  max-width: 300px;
+  overflow-wrap: anywhere;
+  white-space: nowrap;
+}
+
+.hosted-table-wrap td {
+  color: var(--text);
+}
+
+.hosted-table-wrap tr:hover td {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+.hosted-evidence-intro {
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.hosted-evidence-intro strong {
+  color: var(--text);
+}
+
+.hosted-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+  padding: 12px;
+}
+
+.hosted-evidence-card {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 10px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-alt);
+}
+
+.hosted-evidence-card strong {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hosted-evidence-card .evidence-type {
+  align-self: start;
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.hosted-evidence-card code {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hosted-evidence-card a {
+  grid-column: 1 / -1;
+  width: fit-content;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.hosted-evidence-card a:hover,
+.hosted-evidence-card a:focus-visible {
+  text-decoration: underline;
+}
+
+.hosted-error {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: var(--danger);
+  text-align: center;
+}
+
+.hosted-noscript {
+  position: fixed;
+  inset: auto 16px 16px;
+  z-index: 100;
+  padding: 12px;
+  border: 1px solid var(--danger-line);
+  border-radius: 8px;
+  background: var(--danger-bg);
+  color: var(--text);
+}
+
+.toast {
+  z-index: 1000;
+}
+
+@media (max-width: 1040px) {
+  .hosted-topbar {
+    height: auto;
+    min-height: 108px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand . actions"
+      "tabs picker picker";
+    padding-block: 7px;
+  }
+
+  .hosted-topbar .hosted-brand {
+    grid-area: brand;
+  }
+
+  .hosted-topbar .topbar-tabs {
+    grid-area: tabs;
+  }
+
+  .hosted-topbar .hosted-experiment-picker {
+    grid-area: picker;
+    max-width: none;
+  }
+
+  .hosted-topbar .topbar-actions {
+    grid-area: actions;
+  }
+
+  .hosted-graph-shell {
+    grid-template-columns: minmax(0, 1fr) 276px;
+  }
+
+  .hosted-chart-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hosted-chart-frame,
+  .hosted-chart-frame:nth-child(odd) {
+    grid-column: auto;
+    border-right: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .hosted-topbar {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "brand actions"
+      "tabs picker";
+  }
+
+  .hosted-topbar .topbar-tabs {
+    grid-area: tabs;
+  }
+
+  .hosted-topbar .topbar-actions {
+    grid-area: actions;
+  }
+
+  .hosted-action {
+    min-width: 0;
+    font-size: 11px;
+  }
+
+  .hosted-workspace {
+    padding: 8px;
+  }
+
+  .hosted-results-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hosted-experiment-picker,
+  .hosted-table-toolbar label {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hosted-table-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hosted-primary-view {
+    overflow: auto;
+  }
+
+  .hosted-graph-shell {
+    min-height: min-content;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .hosted-graph-stage {
+    flex: 0 0 500px;
+  }
+
+  .hosted-recipe-inspector {
+    flex: 0 0 auto;
+    min-height: 300px;
+    max-height: none;
+    overflow: visible;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+}
+
+@media (max-width: 520px) {
+  .hosted-topbar {
+    grid-template-areas:
+      "brand actions"
+      "tabs tabs"
+      "picker picker";
+  }
+
+  .hosted-brand small,
+  .hosted-action:first-of-type {
+    display: none;
+  }
+
+  .hosted-brand strong {
+    font-size: 24px;
+  }
+
+  .hosted-graph-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hosted-graph-provenance > span:last-child {
+    display: none;
+  }
+
+  .hosted-graph-zoom {
+    justify-content: flex-end;
+  }
+
+}

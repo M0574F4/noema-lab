@@ -1,0 +1,24 @@
+This directory is copied as static files into the published Sphinx site.
+
+The demo is read-only. Live Noema actions such as running recipes, editing recipes, verifying local
+run bundles, or opening local artifacts require an installed Noema environment and the local dashboard.
+The hosted experiment list is generated from chart-bearing documentation tutorials and their linked
+CSV/JSON evidence:
+
+  uv run python tools/generate_hosted_demo_catalog.py
+
+The hosted page reuses the dashboard Results stylesheet and the documentation interactive-chart
+runtime. It does not maintain a separate set of metric values. The generated catalog.js includes
+the CSV text so the built page also works when opened directly through file://.
+
+Authored OFDM tutorial assets are regenerated from the unchanged all-metrics CSV snapshot with:
+
+  uv run python tools/generate_ofdm_resource_allocation_demo_assets.py
+
+Authored QPSK phase-tracking tutorial assets are regenerated from their committed scalar-metrics
+snapshot with:
+
+  uv run python tools/generate_qpsk_phase_tracking_demo_assets.py
+
+The generated summary CSV and SVG files are convenient views, not replacements for the raw export or
+for a verified held-out benchmark publication.

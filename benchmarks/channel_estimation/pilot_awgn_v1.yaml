@@ -1,0 +1,90 @@
+schema_version: 1
+id: channel_estimation.pilot_awgn_v1
+version: "0.1.0"
+name: Pilot Channel Estimation over AWGN
+description: Explicit flat-fading SISO pilot transmission over AWGN with LS and trainable-estimator endpoints.
+suite:
+  id: channel_estimation
+  name: Channel Estimation
+  status: experimental
+  version: v1-draft
+dataset:
+  id: synthetic_pilot_channel
+  modality: wireless
+  version: synthetic-pilot-channel-v1
+  split: fixed_seed
+task:
+  id: pilot_channel_estimation
+  kind: estimation
+  modality: wireless
+metrics:
+  - id: channel.snr_db
+    definition_version: 1
+    source_step: pilot_observation
+    source_operation: wireless.pilot_observation
+    family: channel
+    unit: dB
+    direction: neutral
+  - id: channel_estimation.nmse
+    family: estimation
+    unit: ratio
+    direction: lower_is_better
+  - id: task.score
+    family: task
+    unit: score
+    direction: higher_is_better
+baselines:
+  - ls_pilot_estimator
+  - channel_estimator_adapter
+recipes:
+  - id: ls_snr0
+    label: LS estimator
+    role: baseline
+    path: ../../recipes/channel_estimation_ls_awgn.yaml
+    params:
+      method_id: ls_pilot_estimator
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        pilot_observation:
+          snr_db: 0
+  - id: adapter_snr0
+    label: LMMSE reference (trainable endpoint)
+    role: baseline
+    path: ../../recipes/channel_estimation_adapter_awgn.yaml
+    params:
+      method_id: channel_estimator_adapter
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        pilot_observation:
+          snr_db: 0
+  - id: ls_snr15
+    label: LS estimator
+    role: baseline
+    path: ../../recipes/channel_estimation_ls_awgn.yaml
+    params:
+      method_id: ls_pilot_estimator
+      matrix_selection:
+        channel.snr_db: 15
+      step_params:
+        pilot_observation:
+          snr_db: 15
+  - id: adapter_snr15
+    label: LMMSE reference (trainable endpoint)
+    role: baseline
+    path: ../../recipes/channel_estimation_adapter_awgn.yaml
+    params:
+      method_id: channel_estimator_adapter
+      matrix_selection:
+        channel.snr_db: 15
+      step_params:
+        pilot_observation:
+          snr_db: 15
+metadata:
+  benchmark_tier: experimental
+  default_plot:
+    plot: graceful-degradation
+    x: channel.snr_db
+    y: task.score
+  notes: The graph exposes channel realization, pilot pattern, noisy observation, estimation, and evaluation as separate contracts. The adapter recipe uses a deterministic LMMSE reference until a trained artifact replaces that endpoint.

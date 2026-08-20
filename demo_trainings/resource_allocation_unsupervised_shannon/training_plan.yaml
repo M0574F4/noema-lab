@@ -1,0 +1,16 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps:
+  - tx_power
+dataset_capture:
+  taps:
+    - id: channel_gains
+      from: channel_state.state
+  split_plan:
+    total_samples: 192
+    percentages:
+      train: 66.6666666667
+      validation: 16.66666666665
+      test: 16.66666666665
+objective: resource.negative_shannon_spectral_efficiency
+framework: torch

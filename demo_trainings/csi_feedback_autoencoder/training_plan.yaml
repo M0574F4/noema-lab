@@ -1,0 +1,17 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps:
+  - feedback_encoder
+  - feedback_decoder
+dataset_capture:
+  taps:
+    - id: true_csi
+      from: channel_state.csi
+  split_plan:
+    total_samples: 12288
+    percentages:
+      train: 80
+      validation: 10
+      test: 10
+objective: csi.hybrid_nmse_mrt_rate
+framework: torch

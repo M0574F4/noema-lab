@@ -1,0 +1,551 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "22199e96f0b683aca5e1e5e08e32b7a8855907bc3c9d28937f4b9dbd35b87650",
+      "size_bytes": 21444
+    },
+    "chart_data.json": {
+      "sha256": "ff91998227569c81aec7304c158292783a1ebbe6f42eebae0e8ffdf96214825a",
+      "size_bytes": 30340
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-mimo-channel-estimation-chart-data.js",
+      "sha256": "7a7a350f295a1da914ddae87e4d69b3bd9dee79a9eba5cca2f41cbcb438ef77f",
+      "size_bytes": 30502
+    },
+    "rows": 54,
+    "summary_table.csv": {
+      "sha256": "6441a202fb17f1dd24187e5c1ce41d0a4fff79bc989f384fce5c9c28589b34ad",
+      "size_bytes": 963
+    }
+  },
+  "representative_preview": {
+    "estimator_label": "Portable learned MIMO-OFDM estimator",
+    "link": "RX0\u2013TX0",
+    "paired_seed": 92001,
+    "recipe_id": "learned_estimator_tdlc_snr10_seed92001",
+    "report": {
+      "sha256": "977102a917fe542c37942dc80ae334e639603e5fd8d484be354786867db0444a",
+      "size_bytes": 56364
+    },
+    "run_id": "20260726T235442Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdlc_snr10_seed92001",
+    "snr_db": 10.0,
+    "subcarrier_count": 64,
+    "tdl_profile": "C"
+  },
+  "runs": [
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "least_squares_tdla_snrm5_seed91001",
+      "recipe_sha256": "e89ef195af49d0613264b6959ddb534448c251aa5399b23e9daf0988b4f20235",
+      "role": "baseline",
+      "run_id": "20260726T235356Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdla_snrm5_seed91001",
+      "semantic_recipe_sha256": "0d1e50f7c4875905364531b71f5fbfc9f760b6a1131923517d05c300ec531f0c"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "fixed_prior_lmmse_tdla_snrm5_seed91001",
+      "recipe_sha256": "3781370bcd0d76a3b2a2a4cd26e859bc123c275cbf9d8d860b4b22746ba5a3d9",
+      "role": "baseline",
+      "run_id": "20260726T235400Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdla_snrm5_seed91001",
+      "semantic_recipe_sha256": "982f85d40d739af76e1f13fd18624151bf57337215019c9a211bee313a9ab9f5"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "learned_estimator_tdla_snrm5_seed91001",
+      "recipe_sha256": "9fd31ee2a3eb7f493b20547e6ebc69dd2095c1a00e1f177ba6c95b7808a887f3",
+      "role": "candidate",
+      "run_id": "20260726T235401Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdla_snrm5_seed91001",
+      "semantic_recipe_sha256": "2262ff998f26649fc1f8e71216f06c1bb72cf9c66cf34f0d51033b5c4eba3b5a"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "least_squares_tdlc_snrm5_seed92001",
+      "recipe_sha256": "1597943dc2761eb1a6e9cdcf9869511371b4498d88105ad820a597bb8f340eed",
+      "role": "baseline",
+      "run_id": "20260726T235403Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdlc_snrm5_seed92001",
+      "semantic_recipe_sha256": "30690c4596901a8bff1039291ce41ffe2d39589840d6d33302b96c30dde1943a"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "fixed_prior_lmmse_tdlc_snrm5_seed92001",
+      "recipe_sha256": "be5fd8e95fdfe10cc3109dfd1a422fee3193518e7f5d568459ada71b3953f80e",
+      "role": "baseline",
+      "run_id": "20260726T235404Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdlc_snrm5_seed92001",
+      "semantic_recipe_sha256": "74ae9e9b1845b0bfc07af1b73199c7b5a352429968d34e918bbbfd88c2d4eca7"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "learned_estimator_tdlc_snrm5_seed92001",
+      "recipe_sha256": "8784e61ac0eee636fa7c53ce2e2c6315257a2951a6142fecd61b85b65802f203",
+      "role": "candidate",
+      "run_id": "20260726T235405Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdlc_snrm5_seed92001",
+      "semantic_recipe_sha256": "997d18c83780d547c82c7e5cbd0bbe3c75ab8a82291d4fb53ff0bf8e301e2e0a"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "least_squares_tdle_snrm5_seed93001",
+      "recipe_sha256": "cc8bb0c3669ffcc2757f10361db9857e75a17105e6f42283266184d013e2b8ff",
+      "role": "baseline",
+      "run_id": "20260726T235406Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdle_snrm5_seed93001",
+      "semantic_recipe_sha256": "6b0b4be969c0f57c9d018782fa192d020fe4fa900940d9493074c584ef1b29eb"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "fixed_prior_lmmse_tdle_snrm5_seed93001",
+      "recipe_sha256": "2a931939e4206361a7fcbd1b4b2291b312a0e30b14c631a3e50e455618d197f1",
+      "role": "baseline",
+      "run_id": "20260726T235407Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdle_snrm5_seed93001",
+      "semantic_recipe_sha256": "c158840c9357fd5ad8f06dfb6c1fb369483ab13659941b98de0be52d1cce39db"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "learned_estimator_tdle_snrm5_seed93001",
+      "recipe_sha256": "60ae6e980e72bd13530d384a94dbc0b8009950c77995604dcb638950f9079e70",
+      "role": "candidate",
+      "run_id": "20260726T235408Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdle_snrm5_seed93001",
+      "semantic_recipe_sha256": "15677ecd604fbed7c62519a2e8c74f189e7223273d9e8b1c1b8bcefe2940524d"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "least_squares_tdla_snr0_seed91001",
+      "recipe_sha256": "3f7f840f84ad290dfd9c4fc538b3ad3e289a8bbc289155e56400eb2b9d719cda",
+      "role": "baseline",
+      "run_id": "20260726T235410Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdla_snr0_seed91001",
+      "semantic_recipe_sha256": "4443342aa8e75bd0f420a2b65b66e6f2205cb249c4dd9b0794dfdb7c794784e9"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "fixed_prior_lmmse_tdla_snr0_seed91001",
+      "recipe_sha256": "966c55a0db2eedea5f960a4bb1e774b88047cebffd07837eeafa7fa99a7a5ea7",
+      "role": "baseline",
+      "run_id": "20260726T235411Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdla_snr0_seed91001",
+      "semantic_recipe_sha256": "8ba039a356f4cb4ff1c53e61fa400be27c0dca307134a6481ae7af374348e00a"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "learned_estimator_tdla_snr0_seed91001",
+      "recipe_sha256": "3f6bdeba36f81924fa3a6b80f59b8093496ef50ffe56d9491236cdbe6705af0d",
+      "role": "candidate",
+      "run_id": "20260726T235412Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdla_snr0_seed91001",
+      "semantic_recipe_sha256": "890b7e377c0a8ff45b0840671f07cb8913fd781528b24a5c6471c35cd99a08c4"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "least_squares_tdlc_snr0_seed92001",
+      "recipe_sha256": "b873f697486fcbb40823f00f69fb74d70c967658f95083e0912ae241c09b43a9",
+      "role": "baseline",
+      "run_id": "20260726T235413Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdlc_snr0_seed92001",
+      "semantic_recipe_sha256": "c2edceb42dcbd7a3f5b95cef49a6dafe9b3f382046885cad01ad60e6fd10278b"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "fixed_prior_lmmse_tdlc_snr0_seed92001",
+      "recipe_sha256": "5307e8393eb77e7bcab7f2d9436ec53af0ed50b8f70f449b8a5ec194c2dfe3f9",
+      "role": "baseline",
+      "run_id": "20260726T235414Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdlc_snr0_seed92001",
+      "semantic_recipe_sha256": "d5f2492159c55eba6ff3398adb7277ae3deb2305f7602eac11dbd0e7760c6120"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "learned_estimator_tdlc_snr0_seed92001",
+      "recipe_sha256": "4dddba3b8cedb70167e2970175da879e1ca0b5e47d37f2f74a009e4d49bb4f1b",
+      "role": "candidate",
+      "run_id": "20260726T235416Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdlc_snr0_seed92001",
+      "semantic_recipe_sha256": "ffc50fd639ee4fed7a5c841522ff54f77084e9c8063ca317e0c4495e15a29339"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "least_squares_tdle_snr0_seed93001",
+      "recipe_sha256": "218d93842ccf22d2feb5bf85fbb989f1a2ea671da1e5ab1c9f7dba8684f1355a",
+      "role": "baseline",
+      "run_id": "20260726T235417Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdle_snr0_seed93001",
+      "semantic_recipe_sha256": "e1d7a36126474c3458be3a122e4db213e942806e411f90099ffc1c6f67f1191c"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "fixed_prior_lmmse_tdle_snr0_seed93001",
+      "recipe_sha256": "22a166d96852254cf931e9fa7cd349a6f0510cc0ef74847979a71ff5924387c2",
+      "role": "baseline",
+      "run_id": "20260726T235418Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdle_snr0_seed93001",
+      "semantic_recipe_sha256": "144a8e35727981705732ea4d07904cf85a1e7ec1686ac2ce45545fa07dd5b9bc"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "learned_estimator_tdle_snr0_seed93001",
+      "recipe_sha256": "6bbd3d65375267a3c6cdaa5e41d506100fcb503a84c601d0c20f0be6d67f4df5",
+      "role": "candidate",
+      "run_id": "20260726T235420Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdle_snr0_seed93001",
+      "semantic_recipe_sha256": "2440193e6ca54eb08067a15e2043b50f87f1d9d346876d2883b2d6bb533a682f"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "least_squares_tdla_snr5_seed91001",
+      "recipe_sha256": "f679bd8af9eac9f7b25dead9309444d0fb7848b0ab1de58704d1810a194fb91a",
+      "role": "baseline",
+      "run_id": "20260726T235421Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdla_snr5_seed91001",
+      "semantic_recipe_sha256": "2ef6afa422a859eaa0f21db716a863296ecf992ced3051e350339e5b75ed22d5"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "fixed_prior_lmmse_tdla_snr5_seed91001",
+      "recipe_sha256": "791b22fc515419884f8a9a013b4b34789004b17bbea3e031fd12256bdb2c2349",
+      "role": "baseline",
+      "run_id": "20260726T235422Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdla_snr5_seed91001",
+      "semantic_recipe_sha256": "8c2bac34a9ecec906ea61d7462db70708dc5d1b69622e0e4b592c3987f28f3c6"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "learned_estimator_tdla_snr5_seed91001",
+      "recipe_sha256": "7f2216894dd25d02e49f10b692ed472fa4a762dbf21b08ffb3a34a1015e369a5",
+      "role": "candidate",
+      "run_id": "20260726T235424Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdla_snr5_seed91001",
+      "semantic_recipe_sha256": "dc903a0b4664f11fbc4ac5a46c6692815eb354c00ed6d21a48c40597cd4ac430"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "least_squares_tdlc_snr5_seed92001",
+      "recipe_sha256": "a66281d55be19cfc7ff37d7563544daffb918446a17fe47cfffbeda725d3e274",
+      "role": "baseline",
+      "run_id": "20260726T235425Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdlc_snr5_seed92001",
+      "semantic_recipe_sha256": "d471566805b8b83a2b795f07bbc233344a48c86c612d5566df4e4517d20fac93"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "fixed_prior_lmmse_tdlc_snr5_seed92001",
+      "recipe_sha256": "a81ae8da9a87ec828b7a4c103bd2dba0e55faf902ac557c398fc4ea89aa2c62c",
+      "role": "baseline",
+      "run_id": "20260726T235427Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdlc_snr5_seed92001",
+      "semantic_recipe_sha256": "0a35bbb0d5035d22aeb3d8679e159166bed3d7c5f894d52df981f21bda13477c"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "learned_estimator_tdlc_snr5_seed92001",
+      "recipe_sha256": "07bf5cde147e80e97f185dc4e516249af2a246c7de5dc074ff987b65c30f0e19",
+      "role": "candidate",
+      "run_id": "20260726T235428Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdlc_snr5_seed92001",
+      "semantic_recipe_sha256": "b1bb79c89adbd07eb0614bc527f2fb1b8a2d7550ee5b98557cb374293057e6c1"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "least_squares_tdle_snr5_seed93001",
+      "recipe_sha256": "3eeb8b88d5ecc84c8629f1211ad9b69bd137c18fd73232c55f3ae48b57ce3677",
+      "role": "baseline",
+      "run_id": "20260726T235429Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdle_snr5_seed93001",
+      "semantic_recipe_sha256": "bfb3dbbf28e740b60735dfe20386431349ee063311e31870a9ea83dc67afd415"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "fixed_prior_lmmse_tdle_snr5_seed93001",
+      "recipe_sha256": "62c1242e92164b59a87a7dd8863baec7f1326ba8b9999b91025f2b2f1f67299a",
+      "role": "baseline",
+      "run_id": "20260726T235431Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdle_snr5_seed93001",
+      "semantic_recipe_sha256": "4bcafc1344408b01bed1c585f3958fbd9edb627ea6e8f3d6a80aad97cbc41937"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "learned_estimator_tdle_snr5_seed93001",
+      "recipe_sha256": "2dc6385f6d35c161963f98c213bd8007b8054c2cf0dad650705fed55008e8a12",
+      "role": "candidate",
+      "run_id": "20260726T235432Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdle_snr5_seed93001",
+      "semantic_recipe_sha256": "1fd2ed6764d0377c7169ee459bf85c0d1c3f0f414c5f1c544122e7c296340b53"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "least_squares_tdla_snr10_seed91001",
+      "recipe_sha256": "2edd4ba742e0830faf211cf2c4eee9b7faaac2cb9d5a7bf9ea5e2e7170042c05",
+      "role": "baseline",
+      "run_id": "20260726T235434Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdla_snr10_seed91001",
+      "semantic_recipe_sha256": "5ff24ac6c059fc5dad74c9246c4e0177514be8c32988de42792fc40ca1374b8f"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "fixed_prior_lmmse_tdla_snr10_seed91001",
+      "recipe_sha256": "ed603321b127bef561553774a8a670dd62d40b72151102143e71b5b2690f6d0d",
+      "role": "baseline",
+      "run_id": "20260726T235436Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdla_snr10_seed91001",
+      "semantic_recipe_sha256": "e45aff456b5c49538520976fac51eab421f3847d18264ef14bd41469aa2ad92c"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "learned_estimator_tdla_snr10_seed91001",
+      "recipe_sha256": "9f2e278b9377d67e27f24aaae333d8273432a6c8afe6da086a4de060289e63bd",
+      "role": "candidate",
+      "run_id": "20260726T235437Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdla_snr10_seed91001",
+      "semantic_recipe_sha256": "f2a92dc8ab85d717cfb92ad70b207e50000d3266aef6e3dc4d8819dc4f76342b"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "least_squares_tdlc_snr10_seed92001",
+      "recipe_sha256": "a899ec86d33b5efc86ecfe3a5c9129860516358c1cfe8891cb61b13fac6fda6c",
+      "role": "baseline",
+      "run_id": "20260726T235439Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdlc_snr10_seed92001",
+      "semantic_recipe_sha256": "9129912a0365a2f1c6ef2627a8e97fed5164343aa6347466e4b8487aec8805d7"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "fixed_prior_lmmse_tdlc_snr10_seed92001",
+      "recipe_sha256": "ad67af6f5fd89be0a2ccca53a502ebea425607d93bf2395af4f43f9a33e54a85",
+      "role": "baseline",
+      "run_id": "20260726T235440Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdlc_snr10_seed92001",
+      "semantic_recipe_sha256": "1a180aa605a4e130c0731f347c97a08ab8a98413bb1e84fa89ad4db3260cf91c"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "learned_estimator_tdlc_snr10_seed92001",
+      "recipe_sha256": "43cdc00d2128b247b18dc6d36c59f75d05d733494e370caed72b19f8844ec204",
+      "role": "candidate",
+      "run_id": "20260726T235442Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdlc_snr10_seed92001",
+      "semantic_recipe_sha256": "08013d44a066641e687a1ab678424d69ea3685d0f1f9ee9118b208582332ca74"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "least_squares_tdle_snr10_seed93001",
+      "recipe_sha256": "6c097555b1fa7c10b61bdf9178101cd061dc742a11e44ef657d4e519663b0748",
+      "role": "baseline",
+      "run_id": "20260726T235443Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdle_snr10_seed93001",
+      "semantic_recipe_sha256": "f2130338f80259b8937d607a3c00788de8505eee753e81516bf5212267f8fb82"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "fixed_prior_lmmse_tdle_snr10_seed93001",
+      "recipe_sha256": "67f9143c0515062dd9e5177959c328d87a6df49e4bad4a5d2a11f071bf08f3e8",
+      "role": "baseline",
+      "run_id": "20260726T235445Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdle_snr10_seed93001",
+      "semantic_recipe_sha256": "dd4043d39a28de87147a76b140e99a161fc49276999cfe750025eb03ffb8409e"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "learned_estimator_tdle_snr10_seed93001",
+      "recipe_sha256": "dd144fbd5ae825698600550cda01eabe8df4e84d9c954670b2533a987332dc4a",
+      "role": "candidate",
+      "run_id": "20260726T235447Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdle_snr10_seed93001",
+      "semantic_recipe_sha256": "400b40d33efb80f6fc90c006c8a6ebaf30404a8d90c17691150f9ccb5844f54b"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "least_squares_tdla_snr15_seed91001",
+      "recipe_sha256": "4c701924966797711bb798e1c440ba4ed8370e16dc73f1fc373cb9ebf744381e",
+      "role": "baseline",
+      "run_id": "20260726T235448Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdla_snr15_seed91001",
+      "semantic_recipe_sha256": "dd1a6e54169131999d91da4ea95269c783432ad41a6a22501efba66233f958c4"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "fixed_prior_lmmse_tdla_snr15_seed91001",
+      "recipe_sha256": "a19975e014c1643c634d46bded43e083fa335a0b2becf1df4f599cd30868e121",
+      "role": "baseline",
+      "run_id": "20260726T235450Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdla_snr15_seed91001",
+      "semantic_recipe_sha256": "e812e3064d63d26b779b55d53c08dbdd4905307e1b15ee53b3cd31b96daa377a"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "learned_estimator_tdla_snr15_seed91001",
+      "recipe_sha256": "007e73250267917de24c21a03336c32e8fd2155d10f60ccbc907b1df2ea85ab7",
+      "role": "candidate",
+      "run_id": "20260726T235452Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdla_snr15_seed91001",
+      "semantic_recipe_sha256": "12f3f5b77ad3ceeb39d4dbee347e7c45e0788d9976fed0376ccc7a99f949b3a4"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "least_squares_tdlc_snr15_seed92001",
+      "recipe_sha256": "ddcfab70fc2f7e4da9397293cbf429596663c21496a5dc42911842d416bdf402",
+      "role": "baseline",
+      "run_id": "20260726T235453Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdlc_snr15_seed92001",
+      "semantic_recipe_sha256": "d3870c5a74b8bdd024e672462d598d7375200d11849113b2b36082cc59aec2e9"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "fixed_prior_lmmse_tdlc_snr15_seed92001",
+      "recipe_sha256": "5b036d7dd5af45a4c4053a3c5bc9e5f0005542b5f36019e97d3059d3563a10d0",
+      "role": "baseline",
+      "run_id": "20260726T235455Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdlc_snr15_seed92001",
+      "semantic_recipe_sha256": "cedd34a0882c8a436fffebf486734acef260a428ad8efd7d187a00365ef40cb7"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "learned_estimator_tdlc_snr15_seed92001",
+      "recipe_sha256": "c5b34baf9201b5043ae47f7d469c5261c37069a5e0be880e002119451b24f569",
+      "role": "candidate",
+      "run_id": "20260726T235457Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdlc_snr15_seed92001",
+      "semantic_recipe_sha256": "2be69d0aec78f632d94a905b0fa00917688216b764031d7ecb850dd91f7c90a3"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "least_squares_tdle_snr15_seed93001",
+      "recipe_sha256": "965ae37f48e6822e640408d43db5ee856a4902d2a9a10ea9216135d2293fe6a2",
+      "role": "baseline",
+      "run_id": "20260726T235459Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdle_snr15_seed93001",
+      "semantic_recipe_sha256": "6324a572f501b3124c9611aa7d6f7a4a2e2c8d0e87342522771e7aeb26942bc5"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "fixed_prior_lmmse_tdle_snr15_seed93001",
+      "recipe_sha256": "babb39ddf63c1acacc4c05bdb7ebabb65854917c46bb96d3f39353687ce5c3e4",
+      "role": "baseline",
+      "run_id": "20260726T235500Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdle_snr15_seed93001",
+      "semantic_recipe_sha256": "23be6930119e276aae2fbfea085d4c2a891f3bdf0a1b93e21295de8c19d9408c"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "learned_estimator_tdle_snr15_seed93001",
+      "recipe_sha256": "2330ec799019724fbff8c8c5c7ab1da940ef87dd2ed5d287d02aa0cb842c3c7b",
+      "role": "candidate",
+      "run_id": "20260726T235502Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdle_snr15_seed93001",
+      "semantic_recipe_sha256": "5714b238d79cabf55a3d48ef0a7f600e96ae43de927e51e011e4a997b4ba9ec7"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "least_squares_tdla_snr20_seed91001",
+      "recipe_sha256": "ff10767619a501dfc9363cd53e9d91871d2629651a1467290f94b3eccbc09e52",
+      "role": "baseline",
+      "run_id": "20260726T235504Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdla_snr20_seed91001",
+      "semantic_recipe_sha256": "795576f5c535fcc7e80116b7ff5338e22809582d0754f867d4e574d3481e08de"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "fixed_prior_lmmse_tdla_snr20_seed91001",
+      "recipe_sha256": "ef9a4556b39c6a5a3ae965fab04b89ca2fdafd4cc1747acbe611df0a680f4a8f",
+      "role": "baseline",
+      "run_id": "20260726T235506Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdla_snr20_seed91001",
+      "semantic_recipe_sha256": "441a6ea0f05f1d639ff99271136fc0b047964ab602d34668fa874f9fce2acbed"
+    },
+    {
+      "pairing_id": "A:91001",
+      "recipe_id": "learned_estimator_tdla_snr20_seed91001",
+      "recipe_sha256": "70b98d63bc8e673397affd62704f712191350039584dec8a4c4b7a9298eed918",
+      "role": "candidate",
+      "run_id": "20260726T235508Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdla_snr20_seed91001",
+      "semantic_recipe_sha256": "2e91e7f8c2c4102497c23c6ff82c268cb583cddd9f1a95a1de1b33c9b339b584"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "least_squares_tdlc_snr20_seed92001",
+      "recipe_sha256": "447e753db45a2eef028e57b24c3e996e7ad985aa1c3e4f232103c54702219278",
+      "role": "baseline",
+      "run_id": "20260726T235509Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdlc_snr20_seed92001",
+      "semantic_recipe_sha256": "2c1826eba7d036c929818b5f963cbfa4d945f50d47b998c28949c4f416636297"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "fixed_prior_lmmse_tdlc_snr20_seed92001",
+      "recipe_sha256": "f28a16ae0034fa3a0a0dc7eccaeda3b90b6cd2750417ccd994922ff002b960a3",
+      "role": "baseline",
+      "run_id": "20260726T235511Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdlc_snr20_seed92001",
+      "semantic_recipe_sha256": "cc14d32c5e7fe767d2dca284908e68f006541caea0a92ce03343db5d387e503e"
+    },
+    {
+      "pairing_id": "C:92001",
+      "recipe_id": "learned_estimator_tdlc_snr20_seed92001",
+      "recipe_sha256": "161488262b4ba1e460180f53704884bc01e2bae2fe50d8263d20facd1cac03ec",
+      "role": "candidate",
+      "run_id": "20260726T235513Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdlc_snr20_seed92001",
+      "semantic_recipe_sha256": "7cb57e67a0d308fcc699d30f0b8cdddc88df198917a8cb021ff6ae417f32897b"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "least_squares_tdle_snr20_seed93001",
+      "recipe_sha256": "7e09e40e4d7d4dc2da4e8c0ecef1f5c661a72b68bc852cf4636062069c135052",
+      "role": "baseline",
+      "run_id": "20260726T235515Z_mimo_ofdm_mixed_tdl_channel_estimation__least_squares_tdle_snr20_seed93001",
+      "semantic_recipe_sha256": "35ca403c944dc9f0c58c41ecc145cce8d00c6eb52ad7e3c1f7474897cf8ba34b"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "fixed_prior_lmmse_tdle_snr20_seed93001",
+      "recipe_sha256": "7bc4c6573a8178eb53f4bdf5026f47b301aea3189cfff3195cd553813aacbce7",
+      "role": "baseline",
+      "run_id": "20260726T235517Z_mimo_ofdm_mixed_tdl_channel_estimation__fixed_prior_lmmse_tdle_snr20_seed93001",
+      "semantic_recipe_sha256": "85768d2a9c8efea1e0f6367763369ecccb7a911aa512939dc8aff0e44665f612"
+    },
+    {
+      "pairing_id": "E:93001",
+      "recipe_id": "learned_estimator_tdle_snr20_seed93001",
+      "recipe_sha256": "f66a9d5cf69ac9a2570fd5c39bf3472aaef5c7ca223507464ff158d09f44e937",
+      "role": "candidate",
+      "run_id": "20260726T235519Z_mimo_ofdm_mixed_tdl_channel_estimation__learned_estimator_tdle_snr20_seed93001",
+      "semantic_recipe_sha256": "35867666f38804938d0707f91a248f361ac9a581e06226796c5e623b9a5aa4bf"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "learned-mimo-ofdm-channel-estimation",
+  "source": {
+    "benchmark_id": "mimo_ofdm.learned_channel_estimation_post_training_v2",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "2.0.0",
+    "completed_at_utc": "2026-07-26T23:55:20.883Z",
+    "created_at_utc": "2026-07-26T23:53:56.321Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "f5d147f077ff6f57d2824efe632b2c610fee5c9ed6b836b1db6335cafeaecfc0",
+        "size_bytes": 757523
+      },
+      "recipes.csv": {
+        "sha256": "9290650017ca172743ffce4af9294d0351682c8f6088afaf301288b2392f2afa",
+        "size_bytes": 19646
+      },
+      "result.json": {
+        "sha256": "98c0ab5f50e63de88dc83b3e0e47a076941b13ce493032df9420adb2dbd62181",
+        "size_bytes": 1009135
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "6b305c9a1e265fa331bf3dc1664431d4ae72c22cb18ee2eebc28791ecad19504",
+        "size_bytes": 1662
+      }
+    },
+    "result_id": "20260726T235356Z_mimo_ofdm.learned_channel_estimation_post_training_v2",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "channel SNR",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out profile/channel units",
+    "paired_profiles": [
+      "A",
+      "C",
+      "E"
+    ],
+    "paired_seeds": [
+      91001,
+      92001,
+      93001
+    ],
+    "sample_count_per_method_and_snr": 3,
+    "statistical_unit": "paired held-out TDL profile/channel seed",
+    "warning": "Three heterogeneous paired profile/channel units support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": {
+    "component": {
+      "id": "estimator",
+      "kind": "component",
+      "path": "training_evidence/entries/000-learned_estimator/artifact/artifacts/channel_estimator.onnx",
+      "sha256": "013ad649f76ddba7f25ffb2ab99122b1b284e8e6dd0b143a0402721a309fed68",
+      "size_bytes": 392682
+    },
+    "contract": {
+      "id": "mimo_ofdm_mixed_tdl_channel_estimation.7cd0696b7980",
+      "kind": "contract",
+      "path": "training_evidence/entries/000-learned_estimator/artifact/training_contract.yaml",
+      "sha256": "bc74c736bbc076c77cfac625656dccfddd564bd35820236c0e6a12ceab1c3bb0",
+      "size_bytes": 5495
+    },
+    "evaluation_metrics": {
+      "path": "training_evidence/entries/000-learned_estimator/evidence/evaluation_metrics.json",
+      "sha256": "5ff81935a69101fbcd8b018dcfecedbaa66f9c0c57b5d90651670e0724d42f49",
+      "size_bytes": 2308
+    },
+    "series": "learned_estimator",
+    "trained_artifact_manifest": {
+      "path": "training_evidence/entries/000-learned_estimator/artifact/trained_artifact_manifest.yaml",
+      "sha256": "bc81e2254cb40eae13d42a914670732eb009204e200a098dfe08e312712d4b2e",
+      "size_bytes": 3206
+    },
+    "training_history": {
+      "path": "training_evidence/entries/000-learned_estimator/evidence/training_history.json",
+      "sha256": "fdd459fc1821e1fa99958caae427d0d16e1bb125ed83f0463718eff0b3535040",
+      "size_bytes": 1442536
+    }
+  }
+}

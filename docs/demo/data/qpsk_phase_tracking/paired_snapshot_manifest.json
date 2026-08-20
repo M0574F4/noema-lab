@@ -1,0 +1,1120 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "chart_javascript": {
+      "path": "docs/_static/noema-qpsk-phase-tracking-chart-data.js",
+      "sha256": "bf7eec6c01a5556d1629ac09823471ec9a38e4fbfb36f522a78c71a1b944e330",
+      "size_bytes": 109890
+    },
+    "paired_benchmark_projection.csv": {
+      "sha256": "fff26443fdb22f6a7a7cce7519309f61fb8e111a3d0dedb9b80e28ca5e68edeb",
+      "size_bytes": 42704
+    },
+    "paired_chart_data.json": {
+      "sha256": "e8a160615225d4fb8fcc6bf05074dad37544adba2c2f7ac91e2a3641eb5a86ee",
+      "size_bytes": 109728
+    },
+    "paired_summary_table.csv": {
+      "sha256": "3cf85a8a115c87343d133ac009f268c824f8384ce4b8e8594a6d56ba1ab4371b",
+      "size_bytes": 1081
+    },
+    "rows": 126
+  },
+  "representative_phase_trace": {
+    "manifest": {
+      "sha256": "9ef49ec7985fc15246c7239f43a46467905e853414f0b5980c3820300e4188f8",
+      "size_bytes": 2245
+    },
+    "scope": "qualitative 6 dB packet trace from the preserved paired UI snapshot; statistical BER claims use the 126-run benchmark",
+    "trace": {
+      "sha256": "f8547c071e3092d6f2bd5bb7322c2ffe9ee1ed4fad37a92526004358f2fc3814",
+      "size_bytes": 20750
+    }
+  },
+  "runs": [
+    {
+      "pairing_id": "91001",
+      "recipe_id": "uncompensated_qpsk_snrm2_seed91001",
+      "recipe_sha256": "e28cdf6372c3b5ac21662621ea9e47fb426f98ee99b00dc1dc15c99c3568f1c2",
+      "role": "baseline",
+      "run_id": "20260727T005816Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snrm2_seed91001",
+      "semantic_recipe_sha256": "274bd824a927f6b3847b35ff6dd2952646f4030cf26e957a9d922a3701e966a7"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_interpolation_snrm2_seed91001",
+      "recipe_sha256": "3875c44d7db3380ea662ab5564730a03a056767db6d629bf40da809189b09386",
+      "role": "baseline",
+      "run_id": "20260727T005817Z_qpsk_pilot_phase_tracking__pilot_interpolation_snrm2_seed91001",
+      "semantic_recipe_sha256": "c968fefb2a434765b025038927a5161f30b67fb529af2c64a1f5707a7b37ca8f"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_smoothing_snrm2_seed91001",
+      "recipe_sha256": "67c6edd04668cf388e5c80470eb393f801743a4b09a35858beeedf7464ab7c5b",
+      "role": "baseline",
+      "run_id": "20260727T005819Z_qpsk_pilot_phase_tracking__pilot_smoothing_snrm2_seed91001",
+      "semantic_recipe_sha256": "715e9bdab2647daf2821c7c066fc9b60d6fb456fdf44409b17aa2a7cc9f5b9d6"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "decision_directed_pll_snrm2_seed91001",
+      "recipe_sha256": "856d7fc669efe987b98be2103e6498106c200ecadeedd034df2c27c2b6bc54a4",
+      "role": "baseline",
+      "run_id": "20260727T005820Z_qpsk_pilot_phase_tracking__decision_directed_pll_snrm2_seed91001",
+      "semantic_recipe_sha256": "87d0477785c330ec80a7675c44710d9355daf29011137ca185fa2ba603513555"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "learned_receiver_snrm2_seed91001",
+      "recipe_sha256": "76f7e05cd343abd9d736264a58b7082e43b17134127c576cb254444bf5e50c8a",
+      "role": "candidate",
+      "run_id": "20260727T005823Z_qpsk_pilot_phase_tracking__learned_receiver_snrm2_seed91001",
+      "semantic_recipe_sha256": "8bf2b82df0eb493489a17dd874ef2085db3364ac6ecefa4ada95fb52ce3b6a98"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "oracle_phase_snrm2_seed91001",
+      "recipe_sha256": "ace31d5780f4315ebbdd12c6aa1a10130b0bfead0414a87ffe8789e8eee559ba",
+      "role": "upper_bound",
+      "run_id": "20260727T005825Z_qpsk_pilot_phase_tracking__oracle_phase_snrm2_seed91001",
+      "semantic_recipe_sha256": "3bc959ff17e1f7880ab151173800b7afc1f5d366c68866bcff10e7194b53d8ad"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "uncompensated_qpsk_snrm2_seed92001",
+      "recipe_sha256": "a13ac28df81a753aad99f9f0a25b45dda65cdae9608d6417cf208f8fbc3803e2",
+      "role": "baseline",
+      "run_id": "20260727T005827Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snrm2_seed92001",
+      "semantic_recipe_sha256": "9e914d365e1dc79cd342b6dcbc9c75a9f722d76a34a18dc6ef4e96c460b60182"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_interpolation_snrm2_seed92001",
+      "recipe_sha256": "b6bc5c0af8a871684e17fa520133a827a5c7f726801a08f9dc7cda5d6bb1f7e4",
+      "role": "baseline",
+      "run_id": "20260727T005829Z_qpsk_pilot_phase_tracking__pilot_interpolation_snrm2_seed92001",
+      "semantic_recipe_sha256": "a746e91e7ef6936f1430e2c94fef766ceff35f1c4ffbd713a3b2513d1632b523"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_smoothing_snrm2_seed92001",
+      "recipe_sha256": "2f1f62d5796d42b49c1c9ee88d68910b2c4552d02e4a52c6d6efefcf941304f2",
+      "role": "baseline",
+      "run_id": "20260727T005830Z_qpsk_pilot_phase_tracking__pilot_smoothing_snrm2_seed92001",
+      "semantic_recipe_sha256": "aa5d21928afde66273ce22d5012a7f191812db527a913cf111072b0c68a39669"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "decision_directed_pll_snrm2_seed92001",
+      "recipe_sha256": "8a658d409434655e32a71801a9fe5eebf022417bd920666fbae03ffad6e31a46",
+      "role": "baseline",
+      "run_id": "20260727T005832Z_qpsk_pilot_phase_tracking__decision_directed_pll_snrm2_seed92001",
+      "semantic_recipe_sha256": "472f212c7a4bcfd8fd349281d2a013843e32a002aae2c1be4721552310a97596"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "learned_receiver_snrm2_seed92001",
+      "recipe_sha256": "8507f3d1f62104904c8095fe52edff20dcab944252885cb8bdab8ff47ba8c983",
+      "role": "candidate",
+      "run_id": "20260727T005836Z_qpsk_pilot_phase_tracking__learned_receiver_snrm2_seed92001",
+      "semantic_recipe_sha256": "84662f47fe7bbf6e6bc617aa72c5a443cfb75e66d5192bce6d8bdcb3ab59eeb5"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "oracle_phase_snrm2_seed92001",
+      "recipe_sha256": "717170d8f8842fe5447f2cc8a8cc92c816d46530ce62bf25b7977c2175c40a8b",
+      "role": "upper_bound",
+      "run_id": "20260727T005838Z_qpsk_pilot_phase_tracking__oracle_phase_snrm2_seed92001",
+      "semantic_recipe_sha256": "7633615db3f45e24f8fd4ac8f6900b0594f66ace40b30034773f809175f3e22a"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "uncompensated_qpsk_snrm2_seed93001",
+      "recipe_sha256": "46ed8030654cecc8559ae1b237576083c24005c52c75b9d11881be0636124745",
+      "role": "baseline",
+      "run_id": "20260727T005840Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snrm2_seed93001",
+      "semantic_recipe_sha256": "07ad54677f96bdd8d82a266e07cd3da74c7c11171bd3cb342ed8f33b849fe4dd"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_interpolation_snrm2_seed93001",
+      "recipe_sha256": "46408fb738798632dd2e8ffe82164369ee39440664073ff68a173df5017a21af",
+      "role": "baseline",
+      "run_id": "20260727T005842Z_qpsk_pilot_phase_tracking__pilot_interpolation_snrm2_seed93001",
+      "semantic_recipe_sha256": "0f823e9bdd2124be496b3fb09ee29c22b5fc41b882282e42b9883d5da70ca5d0"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_smoothing_snrm2_seed93001",
+      "recipe_sha256": "8295e62c66c2d0ab681063bef9c7c5dffbf9c43dee82a8b33c2e30f5eb01ca81",
+      "role": "baseline",
+      "run_id": "20260727T005844Z_qpsk_pilot_phase_tracking__pilot_smoothing_snrm2_seed93001",
+      "semantic_recipe_sha256": "36ee03dddb8280344c3ae546ae44860291303417da4f93efda8c0f83daed52a5"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "decision_directed_pll_snrm2_seed93001",
+      "recipe_sha256": "45176a79ce0d917a7c8c3978acb98a22358788dd888a7333097a112ec29131f6",
+      "role": "baseline",
+      "run_id": "20260727T005846Z_qpsk_pilot_phase_tracking__decision_directed_pll_snrm2_seed93001",
+      "semantic_recipe_sha256": "798450ce35d238bf26dc0f9e1565326fb620e237ec624321b2bd5320b7ad75ee"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "learned_receiver_snrm2_seed93001",
+      "recipe_sha256": "16a743be7c4f7097e647e8ee6218bfbb1ffdc7fa1ecc0000a3767004552dc66b",
+      "role": "candidate",
+      "run_id": "20260727T005850Z_qpsk_pilot_phase_tracking__learned_receiver_snrm2_seed93001",
+      "semantic_recipe_sha256": "c488c45db521ed3b4377bcb202e809b0056bae1195e7c47dabefa1d567148479"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "oracle_phase_snrm2_seed93001",
+      "recipe_sha256": "fa9a3402e5af6f7d2c1e0702f5b59e7b35051717bac54543a9e6282b52c50d5c",
+      "role": "upper_bound",
+      "run_id": "20260727T005852Z_qpsk_pilot_phase_tracking__oracle_phase_snrm2_seed93001",
+      "semantic_recipe_sha256": "987c7d541180c510fb43c4eae54f2b1a5160e65caf841d09091b5c6b329f8ff1"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "uncompensated_qpsk_snr0_seed91001",
+      "recipe_sha256": "75bd064b9235ef5b0ecd2a1869f9780051be1a34a921c5b7b50edeaef9d116ee",
+      "role": "baseline",
+      "run_id": "20260727T005855Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr0_seed91001",
+      "semantic_recipe_sha256": "aa80785e5e146227a90e8e4e6fcc58cc62f3c575ae5760f7927bba4f3be47571"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_interpolation_snr0_seed91001",
+      "recipe_sha256": "97009bd7a27e2603077f9174f82ecd35a3e63fc034f47f60a2fcc07e677d87e3",
+      "role": "baseline",
+      "run_id": "20260727T005857Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr0_seed91001",
+      "semantic_recipe_sha256": "8ce7d1e73f9c3f27a9b8dc43aadefef8f79a3ca6a6a005d22fde426d13eadee5"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_smoothing_snr0_seed91001",
+      "recipe_sha256": "00bf0880f7d2f09cbae4a3c190aa1c1e5c9671bd19c1e87c6797bc95bcffe212",
+      "role": "baseline",
+      "run_id": "20260727T005859Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr0_seed91001",
+      "semantic_recipe_sha256": "3fb090ea6adc900e17a03718cbc671c633c96d87e83072e5b4fef7e2997caebc"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "decision_directed_pll_snr0_seed91001",
+      "recipe_sha256": "ab8635948e084a9386f2f178729974ab9c7dafeefe83d8bda64b8d4ae08840a6",
+      "role": "baseline",
+      "run_id": "20260727T005902Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr0_seed91001",
+      "semantic_recipe_sha256": "d908a04e391ff3d7378ab77cf56243a8b3359c7ea33cd2604cf86b0016d5a149"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "learned_receiver_snr0_seed91001",
+      "recipe_sha256": "27538448457b33a01eeaa32ae8a949350717d849c7ca5bf32ae74f3fb53a7302",
+      "role": "candidate",
+      "run_id": "20260727T005906Z_qpsk_pilot_phase_tracking__learned_receiver_snr0_seed91001",
+      "semantic_recipe_sha256": "ee07a0975bc0b9c1a9efcd8a32aa2207aa562165d318b844f32eac73880122c9"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "oracle_phase_snr0_seed91001",
+      "recipe_sha256": "1309b9cb786a22a78b2da7c6966fe64bfac0fb24ff64f9bf06974259cd4667d1",
+      "role": "upper_bound",
+      "run_id": "20260727T005908Z_qpsk_pilot_phase_tracking__oracle_phase_snr0_seed91001",
+      "semantic_recipe_sha256": "cc81d8c64c9fa838e335e12e8115fa288e5ba9d56e8f23aaa930e1fd9a404b2c"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "uncompensated_qpsk_snr0_seed92001",
+      "recipe_sha256": "95c5de25b74569e09807a893c6884fd7bb0bae76b3d05e2571561533f32f7da1",
+      "role": "baseline",
+      "run_id": "20260727T005911Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr0_seed92001",
+      "semantic_recipe_sha256": "87871989bce1516c89deaca3653377e5a57bca2480ca8de890eae5bf38eafd40"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_interpolation_snr0_seed92001",
+      "recipe_sha256": "582417ee08cb5b3523e0ee5b4ec87b5bcb86fdfda94122ac557e308dbcc6a555",
+      "role": "baseline",
+      "run_id": "20260727T005913Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr0_seed92001",
+      "semantic_recipe_sha256": "096bf2a91458e07be819ce9579628ed2bc6d956136a84523a0dad90dc743a3aa"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_smoothing_snr0_seed92001",
+      "recipe_sha256": "1fc391c4aa4817aabeed9eb3af1a42ab6ae26ec2bfcdcf3abc3be1594be91459",
+      "role": "baseline",
+      "run_id": "20260727T005916Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr0_seed92001",
+      "semantic_recipe_sha256": "32c6602f09b7a464afc81a42edf09046d13fb19c285f237b2c420a07a0bef9d8"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "decision_directed_pll_snr0_seed92001",
+      "recipe_sha256": "e5ae7b021703c0714e4d5a5b84d021082e8d5dc7ad38ede508c2dc80216349bb",
+      "role": "baseline",
+      "run_id": "20260727T005918Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr0_seed92001",
+      "semantic_recipe_sha256": "296f0f9a2eba17f6c368cdaccf2e042f672daa32c15819db6cb9acce82eb80c6"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "learned_receiver_snr0_seed92001",
+      "recipe_sha256": "528c99cca2e1d28c072daf451462f5b715605de9599cf6cece295cefed4258d8",
+      "role": "candidate",
+      "run_id": "20260727T005922Z_qpsk_pilot_phase_tracking__learned_receiver_snr0_seed92001",
+      "semantic_recipe_sha256": "2ad9cd4c09a5ece412acfda31991c8f04a2bb3996a7523b963f49ae64680f10b"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "oracle_phase_snr0_seed92001",
+      "recipe_sha256": "804b52c68286b4e90a617f5c5dc0c176870058de75e8d75c8f3b9ba5ee6558bd",
+      "role": "upper_bound",
+      "run_id": "20260727T005925Z_qpsk_pilot_phase_tracking__oracle_phase_snr0_seed92001",
+      "semantic_recipe_sha256": "b016102c2ce56d5abf15738d9cf2b035d2f7ae20a08e1337d6a111ddbb08eb50"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "uncompensated_qpsk_snr0_seed93001",
+      "recipe_sha256": "4fa3265fa55001efd2c64995441502131e215144ee481498c41bedf942cab48e",
+      "role": "baseline",
+      "run_id": "20260727T005928Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr0_seed93001",
+      "semantic_recipe_sha256": "0fb64eebc7c332d13d89bdde4385f1397b0a28873bf58059a37c1be804db3b98"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_interpolation_snr0_seed93001",
+      "recipe_sha256": "432542c083b00a2165d2191e53c95bf4c977c12a8d3cdf6f8db189e318069fdf",
+      "role": "baseline",
+      "run_id": "20260727T005931Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr0_seed93001",
+      "semantic_recipe_sha256": "ee5d9ffd4813f658bb855a255737ab981acfc1219209397cb10736fbb6c25ba0"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_smoothing_snr0_seed93001",
+      "recipe_sha256": "1a2733734207b48d522e237a76be2720435645e4f5980ff6bdf628f2cd268786",
+      "role": "baseline",
+      "run_id": "20260727T005933Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr0_seed93001",
+      "semantic_recipe_sha256": "db0e7e17b78c6575f59702c30eec0fb61ae90d46e03d34f4e3ff5aa9cba24c06"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "decision_directed_pll_snr0_seed93001",
+      "recipe_sha256": "5ed834bbac8a4f439e784d5747795f122b78c8867ceb437e24cf16b8f771f30b",
+      "role": "baseline",
+      "run_id": "20260727T005936Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr0_seed93001",
+      "semantic_recipe_sha256": "b9492d6f423be290a676afdff5c10af9c7da8e0d28eb00e0ec6aae64f409d49b"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "learned_receiver_snr0_seed93001",
+      "recipe_sha256": "fd888b0cec0718890ce6892fa142477e3a730b10f27033c27418fa87e81b78c9",
+      "role": "candidate",
+      "run_id": "20260727T005940Z_qpsk_pilot_phase_tracking__learned_receiver_snr0_seed93001",
+      "semantic_recipe_sha256": "9d359a65fab556f3d8c58a0801a9316cea32aa87e14b972782d8b6e771a82bf7"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "oracle_phase_snr0_seed93001",
+      "recipe_sha256": "a4dc20526bfac5d7fd09d46606de7c8334049755dadb96a43670cdc90aab23c4",
+      "role": "upper_bound",
+      "run_id": "20260727T005944Z_qpsk_pilot_phase_tracking__oracle_phase_snr0_seed93001",
+      "semantic_recipe_sha256": "b7a3cddd5ce295da3eaf270ccd0567ada168cb2b0b465781587aa3bade33fa6e"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "uncompensated_qpsk_snr2_seed91001",
+      "recipe_sha256": "1e854d4329aac99bf5be838ac158fb887b90e5b4b1380bd00458654f62dad0e9",
+      "role": "baseline",
+      "run_id": "20260727T005946Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr2_seed91001",
+      "semantic_recipe_sha256": "9aa9df58a44f3a76951a111e24ffcbaa6e78556635dde005c53b68cc98930a27"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_interpolation_snr2_seed91001",
+      "recipe_sha256": "fe3ecb226d7e8b73656ec826774cf2b4bf053fd4b81bdd2a97513c37f0884cb7",
+      "role": "baseline",
+      "run_id": "20260727T005949Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr2_seed91001",
+      "semantic_recipe_sha256": "3bb9faa6abf3c1a946d757a1195510ee287ccb3fc0beadac582e388ce1a63f3e"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_smoothing_snr2_seed91001",
+      "recipe_sha256": "d90e310da11a879af121ea82a8a2082eb6c013a2051817698f5ff1c94baa533a",
+      "role": "baseline",
+      "run_id": "20260727T005952Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr2_seed91001",
+      "semantic_recipe_sha256": "c77fe62c4640f46638255a8e65c7a342309048149138eeca4084742c31e83e86"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "decision_directed_pll_snr2_seed91001",
+      "recipe_sha256": "d490768c91c7dad80601b7069cf0e037333c8c345fe93ca289c0bd309bf75125",
+      "role": "baseline",
+      "run_id": "20260727T005955Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr2_seed91001",
+      "semantic_recipe_sha256": "071dc868aa83d01b1da987289c9406a69a4e4c327f27ba32221bb67e54f09e87"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "learned_receiver_snr2_seed91001",
+      "recipe_sha256": "9634653675ef5f9bd3001de680c162beebf46eb770568cc880222393d44edd0c",
+      "role": "candidate",
+      "run_id": "20260727T005959Z_qpsk_pilot_phase_tracking__learned_receiver_snr2_seed91001",
+      "semantic_recipe_sha256": "818552e615db1e03561c0cc9dcbfd6d04de586657620e4ee083563cef8e4329e"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "oracle_phase_snr2_seed91001",
+      "recipe_sha256": "8c5606b927fd17458266259a8c7450b1f568311be62b9cfa2209bd8616004257",
+      "role": "upper_bound",
+      "run_id": "20260727T010003Z_qpsk_pilot_phase_tracking__oracle_phase_snr2_seed91001",
+      "semantic_recipe_sha256": "5f63559e500b64bfb75124d24d1839046931b0bf7d867254dcf15be903d2abea"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "uncompensated_qpsk_snr2_seed92001",
+      "recipe_sha256": "c373a29c36fb0cbd122e19de3d743623c86e7a256a2dbb811000e249358567a3",
+      "role": "baseline",
+      "run_id": "20260727T010006Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr2_seed92001",
+      "semantic_recipe_sha256": "f21d935932084a14ece9dd7e7599efa07cb6d4ebf10f60954f98cc047ed8ec59"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_interpolation_snr2_seed92001",
+      "recipe_sha256": "479d3ed028d257ac47a3434c25a1357dd2e76bc2e5c0524d6df4f784acaf8d85",
+      "role": "baseline",
+      "run_id": "20260727T010009Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr2_seed92001",
+      "semantic_recipe_sha256": "47b1b110701ce33c5235309d3732ac1a52f97d086694a424d235cced61fbdf8f"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_smoothing_snr2_seed92001",
+      "recipe_sha256": "38c732fbfff07310222a1c4e0b47d831e0466c4fcde9b4ed900f28784641db15",
+      "role": "baseline",
+      "run_id": "20260727T010012Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr2_seed92001",
+      "semantic_recipe_sha256": "0717f796228f5b31157d4ab71e820b27809c50f14c661ce3067ca3f79bf1efd5"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "decision_directed_pll_snr2_seed92001",
+      "recipe_sha256": "f58265923835bd03454ea547ac10decf7d71d0de91e77dd55b3fe7d524f1e944",
+      "role": "baseline",
+      "run_id": "20260727T010015Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr2_seed92001",
+      "semantic_recipe_sha256": "de5dae3f934de30671d2772cf76ba858ba76391f3995aec8a81c75226f8e880f"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "learned_receiver_snr2_seed92001",
+      "recipe_sha256": "a6409ff7d551816ec2c3a5e412af215a3ab8a294c622bc8b0c3843c365ec56d3",
+      "role": "candidate",
+      "run_id": "20260727T010019Z_qpsk_pilot_phase_tracking__learned_receiver_snr2_seed92001",
+      "semantic_recipe_sha256": "f91c2baa226313ebdd9d02cf5217f3b16efa3de7029ccaab69373f534046961a"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "oracle_phase_snr2_seed92001",
+      "recipe_sha256": "8e4e6cf8cef8a14994f8feae426d1963a035b474e483de766ba32d24d7a0e1a2",
+      "role": "upper_bound",
+      "run_id": "20260727T010023Z_qpsk_pilot_phase_tracking__oracle_phase_snr2_seed92001",
+      "semantic_recipe_sha256": "0c505104519e7f5ea3411fe47a87579658266c7164e1dec3d25947acb1499cdd"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "uncompensated_qpsk_snr2_seed93001",
+      "recipe_sha256": "b3ef0d50cb8f3977825f9b4fb6693ed3c886e9ec740404a04014d0256d8beba7",
+      "role": "baseline",
+      "run_id": "20260727T010026Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr2_seed93001",
+      "semantic_recipe_sha256": "c7fff050e5980ebdc3b406ca9024b79a65080a66e7afb4bbfefd3ec32a0f4711"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_interpolation_snr2_seed93001",
+      "recipe_sha256": "37432fedd0b51f6fd25058d51192c21f234b7d6b6702c547868ceb43330a8a8d",
+      "role": "baseline",
+      "run_id": "20260727T010029Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr2_seed93001",
+      "semantic_recipe_sha256": "0b4464eb7b30281f1c0dd59ede283b8df739fe7c170d674813fa81599e26bffe"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_smoothing_snr2_seed93001",
+      "recipe_sha256": "361a9271cd952fe509d3e1074622a7184613f3b27b6b49288c7cbbd9705573e1",
+      "role": "baseline",
+      "run_id": "20260727T010032Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr2_seed93001",
+      "semantic_recipe_sha256": "08621acc0ce3de94c6ec193e949c0efbd62d721629d1993e370532704d3ed136"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "decision_directed_pll_snr2_seed93001",
+      "recipe_sha256": "08fcd23b2cf940f9c9c194fc27f45e0b6b4c40e1b10f1e9f109a88915e542d69",
+      "role": "baseline",
+      "run_id": "20260727T010036Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr2_seed93001",
+      "semantic_recipe_sha256": "1b7ee3d23ad2f761e6c01b9747b17c2994de9d1869fb706258745e9b9e3ff819"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "learned_receiver_snr2_seed93001",
+      "recipe_sha256": "6b869f1ee28b6036a098d2b86f5d8e0aa3f705f7fd7245157e5b852661e0f742",
+      "role": "candidate",
+      "run_id": "20260727T010040Z_qpsk_pilot_phase_tracking__learned_receiver_snr2_seed93001",
+      "semantic_recipe_sha256": "42206f5b3dd44af80568c3c284e1717c67beec8ec25a1550a7cae1302e6a90d6"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "oracle_phase_snr2_seed93001",
+      "recipe_sha256": "6e7ec1f42b498000d012fbf5c5e6afc081a23dc4dd148183eb3fd670a4e9beb1",
+      "role": "upper_bound",
+      "run_id": "20260727T010044Z_qpsk_pilot_phase_tracking__oracle_phase_snr2_seed93001",
+      "semantic_recipe_sha256": "420c0471d51fc9d0f2c93e4794558ba2dbb1da0368159a5f2d3faa80fdfb9095"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "uncompensated_qpsk_snr4_seed91001",
+      "recipe_sha256": "d1c583ee07188afdd34b59de4293933986d77595d7114bdf755ae88ef333c350",
+      "role": "baseline",
+      "run_id": "20260727T010047Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr4_seed91001",
+      "semantic_recipe_sha256": "4dae21d3ba28c89e328ccdcd5316ab396dac5145c5bc92069a3e012d45af60e7"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_interpolation_snr4_seed91001",
+      "recipe_sha256": "4c31b4715602353d50114a60593b05188dcb803d9a1125bc631a388ed7c99a7b",
+      "role": "baseline",
+      "run_id": "20260727T010050Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr4_seed91001",
+      "semantic_recipe_sha256": "3c8cbda04187674d1f7d0c4a8dbdd18f8db8b3a74ed8d20c2c51384f1b482d42"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_smoothing_snr4_seed91001",
+      "recipe_sha256": "98c765d3637b121940631eb687fb5f3f149e652fbae9f77b1f854a61351d4aa5",
+      "role": "baseline",
+      "run_id": "20260727T010054Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr4_seed91001",
+      "semantic_recipe_sha256": "9236fa6aca311135c13d4e0388062c384f8f61ddc8cdd731182341543b83a780"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "decision_directed_pll_snr4_seed91001",
+      "recipe_sha256": "8f36bdaad826a4b673a535ba8da008d9da23d31976c1ebba128c2d5129b4f1a8",
+      "role": "baseline",
+      "run_id": "20260727T010057Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr4_seed91001",
+      "semantic_recipe_sha256": "64adeba3340f1b19dc81a6369e6bf411b3e4167b709d8ae20c150402b65840b0"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "learned_receiver_snr4_seed91001",
+      "recipe_sha256": "1e3fdef2dae4f4df7fe449902dff4317c60334acfd911bd2eca8a01e8cc7d8e0",
+      "role": "candidate",
+      "run_id": "20260727T010102Z_qpsk_pilot_phase_tracking__learned_receiver_snr4_seed91001",
+      "semantic_recipe_sha256": "9b42866fbff2c83d310b177525f74e992c517a8f403902aa2bfdef6b9c2f0231"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "oracle_phase_snr4_seed91001",
+      "recipe_sha256": "6557571b3b2ef8b6790c748547236dbae89f7e99e775d7096b2deb48e1b53736",
+      "role": "upper_bound",
+      "run_id": "20260727T010106Z_qpsk_pilot_phase_tracking__oracle_phase_snr4_seed91001",
+      "semantic_recipe_sha256": "29cc12a1fe75161dc5a67116875edd9c39438e069b00dfc3f0ce03145078f62a"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "uncompensated_qpsk_snr4_seed92001",
+      "recipe_sha256": "c725c4ca3f58abf595890c2e9d61cae709ea81ad57e5ed1b9202ec60ac66da26",
+      "role": "baseline",
+      "run_id": "20260727T010110Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr4_seed92001",
+      "semantic_recipe_sha256": "b51784d008bf32b8a4d48e8f8a4836ac00c409f5ef48c12dbb13cc534b497f7e"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_interpolation_snr4_seed92001",
+      "recipe_sha256": "04f2524e9854ac4cd3bf1d077d269132f6c0e83ab1a98a460130f2146b7dc293",
+      "role": "baseline",
+      "run_id": "20260727T010113Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr4_seed92001",
+      "semantic_recipe_sha256": "08f0b59ecb775d3d5c122a729e96af2bc370b81ee326f5270026ee9ac516144d"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_smoothing_snr4_seed92001",
+      "recipe_sha256": "b655f8738a03b8eafde0436d000f12b8bae6ff6728723dc2ff83a70bf44286c0",
+      "role": "baseline",
+      "run_id": "20260727T010116Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr4_seed92001",
+      "semantic_recipe_sha256": "80d95bc64f084a8708c0ac9561e5d05cfb5a5a689c7722d8ae79e34ffc47a523"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "decision_directed_pll_snr4_seed92001",
+      "recipe_sha256": "53df7d07e27aaa0b9eb4125605eee4dcb97d67a423bc1efe87ed0ee12102b24a",
+      "role": "baseline",
+      "run_id": "20260727T010120Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr4_seed92001",
+      "semantic_recipe_sha256": "bac69b11b9b88761a22e6faba089b23a4deb36f7c00adcd47430f255aff4a89b"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "learned_receiver_snr4_seed92001",
+      "recipe_sha256": "fc7532cc5cf37ee372f5e443fcae2ed79bcddf88aad188f4792da98b20435fe4",
+      "role": "candidate",
+      "run_id": "20260727T010125Z_qpsk_pilot_phase_tracking__learned_receiver_snr4_seed92001",
+      "semantic_recipe_sha256": "c85ee64c7e7b30ccf4942601dd0912c62adbbebae9df1c52c3479c5a0e3cd7d7"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "oracle_phase_snr4_seed92001",
+      "recipe_sha256": "58b651b5651e4af79fe3e3b9ba8a0f37a752c8a5abbbea53b179c52542773be8",
+      "role": "upper_bound",
+      "run_id": "20260727T010129Z_qpsk_pilot_phase_tracking__oracle_phase_snr4_seed92001",
+      "semantic_recipe_sha256": "df9cee1a015b7f185b790225860194a7db368a4d2483b30f037d6a46f4741048"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "uncompensated_qpsk_snr4_seed93001",
+      "recipe_sha256": "049ea949078a33eca41d487eda5593e7bd4621e4d92545b0940b12802e346669",
+      "role": "baseline",
+      "run_id": "20260727T010133Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr4_seed93001",
+      "semantic_recipe_sha256": "664a97a02c0b6b75841e9f4dca58bcc894019fac87b0dd3c29de3f6752fbfb9b"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_interpolation_snr4_seed93001",
+      "recipe_sha256": "f1307d822839b7def7e3aae5ddb9c61e4d210acae44df0c0f8477da004295095",
+      "role": "baseline",
+      "run_id": "20260727T010137Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr4_seed93001",
+      "semantic_recipe_sha256": "5eb74015443a3c79e9be79104d55536be40a25084f2be83119f4f95f6dfaeafd"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_smoothing_snr4_seed93001",
+      "recipe_sha256": "4e2fc05e50a8f12dea38a5ee8ee43d4bf959c257acfeb248ccbfacf253d9bf59",
+      "role": "baseline",
+      "run_id": "20260727T010140Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr4_seed93001",
+      "semantic_recipe_sha256": "b573c399c2b37ade4dd277d77905b7d22e4f0a7a48ccf83cf389c70ed1b6be79"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "decision_directed_pll_snr4_seed93001",
+      "recipe_sha256": "21e846580d44d69f821890abaaf62efc687b21de8615465f8ff8b89081767bd3",
+      "role": "baseline",
+      "run_id": "20260727T010144Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr4_seed93001",
+      "semantic_recipe_sha256": "f4ef4a0a752f969c756924e7f8f6247988082392c25c409813d032003e945b4c"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "learned_receiver_snr4_seed93001",
+      "recipe_sha256": "bab865121fae4c0b3f41af9949b99f8a6abe351f1ae8f03fc1a2b4025f378bee",
+      "role": "candidate",
+      "run_id": "20260727T010149Z_qpsk_pilot_phase_tracking__learned_receiver_snr4_seed93001",
+      "semantic_recipe_sha256": "47acb9733d3b99b32098d4a45483bae2eededb68a6695914ae6884bc154071e2"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "oracle_phase_snr4_seed93001",
+      "recipe_sha256": "71b9df99efda9ee3351b15e00b0776b91958f503db40d5b44875fdcce762ba14",
+      "role": "upper_bound",
+      "run_id": "20260727T010153Z_qpsk_pilot_phase_tracking__oracle_phase_snr4_seed93001",
+      "semantic_recipe_sha256": "b6c94a6ac76ca57104eb34b9a829276e64043cbb2e6c638bb77aaecc4d1d6607"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "uncompensated_qpsk_snr6_seed91001",
+      "recipe_sha256": "2d4f1df35ccf337738344bdf7e4a1b12c717359e1cf3b503d7d46bcf252bd402",
+      "role": "baseline",
+      "run_id": "20260727T010157Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr6_seed91001",
+      "semantic_recipe_sha256": "71e1f10836599d0a69a6aee7476f0341c03a3ed1ae7bd171fd0e1063cd9f8c13"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_interpolation_snr6_seed91001",
+      "recipe_sha256": "04b9a6616e56f2947d796c9461efedd8b7f2d51ea4b8ffa4e2cc1ed86ec9235f",
+      "role": "baseline",
+      "run_id": "20260727T010201Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr6_seed91001",
+      "semantic_recipe_sha256": "2b256f7f5216a46f554830e42d577445178677fbc27c818228dd4cd0ab71d598"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_smoothing_snr6_seed91001",
+      "recipe_sha256": "f3f4ac883ef28980e02dc9904b62434471468b354922c50efc20dadbf30b644e",
+      "role": "baseline",
+      "run_id": "20260727T010205Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr6_seed91001",
+      "semantic_recipe_sha256": "0f9dca2cddf0ca8c866caaaaf3e26bb7db4644cf685c1d87941906d99b3c23c6"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "decision_directed_pll_snr6_seed91001",
+      "recipe_sha256": "fd6efda16fab2d3fabef4f7976b6e9177bb8afb9768464ad1502ff50dafd0e7b",
+      "role": "baseline",
+      "run_id": "20260727T010209Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr6_seed91001",
+      "semantic_recipe_sha256": "a8ecd6fdfe542db1e09d9ec91181c71d634ba915f2f676d4cf33df5503c4f7db"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "learned_receiver_snr6_seed91001",
+      "recipe_sha256": "ccc209080c9240e57a961c61f8569d9f1e57bc331749e6796ef59519458e8e0e",
+      "role": "candidate",
+      "run_id": "20260727T010214Z_qpsk_pilot_phase_tracking__learned_receiver_snr6_seed91001",
+      "semantic_recipe_sha256": "ea63e2a53d86f9c6752678d29c9e6b857b335b7416d63e447ea9047ca9322b92"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "oracle_phase_snr6_seed91001",
+      "recipe_sha256": "8f473d4b5fa7b4d058797e95df36a75c2502af83b42d2f5a4680aabcdcc064d7",
+      "role": "upper_bound",
+      "run_id": "20260727T010219Z_qpsk_pilot_phase_tracking__oracle_phase_snr6_seed91001",
+      "semantic_recipe_sha256": "b9f58aaa9503e20f82b2246178cb59e9a72df0fda3883caeb1c786cb312ea501"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "uncompensated_qpsk_snr6_seed92001",
+      "recipe_sha256": "6872d350d225fb1a2618fff122cbf11c91faa4e8e10bbd8531e642fcc9c45fe9",
+      "role": "baseline",
+      "run_id": "20260727T010223Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr6_seed92001",
+      "semantic_recipe_sha256": "f1fc4eaecf8dfae5380fa6d8a468f5a29dd6034ea960af5118df1e6d202ae105"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_interpolation_snr6_seed92001",
+      "recipe_sha256": "56c93fccf0689a641e286227c0dd71fa70bbaae42cfcbc192076fa85d6f1ac45",
+      "role": "baseline",
+      "run_id": "20260727T010227Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr6_seed92001",
+      "semantic_recipe_sha256": "c6300daa1243be67982e32d44a2723472b3b3b7ef18a1bf451a2c59faac57690"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_smoothing_snr6_seed92001",
+      "recipe_sha256": "b0729ca019c6e75daf1d2ddcde43ad32433bd4725ebcd8f30768acb27b7d2aa5",
+      "role": "baseline",
+      "run_id": "20260727T010231Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr6_seed92001",
+      "semantic_recipe_sha256": "20a39d3a6e987ee7b72d81b7995f8a988c71def1a6c6b38fb75aeff04e6be58e"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "decision_directed_pll_snr6_seed92001",
+      "recipe_sha256": "f2b2ab7825c270f1a5d44c352ee0f00230699f1d10f8b0a9aa4f7cfd03d3800b",
+      "role": "baseline",
+      "run_id": "20260727T010235Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr6_seed92001",
+      "semantic_recipe_sha256": "61e82b79e6b6f196f179dcd25a59938731aadafac9cfbcb915da41b9916f0be7"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "learned_receiver_snr6_seed92001",
+      "recipe_sha256": "6b429bcb0ea643bdca8360272ac3e339401536f2fc8465fd1e7f37b2f840239e",
+      "role": "candidate",
+      "run_id": "20260727T010240Z_qpsk_pilot_phase_tracking__learned_receiver_snr6_seed92001",
+      "semantic_recipe_sha256": "b0d4c6cf0bcfbc2204bf96aeac4ad438899b5e772c932eb75787f9caf9a15a4f"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "oracle_phase_snr6_seed92001",
+      "recipe_sha256": "9d770785614210c261c2d37b293e90097b518ae78bfcdcae39932b35c1f154ad",
+      "role": "upper_bound",
+      "run_id": "20260727T010245Z_qpsk_pilot_phase_tracking__oracle_phase_snr6_seed92001",
+      "semantic_recipe_sha256": "d0f0ae66ee926606e3661ffc7957321ca9ca909fad1abc8e13abc57e11e4e916"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "uncompensated_qpsk_snr6_seed93001",
+      "recipe_sha256": "e71aaa0dbd62e3c3b01c80128a8f1ae3c29255ec20996606770d13c9ddfd818d",
+      "role": "baseline",
+      "run_id": "20260727T010249Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr6_seed93001",
+      "semantic_recipe_sha256": "eb7072c3863b231cdca3f804be67ed1735cbb2680f35a7896a4e289fadabe258"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_interpolation_snr6_seed93001",
+      "recipe_sha256": "a60b2cc87a46b5706a583aaf5e7e797d27496a53ba9228b9a29582a799a94be9",
+      "role": "baseline",
+      "run_id": "20260727T010253Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr6_seed93001",
+      "semantic_recipe_sha256": "fd0cbd3e403a456622937a292801bbce81513985d0f172e98fc758a8d79567fe"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_smoothing_snr6_seed93001",
+      "recipe_sha256": "264933a1ee10e33d126ebe2cf43c05af6ae4075ef627111072d2a78a0613085d",
+      "role": "baseline",
+      "run_id": "20260727T010258Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr6_seed93001",
+      "semantic_recipe_sha256": "a8e342b70cc4c3eba01a7c429d74b5517e675bae301721fce7db9091ef48d1d6"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "decision_directed_pll_snr6_seed93001",
+      "recipe_sha256": "2b88f84ea8631343627602ac63af8a53248f3f835e5126d47881302ef5004141",
+      "role": "baseline",
+      "run_id": "20260727T010302Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr6_seed93001",
+      "semantic_recipe_sha256": "c33cef933d74594fff77db091c3969f8c522a2749bd38505e2a5ce222434f408"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "learned_receiver_snr6_seed93001",
+      "recipe_sha256": "6356d243ea00687da8d73f36cfb117c78e514d15559514e07f88541912f279e5",
+      "role": "candidate",
+      "run_id": "20260727T010308Z_qpsk_pilot_phase_tracking__learned_receiver_snr6_seed93001",
+      "semantic_recipe_sha256": "cf0b22ffc42ac6e9b432e856ddd3ca3d5a96ead740f3df30166d8b65f83a2807"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "oracle_phase_snr6_seed93001",
+      "recipe_sha256": "406567a708f5c0a646990d3c6e838dff6edb9e7303dd34b3a41007b54185230f",
+      "role": "upper_bound",
+      "run_id": "20260727T010312Z_qpsk_pilot_phase_tracking__oracle_phase_snr6_seed93001",
+      "semantic_recipe_sha256": "ea88aa2a21d1af276bf0402b7b14653cd58d1dcbe7105fd32d6c046dcdc1d40c"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "uncompensated_qpsk_snr8_seed91001",
+      "recipe_sha256": "f0c4607d666f6cc8365dbef2d840cc565b2d9e92a4efc4813acebc6bbb561708",
+      "role": "baseline",
+      "run_id": "20260727T010317Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr8_seed91001",
+      "semantic_recipe_sha256": "e8bef20f5f9e0710bbea3eb03d085cb1ccf97506460d754acb71ebb087819adf"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_interpolation_snr8_seed91001",
+      "recipe_sha256": "17e9b6a8a8850cdfb7cf5a4bd7cda1114f411eb714b66eca3dbd052266e09eea",
+      "role": "baseline",
+      "run_id": "20260727T010321Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr8_seed91001",
+      "semantic_recipe_sha256": "c317ccfc483c3ee2dcc3bd77753ba8479872ef3e7e8ae5c4aac917b69a362145"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_smoothing_snr8_seed91001",
+      "recipe_sha256": "64493e3a6d08a2860605c80ac8fce45b47d3845896477a6bef58fb9a67cf074f",
+      "role": "baseline",
+      "run_id": "20260727T010325Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr8_seed91001",
+      "semantic_recipe_sha256": "426238f6c4b124055256595112a69ec52a14c22e32b3edff13aca1a0727468b5"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "decision_directed_pll_snr8_seed91001",
+      "recipe_sha256": "7ec7e0ee1055507b4d295d6e5e4a73d05e004f3cd849315497ab741255ade138",
+      "role": "baseline",
+      "run_id": "20260727T010330Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr8_seed91001",
+      "semantic_recipe_sha256": "402bcff37396e86c363a4a7210b49ab7dd716ab4006d008bbf717bd275bc0cb1"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "learned_receiver_snr8_seed91001",
+      "recipe_sha256": "b9a32e19b7378bc3d873362e876bc8c01f7706ca420d03473eab4ad123eb99f3",
+      "role": "candidate",
+      "run_id": "20260727T010336Z_qpsk_pilot_phase_tracking__learned_receiver_snr8_seed91001",
+      "semantic_recipe_sha256": "07047d1d3948bc1834a05945d4fc9c10554df33a1eedc380f023f9884324660c"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "oracle_phase_snr8_seed91001",
+      "recipe_sha256": "69479547d3db2b5c3ea4fdc1ca0151d6504b4d35c99c1f8603c622a3ebed4958",
+      "role": "upper_bound",
+      "run_id": "20260727T010341Z_qpsk_pilot_phase_tracking__oracle_phase_snr8_seed91001",
+      "semantic_recipe_sha256": "f4da00fef2f195d1f04a032a26117b0124aa4090568bbe3d43f8a4b9a5ef1585"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "uncompensated_qpsk_snr8_seed92001",
+      "recipe_sha256": "14f202f6621230efa808079d06c80bcd5563be6ded2c8ff947beabf99cafecca",
+      "role": "baseline",
+      "run_id": "20260727T010345Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr8_seed92001",
+      "semantic_recipe_sha256": "c631dfc3cab9f868b17c2eb2b370e3bcd90a7983c54b7cd90e6c8f1c45c40953"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_interpolation_snr8_seed92001",
+      "recipe_sha256": "309c155990a2e7fc66b1e0d3d637af0a10481b2dad8d1cadb8ae08e4f5945eee",
+      "role": "baseline",
+      "run_id": "20260727T010350Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr8_seed92001",
+      "semantic_recipe_sha256": "b13a76b1734d2d4ec1d4703976b3040211a2c5d2311d27f61f7a3e30f62c4bef"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_smoothing_snr8_seed92001",
+      "recipe_sha256": "e7c29f15adb32e8c8f8d2948cd7e45ff149cc9f068dca20ae63fb50daf3b750b",
+      "role": "baseline",
+      "run_id": "20260727T010354Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr8_seed92001",
+      "semantic_recipe_sha256": "ef2958f150932c228553a02be2c08f3c8b9801d4fb04b007331c2d374fee27df"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "decision_directed_pll_snr8_seed92001",
+      "recipe_sha256": "1a6245ac7c9393500de99da86ab0a69393fdd44082da6fefc5bd94e98cdefba9",
+      "role": "baseline",
+      "run_id": "20260727T010359Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr8_seed92001",
+      "semantic_recipe_sha256": "bea324bf6879d34b5152bdb538cda95d7f5f2b962f46363b640a7704b2c355cd"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "learned_receiver_snr8_seed92001",
+      "recipe_sha256": "ffb0d6be1b1a80934f3f02356c81bf2a92499ee64418e1609b14f1ea0de4cc64",
+      "role": "candidate",
+      "run_id": "20260727T010405Z_qpsk_pilot_phase_tracking__learned_receiver_snr8_seed92001",
+      "semantic_recipe_sha256": "12ff654f630ae5f57281fda770aa147de8dc8c89e0686fc510270e72466eaea4"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "oracle_phase_snr8_seed92001",
+      "recipe_sha256": "f7ebfa2bffce37bea87677656acdb26de92e396f21a97446a222209c16465ffc",
+      "role": "upper_bound",
+      "run_id": "20260727T010410Z_qpsk_pilot_phase_tracking__oracle_phase_snr8_seed92001",
+      "semantic_recipe_sha256": "c79c1aa5d8dbd0858d2383f58f31edf60545fc8077191b1657df9a750b42edea"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "uncompensated_qpsk_snr8_seed93001",
+      "recipe_sha256": "0479b20cf590b10b79090273a65a335b16aebcf587fd4369520c5e2ad70022d8",
+      "role": "baseline",
+      "run_id": "20260727T010415Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr8_seed93001",
+      "semantic_recipe_sha256": "7e4e6b5ee529454e28b2c255584824bad419c3e2a88c181c08468cb53847cecb"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_interpolation_snr8_seed93001",
+      "recipe_sha256": "60bc9d18a0415f482eb8daae7708a3f1f64840f8000d1d1275fa112cbbfc1aeb",
+      "role": "baseline",
+      "run_id": "20260727T010420Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr8_seed93001",
+      "semantic_recipe_sha256": "e616f73ff2ab1361c8dfbcc0193951a36d18a9b49288dfdde9e181e81c6ba8ec"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_smoothing_snr8_seed93001",
+      "recipe_sha256": "08624661e93bcc795ead63d4a441d0018198d6e350d54521b38e554ca8a9dc2d",
+      "role": "baseline",
+      "run_id": "20260727T010424Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr8_seed93001",
+      "semantic_recipe_sha256": "bd46bd7cd9c8819f4caa9c70744b95050a3a94d1c35b9be145055512e27c48d9"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "decision_directed_pll_snr8_seed93001",
+      "recipe_sha256": "957bc523e33abbf38df899b7b0f97061cc99e3a053a786cf64304fd8cd9bbd56",
+      "role": "baseline",
+      "run_id": "20260727T010430Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr8_seed93001",
+      "semantic_recipe_sha256": "c8d6278016a9f941f09a68d65c0ba6a87e08edebe6fc0d719ede35cab85969eb"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "learned_receiver_snr8_seed93001",
+      "recipe_sha256": "fcbf65662bc2aeaca179fc8453152364a997139d7e213fc5d0193c165b3027df",
+      "role": "candidate",
+      "run_id": "20260727T010436Z_qpsk_pilot_phase_tracking__learned_receiver_snr8_seed93001",
+      "semantic_recipe_sha256": "127a3b1517ac35fd90cdf3fe1e5a020251753895ab07863ca39991c6718b0871"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "oracle_phase_snr8_seed93001",
+      "recipe_sha256": "b1cb456b6ba3b18d85f4230c66fd942c5b2e7219ec408e047ead8362a4ae65e9",
+      "role": "upper_bound",
+      "run_id": "20260727T010441Z_qpsk_pilot_phase_tracking__oracle_phase_snr8_seed93001",
+      "semantic_recipe_sha256": "b4b87560fcf6961e1d2fa9e1d3bc51ae9aadaf44b834fc17f67c4208eb5798b4"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "uncompensated_qpsk_snr10_seed91001",
+      "recipe_sha256": "13bd839941ed3d5202ceeec5e704e0d00416b1daa1c16e66f490a9f855aab71a",
+      "role": "baseline",
+      "run_id": "20260727T010446Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr10_seed91001",
+      "semantic_recipe_sha256": "137fc2a5bce28224ca4dc039dedd64f018745523ae2e8a8f388017a3e7992586"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_interpolation_snr10_seed91001",
+      "recipe_sha256": "9e8c1fe92a07a351259f72d47e59713f8216ca026ff4cb393c582f261d79076c",
+      "role": "baseline",
+      "run_id": "20260727T010451Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr10_seed91001",
+      "semantic_recipe_sha256": "6b623a31f5c02121b57914ce438dc70e36061846091cb8e3ea5ce53d5164a0a9"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "pilot_smoothing_snr10_seed91001",
+      "recipe_sha256": "3a38acdebba1d61ec8337093273662e5c3049e52dbc79fc5f867604ecb969e6c",
+      "role": "baseline",
+      "run_id": "20260727T010455Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr10_seed91001",
+      "semantic_recipe_sha256": "5699e35804db47fb54e6069628baf3f9dd17dbb74995d6eba25259a2911f3f95"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "decision_directed_pll_snr10_seed91001",
+      "recipe_sha256": "7ba2658ecab25cb7ac4fbaf9ef8a51011325ce63e0f6002fa7c60fe5bbddacfd",
+      "role": "baseline",
+      "run_id": "20260727T010501Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr10_seed91001",
+      "semantic_recipe_sha256": "a6de55bd5c76dfe344253b5a2f4bf626051c8ab92c0e53098e242f3e0bf774f3"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "learned_receiver_snr10_seed91001",
+      "recipe_sha256": "6fb478f69aaae9798bf5f62eb4878d33565f73f2427b0831105767d55f83de0c",
+      "role": "candidate",
+      "run_id": "20260727T010507Z_qpsk_pilot_phase_tracking__learned_receiver_snr10_seed91001",
+      "semantic_recipe_sha256": "356c2e16d4312ffb622d52c8402c5b1a647c0364427ac4effeb8b92dd4e8bc77"
+    },
+    {
+      "pairing_id": "91001",
+      "recipe_id": "oracle_phase_snr10_seed91001",
+      "recipe_sha256": "922262d56327cc2831fcc2bc993bb92cf55cccfff7a74c6ee5bcbaeda6b99f6c",
+      "role": "upper_bound",
+      "run_id": "20260727T010513Z_qpsk_pilot_phase_tracking__oracle_phase_snr10_seed91001",
+      "semantic_recipe_sha256": "c907a727bb7ee3eb07e461e29a9ea7e060d5c87a313ad548e04c244c54f4257b"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "uncompensated_qpsk_snr10_seed92001",
+      "recipe_sha256": "02e56cfb29c1c13da93307441b4d9841e08da5112ec0027650db26c46d6f1188",
+      "role": "baseline",
+      "run_id": "20260727T010518Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr10_seed92001",
+      "semantic_recipe_sha256": "e5050e32de7f0ea3427eaddd6bccd6095c221256df2462c105ca1195ebb17079"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_interpolation_snr10_seed92001",
+      "recipe_sha256": "4daeae6e155c236877c0c5faf567b62348abf530e2fe100c78b8655f9d6bde2c",
+      "role": "baseline",
+      "run_id": "20260727T010523Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr10_seed92001",
+      "semantic_recipe_sha256": "dc0f4c84f300ab4a58f63c7810feade083c4b7f507b322489efa7185af3efa94"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "pilot_smoothing_snr10_seed92001",
+      "recipe_sha256": "c06421f7fc0c6ccb742bab4a46c05ad82f888e0d5d4d94a899008b14ebfb15f6",
+      "role": "baseline",
+      "run_id": "20260727T010528Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr10_seed92001",
+      "semantic_recipe_sha256": "e5be6d0d56556f163bbacfaedb1156a93f2cd4b58dd80decefafce1c64c2dbba"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "decision_directed_pll_snr10_seed92001",
+      "recipe_sha256": "062a993b7133d47bad9e3171c0dae243d9731c32a53320dfc38e3eff2ecfc599",
+      "role": "baseline",
+      "run_id": "20260727T010533Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr10_seed92001",
+      "semantic_recipe_sha256": "9344ee37df385811f132e20e607628ee488eaa4af9bfeab8d98a24e1d4e89759"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "learned_receiver_snr10_seed92001",
+      "recipe_sha256": "b68f8445c29cbbe5a95a663c81fae6717bb6e9c990256ec42edf4958e159f67a",
+      "role": "candidate",
+      "run_id": "20260727T010540Z_qpsk_pilot_phase_tracking__learned_receiver_snr10_seed92001",
+      "semantic_recipe_sha256": "ee90a5408614a704c68e3b99fd18d54cde6d44e481ff6a74f513403ad0b123af"
+    },
+    {
+      "pairing_id": "92001",
+      "recipe_id": "oracle_phase_snr10_seed92001",
+      "recipe_sha256": "854f2ddccd8301a930207cdaf617f123cddde392ac1bd830bb90e4ba6e7550d5",
+      "role": "upper_bound",
+      "run_id": "20260727T010546Z_qpsk_pilot_phase_tracking__oracle_phase_snr10_seed92001",
+      "semantic_recipe_sha256": "c1dd6381b4d10b55952036f92ae66d25338173cf3766d816e05fd1320bc6b224"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "uncompensated_qpsk_snr10_seed93001",
+      "recipe_sha256": "d653e9beaa9871c7138fcc39e37844b3eccf3cc09afac3c5fbf7545e574a925c",
+      "role": "baseline",
+      "run_id": "20260727T010551Z_qpsk_pilot_phase_tracking__uncompensated_qpsk_snr10_seed93001",
+      "semantic_recipe_sha256": "6e0374ada92e7ef9a5b482a442aea9d3f6fb651256331bfcd4d949ca77126a7a"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_interpolation_snr10_seed93001",
+      "recipe_sha256": "49e16a52ca0ee7f20ca568856f7cd3b39ce4f64f5aa9472a5314d08dfa21a255",
+      "role": "baseline",
+      "run_id": "20260727T010556Z_qpsk_pilot_phase_tracking__pilot_interpolation_snr10_seed93001",
+      "semantic_recipe_sha256": "0e13e137abfb81264ddc30f36635986c14abf56188af03ff96ae3fe69b72798d"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "pilot_smoothing_snr10_seed93001",
+      "recipe_sha256": "cbfa7b7a3682994476094d597a2a000549963348daf595f0a59a9f9bf04512e6",
+      "role": "baseline",
+      "run_id": "20260727T010601Z_qpsk_pilot_phase_tracking__pilot_smoothing_snr10_seed93001",
+      "semantic_recipe_sha256": "38b12ab01ef0bbf79a3a67504cb9d480fc7289820a109ce4917508045921ada9"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "decision_directed_pll_snr10_seed93001",
+      "recipe_sha256": "a9c4e846ea066c286dd75978451066a306797c16fe9c094deef7ebc8f93f7891",
+      "role": "baseline",
+      "run_id": "20260727T010607Z_qpsk_pilot_phase_tracking__decision_directed_pll_snr10_seed93001",
+      "semantic_recipe_sha256": "3f61cdfa61321f7423c9c8acb009b136f100a864ee59b8e308ffa14a3794113b"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "learned_receiver_snr10_seed93001",
+      "recipe_sha256": "a9211e636f93cda3c7313788413cf86e11bec2235491132016b90c73208d5abb",
+      "role": "candidate",
+      "run_id": "20260727T010614Z_qpsk_pilot_phase_tracking__learned_receiver_snr10_seed93001",
+      "semantic_recipe_sha256": "648af859d1802f955f9a65634260e969c91c9f08d9c4b1d9375733cb15c9a5a9"
+    },
+    {
+      "pairing_id": "93001",
+      "recipe_id": "oracle_phase_snr10_seed93001",
+      "recipe_sha256": "3cb68c68ea946c7429694eeb27269c57e7c842c8a79e7ff462926643c9a3b8c1",
+      "role": "upper_bound",
+      "run_id": "20260727T010619Z_qpsk_pilot_phase_tracking__oracle_phase_snr10_seed93001",
+      "semantic_recipe_sha256": "562c4d0a97743819d51b70e38560585e70ed5eb9d55c34f830a49fa45b5c981c"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "learned-qpsk-phase-tracking-receiver",
+  "source": {
+    "benchmark_id": "neural_receiver_ai_phy.learned_qpsk_phase_tracking_v2",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "2.0.0",
+    "completed_at_utc": "2026-07-27T01:06:25.080Z",
+    "created_at_utc": "2026-07-27T00:58:14.548Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "051ce43670e947370184a1e8f3f07833c5722f3c65315df9f073fe193af1a2e8",
+        "size_bytes": 5729888
+      },
+      "recipes.csv": {
+        "sha256": "a4e95b96b613d2b828c84a1b542a48d0d792c57a893dcfc2de9d50bd145faa42",
+        "size_bytes": 40748
+      },
+      "result.json": {
+        "sha256": "41dbe941feb07979326e93b03aac8c977bdcc10238518cfdf1756509f7b9d0c2",
+        "size_bytes": 3565241
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "24c286b51b720237396980cfcea57a125e8a02a3869b4bcdeeb79baae8d256a8",
+        "size_bytes": 1662
+      }
+    },
+    "result_id": "20260727T005814Z_neural_receiver_ai_phy.learned_qpsk_phase_tracking_v2",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "channel SNR",
+    "compared_bits_per_run": 262144,
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out seed units",
+    "paired_seeds": [
+      91001,
+      92001,
+      93001
+    ],
+    "sample_count_per_method_and_snr": 3,
+    "statistical_unit": "paired held-out payload/noise/impairment seed",
+    "warning": "Three paired held-out seeds support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": {
+    "component": {
+      "id": "receiver",
+      "kind": "component",
+      "path": "training_evidence/entries/000-learned_receiver/artifact/artifacts/phase_tracking_receiver.onnx",
+      "sha256": "7917d7d61eaa95453be69cfcea6cf400e75b38bdebe1bb95950274707edda4e3",
+      "size_bytes": 53603
+    },
+    "contract": {
+      "id": "qpsk_pilot_phase_tracking.70f0a2112948",
+      "kind": "contract",
+      "path": "training_evidence/entries/000-learned_receiver/artifact/training_contract.yaml",
+      "sha256": "dab9d9c264bec828a2825961bcda838c87b2f16c47b50dfdcf90c818723ae73f",
+      "size_bytes": 7562
+    },
+    "evaluation_metrics": {
+      "path": "training_evidence/entries/000-learned_receiver/evidence/evaluation_metrics.json",
+      "sha256": "6de1de6a97b779089699bd4baefea7490b6b8c7ffed888ba59966becbcc83ecb",
+      "size_bytes": 9474
+    },
+    "series": "learned_receiver",
+    "trained_artifact_manifest": {
+      "path": "training_evidence/entries/000-learned_receiver/artifact/trained_artifact_manifest.yaml",
+      "sha256": "0e9b5819e11109ebf1eec02ba7aba7da622b16899fb9e26042a31c45be9f4118",
+      "size_bytes": 98985
+    },
+    "training_history": {
+      "path": "training_evidence/entries/000-learned_receiver/evidence/training_history.json",
+      "sha256": "5e306a32eef00266c412db785fc09861158971d716d0f2d00c15b72a4ae2c769",
+      "size_bytes": 421793
+    }
+  }
+}

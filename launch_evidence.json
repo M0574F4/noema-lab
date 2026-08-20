@@ -1,0 +1,1330 @@
+{
+  "comparisons": [
+    {
+      "calibrated_reference_mean_ber": 0.21337254842122397,
+      "learned_maximum_ber": 0.213623046875,
+      "learned_mean_ber": 0.21335601806640625,
+      "learned_minimum_ber": 0.21294021606445312,
+      "learned_reduction_percent": 16.180751645700205,
+      "learned_relative_gap_to_reference_percent": -0.00774717972861467,
+      "snr_db": -2.0,
+      "uncompensated_mean_ber": 0.2545429865519206
+    },
+    {
+      "calibrated_reference_mean_ber": 0.1585229237874349,
+      "learned_maximum_ber": 0.15874671936035156,
+      "learned_mean_ber": 0.158540407816569,
+      "learned_minimum_ber": 0.15826797485351562,
+      "learned_reduction_percent": 25.387146048050845,
+      "learned_relative_gap_to_reference_percent": 0.011029338039172557,
+      "snr_db": 0.0,
+      "uncompensated_mean_ber": 0.21248404184977213
+    },
+    {
+      "calibrated_reference_mean_ber": 0.10395399729410808,
+      "learned_maximum_ber": 0.10424423217773438,
+      "learned_mean_ber": 0.10397179921468098,
+      "learned_minimum_ber": 0.10356521606445312,
+      "learned_reduction_percent": 39.563095583466236,
+      "learned_relative_gap_to_reference_percent": 0.017124806199170943,
+      "snr_db": 2.0,
+      "uncompensated_mean_ber": 0.17203362782796225
+    },
+    {
+      "calibrated_reference_mean_ber": 0.056342124938964844,
+      "learned_maximum_ber": 0.05659770965576172,
+      "learned_mean_ber": 0.05636882781982422,
+      "learned_minimum_ber": 0.05608177185058594,
+      "learned_reduction_percent": 58.67885880469509,
+      "learned_relative_gap_to_reference_percent": 0.047394167132145094,
+      "snr_db": 4.0,
+      "uncompensated_mean_ber": 0.13641643524169922
+    },
+    {
+      "calibrated_reference_mean_ber": 0.022782643636067707,
+      "learned_maximum_ber": 0.022942543029785156,
+      "learned_mean_ber": 0.02278582255045573,
+      "learned_minimum_ber": 0.022705078125,
+      "learned_reduction_percent": 78.77672599361033,
+      "learned_relative_gap_to_reference_percent": 0.013953228777149183,
+      "snr_db": 6.0,
+      "uncompensated_mean_ber": 0.10736242930094402
+    },
+    {
+      "calibrated_reference_mean_ber": 0.0060367584228515625,
+      "learned_maximum_ber": 0.00609588623046875,
+      "learned_mean_ber": 0.006040891011555989,
+      "learned_minimum_ber": 0.0059947967529296875,
+      "learned_reduction_percent": 92.85424202997737,
+      "learned_relative_gap_to_reference_percent": 0.06845708267508736,
+      "snr_db": 8.0,
+      "uncompensated_mean_ber": 0.08453814188639323
+    },
+    {
+      "calibrated_reference_mean_ber": 0.0007495880126953125,
+      "learned_maximum_ber": 0.0007810592651367188,
+      "learned_mean_ber": 0.000751495361328125,
+      "learned_minimum_ber": 0.0007333755493164062,
+      "learned_reduction_percent": 98.87343274193317,
+      "learned_relative_gap_to_reference_percent": 0.2544529262086514,
+      "snr_db": 10.0,
+      "uncompensated_mean_ber": 0.06670665740966797
+    }
+  ],
+  "consumer_contract": {
+    "canonical_for": [
+      "readme",
+      "documentation",
+      "webpage",
+      "experiment_figure",
+      "result_table",
+      "video_overlay"
+    ],
+    "rules": [
+      "Derive every displayed number from series, comparisons, or headline.",
+      "Display scientific_status.disclosure beside any quantitative claim.",
+      "Describe point bands as observed minima and maxima, never confidence intervals.",
+      "Never use distribution clearance to upgrade the experiment's scientific tier."
+    ]
+  },
+  "design": {
+    "bits_per_run": 1048576,
+    "blocks_per_run": 1024,
+    "frozen_observation_grid_sha256": "b3744246c697c9c452caccd6423ba979c58f680a2e241c780293a4b041bc3bba",
+    "methods": [
+      {
+        "id": "uncompensated_qpsk",
+        "label": "Uncompensated QPSK",
+        "role": "baseline"
+      },
+      {
+        "id": "calibrated_iq_oracle",
+        "label": "Calibrated I/Q oracle",
+        "role": "reference"
+      },
+      {
+        "id": "learned_receiver",
+        "label": "Learned I/Q receiver",
+        "role": "candidate"
+      }
+    ],
+    "paired_seeds": [
+      71001,
+      72001,
+      73001
+    ],
+    "run_count": 63,
+    "runs_per_method_and_snr": 3,
+    "snr_db": [
+      -2.0,
+      0.0,
+      2.0,
+      4.0,
+      6.0,
+      8.0,
+      10.0
+    ],
+    "statistical_unit": "paired held-out seed within a predeclared SNR cell"
+  },
+  "distribution_clearance": {
+    "handoff_status": "review_in_progress",
+    "included_rights_status": "pending",
+    "launch_asset_rights_status": "review_required",
+    "overall_rights_status": "required",
+    "paper_final_binding_status": "missing",
+    "paper_review_status": "in_progress",
+    "release_gate_blocked": true,
+    "rights_final_review_status": "missing",
+    "status": "candidate"
+  },
+  "headline": {
+    "accessible_summary": "Across seven predeclared SNR cells, the observed learned-versus-uncompensated BER change ranged from 16.18% to 98.87%; the largest absolute relative gap between the learned receiver and calibrated diagnostic reference was 0.25%.",
+    "maximum_absolute_relative_gap_to_reference_percent": 0.2544529262086514,
+    "observed_reduction_range_percent": {
+      "maximum": 98.87343274193317,
+      "minimum": 16.180751645700205
+    },
+    "primary_learned_reduction_percent": 98.87343274193317,
+    "primary_snr_db": 10.0,
+    "selection_rules": {
+      "primary_cell": "highest_predeclared_snr",
+      "reference_gap": "maximum_absolute_relative_gap_across_all_predeclared_cells"
+    },
+    "text": "At 10 dB, the learned receiver reduced mean pre-decoder BER by 98.87% relative to uncompensated QPSK."
+  },
+  "identity": {
+    "benchmark_id": "neural_receiver_ai_phy.learned_qpsk_iq_calibration_v1",
+    "benchmark_version": "1.0.0",
+    "completed_at_utc": "2026-07-26T15:56:42.211Z",
+    "current_version": "0.2.0.dev0",
+    "experiment_id": "learned_qpsk_demapper_demo",
+    "manifest_recorded_origin_digests": {
+      "benchmark_json_sha256": "e98630aaaf83bacfad82a7366e2f8556e0985ed01aa148bc2cae0aa615f077ca",
+      "benchmark_semantic_sha256": "8dbfe6298ccee25b5490781ed8fa312026de1b598914055a396b60e816a960eb",
+      "metrics_csv_sha256": "ad33417be0cf1a8a58dcecde305d4e501199cb798ff3ef495fc6724156784451",
+      "result_json_sha256": "aa051f9e893ace504f0b5748dd5319c1cf2897f0e3fa97f4ff926281460ed781",
+      "trained_artifact_runtime_identity_sha256": "b6fc5cf1fdf6cd06771169a8ed8f22e176247e3f4340071bc418a2ed6a3af762"
+    },
+    "project": "Noema",
+    "result_id": "20260726T155403Z_neural_receiver_ai_phy.learned_qpsk_iq_calibration_v1",
+    "result_status": "completed",
+    "target_version": "0.2.0",
+    "title": "Learned QPSK Receiver Calibration",
+    "tutorial_path": "docs/tutorials/learned_qpsk_demapper_demo.md"
+  },
+  "kind": "noema.launch_evidence_projection",
+  "presentation": {
+    "figure": {
+      "data_path": "series",
+      "generator_path": "tools/generate_launch_assets.py",
+      "id": "qpsk_iq_calibration_ber",
+      "path": "docs/_static/launch/f3-receiver-ber-vs-snr.svg",
+      "status": "canonical_asset_generated",
+      "title": "Receiver BER vs SNR",
+      "type": "line_with_observed_range",
+      "x_axis": "SNR (dB)",
+      "y_axis": "Pre-decoder bit error rate (log scale)"
+    },
+    "table": {
+      "data_path": "comparisons",
+      "generator_path": "tools/generate_launch_assets.py",
+      "id": "qpsk_iq_calibration_ber_table",
+      "paths": [
+        "docs/_static/launch/tables/t0-result-summary.csv",
+        "docs/_static/launch/tables/t0-result-summary.md"
+      ],
+      "status": "canonical_asset_generated",
+      "title": "Paired QPSK I/Q-calibration BER summary"
+    },
+    "video_overlay": {
+      "data_paths": [
+        "headline",
+        "series",
+        "scientific_status.disclosure"
+      ],
+      "embed_url": "https://www.youtube-nocookie.com/embed/bKNXS_vHLHc",
+      "provider": "youtube",
+      "status": "recorded_external_video",
+      "title": "Learned QPSK I/Q calibration receiver — complete Noema workflow",
+      "video_id": "bKNXS_vHLHc",
+      "watch_url": "https://www.youtube.com/watch?v=bKNXS_vHLHc"
+    }
+  },
+  "projection_id": "noema.qpsk_iq_calibration.launch.v1",
+  "provenance": {
+    "generator": {
+      "path": "tools/generate_launch_evidence.py",
+      "sha256": "233c4c585ad8a67cb9931f3d5ee88e5a5996f9ec73b57ec7307c5c48e8a76478",
+      "size_bytes": 52622
+    },
+    "schema": {
+      "path": "schemas/launch_evidence.schema.json",
+      "sha256": "0214ee348f876af847e912f33dba7c6f91ee7f43c0501484468390ac63aa61ed",
+      "size_bytes": 17109
+    },
+    "upstream_generator": {
+      "path": "tools/generate_qpsk_iq_calibration_demo_assets.py",
+      "sha256": "13210569905a0ad567cdc6b422fe3d0c129ee311e2d3e3ba0638b535587d1f94",
+      "size_bytes": 19328
+    },
+    "verified_inputs": [
+      {
+        "path": "docs/demo/data/qpsk_iq_calibration/benchmark_projection.csv",
+        "sha256": "1a1211d8aa2f45293111c135d4d669f8496610dfc41ded446ebbb3ed4ed6985a",
+        "size_bytes": 30342
+      },
+      {
+        "path": "docs/demo/data/qpsk_iq_calibration/benchmark_manifest.json",
+        "sha256": "d33498f44877bc32bb31b52c2acd67d8c49df820f8eeb22d34d7368b006b0e9c",
+        "size_bytes": 2362
+      },
+      {
+        "path": "publication_handoff.yaml",
+        "sha256": "a7c7fff3954e2fe6296a383f51c05c2861f82f8aa7462c1926d7788d1a7c5864",
+        "size_bytes": 4962
+      },
+      {
+        "path": "schemas/publication_handoff.schema.json",
+        "sha256": "7686513e53867f88032d1e058c9ddb83353183bb036a4c3376cff743b1fb9f65",
+        "size_bytes": 9487
+      },
+      {
+        "path": "release_identity.yaml",
+        "sha256": "df4d68eb8a22aab74bac8428c700d6984bbb50087fefab80e10f71ffe24e0ee9",
+        "size_bytes": 2618
+      }
+    ]
+  },
+  "role": "launch_demonstration",
+  "schema_version": 1,
+  "scientific_status": {
+    "aggregation": "arithmetic_mean_across_paired_seeds",
+    "benchmark_tier": "experimental",
+    "disclosure": "Internally valid completed experimental benchmark; not a publication-ready canonical benchmark.",
+    "evidence_level": "completed_experimental_benchmark",
+    "limitations": [
+      "The committed CSV is a deterministic projection of the local completed result, not a replacement for its full run-evidence snapshot.",
+      "Three paired held-out seeds support a demonstration comparison but are not a universal publication-strength sample size."
+    ],
+    "publication_ready": false,
+    "reference_role": "The calibrated I/Q oracle is a diagnostic reference with calibration knowledge, not a deployable competitor using the same information.",
+    "uncertainty_display": "observed_min_max_not_confidence_interval",
+    "verification_status": "warning",
+    "warnings": [
+      "The evidence is internally valid, but this experimental suite is not yet designated as a publication-ready canonical benchmark."
+    ]
+  },
+  "series": [
+    {
+      "id": "uncompensated_qpsk",
+      "label": "Uncompensated QPSK",
+      "points": [
+        {
+          "observations": [
+            {
+              "ber": 0.2545356750488281,
+              "bit_errors": 266900,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "uncompensated_qpsk_snrm2_seed71001",
+              "recipe_sha256": "26e614b76ee5fda87ea99e313138cf31968e17a8b0a5b1050d7d6e7aa548d119",
+              "run_id": "20260726T155404Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snrm2_seed71001",
+              "semantic_recipe_sha256": "2965e721b446f6db761145f802b5fccc70273e311f93182f6d77d10190a8f401"
+            },
+            {
+              "ber": 0.25463104248046875,
+              "bit_errors": 267000,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "uncompensated_qpsk_snrm2_seed72001",
+              "recipe_sha256": "178a5b29f64c3ff070f451958af99b304e8871c7766055398f411bf8dce36165",
+              "run_id": "20260726T155411Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snrm2_seed72001",
+              "semantic_recipe_sha256": "15d302bbc918b65cea094755b0275c6361658df86e22edb7ba09c520ab501b1b"
+            },
+            {
+              "ber": 0.25446224212646484,
+              "bit_errors": 266823,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "uncompensated_qpsk_snrm2_seed73001",
+              "recipe_sha256": "6ebd444d723d637b7b078ac8c9dff69b15dd0d29754c58fc5ac321096ba716f9",
+              "run_id": "20260726T155418Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snrm2_seed73001",
+              "semantic_recipe_sha256": "660187e61145bcb1a5daa65bf864d5e4abc287dfe35362831dac051625dac937"
+            }
+          ],
+          "snr_db": -2.0,
+          "summary": {
+            "maximum_ber": 0.25463104248046875,
+            "mean_ber": 0.2545429865519206,
+            "minimum_ber": 0.25446224212646484
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.21230125427246094,
+              "bit_errors": 222614,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "uncompensated_qpsk_snr0_seed71001",
+              "recipe_sha256": "28ec35e8101f8555e55a2181c85f63d16a29f63797b4a3ea17c2a2e1dea8f0b9",
+              "run_id": "20260726T155425Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr0_seed71001",
+              "semantic_recipe_sha256": "3445f01898047ec8b2a9d5af70a77b52b76670d01f77b8054154573c981f6ee5"
+            },
+            {
+              "ber": 0.21260452270507812,
+              "bit_errors": 222932,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "uncompensated_qpsk_snr0_seed72001",
+              "recipe_sha256": "1432952b642f514099d787d004972f311d58e34ab7d90bb536c4a2a03f77e11b",
+              "run_id": "20260726T155432Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr0_seed72001",
+              "semantic_recipe_sha256": "22326864cb49b52e6d56b2c1aed1a388d063ef41eea81687de41c3965cddab3e"
+            },
+            {
+              "ber": 0.21254634857177734,
+              "bit_errors": 222871,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "uncompensated_qpsk_snr0_seed73001",
+              "recipe_sha256": "cbc001c88201442ba5b8a8c7b91c87203bc0067e1b8e8a833d5c1e657908e7ce",
+              "run_id": "20260726T155440Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr0_seed73001",
+              "semantic_recipe_sha256": "980d389033aa4172de230d4919898222916e152eac698bf4aa75fbcf33193500"
+            }
+          ],
+          "snr_db": 0.0,
+          "summary": {
+            "maximum_ber": 0.21260452270507812,
+            "mean_ber": 0.21248404184977213,
+            "minimum_ber": 0.21230125427246094
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.17180538177490234,
+              "bit_errors": 180151,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "uncompensated_qpsk_snr2_seed71001",
+              "recipe_sha256": "37aca1dbad548ec7966134d935afbe27520cb8c839be27ed94a2aa9ecff55a1d",
+              "run_id": "20260726T155447Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr2_seed71001",
+              "semantic_recipe_sha256": "bfd18a342ab08d91327e193f45901ce521ea8b5f70fb67e059448a2e314a4c54"
+            },
+            {
+              "ber": 0.1722116470336914,
+              "bit_errors": 180577,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "uncompensated_qpsk_snr2_seed72001",
+              "recipe_sha256": "3c493ef8d36c3dc0eb1bafa33d41ca32579475b5ed775c52078229c24f900a9c",
+              "run_id": "20260726T155454Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr2_seed72001",
+              "semantic_recipe_sha256": "cbdd797222c8cbf163ff77ec2bbe1ba7808f65845d3d35ba7c094e667d027ad1"
+            },
+            {
+              "ber": 0.17208385467529297,
+              "bit_errors": 180443,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "uncompensated_qpsk_snr2_seed73001",
+              "recipe_sha256": "0637f0858ae2906443280a830acb879389cf724f94bff48e37ffe262551f1cf3",
+              "run_id": "20260726T155502Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr2_seed73001",
+              "semantic_recipe_sha256": "e4ed2b97139863dab9ffc03634911973b0f0f099c5aaa0689171058d7bebf0c0"
+            }
+          ],
+          "snr_db": 2.0,
+          "summary": {
+            "maximum_ber": 0.1722116470336914,
+            "mean_ber": 0.17203362782796225,
+            "minimum_ber": 0.17180538177490234
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.1361217498779297,
+              "bit_errors": 142734,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "uncompensated_qpsk_snr4_seed71001",
+              "recipe_sha256": "628f9362c06afd6cde96d9632599b6b63112f955c45b792114f1f9723f027172",
+              "run_id": "20260726T155509Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr4_seed71001",
+              "semantic_recipe_sha256": "bb9cea3f4e8826fe1e5415f79c817ce59800bb450bbdf77d33ac7ca230125eae"
+            },
+            {
+              "ber": 0.13652801513671875,
+              "bit_errors": 143160,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "uncompensated_qpsk_snr4_seed72001",
+              "recipe_sha256": "e6e88cb22b9dad0fe4b129beb259aa2911d21e27a723751647420444232c7c83",
+              "run_id": "20260726T155517Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr4_seed72001",
+              "semantic_recipe_sha256": "891ee50f9ba1d0061e7780d7be7ff5c51665329bd2ee84b030763c3cd74bf58f"
+            },
+            {
+              "ber": 0.13659954071044922,
+              "bit_errors": 143235,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "uncompensated_qpsk_snr4_seed73001",
+              "recipe_sha256": "2a92f891bfd24537f2fdbb6e5c29a73d52b8482d254f4dc2ea94ed77746e55c1",
+              "run_id": "20260726T155525Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr4_seed73001",
+              "semantic_recipe_sha256": "4f30e0bb377b9dc75eedf8eb838d2df3b1a65e30f9e43819958cf1e5ddd1de7e"
+            }
+          ],
+          "snr_db": 4.0,
+          "summary": {
+            "maximum_ber": 0.13659954071044922,
+            "mean_ber": 0.13641643524169922,
+            "minimum_ber": 0.1361217498779297
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.1072540283203125,
+              "bit_errors": 112464,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "uncompensated_qpsk_snr6_seed71001",
+              "recipe_sha256": "78e9f2f2abeb7b0fabc6df331fa94b6f3433ef889b5ed5b099158865984cebf7",
+              "run_id": "20260726T155533Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr6_seed71001",
+              "semantic_recipe_sha256": "ba60abab3333abf8a2edd4df2cebf65ef0816937e54e977a8cdd065a05c36bb5"
+            },
+            {
+              "ber": 0.10759830474853516,
+              "bit_errors": 112825,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "uncompensated_qpsk_snr6_seed72001",
+              "recipe_sha256": "2c27196ef13b17c5d234cca756e1b8961a20362b348cd880b3e57a26e74d8721",
+              "run_id": "20260726T155540Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr6_seed72001",
+              "semantic_recipe_sha256": "819300fd0b68bd067fe60189b56a16865ba475b6f1032d15ddd871783b19b31a"
+            },
+            {
+              "ber": 0.10723495483398438,
+              "bit_errors": 112444,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "uncompensated_qpsk_snr6_seed73001",
+              "recipe_sha256": "07302139e4d65ed57cd451f97c3a43d69d02bc7c6905964dd10ef9af81166c95",
+              "run_id": "20260726T155548Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr6_seed73001",
+              "semantic_recipe_sha256": "d27acd68a314b05f50be1b985cd9b21c8a35125384880d139e8f2abb8f19377f"
+            }
+          ],
+          "snr_db": 6.0,
+          "summary": {
+            "maximum_ber": 0.10759830474853516,
+            "mean_ber": 0.10736242930094402,
+            "minimum_ber": 0.10723495483398438
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.08469581604003906,
+              "bit_errors": 88810,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "uncompensated_qpsk_snr8_seed71001",
+              "recipe_sha256": "33bf232930f8061221035fdc2b2557a4ce1d03ce840ded48543761074681229b",
+              "run_id": "20260726T155555Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr8_seed71001",
+              "semantic_recipe_sha256": "49875203ad7193faad59e7553fe851bdd719d5bbceb692e7f7afa5a02393384a"
+            },
+            {
+              "ber": 0.0845184326171875,
+              "bit_errors": 88624,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "uncompensated_qpsk_snr8_seed72001",
+              "recipe_sha256": "4fed18e65b542ec8383c75c446681ef224c44b2f3676cf5c09b8f62370e7fa43",
+              "run_id": "20260726T155602Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr8_seed72001",
+              "semantic_recipe_sha256": "12fd5d3c6cd7be2c34403450fd2319effee1f89cfcf8dc9dbd1efb64ea4ea2c9"
+            },
+            {
+              "ber": 0.08440017700195312,
+              "bit_errors": 88500,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "uncompensated_qpsk_snr8_seed73001",
+              "recipe_sha256": "2fe06a48510ec5ccc16213c04b0897f1b701deef01ca11d78423f33b79b98af3",
+              "run_id": "20260726T155610Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr8_seed73001",
+              "semantic_recipe_sha256": "4fb166e2d31211a380e59e58215f001022bc00b8e177e7103ea9a90a67dd3b7c"
+            }
+          ],
+          "snr_db": 8.0,
+          "summary": {
+            "maximum_ber": 0.08469581604003906,
+            "mean_ber": 0.08453814188639323,
+            "minimum_ber": 0.08440017700195312
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.06668281555175781,
+              "bit_errors": 69922,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "uncompensated_qpsk_snr10_seed71001",
+              "recipe_sha256": "f6ebd2d0a49ef86daafc4183eff00ef27dbb102dcbdaf686a6a6fa0989bacb71",
+              "run_id": "20260726T155618Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr10_seed71001",
+              "semantic_recipe_sha256": "f7712daf1e671038cc9e5fe328d45a4a50dc58288aa46553e1fa85002a266f19"
+            },
+            {
+              "ber": 0.06679058074951172,
+              "bit_errors": 70035,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "uncompensated_qpsk_snr10_seed72001",
+              "recipe_sha256": "48b494f6576f58ed7dbb12b7f8974489aa12603eb604aeaac2368354468e9bc5",
+              "run_id": "20260726T155627Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr10_seed72001",
+              "semantic_recipe_sha256": "e4778b61092e22605767444985625fca48f8ecb9ce2f119a14997ad08e60a8f9"
+            },
+            {
+              "ber": 0.06664657592773438,
+              "bit_errors": 69884,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "uncompensated_qpsk_snr10_seed73001",
+              "recipe_sha256": "9f8de358b9b87df777013418f3e8620680ad9dd987835f6d50d0501d17c2751b",
+              "run_id": "20260726T155634Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__uncompensated_qpsk_snr10_seed73001",
+              "semantic_recipe_sha256": "09f42aeebb99ff5d4149e4c68d776253f032be3233ce3715759aa028f88b7283"
+            }
+          ],
+          "snr_db": 10.0,
+          "summary": {
+            "maximum_ber": 0.06679058074951172,
+            "mean_ber": 0.06670665740966797,
+            "minimum_ber": 0.06664657592773438
+          }
+        }
+      ],
+      "role": "baseline"
+    },
+    {
+      "id": "calibrated_iq_oracle",
+      "label": "Calibrated I/Q oracle",
+      "points": [
+        {
+          "observations": [
+            {
+              "ber": 0.2135467529296875,
+              "bit_errors": 223920,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "calibrated_iq_oracle_snrm2_seed71001",
+              "recipe_sha256": "22922e3db2106fef3d0eb2f493cdba78304a7ffeb391cf121d50a8beacdcd928",
+              "run_id": "20260726T155407Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snrm2_seed71001",
+              "semantic_recipe_sha256": "b76d4d0f80c321d69aea04b45ca360a5fe4586c262aed1c3dc243f916a12068e"
+            },
+            {
+              "ber": 0.2136392593383789,
+              "bit_errors": 224017,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "calibrated_iq_oracle_snrm2_seed72001",
+              "recipe_sha256": "e4ee4344a26f1d67b138e8a11f02c11a3915aff67b323c28a4f0379d132e531a",
+              "run_id": "20260726T155413Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snrm2_seed72001",
+              "semantic_recipe_sha256": "afec43adecf752c4a5ffb875d4ace8452c19168069fd84882c354d7f75ea21c0"
+            },
+            {
+              "ber": 0.21293163299560547,
+              "bit_errors": 223275,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "calibrated_iq_oracle_snrm2_seed73001",
+              "recipe_sha256": "154ef0371ad4e3a39360c82e286c03073f44491e5eee047f6f36bf64fe543703",
+              "run_id": "20260726T155420Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snrm2_seed73001",
+              "semantic_recipe_sha256": "9a13bbee10997505496cc3a4358998aaac842259aadce9751972e85337bdc334"
+            }
+          ],
+          "snr_db": -2.0,
+          "summary": {
+            "maximum_ber": 0.2136392593383789,
+            "mean_ber": 0.21337254842122397,
+            "minimum_ber": 0.21293163299560547
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.15876007080078125,
+              "bit_errors": 166472,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "calibrated_iq_oracle_snr0_seed71001",
+              "recipe_sha256": "935a6e99a004ff8b917acb4b2cadd34018dcc78d2bbd97c1e23d48d6a3d0c07b",
+              "run_id": "20260726T155428Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr0_seed71001",
+              "semantic_recipe_sha256": "0f107c8f465e6116f58f4a840277ae132c1198fa161d6b19bc12f3a016c40f1c"
+            },
+            {
+              "ber": 0.15857696533203125,
+              "bit_errors": 166280,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "calibrated_iq_oracle_snr0_seed72001",
+              "recipe_sha256": "df46a0afcfd12ded4a2adaba26592e5809e885003cbc5c2a0a334540e547322e",
+              "run_id": "20260726T155435Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr0_seed72001",
+              "semantic_recipe_sha256": "fc0bffa22a32b6ded24bb21493995fbc989fe932395e03f097388dbe07c9eb63"
+            },
+            {
+              "ber": 0.1582317352294922,
+              "bit_errors": 165918,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "calibrated_iq_oracle_snr0_seed73001",
+              "recipe_sha256": "9606c19bf5f1640e8c6200186fca683c59a18a28e44b740774fffedd4d498208",
+              "run_id": "20260726T155442Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr0_seed73001",
+              "semantic_recipe_sha256": "d4f526da22c392984569669d531e4ac26757939e81abbefc003b9ae06232ccb1"
+            }
+          ],
+          "snr_db": 0.0,
+          "summary": {
+            "maximum_ber": 0.15876007080078125,
+            "mean_ber": 0.1585229237874349,
+            "minimum_ber": 0.1582317352294922
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.10424423217773438,
+              "bit_errors": 109308,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "calibrated_iq_oracle_snr2_seed71001",
+              "recipe_sha256": "770af0a959ebea68f16279489a95a87e28725ed9460e3ccde9355a4dc4a35185",
+              "run_id": "20260726T155449Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr2_seed71001",
+              "semantic_recipe_sha256": "b982667a9f86b38f89e8ed02a5fc94b46049aa39f10286a60080b75df86b67ed"
+            },
+            {
+              "ber": 0.10408496856689453,
+              "bit_errors": 109141,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "calibrated_iq_oracle_snr2_seed72001",
+              "recipe_sha256": "8797ae7d637bea589e0e9d74c56291c6d2cde5cec11a346513f873257fd0098d",
+              "run_id": "20260726T155457Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr2_seed72001",
+              "semantic_recipe_sha256": "91b6057f51112c60cc91d9c85b68ed6559afc9f9e42ce503fdf66d61b36f7dda"
+            },
+            {
+              "ber": 0.10353279113769531,
+              "bit_errors": 108562,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "calibrated_iq_oracle_snr2_seed73001",
+              "recipe_sha256": "d9f9b8a7e32e1ef5fe7ce05d5c39b41596ea3bf1b464e8ce6e557ba0c0fce26f",
+              "run_id": "20260726T155504Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr2_seed73001",
+              "semantic_recipe_sha256": "fba7d38614f10752fc85a699796cd1e2a437eba5ee3ffa305b9f19cf17e88f6c"
+            }
+          ],
+          "snr_db": 2.0,
+          "summary": {
+            "maximum_ber": 0.10424423217773438,
+            "mean_ber": 0.10395399729410808,
+            "minimum_ber": 0.10353279113769531
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.05657005310058594,
+              "bit_errors": 59318,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "calibrated_iq_oracle_snr4_seed71001",
+              "recipe_sha256": "07960ad2ebc1da2573505490070fbaac89bbcf12d1b3540749b98ff7fc45288d",
+              "run_id": "20260726T155512Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr4_seed71001",
+              "semantic_recipe_sha256": "92ed01cae893e646cbee3d5823c2dd211c86583d12ec001f61f50b2de0b31bf9"
+            },
+            {
+              "ber": 0.056427001953125,
+              "bit_errors": 59168,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "calibrated_iq_oracle_snr4_seed72001",
+              "recipe_sha256": "cda09e67134cbe5a14a2c6742b2a1e3effaecf1155392fed77c6eb872b405d90",
+              "run_id": "20260726T155520Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr4_seed72001",
+              "semantic_recipe_sha256": "d2d0eab4e2b02ab7afbbfcf3602e91623d5bb3b00827999b6252b1919188e758"
+            },
+            {
+              "ber": 0.056029319763183594,
+              "bit_errors": 58751,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "calibrated_iq_oracle_snr4_seed73001",
+              "recipe_sha256": "fdbbdeaee7971c4977b923ecc8ce790221dcdf47f09b9925f5ae0f844da16dfc",
+              "run_id": "20260726T155528Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr4_seed73001",
+              "semantic_recipe_sha256": "606eb0882be067f78940f7d3fc801acc50684b98cf324b369ac99d01e6ae7a23"
+            }
+          ],
+          "snr_db": 4.0,
+          "summary": {
+            "maximum_ber": 0.05657005310058594,
+            "mean_ber": 0.056342124938964844,
+            "minimum_ber": 0.056029319763183594
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.022927284240722656,
+              "bit_errors": 24041,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "calibrated_iq_oracle_snr6_seed71001",
+              "recipe_sha256": "23529810ffa03ae32febe72c5cab3fed92f60f6d0a7c963ad50eac3e7e7eb957",
+              "run_id": "20260726T155536Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr6_seed71001",
+              "semantic_recipe_sha256": "dcf1c4bd70d0d170943f298058bbac250c437c281d607cd64a001d1b7bcf733e"
+            },
+            {
+              "ber": 0.022706985473632812,
+              "bit_errors": 23810,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "calibrated_iq_oracle_snr6_seed72001",
+              "recipe_sha256": "e5272a153b2ded4e273816490f3054f6b38cd1c13799290b220611991ea27ab2",
+              "run_id": "20260726T155543Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr6_seed72001",
+              "semantic_recipe_sha256": "0c5ef24e5ee34f155282d0010bd7a3336467a7d08d9f7bc5c3e44aab24e0c9ae"
+            },
+            {
+              "ber": 0.022713661193847656,
+              "bit_errors": 23817,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "calibrated_iq_oracle_snr6_seed73001",
+              "recipe_sha256": "1565570985cb5f1fa2267825980bfbc0aaf807ca800572e71eb8936bc706bd13",
+              "run_id": "20260726T155550Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr6_seed73001",
+              "semantic_recipe_sha256": "b67a12a83bf2b9d63161140bd1900a653875b939be1f52a9a0a55caebeb6798d"
+            }
+          ],
+          "snr_db": 6.0,
+          "summary": {
+            "maximum_ber": 0.022927284240722656,
+            "mean_ber": 0.022782643636067707,
+            "minimum_ber": 0.022706985473632812
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.006099700927734375,
+              "bit_errors": 6396,
+              "bler": 0.9990234375,
+              "block_errors": 1023,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "calibrated_iq_oracle_snr8_seed71001",
+              "recipe_sha256": "842e6894c5a0138455e5274c25ea803469fc97bf0d25f4a25b7c140c50c15dd9",
+              "run_id": "20260726T155557Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr8_seed71001",
+              "semantic_recipe_sha256": "d915774fc8190a8882c5ab00511d4508e88700edea32ee5654ad3f7b330cfd47"
+            },
+            {
+              "ber": 0.006026268005371094,
+              "bit_errors": 6319,
+              "bler": 0.9970703125,
+              "block_errors": 1021,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "calibrated_iq_oracle_snr8_seed72001",
+              "recipe_sha256": "9c66e3faac299356334fdda304a4cfd43f4a23ed0e75e2ee6b15a65a677eca1e",
+              "run_id": "20260726T155605Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr8_seed72001",
+              "semantic_recipe_sha256": "261451ff59a4a4b2051564e46d37aab7bd8f10fd88deded0cb0471e10f3d28cb"
+            },
+            {
+              "ber": 0.005984306335449219,
+              "bit_errors": 6275,
+              "bler": 0.998046875,
+              "block_errors": 1022,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "calibrated_iq_oracle_snr8_seed73001",
+              "recipe_sha256": "8fdf4721632d911843ba66653ccb8c4799ee3a40fd62b85cf43098a1fd00a2f6",
+              "run_id": "20260726T155612Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr8_seed73001",
+              "semantic_recipe_sha256": "30ed6a47dd4f663351a2967aa96def64e0b4a183ceb6c96b34fec6b7789d8e6b"
+            }
+          ],
+          "snr_db": 8.0,
+          "summary": {
+            "maximum_ber": 0.006099700927734375,
+            "mean_ber": 0.0060367584228515625,
+            "minimum_ber": 0.005984306335449219
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.0007772445678710938,
+              "bit_errors": 815,
+              "bler": 0.556640625,
+              "block_errors": 570,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "calibrated_iq_oracle_snr10_seed71001",
+              "recipe_sha256": "8cc121bd969bc307db50c72a327c67f6b14a167ef03fafe3e6f6306116441209",
+              "run_id": "20260726T155621Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr10_seed71001",
+              "semantic_recipe_sha256": "e8c2289df88c8b44f383957c8b3b1179c66c1a588815bf5fe8f602462110b635"
+            },
+            {
+              "ber": 0.000743865966796875,
+              "bit_errors": 780,
+              "bler": 0.55078125,
+              "block_errors": 564,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "calibrated_iq_oracle_snr10_seed72001",
+              "recipe_sha256": "7ef314b8255d8d9f8a3832935985094d08e7d6c44b7caefcc154ef91f56f2b2c",
+              "run_id": "20260726T155629Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr10_seed72001",
+              "semantic_recipe_sha256": "296e103c8255c9896bfe29e93d491aa5d978a1d1688a5edd563fcf2791c9ef3e"
+            },
+            {
+              "ber": 0.0007276535034179688,
+              "bit_errors": 763,
+              "bler": 0.529296875,
+              "block_errors": 542,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "calibrated_iq_oracle_snr10_seed73001",
+              "recipe_sha256": "7d2d6422488582450e512b4846e83da719a0f136d8bbf83351d8d49f463d7134",
+              "run_id": "20260726T155637Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__calibrated_iq_oracle_snr10_seed73001",
+              "semantic_recipe_sha256": "e2114f2f2b99c0266fdaf171868cf5d97807622de704f3e4081184491825afea"
+            }
+          ],
+          "snr_db": 10.0,
+          "summary": {
+            "maximum_ber": 0.0007772445678710938,
+            "mean_ber": 0.0007495880126953125,
+            "minimum_ber": 0.0007276535034179688
+          }
+        }
+      ],
+      "role": "reference"
+    },
+    {
+      "id": "learned_receiver",
+      "label": "Learned I/Q receiver",
+      "points": [
+        {
+          "observations": [
+            {
+              "ber": 0.21350479125976562,
+              "bit_errors": 223876,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "learned_receiver_snrm2_seed71001",
+              "recipe_sha256": "a385b85398c7eec69a1de21f9a4c1e7633e5690695aa5a7cb7f837accd5c9400",
+              "run_id": "20260726T155409Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snrm2_seed71001",
+              "semantic_recipe_sha256": "35177c72772904a402c7cc41c07589ea4ea1205a464e37f522dda02dc4ea2c4f"
+            },
+            {
+              "ber": 0.213623046875,
+              "bit_errors": 224000,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "learned_receiver_snrm2_seed72001",
+              "recipe_sha256": "5b11e69ca9c955874f3423782cb704890114fb1f5fae0530ec45172603ae611f",
+              "run_id": "20260726T155416Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snrm2_seed72001",
+              "semantic_recipe_sha256": "6f1ea188a8c5a0ddb787d312cbe0bc2d678bf8caca76488cec194476ad87ab5d"
+            },
+            {
+              "ber": 0.21294021606445312,
+              "bit_errors": 223284,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "learned_receiver_snrm2_seed73001",
+              "recipe_sha256": "81d11bfd72701428aefca713d6074f6d9844c87b00237173e9a2b13d2976073d",
+              "run_id": "20260726T155423Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snrm2_seed73001",
+              "semantic_recipe_sha256": "6e509f2f410bcdac0e79b293c53a5af5863497a3d56934d6485830a02c5cec87"
+            }
+          ],
+          "snr_db": -2.0,
+          "summary": {
+            "maximum_ber": 0.213623046875,
+            "mean_ber": 0.21335601806640625,
+            "minimum_ber": 0.21294021606445312
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.15874671936035156,
+              "bit_errors": 166458,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "learned_receiver_snr0_seed71001",
+              "recipe_sha256": "1a34c93e2086c53878a3393e83dffa93db983b15e10ab5ae65ce51ea077cdbc7",
+              "run_id": "20260726T155430Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr0_seed71001",
+              "semantic_recipe_sha256": "b42fa94f65e744efee3e44a1fdfba45d1b924b3ae7e7a6e4df22db234ec191ba"
+            },
+            {
+              "ber": 0.15860652923583984,
+              "bit_errors": 166311,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "learned_receiver_snr0_seed72001",
+              "recipe_sha256": "968af1b68a0253d9f6c30f3dedb13fca700affe7a47ae10453e262024ff7e797",
+              "run_id": "20260726T155437Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr0_seed72001",
+              "semantic_recipe_sha256": "9dfa5889e9ef0bf649f4a3d06d1b0d2941efbd20c48950574eaece529a6e7bee"
+            },
+            {
+              "ber": 0.15826797485351562,
+              "bit_errors": 165956,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "learned_receiver_snr0_seed73001",
+              "recipe_sha256": "dac411665082c63113dfc20dcf0baac1d158eee9d17bd8631389934b2d917430",
+              "run_id": "20260726T155444Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr0_seed73001",
+              "semantic_recipe_sha256": "9d52e17e822792aa16e8f56d42b43077038f290d92a3934ef8344bc6ae3a8e32"
+            }
+          ],
+          "snr_db": 0.0,
+          "summary": {
+            "maximum_ber": 0.15874671936035156,
+            "mean_ber": 0.158540407816569,
+            "minimum_ber": 0.15826797485351562
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.10424423217773438,
+              "bit_errors": 109308,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "learned_receiver_snr2_seed71001",
+              "recipe_sha256": "aa55c51f6f23aa328925ebff2822a323795ca79a1fc3390038948273363a4970",
+              "run_id": "20260726T155452Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr2_seed71001",
+              "semantic_recipe_sha256": "ec80d9e94ec67f134378d86639e519e344d62461847fddad1ecf10995e99488f"
+            },
+            {
+              "ber": 0.10410594940185547,
+              "bit_errors": 109163,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "learned_receiver_snr2_seed72001",
+              "recipe_sha256": "3a96a447a28baf38615825ba5fef10a6e9870182fd20c01f039b978a520ae179",
+              "run_id": "20260726T155459Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr2_seed72001",
+              "semantic_recipe_sha256": "b85562305d4007b63248c8ac89193d93ff9d2824b8f6a54e065816a5edbdb96b"
+            },
+            {
+              "ber": 0.10356521606445312,
+              "bit_errors": 108596,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "learned_receiver_snr2_seed73001",
+              "recipe_sha256": "6bbbb71b8839835b2207a3d718cd5d7af85dbc2e5e2e796252facabfc61ab63f",
+              "run_id": "20260726T155506Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr2_seed73001",
+              "semantic_recipe_sha256": "08f382455aac2c1c0f4d4dc224a91196b84f2fe4b859e08d2b60416373745fd4"
+            }
+          ],
+          "snr_db": 2.0,
+          "summary": {
+            "maximum_ber": 0.10424423217773438,
+            "mean_ber": 0.10397179921468098,
+            "minimum_ber": 0.10356521606445312
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.05659770965576172,
+              "bit_errors": 59347,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "learned_receiver_snr4_seed71001",
+              "recipe_sha256": "4e664324e41bc22ef15e30ded2fbfeaac1345c7b363d237c8b98a79ba2980528",
+              "run_id": "20260726T155514Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr4_seed71001",
+              "semantic_recipe_sha256": "0ba987ab3fd556b6ebd9ab619b0881a9ef5c90f48edc2478262c790d85578fdc"
+            },
+            {
+              "ber": 0.056427001953125,
+              "bit_errors": 59168,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "learned_receiver_snr4_seed72001",
+              "recipe_sha256": "8c356ba5878440ccd9ccc950272fd163205c8e74eb19b17a64e7c862e24bc036",
+              "run_id": "20260726T155522Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr4_seed72001",
+              "semantic_recipe_sha256": "5e41b8314f284cb0dd5135a60a566eb580ce7e8d533b0cf6dce75f7e99175db5"
+            },
+            {
+              "ber": 0.05608177185058594,
+              "bit_errors": 58806,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "learned_receiver_snr4_seed73001",
+              "recipe_sha256": "f768144ddab0bad62bda28b8fa4d1eaffde41e37f341cdcfc3af0ce43720bbdf",
+              "run_id": "20260726T155531Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr4_seed73001",
+              "semantic_recipe_sha256": "46bd6f6f886593d293756ac43295cdf398a01f2c9154961e06020fc74342d209"
+            }
+          ],
+          "snr_db": 4.0,
+          "summary": {
+            "maximum_ber": 0.05659770965576172,
+            "mean_ber": 0.05636882781982422,
+            "minimum_ber": 0.05608177185058594
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.022942543029785156,
+              "bit_errors": 24057,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "learned_receiver_snr6_seed71001",
+              "recipe_sha256": "228f084d5cb237dc5f2845b7ed2f9f817aa76fbc524c99580526f394397bff61",
+              "run_id": "20260726T155538Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr6_seed71001",
+              "semantic_recipe_sha256": "68aab44061dcb04757c0b187500e18b92c4482f87650ca1d52471aa1cc74bd04"
+            },
+            {
+              "ber": 0.02270984649658203,
+              "bit_errors": 23813,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "learned_receiver_snr6_seed72001",
+              "recipe_sha256": "9e5b0acf3f980fa9a680d86129ade7fc9deacd0f176c77c378c1f648ab10e59d",
+              "run_id": "20260726T155545Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr6_seed72001",
+              "semantic_recipe_sha256": "fdd2f9471861728e8591600fbc9aefd622b7928362e96e867a995e2b8800465b"
+            },
+            {
+              "ber": 0.022705078125,
+              "bit_errors": 23808,
+              "bler": 1.0,
+              "block_errors": 1024,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "learned_receiver_snr6_seed73001",
+              "recipe_sha256": "8c813df89c72f54c2cfb32503a26d587be4dc4496c8651e1d0da5f3d9940d147",
+              "run_id": "20260726T155552Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr6_seed73001",
+              "semantic_recipe_sha256": "ce6bae68c9caf941d08858f0e9b79b20c7e8ae5c0436b5832970a6ea700d2104"
+            }
+          ],
+          "snr_db": 6.0,
+          "summary": {
+            "maximum_ber": 0.022942543029785156,
+            "mean_ber": 0.02278582255045573,
+            "minimum_ber": 0.022705078125
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.00609588623046875,
+              "bit_errors": 6392,
+              "bler": 0.998046875,
+              "block_errors": 1022,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "learned_receiver_snr8_seed71001",
+              "recipe_sha256": "ac9a2d1cc3089c3ef7a6b2e05920e7a3ccde86edb75321b5e5958615408bda35",
+              "run_id": "20260726T155600Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr8_seed71001",
+              "semantic_recipe_sha256": "ff1812bd2000ea71e4a8b46486365c89b6b6dbaf5f07c76a81e2d2b60dbf960d"
+            },
+            {
+              "ber": 0.006031990051269531,
+              "bit_errors": 6325,
+              "bler": 0.9951171875,
+              "block_errors": 1019,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "learned_receiver_snr8_seed72001",
+              "recipe_sha256": "bde030978cce587055e2ebab0704c0735e60e16cadca5a02b91075af4ea2043e",
+              "run_id": "20260726T155607Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr8_seed72001",
+              "semantic_recipe_sha256": "5e88fb73f38bdb6bd7e952d198c0f9c1db2ec84dc9240cd09c805b9a03af34d7"
+            },
+            {
+              "ber": 0.0059947967529296875,
+              "bit_errors": 6286,
+              "bler": 0.998046875,
+              "block_errors": 1022,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "learned_receiver_snr8_seed73001",
+              "recipe_sha256": "614f2a03d44df848a464558a36083ad86fbf97b19afd965b2bd7d6094f240d3f",
+              "run_id": "20260726T155615Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr8_seed73001",
+              "semantic_recipe_sha256": "3966ea698160813f22b55c70316a7c39ee48026dca9958f98c355b40bf54da16"
+            }
+          ],
+          "snr_db": 8.0,
+          "summary": {
+            "maximum_ber": 0.00609588623046875,
+            "mean_ber": 0.006040891011555989,
+            "minimum_ber": 0.0059947967529296875
+          }
+        },
+        {
+          "observations": [
+            {
+              "ber": 0.0007810592651367188,
+              "bit_errors": 819,
+              "bler": 0.5537109375,
+              "block_errors": 567,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 71001,
+              "recipe_id": "learned_receiver_snr10_seed71001",
+              "recipe_sha256": "56bd376185c07341a8eb210e1b28a2d2414c24756d653fe60487f07a6969f8c6",
+              "run_id": "20260726T155624Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr10_seed71001",
+              "semantic_recipe_sha256": "b3c1bb5813c18f1777ec221990a652a71b56fe8d4b9887c0f735e20d796a4c20"
+            },
+            {
+              "ber": 0.00074005126953125,
+              "bit_errors": 776,
+              "bler": 0.5498046875,
+              "block_errors": 563,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 72001,
+              "recipe_id": "learned_receiver_snr10_seed72001",
+              "recipe_sha256": "2f74ea3e3d3dd82947b5f0d7b5bb17c195a7a55b87875548405bf2bf5a0704ca",
+              "run_id": "20260726T155632Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr10_seed72001",
+              "semantic_recipe_sha256": "f47eb36c01437e14584106d869c647ce89605d709b1f96d876ec26f0244a6bbb"
+            },
+            {
+              "ber": 0.0007333755493164062,
+              "bit_errors": 769,
+              "bler": 0.5341796875,
+              "block_errors": 547,
+              "compared_bits": 1048576,
+              "compared_blocks": 1024,
+              "paired_seed": 73001,
+              "recipe_id": "learned_receiver_snr10_seed73001",
+              "recipe_sha256": "757512581585a4c0a61990c8fa8a5a12a8882b41f41fbffaee1af1d21bf66d69",
+              "run_id": "20260726T155639Z_qpsk_iq_imbalance_receiver_calibration_post_training_benchmark__learned_receiver_snr10_seed73001",
+              "semantic_recipe_sha256": "3cb9b93aef7534b54db8a9760126123a682c1a6da747e398fef08cc4ffebd3e3"
+            }
+          ],
+          "snr_db": 10.0,
+          "summary": {
+            "maximum_ber": 0.0007810592651367188,
+            "mean_ber": 0.000751495361328125,
+            "minimum_ber": 0.0007333755493164062
+          }
+        }
+      ],
+      "role": "candidate"
+    }
+  ],
+  "sha256": "52ed68b7adf713179999245dd88fedc64210821c5a6898741bc1e9b66f4d1d07"
+}

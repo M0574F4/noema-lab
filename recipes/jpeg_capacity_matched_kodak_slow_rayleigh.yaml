@@ -1,0 +1,61 @@
+schema_version: 1
+execution_profile:
+  id: task_evaluation
+  version: 1
+name: jpeg_capacity_matched_kodak_slow_rayleigh
+description: >-
+  Fixed-rate JPEG plus ideal capacity-achieving channel coding over slow
+  Rayleigh fading. JPEG rate is selected from average SNR; a source item is in
+  outage when its instantaneous block-fading capacity cannot support that rate.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: theoretical_digital_baseline
+  purpose: image_reconstruction
+  channel_enabled: true
+  channel_mode: capacity_oracle_slow_rayleigh
+  protected_digital_baseline: jpeg_capacity_oracle
+  channel_state_information: none_at_transmitter_or_receiver
+  protocol_reference: Bourtsoulatze_Kurka_Gunduz_DeepJSCC_2019
+  matrix:
+    dimensions:
+      channel.snr_db: [0, 5, 10, 15, 20]
+    step_params:
+      wireless_channel:
+        snr_db:
+          matrix: channel.snr_db
+steps:
+  - id: data
+    op: source.image_dataset
+    params:
+      dataset: kodak
+      dataset_dir: .noema/datasets/kodak
+      image_ids: kodim21,kodim22,kodim23,kodim24
+      crop_size: 256
+      repeat_count: 1
+
+  - id: wireless_channel
+    op: channel.jpeg_capacity_oracle
+    inputs:
+      images: data.images
+    params:
+      channel_model: slow_rayleigh
+      snr_db: 10
+      channel_uses_per_pixel: 0.5
+      minimum_quality: 1
+      maximum_quality: 95
+      subsampling: "420"
+      optimize: false
+      progressive: false
+      on_outage: image_channel_mean
+      seed: 81001
+
+  - id: evaluation
+    op: metrics.image_reconstruction
+    inputs:
+      reference: data.images
+      reconstruction: wireless_channel.images
+    params: {}

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+  <title id="title">Noema learned-communication experiment contract banner</title>
+  <desc id="desc">A stylized learned-communication flow from an experiment contract to retained result and plot evidence.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0e1412"/>
+      <stop offset="0.48" stop-color="#15231e"/>
+      <stop offset="1" stop-color="#0f1b22"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0" stop-color="#53b889"/>
+      <stop offset="1" stop-color="#4eb7c4"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="360" rx="28" fill="url(#bg)"/>
+  <g opacity="0.18" stroke="#e6ece8" stroke-width="1">
+    <path d="M0 300 C220 240 330 410 560 310 S900 230 1280 280" fill="none"/>
+    <path d="M0 72 C210 120 370 10 590 70 S890 140 1280 80" fill="none"/>
+  </g>
+  <g transform="translate(76 70)">
+    <text x="0" y="0" fill="#e6ece8" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="54" font-weight="800">Noema</text>
+    <text x="0" y="42" fill="#9aa7a0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="20">Experiment contracts and protocol-to-plot evidence for learned communications.</text>
+    <g transform="translate(0 92)" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">
+      <rect x="0" y="0" width="122" height="34" rx="17" fill="#10281f" stroke="#2f7f5c"/>
+      <text x="20" y="22" fill="#78d4a8">contracts</text>
+      <rect x="136" y="0" width="142" height="34" rx="17" fill="#102033" stroke="#365f87"/>
+      <text x="156" y="22" fill="#9bd1ff">capture/export</text>
+      <rect x="292" y="0" width="116" height="34" rx="17" fill="#2a2111" stroke="#8d6422"/>
+      <text x="312" y="22" fill="#e5bd73">adapters</text>
+      <rect x="422" y="0" width="138" height="34" rx="17" fill="#2a1716" stroke="#88413d"/>
+      <text x="442" y="22" fill="#f0aaa4">local evidence</text>
+    </g>
+  </g>
+  <g transform="translate(666 78)">
+    <g fill="#151d1a" stroke="#42524b" stroke-width="2">
+      <rect x="0" y="44" width="128" height="58" rx="12"/>
+      <rect x="166" y="44" width="128" height="58" rx="12"/>
+      <rect x="332" y="44" width="128" height="58" rx="12"/>
+      <rect x="166" y="144" width="128" height="58" rx="12"/>
+    </g>
+    <g fill="#e6ece8" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">
+      <text x="30" y="79">sender</text>
+      <text x="204" y="79">channel</text>
+      <text x="358" y="79">receiver</text>
+      <text x="198" y="179">metrics</text>
+    </g>
+    <g stroke="url(#accent)" stroke-width="4" stroke-linecap="round" filter="url(#glow)">
+      <path d="M128 73 H166"/>
+      <path d="M294 73 H332"/>
+      <path d="M230 102 V144"/>
+    </g>
+    <g transform="translate(24 238)">
+      <rect x="0" y="-2" width="452" height="66" rx="14" fill="#101714" stroke="#2d3934"/>
+      <path d="M34 42 C94 28 142 16 204 20 S300 44 394 10" fill="none" stroke="#53b889" stroke-width="4"/>
+      <path d="M34 50 C116 45 198 38 276 30 S356 22 418 18" fill="none" stroke="#4eb7c4" stroke-width="4"/>
+      <path d="M34 58 C110 54 184 50 250 42 S342 24 428 4" fill="none" stroke="#e2a646" stroke-width="3" stroke-dasharray="10 9"/>
+      <text x="284" y="55" fill="#e5bd73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">your method</text>
+    </g>
+  </g>
+</svg>

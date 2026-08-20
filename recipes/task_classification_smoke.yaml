@@ -1,0 +1,30 @@
+schema_version: 1
+execution_profile:
+  id: task_evaluation
+  version: 1
+name: task_classification_smoke
+description: Dependency-light task-oriented classification smoke recipe.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: task_benchmark_core
+  ui_configured: true
+  channel_enabled: false
+  channel_mode: disabled
+  seed: 23
+steps:
+  - id: data
+    op: source.task_labels_smoke
+    inputs: {}
+    params:
+      dataset: task_smoke
+      sample_ids: ""
+  - id: evaluation
+    op: metrics.classification
+    inputs:
+      reference: data.reference
+      candidate: data.candidate
+    params: {}

@@ -1,0 +1,197 @@
+schema_version: 1
+suites:
+  - id: semantic_comm
+    name: Semantic Communication
+    status: active
+    version: v1
+    summary: Meaning-aware, task-oriented, and generative communication benchmarks over controlled channels.
+    docs:
+      page: docs/suites/semantic_comm.md
+      architecture: docs/architecture/ai_native_positioning.md
+      tutorials:
+        - docs/tutorials/digital_vs_deepjscc_sionna.md
+        - docs/tutorials/export_differentiable_training_scenario.md
+        - docs/tutorials/external_training_checkpoint_adapter.md
+    supported_tasks:
+      - image_reconstruction
+      - text_semantic_similarity
+      - classification
+      - visual_question_answering
+      - object_detection
+      - segmentation
+      - image_text_retrieval
+      - image_generation
+      - bit_transport
+    planned_tasks:
+      - image_captioning
+      - speech_recognition
+    benchmark_packs:
+      - id: benchmark_v1.image_reconstruction.kodak
+        path: benchmarks/benchmark_v1/kodak_image_reconstruction_v1.yaml
+        status: canonical
+        task: image_reconstruction
+      - id: semantic_comm_v1.protected_digital_vs_deepjscc_awgn
+        path: benchmarks/semantic_comm_v1/protected_digital_vs_deepjscc_awgn.yaml
+        status: experimental
+        task: image_reconstruction
+      - id: semantic_comm_v1.adaptive_digital_vs_semantic_awgn
+        path: benchmarks/semantic_comm_v1/adaptive_digital_vs_semantic_awgn.yaml
+        status: experimental
+        task: image_reconstruction
+      - id: image_reconstruction_kodak_smoke_v1
+        path: benchmarks/image_reconstruction_kodak_smoke_v1.yaml
+        status: smoke
+        task: image_reconstruction
+      - id: image_reconstruction_rd_v1
+        path: benchmarks/image_reconstruction_rd_v1.yaml
+        status: smoke
+        task: image_reconstruction
+      - id: text_semantic_smoke_v1
+        path: benchmarks/text_semantic_smoke_v1.yaml
+        status: smoke
+        task: text_semantic_similarity
+      - id: text_semantic_presets_v1
+        path: benchmarks/text_semantic_presets_v1.yaml
+        status: smoke
+        task: text_semantic_similarity
+      - id: task_oriented_smoke_v1
+        path: benchmarks/task_oriented_smoke_v1.yaml
+        status: smoke
+        task: classification
+      - id: vqa_goal_oriented_smoke_v1
+        path: benchmarks/vqa_goal_oriented_smoke_v1.yaml
+        status: smoke
+        task: visual_question_answering
+      - id: diffusion_flickr8k_generation_v1
+        path: benchmarks/diffusion_flickr8k_generation_v1.yaml
+        status: smoke
+        task: image_generation
+  - id: neural_receiver
+    name: Neural Receiver / AI-PHY
+    status: experimental
+    version: v1-draft
+    summary: Learned receivers, demappers, receiver-only training, and BER/BLER link benchmarks.
+    docs:
+      page: docs/suites/neural_receiver.md
+    supported_tasks:
+      - neural_receiver_demapping
+      - automatic_modulation_recognition
+      - bit_transport
+    planned_tasks:
+      - receiver_only_training
+      - coded_ber_bler
+      - channel_mismatch_generalization
+      - sionna_ldpc_receiver
+    benchmark_packs:
+      - id: neural_receiver_ai_phy.qpsk_awgn_receiver_v1
+        path: benchmarks/neural_receiver_ai_phy/qpsk_awgn_receiver_v1.yaml
+        status: experimental
+        task: neural_receiver_demapping
+      - id: neural_receiver_ai_phy.modulation_recognition_awgn_v1
+        path: benchmarks/neural_receiver_ai_phy/modulation_recognition_awgn_v1.yaml
+        status: experimental
+        task: automatic_modulation_recognition
+  - id: mimo_ofdm
+    name: MIMO-OFDM
+    status: experimental
+    version: v1-draft
+    summary: Explicit multi-antenna, multi-subcarrier pilot grids and noisy observations with interpolation-aware LS and trainable-estimator endpoints.
+    docs:
+      page: docs/suites/mimo_ofdm.md
+    supported_tasks:
+      - mimo_ofdm_channel_estimation
+    planned_tasks:
+      - ofdm_receiver
+      - mimo_detection
+      - mimo_equalization
+      - coded_link_benchmark
+    benchmark_packs:
+      - id: mimo_ofdm.channel_estimation_v1
+        path: benchmarks/mimo_ofdm/channel_estimation_v1.yaml
+        status: experimental
+        task: mimo_ofdm_channel_estimation
+  - id: channel_estimation
+    name: Channel Estimation
+    status: experimental
+    version: v1-draft
+    summary: Explicit pilot patterns and observations for channel estimation, plus limited-feedback CSI reconstruction with downstream precoding evaluation.
+    docs:
+      page: docs/suites/channel_estimation.md
+      tutorials:
+        - docs/tutorials/learned_csi_feedback.md
+    supported_tasks:
+      - pilot_channel_estimation
+      - csi_compression_feedback
+    planned_tasks:
+      - channel_prediction
+    benchmark_packs:
+      - id: channel_estimation.pilot_awgn_v1
+        path: benchmarks/channel_estimation/pilot_awgn_v1.yaml
+        status: experimental
+        task: pilot_channel_estimation
+      - id: channel_estimation.csi_feedback_v1
+        path: benchmarks/channel_estimation/csi_feedback_v1.yaml
+        status: experimental
+        task: csi_compression_feedback
+  - id: beamforming_precoding
+    name: Beamforming / Precoding
+    status: experimental
+    version: v1-draft
+    summary: MISO beam-selection and precoding benchmarks with MRT/codebook baselines and learned-policy adapter points.
+    docs:
+      page: docs/suites/beamforming_precoding.md
+    supported_tasks:
+      - beamforming_precoding
+    planned_tasks:
+      - multi_user_precoding
+      - beam_tracking
+      - power_aware_beam_selection
+    benchmark_packs:
+      - id: beamforming_precoding.beam_selection_v1
+        path: benchmarks/beamforming_precoding/beam_selection_v1.yaml
+        status: experimental
+        task: beamforming_precoding
+  - id: localization_sensing
+    name: Localization / Sensing
+    status: experimental
+    version: v1-draft
+    summary: Explicit range-localization and ULA angle-of-arrival scenarios with classical baselines and trainable estimator endpoints.
+    docs:
+      page: docs/suites/localization_sensing.md
+    supported_tasks:
+      - wireless_localization
+      - aoa_estimation
+    planned_tasks:
+      - aoa_toa_fusion
+      - beam_alignment
+      - radio_map_prediction
+      - rf_scene_understanding
+      - sionna_rt_materialization
+    benchmark_packs:
+      - id: localization_sensing.range_localization_v1
+        path: benchmarks/localization_sensing/range_localization_v1.yaml
+        status: experimental
+        task: wireless_localization
+      - id: localization_sensing.aoa_estimation_v1
+        path: benchmarks/localization_sensing/aoa_estimation_v1.yaml
+        status: experimental
+        task: aoa_estimation
+  - id: resource_allocation
+    name: Resource Allocation
+    status: experimental
+    version: v1-draft
+    summary: Frequency-selective OFDM subcarrier power-allocation benchmarks with equal-power, theoretical water-filling, and learned-policy adapter points.
+    docs:
+      page: docs/suites/resource_allocation.md
+    supported_tasks:
+      - resource_allocation
+    planned_tasks:
+      - scheduling
+      - interference_management
+      - link_adaptation
+      - sionna_sys_materialization
+    benchmark_packs:
+      - id: resource_allocation.power_allocation_v1
+        path: benchmarks/resource_allocation/power_allocation_v1.yaml
+        status: experimental
+        task: resource_allocation

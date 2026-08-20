@@ -1,0 +1,35 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: neural_receiver.supervised_qpsk
+name: Neural receiver · fixed I/Q front-end calibration
+status: reference_only
+operation: demodulation.neural_receiver_adapter
+framework: torch
+data:
+  owner: noema_capture_contract
+  feature: impaired received complex QPSK symbols
+  target: pre-decoder transmitted-bit boundary (identity code; uncoded QPSK)
+model:
+  owner: external_researcher
+  reference_architecture: learned affine I/Q calibration
+  initialization: supervised least-squares estimate from captured I/Q and bit pairs
+  optimizer: full-batch L-BFGS logistic fit
+loss:
+  owner: external_researcher
+  reference_objective: binary cross entropy
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: single_binding
+  entrypoint: neural_receiver
+post_training:
+  helper: build_benchmark.py
+  recipe_output: benchmark_recipe.yaml
+  output: benchmark_pack.yaml
+  comparison:
+    - uncompensated_qpsk
+    - calibrated_iq_oracle
+    - learned_receiver
+  sweep: channel.snr_db
+  pairing: common held-out payload, AWGN seeds, and fixed front-end impairment at each SNR
+  presentation: metadata.demo@1

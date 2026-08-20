@@ -1,0 +1,58 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test py${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install project
+        run: uv sync --frozen
+      - name: Unit tests
+        run: uv run python -m unittest tests.public_suite
+      - name: Validate representative recipes and benchmarks
+        run: |
+          uv run noema recipe lint recipes/compressai_kodak_default.yaml
+          uv run noema recipe lint recipes/text_semantic_utf8_clean.yaml
+          uv run noema benchmark validate benchmarks/image_reconstruction_kodak_smoke_v1.yaml
+          uv run noema benchmark validate benchmarks/neural_receiver_ai_phy/qpsk_awgn_receiver_v1.yaml
+
+  docs:
+    name: docs and demos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+      - name: Install documentation dependencies
+        run: uv sync --frozen --extra docs
+      - name: Check generated documentation and launch assets
+        run: |
+          uv run python tools/generate_docs_reference.py --check
+          uv run python tools/generate_hosted_demo_catalog.py --check
+          uv run python tools/generate_qpsk_iq_calibration_demo_assets.py --check
+          uv run python tools/generate_launch_evidence.py --verify
+          uv run python tools/generate_launch_assets.py --check
+          uv run python tools/generate_deepjscc_demo_assets.py --check
+      - name: Build documentation
+        run: uv run sphinx-build -W -b html docs docs/_build/html
+      - name: Probe the flagship browser demo
+        run: uv run python tools/probe_break_the_comparison_demo.py --site-dir docs/_build/html --chrome google-chrome

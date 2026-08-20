@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://M0574F4.github.io/noema-lab/schemas/launch_asset_manifest.schema.json",
+  "title": "Noema launch asset manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "evidence",
+    "generator",
+    "schema",
+    "figures",
+    "tables",
+    "scientific_disclosure",
+    "paper_binding"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "kind": {"const": "noema.launch_asset_manifest"},
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "file_sha256", "document_sha256"],
+      "properties": {
+        "path": {"const": "launch_evidence.json"},
+        "file_sha256": {"$ref": "#/$defs/sha256"},
+        "document_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "generator": {"$ref": "#/$defs/binding"},
+    "schema": {"$ref": "#/$defs/binding"},
+    "figures": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {"$ref": "#/$defs/asset"}
+    },
+    "tables": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {"$ref": "#/$defs/asset"}
+    },
+    "scientific_disclosure": {"type": "string", "minLength": 1},
+    "paper_binding": {"const": "not_selected_for_paper_during_review"}
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "path", "sha256", "size_bytes"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[FT][0-9]$"},
+        "title": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "size_bytes": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

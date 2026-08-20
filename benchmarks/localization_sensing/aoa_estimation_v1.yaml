@@ -1,0 +1,94 @@
+schema_version: 1
+id: localization_sensing.aoa_estimation_v1
+version: "0.1.0"
+name: ULA Angle-of-Arrival Estimation
+description: Far-field single-source narrowband AoA estimation with a half-wavelength ULA, noisy snapshots, MUSIC, and a trainable estimator endpoint.
+suite:
+  id: localization_sensing
+  name: Localization / Sensing
+  status: experimental
+  version: v1-draft
+dataset:
+  id: synthetic_ula_aoa
+  modality: wireless
+  version: synthetic-ula-aoa-v1
+  split: fixed_seed
+task:
+  id: aoa_estimation
+  kind: estimation
+  modality: wireless
+metrics:
+  - id: channel.snr_db
+    family: channel
+    unit: dB
+    direction: neutral
+    definition_version: 1
+    source_step: array_observation
+    source_operation: wireless.ula_array_observation
+  - id: aoa.rmse_deg
+    family: sensing
+    unit: degree
+    direction: lower_is_better
+  - id: aoa.mae_deg
+    family: sensing
+    unit: degree
+    direction: lower_is_better
+  - id: task.score
+    family: task
+    unit: score
+    direction: higher_is_better
+baselines:
+  - music_ula
+  - bartlett_adapter_reference
+recipes:
+  - id: music_snr0
+    label: MUSIC · 0 dB
+    role: baseline
+    path: ../../recipes/aoa_music_ula_baseline.yaml
+    params:
+      method_id: music_ula
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        array_observation:
+          snr_db: 0
+  - id: adapter_snr0
+    label: Bartlett reference endpoint · 0 dB
+    role: baseline
+    path: ../../recipes/aoa_adapter_ula_baseline.yaml
+    params:
+      method_id: bartlett_adapter_reference
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        array_observation:
+          snr_db: 0
+  - id: music_snr15
+    label: MUSIC · 15 dB
+    role: baseline
+    path: ../../recipes/aoa_music_ula_baseline.yaml
+    params:
+      method_id: music_ula
+      matrix_selection:
+        channel.snr_db: 15
+      step_params:
+        array_observation:
+          snr_db: 15
+  - id: adapter_snr15
+    label: Bartlett reference endpoint · 15 dB
+    role: baseline
+    path: ../../recipes/aoa_adapter_ula_baseline.yaml
+    params:
+      method_id: bartlett_adapter_reference
+      matrix_selection:
+        channel.snr_db: 15
+      step_params:
+        array_observation:
+          snr_db: 15
+metadata:
+  benchmark_tier: experimental
+  default_plot:
+    plot: graceful-degradation
+    x: channel.snr_db
+    y: aoa.rmse_deg
+  notes: The initial scenario is intentionally focused and reproducible—a single far-field source, narrowband snapshots, a half-wavelength ULA, and AWGN. Multipath, multiple sources, and AoA/ToA fusion remain separate future protocols.

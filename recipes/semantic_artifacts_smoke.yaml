@@ -1,0 +1,55 @@
+schema_version: 1
+execution_profile:
+  id: custom
+  version: 1
+name: semantic_artifacts_smoke
+description: Smoke recipe for typed semantic artifact contracts.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: typed_semantic_artifacts
+  ui_configured: false
+  channel_enabled: false
+  channel_mode: disabled
+  seed: 23
+steps:
+  - id: data
+    op: source.semantic_artifacts_smoke
+    inputs: {}
+    params:
+      dataset: semantic_artifact_smoke
+      embedding_dim: 8
+  - id: detection_evaluation
+    op: metrics.detection
+    inputs:
+      reference: data.detections_reference
+      candidate: data.detections_candidate
+    params:
+      iou_threshold: 0.5
+  - id: segmentation_evaluation
+    op: metrics.segmentation
+    inputs:
+      reference: data.segmentation_reference
+      candidate: data.segmentation_candidate
+    params: {}
+  - id: captioning_evaluation
+    op: metrics.captioning
+    inputs:
+      reference: data.captions_reference
+      candidate: data.captions_candidate
+    params: {}
+  - id: vqa_evaluation
+    op: metrics.vqa
+    inputs:
+      reference: data.vqa_reference
+      candidate: data.vqa_candidate
+    params: {}
+  - id: retrieval_evaluation
+    op: metrics.retrieval
+    inputs:
+      rankings: data.rankings
+    params:
+      k_values: "1,2"

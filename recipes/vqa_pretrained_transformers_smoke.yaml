@@ -1,0 +1,54 @@
+schema_version: 1
+execution_profile:
+  id: task_inference
+  version: 1
+name: visual_question_answering
+description: Visual question answering on a compact downloadable image-question dataset using a pretrained Transformers receiver.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  benchmark_id: vqa_pretrained_transformers_smoke
+  benchmark_version: v1
+  channel_enabled: false
+  channel_mode: no_channel_full_image_vqa_baseline
+  codec_format: pretrained_vqa_full_image
+  codec_label: Pretrained Transformers full-image VQA baseline
+  codec_output_form: answers
+  codec_profile: pretrained_vqa
+  measure_codec_timing: true
+  research:
+    task:
+      id: visual_question_answering
+  research_stage: goal_oriented_vqa
+  semantic_representation: full_image_question
+  seed: 23
+  transport_representation: none_no_channel_baseline
+  ui_configured: true
+steps:
+  - id: data
+    op: source.vqa_small_hf
+    inputs: {}
+    params:
+      dataset_dir: .noema/datasets/vqa_small
+      split: validation
+      limit: 8
+      image_size: 224
+      download: true
+  - id: receiver
+    op: foundation.vqa_transformers_answer
+    inputs:
+      images: data.images
+      questions: data.questions
+    params:
+      model_id: dandelin/vilt-b32-finetuned-vqa
+      device: cpu
+      top_k: 1
+  - id: evaluation
+    op: metrics.vqa
+    inputs:
+      reference: data.answers
+      candidate: receiver.answers
+    params: {}

@@ -1,0 +1,305 @@
+schema_version: 1
+templates:
+  - id: semantic_comm.image_reconstruction.default
+    label: Image reconstruction — source-coded link
+    task_id: image_reconstruction
+    editor: image
+    recipe_path: recipes/compressai_kodak_default.yaml
+    starter_resource: recipe_starters/compressai_kodak_default.yaml
+    order: 10
+    default: true
+    status: supported
+    execution_profile:
+      id: layered_digital
+      version: 1
+    editor_bindings:
+      image_ids:
+        step_id: data
+        op: source.image_dataset
+        param: image_ids
+
+  - id: semantic_comm.image_reconstruction.protected_digital
+    label: Image reconstruction — protected digital link
+    task_id: image_reconstruction
+    editor: graph
+    recipe_path: recipes/jpeg_q75_kodak_repetition_awgn.yaml
+    starter_resource: recipe_starters/jpeg_q75_kodak_repetition_awgn.yaml
+    order: 11
+    default: false
+    status: supported
+    execution_profile:
+      id: layered_digital
+      version: 1
+
+  - id: semantic_comm.image_reconstruction.deepjscc_awgn
+    label: Image reconstruction — DeepJSCC over AWGN
+    task_id: image_reconstruction
+    editor: graph
+    recipe_path: recipes/deepjscc_kodak_awgn_train.yaml
+    starter_resource: recipe_starters/deepjscc_kodak_awgn_train.yaml
+    order: 12
+    default: false
+    status: experimental
+    execution_profile:
+      id: joint_source_channel_symbols
+      version: 1
+
+  - id: semantic_comm.image_reconstruction.deepjscc_slow_rayleigh
+    label: Image reconstruction — blind DeepJSCC over slow fading
+    task_id: image_reconstruction
+    editor: graph
+    recipe_path: recipes/deepjscc_kodak_slow_rayleigh_train.yaml
+    starter_resource: recipe_starters/deepjscc_kodak_slow_rayleigh_train.yaml
+    order: 13
+    default: false
+    status: experimental
+    execution_profile:
+      id: joint_source_channel_symbols
+      version: 1
+
+  - id: semantic_comm.text_semantic_similarity.default
+    label: Text transport — layered digital
+    task_id: text_semantic_similarity
+    editor: text
+    recipe_path: recipes/text_semantic_utf8_clean.yaml
+    starter_resource: recipe_starters/text_semantic_utf8_clean.yaml
+    order: 20
+    default: true
+    status: supported
+    execution_profile:
+      id: layered_digital
+      version: 1
+
+  - id: semantic_comm.text_semantic_similarity.semantic_state_kb
+    label: Text transport — knowledge-assisted semantic packets
+    task_id: text_semantic_similarity
+    editor: graph
+    recipe_path: recipes/text_semantic_state_kb_clean.yaml
+    starter_resource: recipe_starters/text_semantic_state_kb_clean.yaml
+    order: 21
+    default: false
+    status: supported
+    execution_profile:
+      id: layered_digital
+      version: 1
+
+  - id: semantic_comm.text_semantic_similarity.bart_joint_symbols
+    label: Text transport — continuous-symbol JSCC
+    task_id: text_semantic_similarity
+    editor: graph
+    recipe_path: recipes/text_bart_jscc_clean.yaml
+    starter_resource: recipe_starters/text_bart_jscc_clean.yaml
+    order: 22
+    default: false
+    status: experimental
+    execution_profile:
+      id: joint_source_channel_symbols
+      version: 1
+
+  - id: semantic_comm.visual_question_answering.default
+    label: Visual question answering
+    task_id: visual_question_answering
+    editor: task
+    recipe_path: recipes/vqa_pretrained_transformers_smoke.yaml
+    starter_resource: recipe_starters/vqa_pretrained_transformers_smoke.yaml
+    order: 40
+    default: true
+    status: supported
+    execution_profile:
+      id: task_inference
+      version: 1
+
+  - id: semantic_comm.object_detection.default
+    label: Object detection
+    task_id: object_detection
+    editor: task
+    recipe_path: recipes/yolo_coco_detection.yaml
+    starter_resource: recipe_starters/yolo_coco_detection.yaml
+    order: 50
+    default: true
+    status: supported
+    execution_profile:
+      id: task_inference
+      version: 1
+
+  - id: semantic_comm.segmentation.default
+    label: Segmentation
+    task_id: segmentation
+    editor: task
+    recipe_path: recipes/yolo_coco_segmentation.yaml
+    starter_resource: recipe_starters/yolo_coco_segmentation.yaml
+    order: 60
+    default: true
+    status: supported
+    execution_profile:
+      id: task_inference
+      version: 1
+
+  - id: semantic_comm.image_text_retrieval.default
+    label: Image-text retrieval
+    task_id: image_text_retrieval
+    editor: task
+    recipe_path: recipes/clip_retrieval_smoke.yaml
+    starter_resource: recipe_starters/clip_retrieval_smoke.yaml
+    order: 70
+    default: true
+    status: supported
+    execution_profile:
+      id: task_inference
+      version: 1
+
+  - id: semantic_comm.image_generation.default
+    label: Caption-to-image generation
+    task_id: image_generation
+    editor: task
+    recipe_path: recipes/diffusion_flickr8k_generation.yaml
+    starter_resource: recipe_starters/diffusion_flickr8k_generation.yaml
+    order: 80
+    default: true
+    status: supported
+    execution_profile:
+      id: layered_digital
+      version: 1
+
+  - id: ai_phy.pilot_channel_estimation.adapter
+    label: Flat-fading SISO pilot channel estimation
+    task_id: pilot_channel_estimation
+    editor: graph
+    recipe_path: recipes/channel_estimation_adapter_awgn.yaml
+    starter_resource: recipe_starters/channel_estimation_adapter_awgn.yaml
+    order: 91
+    default: true
+    status: supported
+    execution_profile:
+      id: pilot_channel_estimation
+      version: 1
+
+  - id: ai_phy.mimo_ofdm_channel_estimation.adapter
+    label: Learned 2×2 MIMO-OFDM channel estimation
+    task_id: mimo_ofdm_channel_estimation
+    editor: graph
+    recipe_path: recipes/mimo_ofdm_adapter_channel_estimation.yaml
+    starter_resource: recipe_starters/mimo_ofdm_adapter_channel_estimation.yaml
+    order: 101
+    default: true
+    status: supported
+    execution_profile:
+      id: mimo_ofdm_channel_estimation
+      version: 1
+
+  - id: ai_phy.csi_compression_feedback.truncated_angular_delay
+    label: Limited-feedback MISO-OFDM CSI
+    task_id: csi_compression_feedback
+    editor: graph
+    recipe_path: recipes/csi_feedback_truncated_angular_delay.yaml
+    starter_resource: recipe_starters/csi_feedback_truncated_angular_delay.yaml
+    order: 102
+    default: true
+    status: supported
+    execution_profile:
+      id: csi_feedback_downlink
+      version: 1
+
+  - id: ai_phy.beamforming_precoding.adapter
+    label: Single-user MISO beamforming / precoding
+    task_id: beamforming_precoding
+    editor: graph
+    recipe_path: recipes/beamforming_adapter_baseline.yaml
+    starter_resource: recipe_starters/beamforming_adapter_baseline.yaml
+    order: 111
+    default: true
+    status: supported
+    execution_profile:
+      id: beamforming_link_evaluation
+      version: 1
+
+  - id: ai_phy.wireless_localization.adapter
+    label: 2D range-based wireless localization
+    task_id: wireless_localization
+    editor: graph
+    recipe_path: recipes/localization_adapter_baseline.yaml
+    starter_resource: recipe_starters/localization_adapter_baseline.yaml
+    order: 121
+    default: true
+    status: supported
+    execution_profile:
+      id: range_localization
+      version: 1
+
+  - id: ai_phy.aoa_estimation.adapter
+    label: Single-source ULA angle-of-arrival estimation
+    task_id: aoa_estimation
+    editor: graph
+    recipe_path: recipes/aoa_adapter_ula_baseline.yaml
+    starter_resource: recipe_starters/aoa_adapter_ula_baseline.yaml
+    order: 131
+    default: true
+    status: supported
+    execution_profile:
+      id: aoa_array_estimation
+      version: 1
+
+  - id: ai_phy.resource_allocation.equal_power
+    label: OFDM subcarrier resource allocation
+    task_id: resource_allocation
+    editor: graph
+    recipe_path: recipes/resource_equal_power_baseline.yaml
+    starter_resource: recipe_starters/resource_equal_power_baseline.yaml
+    order: 140
+    default: true
+    status: supported
+    execution_profile:
+      id: layered_digital
+      version: 1
+
+  - id: ai_phy.resource_allocation.delayed_csi_finite_blocklength
+    label: Reliability-aware OFDM allocation with delayed CSI
+    task_id: resource_allocation
+    editor: graph
+    recipe_path: recipes/resource_delayed_csi_finite_blocklength.yaml
+    starter_resource: recipe_starters/resource_delayed_csi_finite_blocklength.yaml
+    order: 141
+    default: false
+    status: experimental
+    execution_profile:
+      id: layered_digital
+      version: 1
+
+  - id: ai_phy.neural_receiver_demapping.adapter
+    label: QPSK receiver calibration under I/Q imbalance
+    task_id: neural_receiver_demapping
+    editor: graph
+    recipe_path: recipes/neural_receiver_qpsk_iq_calibration.yaml
+    starter_resource: recipe_starters/neural_receiver_qpsk_iq_calibration.yaml
+    order: 150
+    default: true
+    status: supported
+    execution_profile:
+      id: layered_digital
+      version: 1
+
+  - id: ai_phy.neural_receiver_demapping.phase_tracking
+    label: Pilot-aided QPSK carrier tracking
+    task_id: neural_receiver_demapping
+    editor: graph
+    recipe_path: recipes/neural_receiver_qpsk_phase_tracking.yaml
+    starter_resource: recipe_starters/neural_receiver_qpsk_phase_tracking.yaml
+    order: 151
+    default: false
+    status: experimental
+    execution_profile:
+      id: layered_digital
+      version: 1
+
+  - id: ai_phy.automatic_modulation_recognition.awgn
+    label: Automatic modulation recognition with blind carrier impairments
+    task_id: automatic_modulation_recognition
+    editor: graph
+    recipe_path: recipes/modulation_recognition_awgn.yaml
+    starter_resource: recipe_starters/modulation_recognition_awgn.yaml
+    order: 160
+    default: true
+    status: supported
+    execution_profile:
+      id: task_inference
+      version: 1

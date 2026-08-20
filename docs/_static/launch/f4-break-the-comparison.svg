@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Four ways to break the comparison</title>
+  <desc id="desc">Condition mismatch, seed cherry-picking, metric mismatch, and hidden oracle information all invalidate an otherwise precise-looking claim.</desc>
+  <defs>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b211b"/>
+      <stop offset="1" stop-color="#06100e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="82%" cy="8%" r="72%">
+      <stop offset="0" stop-color="#2fb47c" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#07110f" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5de2a5"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff6b6b"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffc857"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4ec5c1"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#000" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#07110f"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <text x="80" y="82" fill="#5de2a5" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="19" font-weight="750" text-anchor="start" letter-spacing="2.5">F4 · BREAK THE COMPARISON</text><text x="80" y="155" fill="#effbf6" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="48" font-weight="740" text-anchor="start">The arithmetic can be exact while the comparison is wrong.</text><rect x="585" y="310" width="430" height="270" rx="32" fill="#241417" stroke="#ff6b6b" stroke-width="3"/><text x="800" y="372" fill="#ff6b6b" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18" font-weight="750" text-anchor="middle" letter-spacing="2">CLAIM</text><text x="800" y="458" fill="#effbf6" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="78" font-weight="780" text-anchor="middle">98.87%</text><text x="800" y="510" fill="#a9c1b8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="24" font-weight="650" text-anchor="middle">precise-looking ≠ defensible</text><text x="800" y="548" fill="#ffc857" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18" font-weight="500" text-anchor="middle">Restore every contract boundary before quoting.</text><rect x="90" y="280" width="380" height="180" rx="24" fill="#0d211c" stroke="#4ec5c1" stroke-width="2"/><text x="118" y="338" fill="#4ec5c1" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="28" font-weight="730" text-anchor="start">Condition mismatch</text><text x="118" y="384" fill="#a9c1b8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18" font-weight="500" text-anchor="start"><tspan x="118" dy="0">Candidate moved to another SNR</tspan><tspan x="118" dy="24.3">cell</tspan></text><line x1="470" y1="370" x2="575" y2="445" stroke="#ff6b6b" stroke-width="4" marker-end="url(#arrow-red)"/><rect x="1130" y="280" width="380" height="180" rx="24" fill="#0d211c" stroke="#ffc857" stroke-width="2"/><text x="1158" y="338" fill="#ffc857" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="28" font-weight="730" text-anchor="start">Seed cherry-pick</text><text x="1158" y="384" fill="#a9c1b8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18" font-weight="500" text-anchor="start"><tspan x="1158" dy="0">Best candidate seed versus</tspan><tspan x="1158" dy="24.3">baseline mean</tspan></text><line x1="1130" y1="370" x2="1025" y2="445" stroke="#ff6b6b" stroke-width="4" marker-end="url(#arrow-red)"/><rect x="90" y="610" width="380" height="180" rx="24" fill="#0d211c" stroke="#ff6b6b" stroke-width="2"/><text x="118" y="668" fill="#ff6b6b" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="28" font-weight="730" text-anchor="start">Metric mismatch</text><text x="118" y="714" fill="#a9c1b8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18" font-weight="500" text-anchor="start"><tspan x="118" dy="0">Candidate BLER placed beside</tspan><tspan x="118" dy="24.3">baseline BER</tspan></text><line x1="470" y1="700" x2="575" y2="445" stroke="#ff6b6b" stroke-width="4" marker-end="url(#arrow-red)"/><rect x="1130" y="610" width="380" height="180" rx="24" fill="#0d211c" stroke="#5de2a5" stroke-width="2"/><text x="1158" y="668" fill="#5de2a5" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="28" font-weight="730" text-anchor="start">Hidden information</text><text x="1158" y="714" fill="#a9c1b8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18" font-weight="500" text-anchor="start"><tspan x="1158" dy="0">Diagnostic oracle presented as a</tspan><tspan x="1158" dy="24.3">peer</tspan></text><line x1="1130" y1="700" x2="1025" y2="445" stroke="#ff6b6b" stroke-width="4" marker-end="url(#arrow-red)"/><text x="800" y="858" fill="#ffc857" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18" font-weight="500" text-anchor="middle">Internally valid completed experimental benchmark; not a publication-ready canonical benchmark.</text>
+</svg>

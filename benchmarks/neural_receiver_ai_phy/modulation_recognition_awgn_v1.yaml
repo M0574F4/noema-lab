@@ -1,0 +1,110 @@
+schema_version: 1
+id: neural_receiver_ai_phy.modulation_recognition_awgn_v1
+version: "0.2.0"
+name: Blind-Carrier Automatic Modulation Recognition
+description: Balanced fixed-frame BPSK, QPSK, and 16-QAM recognition under unknown per-frame carrier phase, residual frequency offset, and AWGN, with a blind differential-cumulant baseline and an unbound I/Q-only learned-classifier slot.
+suite:
+  id: neural_receiver
+  name: Neural Receiver / AI-PHY
+  status: experimental
+  version: v1-draft
+dataset:
+  id: synthetic_modulation_iq
+  modality: wireless
+  version: synthetic-modulation-iq-blind-carrier-v1
+  split: fixed_seed
+task:
+  id: automatic_modulation_recognition
+  kind: signal_classification
+  modality: wireless
+metrics:
+  - id: modulation_recognition.accuracy
+    source_step: evaluation
+    source_operation: metrics.modulation_classification
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+  - id: modulation_recognition.balanced_accuracy
+    source_step: evaluation
+    source_operation: metrics.modulation_classification
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+  - id: modulation_recognition.macro_f1
+    source_step: evaluation
+    source_operation: metrics.modulation_classification
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+  - id: channel.snr_db
+    source_step: observation
+    source_operation: wireless.modulation_awgn_observation
+    family: channel
+    unit: dB
+    direction: neutral
+baselines:
+  - blind_differential_cumulant
+recipes:
+  - id: blind_cumulant_snr_minus2
+    label: Blind differential-cumulant baseline
+    role: baseline
+    path: ../../recipes/modulation_recognition_awgn.yaml
+    params:
+      method_id: blind_differential_cumulant
+      matrix_selection:
+        channel.snr_db: -2.0
+      step_params:
+        receiver:
+          mode: classical_cumulant
+  - id: blind_cumulant_snr6
+    label: Blind differential-cumulant baseline
+    role: baseline
+    path: ../../recipes/modulation_recognition_awgn.yaml
+    params:
+      method_id: blind_differential_cumulant
+      matrix_selection:
+        channel.snr_db: 6.0
+      step_params:
+        receiver:
+          mode: classical_cumulant
+  - id: blind_cumulant_snr14
+    label: Blind differential-cumulant baseline
+    role: baseline
+    path: ../../recipes/modulation_recognition_awgn.yaml
+    params:
+      method_id: blind_differential_cumulant
+      matrix_selection:
+        channel.snr_db: 14.0
+      step_params:
+        receiver:
+          mode: classical_cumulant
+  - id: learned_classifier_unbound
+    label: User-trained portable AMC classifier
+    role: candidate_placeholder
+    path: ../../recipes/modulation_recognition_awgn.yaml
+    params:
+      skip: true
+      skip_reason: Train or supply a schema-v2 modulation-classifier artifact, then bind its manifest to the receiver step before benchmarking.
+      matrix_selection:
+        channel.snr_db: 6.0
+      step_params:
+        receiver:
+          mode: learned_artifact
+          artifact_manifest_path: ""
+          artifact_entrypoint: modulation_classifier
+metadata:
+  benchmark_tier: experimental
+  benchmark_family: neural_receiver_ai_phy
+  protocol: blind_carrier_phase_and_residual_frequency_offset_awgn
+  class_vocabulary:
+    - bpsk
+    - qpsk
+    - qam16
+  artifact_bound: false
+  publication_ready: false
+  baseline_information_note: The blind differential-cumulant baseline and learned classifier consume I/Q only. The post-training campaign also includes an oracle-synchronized likelihood diagnostic that receives simulator carrier truth.
+  literature:
+    - title: Convolutional Radio Modulation Recognition Networks
+      url: https://arxiv.org/abs/1602.04105
+  dataset_scope_note: This MVP generates controlled synthetic data rather than claiming RadioML parity; DeepSig documents known errata in early RadioML releases.
+  external_dataset_reference: https://www.deepsig.ai/datasets/

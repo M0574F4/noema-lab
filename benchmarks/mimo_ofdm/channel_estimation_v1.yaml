@@ -1,0 +1,94 @@
+schema_version: 1
+id: mimo_ofdm.channel_estimation_v1
+version: "0.1.0"
+name: MIMO-OFDM Channel Estimation
+description: Shared 2×2 MIMO-OFDM Sionna 3GPP TDL-C benchmark coordinates for interpolation-aware LS and trainable-estimator endpoints.
+suite:
+  id: mimo_ofdm
+  name: MIMO-OFDM
+  status: experimental
+  version: v1-draft
+dataset:
+  id: sionna_3gpp_mixed_tdl_mimo_ofdm_pilots
+  modality: wireless
+  version: sionna-tdl-ace-2x2-64sc-v2
+  split: seeded_channel_realizations
+task:
+  id: mimo_ofdm_channel_estimation
+  kind: estimation
+  modality: wireless
+metrics:
+  - id: channel.snr_db
+    definition_version: 1
+    source_step: pilot_observation
+    source_operation: wireless.pilot_observation
+    family: channel
+    unit: dB
+    direction: neutral
+  - id: mimo.channel_estimation.nmse
+    family: estimation
+    unit: ratio
+    direction: lower_is_better
+  - id: task.score
+    family: task
+    unit: score
+    direction: higher_is_better
+baselines:
+  - ls_mimo_ofdm_estimator
+  - mimo_ofdm_estimator_adapter
+recipes:
+  - id: ls_snr0
+    label: LS MIMO-OFDM estimator
+    role: baseline
+    path: ../../recipes/mimo_ofdm_ls_channel_estimation.yaml
+    params:
+      method_id: ls_mimo_ofdm_estimator
+      matrix_selection:
+        channel.snr_db: 0
+        channel.tdl_profile: C
+      step_params:
+        pilot_observation:
+          snr_db: 0
+  - id: adapter_snr0
+    label: MIMO-OFDM LMMSE reference (trainable endpoint)
+    role: baseline
+    path: ../../recipes/mimo_ofdm_adapter_channel_estimation.yaml
+    params:
+      method_id: mimo_ofdm_estimator_adapter
+      matrix_selection:
+        channel.snr_db: 0
+        channel.tdl_profile: C
+      step_params:
+        pilot_observation:
+          snr_db: 0
+  - id: ls_snr15
+    label: LS MIMO-OFDM estimator
+    role: baseline
+    path: ../../recipes/mimo_ofdm_ls_channel_estimation.yaml
+    params:
+      method_id: ls_mimo_ofdm_estimator
+      matrix_selection:
+        channel.snr_db: 15
+        channel.tdl_profile: C
+      step_params:
+        pilot_observation:
+          snr_db: 15
+  - id: adapter_snr15
+    label: MIMO-OFDM LMMSE reference (trainable endpoint)
+    role: baseline
+    path: ../../recipes/mimo_ofdm_adapter_channel_estimation.yaml
+    params:
+      method_id: mimo_ofdm_estimator_adapter
+      matrix_selection:
+        channel.snr_db: 15
+        channel.tdl_profile: C
+      step_params:
+        pilot_observation:
+          snr_db: 15
+metadata:
+  benchmark_tier: experimental
+  default_plot:
+    plot: graceful-degradation
+    x: channel.snr_db
+    y: task.score
+  notes: All four coordinates use the same seeded TDL-C scenario, antenna geometry, pilot grid, and waveform settings. The graph exposes the channel tensor (including transmit and receive antenna axes), noisy observation, interpolation-aware estimation, and exact-shape evaluation. The adapter recipe uses a deterministic LMMSE reference until replaced by a trained artifact.

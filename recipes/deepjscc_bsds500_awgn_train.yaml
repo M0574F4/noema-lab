@@ -1,0 +1,107 @@
+schema_version: 1
+execution_profile:
+  id: joint_source_channel_symbols
+  version: 1
+name: deepjscc_bsds500_awgn_train
+description: >-
+  Locally trained, fixed-bandwidth DeepJSCC demonstration artifact using only
+  the official BSDS500 train and validation partitions. Publisher test images
+  and PIRM images are excluded from the training bundle.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: publication_case_study_training
+  channel_enabled: true
+  channel_mode: awgn
+  codec_profile: deepjscc_external
+  semantic_representation: learned_continuous_symbols
+  transport_representation: complex_channel_symbols
+  rate_count_fixed_point: tx_symbol_boundary.channel.fixed.modulator_input.symbol_count
+  data_partition_role: train_validation_only
+  held_out_populations: [bsds500_publication_test, pirm_2018_hr_test]
+  matrix:
+    dimensions:
+      channel.snr_db: [1, 7, 13]
+    step_params:
+      wireless_channel:
+        snr_db:
+          matrix: channel.snr_db
+steps:
+  - id: data
+    op: source.image_dataset
+    params:
+      dataset: bsds500
+      dataset_dir: .noema/datasets/publication_candidates/bsds500/BSR/BSDS500/data/images
+      manifest_path: .noema/datasets/publication_candidates/bsds500/bsds500-all-candidate.yaml
+      manifest_sha256: b37ad5d88a0d33611f97e14f4d3522d3a82b1b09cc6d6d75c3b26198ad8da48a
+      split: training_all
+      image_ids: ""
+      training_validation_count: 100
+      crop_size: 128
+      repeat_count: 1
+
+  - id: sender
+    op: model.deepjscc_external_encode
+    inputs:
+      images: data.images
+    params:
+      runtime: training_interface
+
+  - id: tx_power
+    op: channel.symbol_power_normalize
+    inputs:
+      symbols: sender.symbols
+    params:
+      label: tx_power_normalize
+      target_power: 1.0
+      normalization_scope: source_item
+
+  - id: tx_symbol_boundary
+    op: channel.symbol_boundary
+    inputs:
+      symbols: tx_power.symbols
+    params:
+      label: modulator_input
+      role: symbol_channel_input
+
+  - id: wireless_channel
+    op: wireless.channel
+    inputs:
+      symbols: tx_symbol_boundary.symbols
+    params:
+      channel: awgn
+      snr_db: 7
+      wireless_backend: numpy
+      seed: 53001
+
+  - id: rx_symbol_boundary
+    op: channel.symbol_boundary
+    inputs:
+      symbols: wireless_channel.rx_symbols
+    params:
+      label: channel_output
+      role: symbol_channel_output
+
+  - id: channel_symbol_count_match
+    op: channel.symbol_count_match
+    inputs:
+      reference: tx_symbol_boundary.symbols
+      candidate: rx_symbol_boundary.symbols
+    params:
+      label: channel_io
+
+  - id: receiver
+    op: model.deepjscc_external_decode
+    inputs:
+      symbols: rx_symbol_boundary.symbols
+    params:
+      runtime: training_interface
+
+  - id: evaluation
+    op: metrics.image_reconstruction
+    inputs:
+      reference: data.images
+      reconstruction: receiver.images

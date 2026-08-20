@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lab.dev/schemas/benchmark_result.schema.json",
+  "title": "Noema benchmark result bundle",
+  "type": "object",
+  "required": ["schema_version", "kind", "benchmark", "status", "recipes"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "kind": {"const": "noema.benchmark_result"},
+    "status": {"enum": ["running", "completed", "incomplete", "failed"]},
+    "benchmark": {
+      "type": "object",
+      "required": ["id", "version", "sha256"],
+      "properties": {
+        "id": {"type": "string"},
+        "version": {"type": "string"},
+        "sha256": {"type": "string"},
+        "benchmark_tier": {"enum": ["smoke", "canonical", "experimental"]},
+        "traceability_profile_requested": {
+          "type": "boolean",
+          "description": "Records whether the frozen benchmark requested Noema's strongest local traceability profile."
+        },
+        "publication_ready": {
+          "type": "boolean",
+          "deprecated": true,
+          "description": "Deprecated compatibility alias for traceability_profile_requested."
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "verification_profile": {
+              "$ref": "#/$defs/publicationVerificationProfileBinding"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {"traceability_profile_requested": {"const": true}},
+                "required": ["traceability_profile_requested"]
+              },
+              {
+                "properties": {"publication_ready": {"const": true}},
+                "required": ["publication_ready"]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "benchmark_tier": {"const": "canonical"},
+              "metadata": {
+                "type": "object",
+                "required": ["verification_profile"]
+              }
+            },
+            "required": ["benchmark_tier", "metadata"]
+          }
+        },
+        {
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "traceability_profile_requested": {"const": true},
+                  "publication_ready": {"const": false}
+                },
+                "required": [
+                  "traceability_profile_requested",
+                  "publication_ready"
+                ]
+              },
+              {
+                "properties": {
+                  "traceability_profile_requested": {"const": false},
+                  "publication_ready": {"const": true}
+                },
+                "required": [
+                  "traceability_profile_requested",
+                  "publication_ready"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "recipes": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/recipeResult"}
+    },
+    "reports": {"type": "object"}
+  },
+  "$defs": {
+    "publicationVerificationProfileBinding": {
+      "type": "object",
+      "required": ["id", "sha256"],
+      "properties": {
+        "id": {"const": "noema.traceability.v2"},
+        "sha256": {
+          "const": "1ee5af4e236df50eef50612cc1d6912fa58442a8a46d0b00adc3ee6d857f45b1"
+        }
+      },
+      "additionalProperties": false
+    },
+    "metricProvenanceEntry": {
+      "type": "object",
+      "required": [
+        "metric_id",
+        "source_scope",
+        "source_step",
+        "source_operation",
+        "qualified_metric",
+        "definition_version",
+        "definition_sha256",
+        "source_implementation_sha256",
+        "source_outputs_sha256",
+        "source_execution_binding_sha256",
+        "source_run_evidence_sha256"
+      ],
+      "properties": {
+        "metric_id": {"type": "string", "minLength": 1},
+        "source_scope": {"const": "step"},
+        "source_step": {"type": "string", "minLength": 1},
+        "source_operation": {"type": "string", "minLength": 1},
+        "qualified_metric": {"type": "string", "minLength": 1},
+        "definition_version": {"type": "integer", "minimum": 1},
+        "definition_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_implementation_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_outputs_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_execution_binding_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_run_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "recipeResult": {
+      "type": "object",
+      "required": ["id", "status", "metrics"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "status": {
+          "enum": ["completed", "failed", "skipped", "rejected_resource_budget"]
+        },
+        "metrics": {"type": "object"},
+        "metric_provenance": {
+          "type": "object",
+          "additionalProperties": {"$ref": "#/$defs/metricProvenanceEntry"}
+        },
+        "common_condition_evidence": {
+          "$ref": "#/$defs/commonConditionEvidence"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {"enum": ["completed", "rejected_resource_budget"]}
+            },
+            "required": ["status"]
+          },
+          "then": {"required": ["metric_provenance"]}
+        }
+      ],
+      "additionalProperties": true
+    },
+    "commonConditionEvidence": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "contract_sha256",
+        "declaration_sha256",
+        "pairing_id",
+        "aggregation_cell_id",
+        "complete",
+        "sections",
+        "comparison_identity",
+        "comparison_identity_sha256",
+        "evidence_sha256"
+      ],
+      "properties": {
+        "schema_version": {"const": 1},
+        "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "declaration_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "pairing_id": {"type": "string", "minLength": 1},
+        "aggregation_cell_id": {"type": "string", "minLength": 1},
+        "complete": {"type": "boolean"},
+        "sections": {
+          "type": "object",
+          "required": ["source", "randomness", "power", "receiver", "failure"]
+        },
+        "comparison_identity": {"type": "object"},
+        "comparison_identity_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

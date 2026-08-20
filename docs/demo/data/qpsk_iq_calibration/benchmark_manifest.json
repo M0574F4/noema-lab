@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "noema.completed_benchmark_projection",
+  "evidence_level": "completed_experimental_benchmark",
+  "result": {
+    "id": "20260726T155403Z_neural_receiver_ai_phy.learned_qpsk_iq_calibration_v1",
+    "benchmark_id": "neural_receiver_ai_phy.learned_qpsk_iq_calibration_v1",
+    "benchmark_version": "1.0.0",
+    "status": "completed",
+    "created_at_utc": "2026-07-26T15:54:03.966Z",
+    "completed_at_utc": "2026-07-26T15:56:42.211Z",
+    "result_json_sha256": "aa051f9e893ace504f0b5748dd5319c1cf2897f0e3fa97f4ff926281460ed781",
+    "benchmark_json_sha256": "e98630aaaf83bacfad82a7366e2f8556e0985ed01aa148bc2cae0aa615f077ca",
+    "metrics_csv_sha256": "ad33417be0cf1a8a58dcecde305d4e501199cb798ff3ef495fc6724156784451",
+    "benchmark_semantic_sha256": "8dbfe6298ccee25b5490781ed8fa312026de1b598914055a396b60e816a960eb"
+  },
+  "projection": {
+    "path": "benchmark_projection.csv",
+    "sha256": "1a1211d8aa2f45293111c135d4d669f8496610dfc41ded446ebbb3ed4ed6985a",
+    "row_count": 63,
+    "fields": [
+      "result_id",
+      "recipe_id",
+      "recipe_label",
+      "role",
+      "run_id",
+      "method",
+      "paired_seed",
+      "snr_db",
+      "bit_errors",
+      "compared_bits",
+      "ber",
+      "block_errors",
+      "compared_blocks",
+      "bler",
+      "recipe_sha256",
+      "semantic_recipe_sha256"
+    ]
+  },
+  "scope": {
+    "methods": [
+      "uncompensated_qpsk",
+      "calibrated_iq_oracle",
+      "learned_receiver"
+    ],
+    "snr_db": [
+      -2.0,
+      0.0,
+      2.0,
+      4.0,
+      6.0,
+      8.0,
+      10.0
+    ],
+    "paired_seeds": [
+      71001,
+      72001,
+      73001
+    ],
+    "bits_per_run": 1048576,
+    "runs_per_method_and_snr": 3,
+    "trained_artifact_runtime_identity_sha256": "b6fc5cf1fdf6cd06771169a8ed8f22e176247e3f4340071bc418a2ed6a3af762"
+  },
+  "verification": {
+    "status": "warning",
+    "integrity_errors": [],
+    "warnings": [
+      "The evidence is internally valid, but this experimental suite is not yet designated as a publication-ready canonical benchmark."
+    ]
+  },
+  "limitations": [
+    "The committed CSV is a deterministic projection of the local completed result, not a replacement for its full run-evidence snapshot.",
+    "Three paired held-out seeds support a demonstration comparison but are not a universal publication-strength sample size."
+  ]
+}

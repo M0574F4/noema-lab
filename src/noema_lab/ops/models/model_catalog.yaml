@@ -1,0 +1,251 @@
+schema_version: 1
+compressai:
+  default_model: bmshj2018_hyperprior
+  default_quality: 3
+  default_metric: mse
+  representation: latents
+  format: "*.pt"
+  runner: pytorch
+  operation_pair:
+    encoder: model.compressai_analysis_encode
+    payload_encoder: model.compressai_entropy_encode
+    payload_decoder: model.compressai_entropy_decode
+    decoder: model.compressai_synthesis_decode
+  runtime_adapters:
+    aot_inductor:
+      format: "*.pt2"
+      conversion: model.compressai_export_aoti
+      encoder: model.compressai_aoti_encode
+      payload_encoder: model.compressai_aoti_entropy_encode
+      payload_decoder: model.compressai_aoti_entropy_decode
+      decoder: model.compressai_aoti_decode
+      notes: Compiles CompressAI analysis/synthesis and hyper-analysis/hyper-synthesis with PyTorch AOT Inductor while preserving entropy-coded payload bits.
+    onnxruntime:
+      format: "*.onnx"
+      conversion: model.compressai_export_onnx
+      encoder: model.compressai_onnx_encode
+      payload_encoder: model.compressai_onnx_entropy_encode
+      payload_decoder: model.compressai_onnx_entropy_decode
+      decoder: model.compressai_onnx_decode
+      notes: Runs CompressAI analysis/synthesis and hyper-analysis/hyper-synthesis with ONNX Runtime while preserving entropy-coded payload bits.
+  compression_control:
+    type: pretrained_quality
+    parameter: quality
+    notes: Quality selects pretrained rate-distortion artifacts in the CompressAI model zoo.
+  models:
+    - id: bmshj2018_factorized
+      family: Ballé 2018 factorized prior
+      qualities: [1, 2, 3, 4, 5, 6, 7, 8]
+      metrics: [mse, ms-ssim]
+      pretrained_artifacts: quality_metric_pairs
+      output_kind: channel.payload_bits.numpy
+    - id: bmshj2018_factorized_relu
+      family: Ballé 2018 factorized prior with ReLU activations
+      qualities: [1, 2, 3, 4, 5, 6, 7, 8]
+      metrics: [mse, ms-ssim]
+      pretrained_artifacts: quality_metric_pairs
+      output_kind: channel.payload_bits.numpy
+    - id: bmshj2018_hyperprior
+      family: Ballé 2018 scale hyperprior
+      qualities: [1, 2, 3, 4, 5, 6, 7, 8]
+      metrics: [mse, ms-ssim]
+      pretrained_artifacts: quality_metric_pairs
+      output_kind: channel.payload_bits.numpy
+    - id: bmshj2018_hyperprior_vbr
+      family: Ballé 2018 scale hyperprior VBR
+      qualities: [1, 2, 3, 4, 5, 6, 7, 8]
+      metrics: [mse]
+      pretrained_artifacts: variable_bitrate_single_checkpoint
+      compression_control:
+        type: vbr_scale_index
+        parameter: vbr_scale_index
+        range: [0, 7]
+      output_kind: channel.payload_bits.numpy
+    - id: mbt2018_mean
+      family: Minnen 2018 mean-scale hyperprior
+      qualities: [1, 2, 3, 4, 5, 6, 7, 8]
+      metrics: [mse, ms-ssim]
+      pretrained_artifacts: quality_metric_pairs
+      output_kind: channel.payload_bits.numpy
+    - id: mbt2018_mean_vbr
+      family: Minnen 2018 mean-scale hyperprior VBR
+      qualities: [1, 2, 3, 4, 5, 6, 7, 8]
+      metrics: [mse]
+      pretrained_artifacts: variable_bitrate_single_checkpoint
+      compression_control:
+        type: vbr_scale_index
+        parameter: vbr_scale_index
+        range: [0, 7]
+      output_kind: channel.payload_bits.numpy
+    - id: mbt2018
+      family: Minnen 2018 joint autoregressive hierarchical prior
+      qualities: [1, 2, 3, 4, 5, 6, 7, 8]
+      metrics: [mse, ms-ssim]
+      pretrained_artifacts: quality_metric_pairs
+      output_kind: channel.payload_bits.numpy
+    - id: mbt2018_vbr
+      family: Minnen 2018 joint autoregressive hierarchical prior VBR
+      qualities: [1, 2, 3, 4, 5, 6, 7, 8]
+      metrics: [mse]
+      pretrained_artifacts: variable_bitrate_single_checkpoint
+      compression_control:
+        type: vbr_scale_index
+        parameter: vbr_scale_index
+        range: [0, 7]
+      output_kind: channel.payload_bits.numpy
+    - id: cheng2020_anchor
+      family: Cheng 2020 attention-free anchor
+      qualities: [1, 2, 3, 4, 5, 6]
+      metrics: [mse, ms-ssim]
+      pretrained_artifacts: quality_metric_pairs
+      output_kind: channel.payload_bits.numpy
+    - id: cheng2020_attn
+      family: Cheng 2020 attention
+      qualities: [1, 2, 3, 4, 5, 6]
+      metrics: [mse, ms-ssim]
+      pretrained_artifacts: quality_metric_pairs
+      output_kind: channel.payload_bits.numpy
+      notes: Some CompressAI releases do not provide pretrained weights for this architecture.
+jpeg:
+  representation: bits
+  format: "*.jpg"
+  runner: local_python
+  operation_pair:
+    encoder: model.jpeg_encode
+    payload_encoder: channel.payload_passthrough_encoder
+    payload_decoder: channel.payload_passthrough_decoder
+    decoder: model.jpeg_decode
+  compression_control:
+    type: encoder_parameter
+    parameter: quality
+    range: [1, 95]
+    notes: Quality and chroma subsampling are recipe parameters, not pretrained artifacts.
+eflic:
+  representation: indices
+  format: "*.pth.tar"
+  runner: pytorch
+  operation_pair:
+    encoder: model.eflic_encode_indices
+    payload_encoder: model.eflic_indices_to_bits
+    payload_decoder: model.eflic_bits_to_indices
+    decoder: model.eflic_decode_indices
+  runtime_adapters:
+    aot_inductor:
+      format: "*.pt2"
+      conversion: model.eflic_export_aoti
+      encoder: model.eflic_aoti_encode_indices
+      payload_encoder: model.eflic_indices_to_bits
+      payload_decoder: model.eflic_bits_to_indices
+      decoder: model.eflic_aoti_decode_indices
+      notes: Compiles fixed-shape EF-LIC neural compress/decompress wrappers with PyTorch AOT Inductor while preserving fixed-length VQ/RVQ index bit packing as the payload adapter.
+    onnxruntime:
+      format: "*.onnx"
+      conversion: model.eflic_export_onnx
+      encoder: model.eflic_onnx_encode_indices
+      payload_encoder: model.eflic_indices_to_bits
+      payload_decoder: model.eflic_bits_to_indices
+      decoder: model.eflic_onnx_decode_indices
+      notes: Exports fixed-shape EF-LIC neural compress/decompress wrappers to ONNX while preserving fixed-length VQ/RVQ index bit packing as the payload adapter.
+    openvino:
+      format: "*.onnx -> OpenVINO"
+      conversion: model.eflic_export_onnx
+      encoder: model.eflic_openvino_encode_indices
+      payload_encoder: model.eflic_indices_to_bits
+      payload_decoder: model.eflic_bits_to_indices
+      decoder: model.eflic_openvino_decode_indices
+      notes: Compiles the EF-LIC ONNX neural wrappers with OpenVINO while preserving fixed-length VQ/RVQ index bit packing as the payload adapter.
+  compression_control:
+    type: force_ind
+    parameter: force_ind
+    range: [0, 4]
+    notes: force_ind selects one of the official EF-LIC rate points.
+diffusers:
+  autoencoderkl:
+    default_model_id: stabilityai/sd-vae-ft-mse
+    output_kind: semantic.latents.numpy
+    models:
+      - id: stabilityai/sd-vae-ft-mse
+        load_kwargs:
+          revision: 31f26fdeee1355a5c34592e401dd41e45d25a493
+  vqmodel:
+    default_model_id: CompVis/ldm-celebahq-256
+    output_kind: semantic.latents.numpy
+    models:
+      - id: CompVis/ldm-celebahq-256
+        load_kwargs:
+          subfolder: vqvae
+          revision: 03978f22272a3c2502da709c3940e227c9714bdd
+deepjscc:
+  output_kind: channel.symbols.complex_numpy
+upstream_lic:
+  representation: bits
+  adapter_contract:
+    encoder_input: image.batch.numpy
+    encoder_output: channel.payload_bits.numpy
+    decoder_input: channel.payload_bits.numpy
+    decoder_output: image.batch.numpy
+  models:
+    - id: evc
+      label: EVC image codec (DCVC repo)
+      importance: high
+      operation_pair:
+        encoder: model.evc_encode
+        payload_encoder: channel.payload_passthrough_encoder
+        payload_decoder: channel.payload_passthrough_decoder
+        decoder: model.evc_decode
+      format: "*.pth.tar"
+      runner: pytorch
+      supported_runners: [pytorch]
+      compression_control:
+        type: checkpoint_and_rate_idx
+        notes: rate_idx selects a q_scale from the EVC checkpoint. Use the DCVC-family/EVC repo path and build its MLCodec C++ extension. ONNX requires a separate EVC adapter; it is not the same conversion path as CompressAI.
+    - id: tcm
+      label: TCM upstream LIC
+      importance: high
+      operation_pair:
+        encoder: model.tcm_encode
+        decoder: model.tcm_decode
+      format: "*.pth"
+      runner: pytorch
+      supported_runners: [pytorch]
+      compression_control:
+        type: checkpoint_or_lambda
+        notes: Public TCM checkpoints are trained per N/lambda RD point.
+    - id: hpcm
+      label: HPCM upstream LIC
+      importance: high
+      operation_pair:
+        encoder: model.hpcm_encode
+        decoder: model.hpcm_decode
+      format: "*.pth"
+      runner: pytorch
+      supported_runners: [pytorch]
+      compression_control:
+        type: checkpoint_or_lambda
+        notes: Public HPCM checkpoints are trained per model/lambda RD point and require the repo's unbounded rANS extension.
+external_lic:
+  representation: user_selected
+  operation_pairs:
+    bits:
+      encoder: model.external_encode_bits
+      decoder: model.external_decode_bits
+    indices:
+      encoder: model.external_encode_indices
+      decoder: model.external_decode_indices
+    latents:
+      encoder: model.external_encode_latents
+      decoder: model.external_decode_latents
+    symbols:
+      encoder: model.deepjscc_external_encode
+      decoder: model.deepjscc_external_decode
+  adapter_contract:
+    notes: Use custom external codecs for private models or paper implementations without a built-in wrapper.
+  models:
+    - id: lalic_custom
+      label: LALIC custom external codec
+      importance: high
+      format: "*.pth / *.ckpt"
+      runner: pytorch
+      compression_control:
+        type: user_adapter
+        notes: No public runnable implementation/checkpoint was found during cataloging, so this remains a custom external adapter path.

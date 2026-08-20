@@ -1,0 +1,90 @@
+schema_version: 1
+id: resource_allocation.delayed_csi_finite_blocklength_causal_history_cnn
+name: Reliability-aware OFDM allocation from delayed CSI
+kind: noema_demo_training_template
+exporter: delayed-csi-resource-allocation
+framework: torch
+boundary:
+  noema_role:
+    - capture a causal four-snapshot delayed/noisy complex CSI history and aligned later channel outcomes
+    - freeze the replacement ABI, scenario, split recipes, and integrity evidence
+    - verify the returned hash-pinned block artifact
+  external_training_role:
+    - define and optimize the allocation policy
+    - select a checkpoint using validation expected goodput
+    - export a portable ONNX policy
+objective:
+  id: resource.negative_expected_finite_blocklength_goodput
+  direction: minimize
+  supervised_allocation_labels: false
+  blocklength_channel_uses: 128
+  target_rate_bps_hz: 2.0
+  formula: -mean(R * (1 - Q((C(p,H_current)-R+log2(n)/(2n))*sqrt(n/V(p,H_current)))))
+  current_csi_role: training_only_environment_outcome
+scenario:
+  channel: Sionna 3GPP TDL-C
+  channel_normalization: false
+  ofdm_fft_size: 128
+  subcarrier_spacing_khz: 15.0
+  occupied_bandwidth_mhz: 1.92
+  rms_delay_spread_us: 1.0
+  mobility_kmh: 120.0
+  feedback_delay_ofdm_symbols: 5
+  csi_history_length: 4
+  csi_history_order: oldest_to_newest
+  allocation_ofdm_symbols: 24
+  capture_temporal_stride: 12
+constraints:
+  nonnegative_power: exact_euclidean_simplex_projection
+  instantaneous_sum_power: exact
+  formula: sum_subcarrier(allocated_power) = subcarrier_count * average_power_budget
+model:
+  architecture: causal_csi_history_frequency_residual_cnn
+  input:
+    - four delayed/noisy complex CSI snapshots [batch, history, subcarrier, iq]
+    - noise variance
+    - average power budget
+  output: unconstrained per-subcarrier allocation scores
+  deployment_projection: exact_euclidean_simplex
+  excludes_runtime_input:
+    - current channel state
+  rationale: temporal features track complex-channel evolution while frequency convolutions exploit neighboring-subcarrier correlation
+data:
+  required_training_taps:
+    - csi_history
+    - current_csi
+  prohibited_training_taps:
+    - power_allocation
+    - water_filling_allocation
+  alignment: each delayed/current row is a causal slice from the same TDL trajectory
+  split_integrity: paired-row SHA-256 with zero duplicate or cross-split overlap
+returned_artifact:
+  manifest_schema: noema.trained_block_artifact.v2
+  format: onnx
+  runtime: onnxruntime
+  contract: training_contract.yaml
+  integrity: required_sha256
+  runtime_inputs:
+    - csi_history
+    - noise_variance
+    - average_power_budget
+evaluation:
+  selection_metric: validation_expected_finite_blocklength_goodput_bps_hz against the strongest deployable baseline
+  evidence_gate:
+    minimum_relative_aggregate_improvement: 0.005
+    paired_confidence_interval: 95% trajectory-cluster interval with lower bound above zero
+    maximum_relative_operating_point_regression: 0.002
+    minimum_independent_trajectory_clusters: 30
+  deployable_comparators:
+    - equal_power
+    - water_filling_on_delayed_noisy_csi
+    - uncertainty_shrunk_water_filling
+    - complex_ar_prediction_plus_water_filling
+  diagnostic_only:
+    - current_csi_shannon_water_filling_not_finite_blocklength_optimum
+    - perfect_current_csi_finite_blocklength_numerical_reference_not_global_optimum
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  pairing: common payload, channel trajectory, CSI-estimation error, and AWGN seeds
+  presentation: metadata.demo@1

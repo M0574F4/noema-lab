@@ -1,0 +1,29 @@
+QPSK phase-tracking illustrative snapshot
+==========================================
+
+snapshot_metrics.csv is a scalar-metric projection of the 20 immutable run
+summaries listed in snapshot_manifest.json.  The runs were produced by a
+Noema recipe matrix on 2026-07-23 UTC as five receiver modes at four SNR
+coordinates.  The source file was imported directly from .noema/runs rather
+than transcribed or reconstructed from a manually edited results table.
+
+This is an illustrative paired workflow snapshot, not a Noema benchmark
+result bundle.  Every point contains two 1,024-bit packets (2,048 compared
+bits), and all methods at an SNR use the same payload, AWGN,
+carrier-impairment, and pilot seeds.  Pilot interpolation was not among the
+five receiver modes.  The manifest records the exact upstream artifact hashes
+and verifies that they are byte-identical across those receivers at each SNR.
+
+summary_table.csv, ber_table.csv, and the SVG under
+docs/demo/assets/qpsk_phase_tracking/ are deterministic projections generated
+by tools/generate_qpsk_phase_tracking_demo_assets.py.  Regenerate and check
+them from the repository root with:
+
+  uv run python tools/generate_qpsk_phase_tracking_demo_assets.py
+  uv run python tools/generate_qpsk_phase_tracking_demo_assets.py --check
+
+Reimport the original local runs only when intentionally replacing the source
+snapshot:
+
+  uv run python tools/generate_qpsk_phase_tracking_demo_assets.py \
+    --import-runs .noema/runs

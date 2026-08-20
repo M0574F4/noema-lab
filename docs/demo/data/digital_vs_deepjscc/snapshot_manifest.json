@@ -1,0 +1,291 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "d71e74573074182661880a9c4b95a50e20168422f23a009fc36b8d4907eaed71",
+      "size_bytes": 11694
+    },
+    "chart_data.json": {
+      "sha256": "8433ac3a43d9db55030f7c8123cb7fe121af67d5d7a65eecf2db4cbd3b8be17b",
+      "size_bytes": 7713
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-deepjscc-chart-data.js",
+      "sha256": "0b13827a66bd13ce30487a939cdba7b3a544adfdb098bd51bfd248512fedb403",
+      "size_bytes": 7875
+    },
+    "jpeg_operating_points_table.csv": {
+      "sha256": "ae289e80ab75fa5b1ee8691773a6f86f7f1239124aad91607e95344d7a644453",
+      "size_bytes": 311
+    },
+    "quality_summary_table.csv": {
+      "sha256": "1731d9d2257a14d208959de61e02427e825ea224c7d5c71d7e7330186b8a42a7",
+      "size_bytes": 295
+    },
+    "resource_audit.csv": {
+      "sha256": "4452a22c79ee8f77ae6a2eb024e2711faae1ed7822bea744c5e478f6dbcebcb9",
+      "size_bytes": 182
+    },
+    "rows": 32,
+    "summary_table.csv": {
+      "sha256": "55fbde69f6093fcdeed59e9fa9fdebfe98b7cd9b03229652d07cd320e67c86ba",
+      "size_bytes": 967
+    }
+  },
+  "publication": {
+    "benchmark_tier": "experimental",
+    "dataset_rights_status": "authoritative Kodak terms not archived",
+    "excluded_public_assets": [
+      "representative_reconstructions"
+    ],
+    "publication_ready": false
+  },
+  "runs": [
+    {
+      "recipe_id": "jpeg_capacity_snrm6",
+      "recipe_sha256": "6a85c4d33714019866b764386238b5f7f16d675460fbbb0f03e43423bffa64ee",
+      "run_id": "20260727T235926Z_jpeg_capacity_matched_kodak_awgn__jpeg_capacity_snrm6",
+      "semantic_recipe_sha256": "ff046617772b97ca64605f423cfb47fd83751a0d5338865d60a10e511d672ac3"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snrm6_seed71001",
+      "recipe_sha256": "47860b5026950abd88c45d54a24fbc67768c774c60b15785cd3580dc90a8fb6b",
+      "run_id": "20260727T235928Z_deepjscc_kodak_awgn_train__learned_deepjscc_snrm6_seed71001",
+      "semantic_recipe_sha256": "31946049e12b30077f133d80852bdf05560278e857f89657180e533406c75a3e"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snrm6_seed72001",
+      "recipe_sha256": "e351813d2c574ddcb707c816e82e1add953d2995a25f2d96d6c5cb0c356cdff6",
+      "run_id": "20260727T235934Z_deepjscc_kodak_awgn_train__learned_deepjscc_snrm6_seed72001",
+      "semantic_recipe_sha256": "e3e6f22fc2f5c526346c2b6f00768976f43791e16df4aaca0c134bd6f61aac7d"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snrm6_seed73001",
+      "recipe_sha256": "1ecc333f47dba02099f023eaad26cc5497053c94a943e332d8fbe1c4b1a2aa42",
+      "run_id": "20260727T235937Z_deepjscc_kodak_awgn_train__learned_deepjscc_snrm6_seed73001",
+      "semantic_recipe_sha256": "6219ae1c20785e64e05a295daf0516e1a77928026b58af5d04312d89b74f33b4"
+    },
+    {
+      "recipe_id": "jpeg_capacity_snrm4",
+      "recipe_sha256": "b5fe45ce265b5bbfa1d325ed6ff3f949c6773d22b24faec2f9b4bdee9cc968ea",
+      "run_id": "20260727T235940Z_jpeg_capacity_matched_kodak_awgn__jpeg_capacity_snrm4",
+      "semantic_recipe_sha256": "6f9b4a7e5bc43bb6067f524bff3ee854566c58c39dcfa5daf69bdc72cb70b917"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snrm4_seed71001",
+      "recipe_sha256": "23455cfe6a50551bd803794b7261afd0cd1517ec11f6d29dc85b510e9491f66a",
+      "run_id": "20260727T235943Z_deepjscc_kodak_awgn_train__learned_deepjscc_snrm4_seed71001",
+      "semantic_recipe_sha256": "2b0215ecce3b7f21dae7c05b975869dc351850227a62ee07996491a20bc55058"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snrm4_seed72001",
+      "recipe_sha256": "33cac7853600350f678e77845c6a0c61d947d690b7d74aeff1288213a5d37bd6",
+      "run_id": "20260727T235946Z_deepjscc_kodak_awgn_train__learned_deepjscc_snrm4_seed72001",
+      "semantic_recipe_sha256": "a7b8b34e1de6bf93b546014bf32f598d9307c1b068d738aff8cb311d905f82ff"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snrm4_seed73001",
+      "recipe_sha256": "fc2426b5fc23a11f71db6bd7e51214ddba5d9fdb908d8d76de9e41ce69783935",
+      "run_id": "20260727T235949Z_deepjscc_kodak_awgn_train__learned_deepjscc_snrm4_seed73001",
+      "semantic_recipe_sha256": "f1458c9a9a339eaa50cedabb59c782892dff87b8706c39947c85161caa2e0827"
+    },
+    {
+      "recipe_id": "jpeg_capacity_snrm2",
+      "recipe_sha256": "83419d91e6c4d4c392bca209451d8094675fbe65908a5d12e7b528c5ad5b9ce2",
+      "run_id": "20260727T235952Z_jpeg_capacity_matched_kodak_awgn__jpeg_capacity_snrm2",
+      "semantic_recipe_sha256": "682367d969743dc2e0757dda784ecc1dc16660407d1c63aed66c713a31446376"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snrm2_seed71001",
+      "recipe_sha256": "09d2fff2292a64e4aa06eaa8aaccd1d7174297af603e9e1d75f0e3378f89b6c8",
+      "run_id": "20260727T235954Z_deepjscc_kodak_awgn_train__learned_deepjscc_snrm2_seed71001",
+      "semantic_recipe_sha256": "2e5fd9a5af483cd478cf7bd9371b1f67acbedd008eb7a83c2a0250c0cfe7ae7f"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snrm2_seed72001",
+      "recipe_sha256": "129c07473ee76c180a27bbff881024890d1011425aec1a3f01967f0bedcbc238",
+      "run_id": "20260727T235957Z_deepjscc_kodak_awgn_train__learned_deepjscc_snrm2_seed72001",
+      "semantic_recipe_sha256": "95eb0cf1323e91cc9487a116805dde735657c1600d0d89c108ee9710a6e1eb50"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snrm2_seed73001",
+      "recipe_sha256": "1fd482b9a6e928ccded0b6f98f3b83a2af7301f00e4ceadc8235634a1efcc42c",
+      "run_id": "20260728T000000Z_deepjscc_kodak_awgn_train__learned_deepjscc_snrm2_seed73001",
+      "semantic_recipe_sha256": "45c400067fc236d1c335a7b2babda02d66fd0787ba0711eb4143a06f3aa58916"
+    },
+    {
+      "recipe_id": "jpeg_capacity_snr0",
+      "recipe_sha256": "bfbcbaff6ababaaf429bd0cdc753ea4eafa42f7d81660ceb23225e43542b61b2",
+      "run_id": "20260728T000003Z_jpeg_capacity_matched_kodak_awgn__jpeg_capacity_snr0",
+      "semantic_recipe_sha256": "84d4c959386afaf89063a0477dd22433090762dc2d9b1876a8cb758905dcb6aa"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr0_seed71001",
+      "recipe_sha256": "a14b7fe5318db2f98f10522854d2eae699fc4a148cc5803567789814d025882c",
+      "run_id": "20260728T000005Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr0_seed71001",
+      "semantic_recipe_sha256": "ce276676f41fd158bcd604573fc225415fcba7ebf02d7f4c2c744c1f17db851d"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr0_seed72001",
+      "recipe_sha256": "7f72f5d273f6224373051f10e5830f4f4f03a4e660bc97d64237d30a02796d65",
+      "run_id": "20260728T000009Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr0_seed72001",
+      "semantic_recipe_sha256": "506c1688504dda10a869372d648901f234da2a30ead60258e4704de51c87f843"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr0_seed73001",
+      "recipe_sha256": "ced65805523e2b9f070aafc876b58baec61955ce74090495dae399702621519d",
+      "run_id": "20260728T000012Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr0_seed73001",
+      "semantic_recipe_sha256": "6e97309ed4eefde8597662c6bd9a77f2291b8a7ab8ecc63b15ed8858550d9e05"
+    },
+    {
+      "recipe_id": "jpeg_capacity_snr4",
+      "recipe_sha256": "8a7dbdbd5b013ec801e14752a1fbc51009ff9b8226c2a28db8a9f6d26a95bb9d",
+      "run_id": "20260728T000015Z_jpeg_capacity_matched_kodak_awgn__jpeg_capacity_snr4",
+      "semantic_recipe_sha256": "f5e6343158db302acffdc0f097a9e0961eb87d2dcfe0443647cab76e00ceeb0d"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr4_seed71001",
+      "recipe_sha256": "07a104b904acdb060753d83b976d9310b97c87616e39379f155749a16ea9a21d",
+      "run_id": "20260728T000017Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr4_seed71001",
+      "semantic_recipe_sha256": "5640f7bf83025512c5d375a0a24d72f3c4aa919488dd24825dfb72bcc033a938"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr4_seed72001",
+      "recipe_sha256": "e50abfbe7e4e3fd17b4052db159de038c45b3f373006de5acb8cab085b85e3cb",
+      "run_id": "20260728T000020Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr4_seed72001",
+      "semantic_recipe_sha256": "f3e8ade2240ccbe59c84fa464d1e716cbd51af723a4935f9eac3e7df25178973"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr4_seed73001",
+      "recipe_sha256": "ec8aef11bef677f633a2f472119ebcae00621ac2cbd47de75ce7ddcf4cf571db",
+      "run_id": "20260728T000024Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr4_seed73001",
+      "semantic_recipe_sha256": "644a216961a38ace9ed86633d4b6ca355f146774a784dcee27f6d112778201b9"
+    },
+    {
+      "recipe_id": "jpeg_capacity_snr8",
+      "recipe_sha256": "11652120e64a3c72112b7770e7b8fd57f0c6f18142ad375347d6f769cd566e7c",
+      "run_id": "20260728T000027Z_jpeg_capacity_matched_kodak_awgn__jpeg_capacity_snr8",
+      "semantic_recipe_sha256": "42fc5679c82c453333b1698bc118fd7bd0724d2e4a6ffb0fb19ee5dfe496920d"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr8_seed71001",
+      "recipe_sha256": "a2e8d0c7bde6e95a5ac3d40c8bf436c7936ae87e9f814b5047cf852e5e8a2688",
+      "run_id": "20260728T000030Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr8_seed71001",
+      "semantic_recipe_sha256": "a8f92fd0a94cf2983ba3e4ba8993558b339ca5626014c4a2dcc9698c65440e5c"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr8_seed72001",
+      "recipe_sha256": "87c67c7de85346ce537f94aa542891aee96f9a8c0b2f1117cb7d1d15b8119779",
+      "run_id": "20260728T000033Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr8_seed72001",
+      "semantic_recipe_sha256": "59404bdced90fa063aaad25d86c9e1198a29042c288772b92e0099bab2d688d4"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr8_seed73001",
+      "recipe_sha256": "e3ef9fc51e777cfb82867330a1013993914cab7b0276fb9a4e7dbb350a354a72",
+      "run_id": "20260728T000037Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr8_seed73001",
+      "semantic_recipe_sha256": "de69d47e34cd6b91ac172f3cc776161ce968d2dad3e7bbe4a77b9ce7d7964556"
+    },
+    {
+      "recipe_id": "jpeg_capacity_snr12",
+      "recipe_sha256": "449ffb5a6155810f4152c3a46da9e6cb5e0f4adb5dee0af36daf4f28fda7fc49",
+      "run_id": "20260728T000040Z_jpeg_capacity_matched_kodak_awgn__jpeg_capacity_snr12",
+      "semantic_recipe_sha256": "70c90cfe1aeea6e3bfd5192fde6e76dd2b930218554f7d4fb454bcc57f334445"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr12_seed71001",
+      "recipe_sha256": "cafec228de97d47df1102fb97aa604f8959605540270ce42c8cddd24db617b08",
+      "run_id": "20260728T000042Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr12_seed71001",
+      "semantic_recipe_sha256": "7991f814e9c25c668228f93284edc5545d0497f90972dc41c230b52d4e202612"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr12_seed72001",
+      "recipe_sha256": "ef59010ce7c82ca5625d9bacba0774e11341bfcf39e1527f20c18bb36b7410d9",
+      "run_id": "20260728T000046Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr12_seed72001",
+      "semantic_recipe_sha256": "3f520b60c6cae79d396783774c270f46c209965746dbae1d8ec3bc10a96ef81b"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr12_seed73001",
+      "recipe_sha256": "b9b4e2ab963f4e0266e9f3ff1219f8407e1ecd10bbbc0ec4f9484075ff78e211",
+      "run_id": "20260728T000049Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr12_seed73001",
+      "semantic_recipe_sha256": "55037bbf81249d16fb7e8084ff93bbe0fd707ddda98904c707eca1130d075495"
+    },
+    {
+      "recipe_id": "jpeg_capacity_snr16",
+      "recipe_sha256": "5a1597cabcc3396757678b25ef0656b6d37fcd668e9f25c9a8139e4237ac9859",
+      "run_id": "20260728T000053Z_jpeg_capacity_matched_kodak_awgn__jpeg_capacity_snr16",
+      "semantic_recipe_sha256": "d91cea1f60185a34361925174797ce8645a1a9fabf8a708e10c4a226eb50f916"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr16_seed71001",
+      "recipe_sha256": "2107472165e112e39649a5da8bfc66e29713927ef77d67fe1eafeae94dc78b5e",
+      "run_id": "20260728T000055Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr16_seed71001",
+      "semantic_recipe_sha256": "2f055ef988e68e322611a25e46bede3015a0f137138d7966bc2c90480c1dded3"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr16_seed72001",
+      "recipe_sha256": "9c38273a19a456f8aa7faed406eec9400c6ea155ca7c01c90ce044351a928c0c",
+      "run_id": "20260728T000100Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr16_seed72001",
+      "semantic_recipe_sha256": "02e606c688741adafa75b2ddb2771016bf93b100aef8e25008f26ebcc506c46d"
+    },
+    {
+      "recipe_id": "learned_deepjscc_snr16_seed73001",
+      "recipe_sha256": "a3a80daa06e66c36964cbd67468c4390909f621df6c96b82ae3438ef1e5b89a7",
+      "run_id": "20260728T000104Z_deepjscc_kodak_awgn_train__learned_deepjscc_snr16_seed73001",
+      "semantic_recipe_sha256": "a0ba022fdfe3c7113e53a7dd25541f1e837bcaed813f815ac32624234ca86a5a"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "digital-versus-deepjscc",
+  "source": {
+    "availability": "The raw local result bundle is not distributed with the documentation; hashes are retained for identity checks.",
+    "benchmark_id": "semantic_comm.digital_vs_deepjscc_post_training_v3",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "3.0.0",
+    "completed_at_utc": "2026-07-28T00:01:07.744Z",
+    "created_at_utc": "2026-07-27T23:59:25.576Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "c8e0b8f7fae227fcea644e94a77a8d0ffb18eb17cf76f12f2814cc21a6c6fe46",
+        "size_bytes": 1097127
+      },
+      "recipes.csv": {
+        "sha256": "eb39161badc9a2f99cee0ade4075ba96c48abd6106ab296db58d564bc214ef70",
+        "size_bytes": 12221
+      },
+      "result.json": {
+        "sha256": "8f025d51b754ace69e735ac525ca09a45307b2e7f234f1e2e8dcb623f1df78a7",
+        "size_bytes": 746097
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "fe4a0299484c7b994afd83856816f4dc5ddc90f36bc8acd434a8581b22bfe046",
+        "size_bytes": 2079
+      }
+    },
+    "result_id": "20260727T235925Z_semantic_comm.digital_vs_deepjscc_post_training_v3",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "channel SNR",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "held_out_images": [
+      "kodim21",
+      "kodim22",
+      "kodim23",
+      "kodim24"
+    ],
+    "interval": "two-sided 95% Student's t interval over learned channel-noise seeds; deterministic reference has no interval",
+    "learned_channel_seeds": [
+      71001,
+      72001,
+      73001
+    ],
+    "resource_limit_complex_channel_uses_per_pixel": 0.5,
+    "sample_count_per_method_and_snr": {
+      "jpeg_capacity": 1,
+      "learned_deepjscc": 3
+    },
+    "statistical_unit": "deterministic capacity-matched JPEG evaluation or DeepJSCC channel-noise seed, conditional on one frozen model and four crops",
+    "warning": "Three learned channel-noise seeds support an experimental tutorial result, not a paper-grade population claim."
+  }
+}

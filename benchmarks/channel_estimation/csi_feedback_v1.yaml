@@ -1,0 +1,133 @@
+schema_version: 1
+id: channel_estimation.csi_feedback_v1
+version: "0.1.0"
+name: Limited-Feedback CSI Reconstruction and Downlink Precoding
+description: Matched-seed truncated angular-delay feedback and a separately labeled perfect-CSIT upper bound over correlated Sionna TDL MISO-OFDM channels.
+suite:
+  id: channel_estimation
+  name: Channel Estimation
+  status: experimental
+  version: v1-draft
+dataset:
+  id: sionna_correlated_miso_ofdm_csi
+  modality: wireless
+  version: sionna-tdl-miso-ofdm-csi-v1
+  split: held_out_fixed_seed
+task:
+  id: csi_compression_feedback
+  kind: feedback_control
+  modality: wireless
+metrics:
+  - id: csi_feedback.achieved_spectral_efficiency_bps_hz
+    family: link
+    unit: bit/s/Hz
+    direction: higher_is_better
+  - id: csi_feedback.spectral_efficiency_retention
+    family: link
+    unit: ratio
+    direction: higher_is_better
+  - id: csi_feedback.nmse_db
+    family: estimation
+    unit: dB
+    direction: lower_is_better
+  - id: csi_feedback.phase_invariant_cosine
+    family: estimation
+    unit: ratio
+    direction: higher_is_better
+  - id: csi_feedback.feedback_bits_per_sample
+    family: rate
+    unit: bit/sample
+    direction: lower_is_better
+    definition_version: 1
+    source_step: feedback_link
+    source_operation: channel.csi_feedback_link
+    applicable_roles: [baseline]
+baselines:
+  - truncated_angular_delay_4bit
+  - perfect_csit_upper_bound
+recipes:
+  - id: truncated_snr0
+    label: Truncated angular-delay · 128 bit
+    role: baseline
+    path: ../../recipes/csi_feedback_truncated_angular_delay.yaml
+    params:
+      method_id: truncated_angular_delay_4bit
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        channel_state:
+          downlink_snr_db: 0
+  - id: perfect_snr0
+    label: Perfect CSIT upper bound
+    role: oracle
+    path: ../../recipes/csi_feedback_perfect_csit_upper_bound.yaml
+    params:
+      method_id: perfect_csit_upper_bound
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        channel_state:
+          downlink_snr_db: 0
+  - id: truncated_snr10
+    label: Truncated angular-delay · 128 bit
+    role: baseline
+    path: ../../recipes/csi_feedback_truncated_angular_delay.yaml
+    params:
+      method_id: truncated_angular_delay_4bit
+      matrix_selection:
+        channel.snr_db: 10
+      step_params:
+        channel_state:
+          downlink_snr_db: 10
+  - id: perfect_snr10
+    label: Perfect CSIT upper bound
+    role: oracle
+    path: ../../recipes/csi_feedback_perfect_csit_upper_bound.yaml
+    params:
+      method_id: perfect_csit_upper_bound
+      matrix_selection:
+        channel.snr_db: 10
+      step_params:
+        channel_state:
+          downlink_snr_db: 10
+  - id: truncated_snr20
+    label: Truncated angular-delay · 128 bit
+    role: baseline
+    path: ../../recipes/csi_feedback_truncated_angular_delay.yaml
+    params:
+      method_id: truncated_angular_delay_4bit
+      matrix_selection:
+        channel.snr_db: 20
+      step_params:
+        channel_state:
+          downlink_snr_db: 20
+  - id: perfect_snr20
+    label: Perfect CSIT upper bound
+    role: oracle
+    path: ../../recipes/csi_feedback_perfect_csit_upper_bound.yaml
+    params:
+      method_id: perfect_csit_upper_bound
+      matrix_selection:
+        channel.snr_db: 20
+      step_params:
+        channel_state:
+          downlink_snr_db: 20
+metadata:
+  benchmark_tier: experimental
+  protocol_revision: sionna-tdl-miso-ofdm-csi-feedback-v1
+  paired_channel_seed: 63001
+  perfect_ue_csi: true
+  tx_antennas: 8
+  subcarriers: 32
+  feedback_dimension: 32
+  matched_budget_bits_per_latent: 4
+  matched_budget_feedback_bits: 128
+  default_plot:
+    plot: graceful-degradation
+    x: channel.snr_db
+    y: csi_feedback.achieved_spectral_efficiency_bps_hz
+  literature_basis:
+    - https://arxiv.org/abs/1712.08919
+    - https://arxiv.org/abs/1910.14322
+    - https://arxiv.org/abs/2011.06099
+  notes: The truncated baseline and upper bound use identical held-out Sionna channel realizations at every SNR. The perfect-CSIT curve is not a matched-feedback-budget competitor. Add a learned artifact by duplicating the training recipe, selecting the returned paired artifact, and keeping these channel seeds and feedback-link parameters unchanged.

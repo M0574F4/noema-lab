@@ -1,0 +1,278 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: ofdm_reliability_allocation_delayed_csi
+description: Reliability-aware wideband OFDM power allocation for short packets using a causal history of delayed, noisy transmitter CSI derived from the same temporally correlated Sionna TDL-C trajectory as the current propagation channel.
+suite:
+  id: resource_allocation
+  name: Resource Allocation
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: delayed_csi_finite_blocklength_allocation
+  codec_profile: bit_source
+  codec_label: Seeded short packets
+  codec_output_form: bits
+  codec_format: canonical_uint8_bits
+  semantic_representation: none
+  transport_representation: fixed_qpsk_short_packet
+  channel_enabled: true
+  channel_mode: ofdm_tdl
+  wireless_backend: sionna
+  wireless_preset: 3GPP TDL-C wideband temporally correlated OFDM
+  modulation: qpsk
+  channel_code: identity
+  finite_blocklength_model: parallel_complex_awgn_normal_approximation
+  finite_blocklength_claim_scope: predicted packet error and expected goodput; not a claim about a particular deployed FEC implementation
+  power_control_mode: fixed_noise_variable_average_tx_budget
+  power_allocator_policy: fixed
+  csi_mode: causal_delayed_noisy_complex_csi_history_perfect_current_receiver_csi
+  csi_pairing: causal_history_and_current_slices_from_one_sionna_tdl_trajectory
+  csi_feedback_delay_ofdm_symbols: 5
+  csi_history_length: 4
+  csi_capture_temporal_stride: 12
+  csi_estimation_snr_db: 20.0
+  allocation_granularity: per_subcarrier_per_ofdm_symbol_state
+  noise_variance: 0.2
+  average_tx_power_budget: 0.8
+  target_rate_bps_hz: 2.0
+  blocklength_channel_uses: 128
+  matrix:
+    dimensions:
+      resource.average_transmit_power_budget: [0.4, 0.6, 0.8, 1.0, 1.4]
+    step_params:
+      channel_state:
+        average_power_budget:
+          matrix: resource.average_transmit_power_budget
+      tx_power:
+        target_power:
+          matrix: resource.average_transmit_power_budget
+  transport_block_size_bits: 1024
+  transport_block_count: 256
+  source_bit_count: 262144
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.modulator_input.bit_count
+  channel_bit_contract: np.uint8 unpacked bits, one bit per element, values 0 or 1
+  seed: 83
+  ui_configured: false
+  research:
+    dataset:
+      id: synthetic_random_bits_sionna_tdl_delayed_csi
+      modality: wireless
+      version: synthetic-random-bits-sionna-tdl-delayed-csi-v2
+      split: fixed_seed
+    task:
+      id: resource_allocation
+      kind: policy_optimization
+      modality: wireless
+      target: maximize_expected_finite_blocklength_goodput_under_delayed_noisy_csi
+      metrics:
+        - resource.finite_blocklength.expected_goodput_bps_hz
+        - resource.finite_blocklength.predicted_bler
+        - resource.power_constraint.max_abs_error
+        - resource.power_constraint.max_negative_violation
+    metrics:
+      - resource.finite_blocklength.expected_goodput_bps_hz
+      - resource.finite_blocklength.predicted_bler
+      - resource.finite_blocklength.mean_capacity_bps_hz
+      - resource.finite_blocklength.p05_goodput_bps_hz
+      - resource.nominal_snr_db
+      - resource.csi.feedback_delay_ofdm_symbols
+      - resource.csi.feedback_delay_seconds
+      - resource.csi.observed_actual_complex_correlation
+      - resource.csi.observed_actual_gain_correlation
+      - resource.csi.observed_actual_complex_nmse
+      - resource.power_constraint.max_abs_error
+      - resource.power_constraint.max_relative_error
+      - resource.power_constraint.max_negative_violation
+      - channel.coded.ber
+      - channel.coded.bler
+      - channel.payload.ber
+      - channel.payload.bler
+dataset_capture:
+  matrix_mode: exclude
+  taps:
+    - id: csi_history
+      from: csi_observation.transmitter_csi
+    - id: current_csi
+      from: csi_observation.actual_state
+  split_plan:
+    total_samples: 3072
+    percentages:
+      train: 66.6666666667
+      validation: 16.66666666665
+      test: 16.66666666665
+steps:
+  - id: data
+    op: source.random_bits
+    params:
+      bit_count: 1024
+      batch_size: 256
+      seed: 83
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: data.bits
+    params:
+      label: payload_input
+      role: payload
+
+  - id: channel_encoder
+    op: channel.identity_encoder
+    inputs:
+      bits: payload_bit_boundary.bits
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: modulator_input
+      role: modulator_input
+
+  - id: modulator
+    op: modulation.digital_modulate
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      modulation: qpsk
+
+  - id: channel_state
+    op: wireless.ofdm_channel_state
+    inputs:
+      symbols: modulator.symbols
+    params:
+      tdl_model: C
+      ofdm_fft_size: 128
+      num_ofdm_symbols: 32
+      subcarrier_spacing_khz: 15.0
+      carrier_frequency_ghz: 3.5
+      delay_spread_ns: 1000.0
+      mobility_kmh: 120.0
+      noise_variance: 0.2
+      average_power_budget: 0.8
+      normalize_channel: false
+      capacity_multiplier: 16
+      seed: 83001
+
+  - id: csi_observation
+    op: wireless.ofdm_delayed_csi
+    inputs:
+      state: channel_state.state
+    params:
+      feedback_delay_ofdm_symbols: 5
+      csi_history_length: 4
+      allocation_ofdm_symbols: 24
+      capture_temporal_stride: 12
+      add_estimation_noise: true
+      csi_estimation_snr_db: 20.0
+      seed: 83002
+
+  - id: tx_power
+    op: model.causal_csi_power_allocator
+    inputs:
+      symbols: channel_state.symbols
+      channel_state: csi_observation.transmitter_csi
+      bits: tx_bit_boundary.bits
+    params:
+      policy: fixed
+      granularity: per_subcarrier
+      budget_mode: fixed_average
+      target_power: 0.8
+      subcarrier_count: 128
+      transport_mode: fixed_modulation
+      csi_gain_shrinkage: 0.6
+      label: tx_power
+
+  - id: wireless_channel
+    op: wireless.channel
+    inputs:
+      symbols: tx_power.symbols
+      channel_state: csi_observation.actual_state
+    params:
+      channel: ofdm_tdl
+      noise_mode: fixed_variance
+      noise_variance: 0.2
+      wireless_backend: sionna
+      channel_state_mode: explicit
+      ofdm_fft_size: 128
+      num_ofdm_symbols: 24
+      subcarrier_spacing_khz: 15.0
+      carrier_frequency_ghz: 3.5
+      mobility_kmh: 120.0
+      seed: 83003
+
+  - id: demodulator
+    op: demodulation.digital_demodulate
+    inputs:
+      rx_symbols: wireless_channel.rx_symbols
+      allocation: tx_power.allocation
+    params:
+      modulation: auto
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: demodulator.bits
+    params:
+      label: demodulator_output
+      role: demodulator_output
+
+  - id: coded_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+
+  - id: coded_bler
+    op: metrics.block_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+      block_size: 1024
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: channel_io
+
+  - id: channel_decoder
+    op: channel.identity_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits
+
+  - id: payload_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: payload_bit_boundary.bits
+      candidate: channel_decoder.bits
+    params:
+      label: payload
+
+  - id: payload_bler
+    op: metrics.block_error_rate
+    inputs:
+      reference: payload_bit_boundary.bits
+      candidate: channel_decoder.bits
+    params:
+      label: payload
+      block_size: 1024
+
+  - id: allocation_evaluation
+    op: metrics.ofdm_finite_blocklength_allocation
+    inputs:
+      actual_state: csi_observation.actual_state
+      transmitter_csi: csi_observation.transmitter_csi
+      allocation: tx_power.allocation
+    params:
+      blocklength_channel_uses: 128
+      target_rate_bps_hz: 2.0
+      include_third_order_term: true

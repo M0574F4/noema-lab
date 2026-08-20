@@ -1,0 +1,105 @@
+schema_version: 1
+id: benchmark_v1.image_reconstruction.kodak
+version: "1.2.0"
+name: Benchmark v1 Kodak Image Reconstruction
+description: Frozen development protocol for image reconstruction and rate accounting on all 24 Kodak images with a disabled identity physical channel; authoritative reuse terms are unresolved, so it is not publication evidence.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+dataset:
+  id: kodak
+  modality: image
+  version: kodak-24
+  split: test
+  selection_role: development_regression
+  access_policy:
+    state: unsealed_reusable
+    publication_test: false
+  preprocessing:
+    operation_params:
+      crop_size: 0
+    color_space: RGB
+    sample_domain: uint8_0_255
+    spatial_policy: native_dimensions
+task:
+  id: image_reconstruction
+  kind: reconstruction
+  modality: image
+metrics:
+  - id: quality.psnr_db
+    source_step: evaluation
+    source_operation: metrics.image_reconstruction
+    family: reconstruction
+    unit: dB
+    direction: higher_is_better
+  - id: quality.mse
+    source_step: evaluation
+    source_operation: metrics.image_reconstruction
+    family: reconstruction
+    unit: pixel^2
+    direction: lower_is_better
+  - id: quality.mae
+    source_step: evaluation
+    source_operation: metrics.image_reconstruction
+    family: reconstruction
+    unit: pixel
+    direction: lower_is_better
+  - id: codec.native_bit_count
+    source_operations: [model.jpeg_encode, model.compressai_entropy_encode]
+    family: rate
+    unit: bits
+    direction: lower_is_better
+  - id: channel.payload_bit_count
+    source_step: payload_bit_boundary
+    source_operation: channel.bit_boundary
+    family: rate
+    unit: bits
+    direction: lower_is_better
+  - id: channel.transmitted_bit_count
+    source_step: tx_bit_boundary
+    source_operation: channel.bit_boundary
+    family: transmitted_rate
+    unit: bits
+    direction: lower_is_better
+baselines:
+  - jpeg_q75
+  - compressai_hyperprior_q3
+recipes:
+  - id: jpeg_q75
+    label: JPEG q75
+    role: baseline
+    path: ../../recipes/jpeg_kodak_default.yaml
+  - id: compressai_hyperprior_q3
+    label: CompressAI bmshj2018 hyperprior q3
+    role: baseline
+    path: ../../recipes/compressai_kodak_default.yaml
+metadata:
+  benchmark_tier: experimental
+  protocol_id: noema.benchmark_v1.image_reconstruction.kodak
+  protocol_version: "1.2.0"
+  frozen: false
+  publication_ready: false
+  benchmark_stage: development_regression
+  expected_runtime: medium
+  dataset_split:
+    name: test
+    sample_ids: kodim01,kodim02,kodim03,kodim04,kodim05,kodim06,kodim07,kodim08,kodim09,kodim10,kodim11,kodim12,kodim13,kodim14,kodim15,kodim16,kodim17,kodim18,kodim19,kodim20,kodim21,kodim22,kodim23,kodim24
+    crop_size: 0
+  channel:
+    mode: disabled_identity
+    physical_channel: disabled
+    channel_code: identity
+    modulation: none
+    snr_grid_db: []
+  rate_accounting:
+    payload_bits: payload_bit_boundary.channel.fixed.payload.bit_count
+    transmitted_bits: tx_bit_boundary.channel.fixed.tx.bit_count
+    channel_uses: none_disabled_channel
+    bpp_denominator: original_image_pixels
+  expected_outputs:
+    - result.json
+    - metrics.csv
+    - recipes.csv
+    - summary.md

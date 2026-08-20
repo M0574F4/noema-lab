@@ -1,0 +1,167 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: qpsk_pilot_phase_tracking
+description: Pilot-aided QPSK packet reception over AWGN with random carrier phase, residual frequency offset, Wiener phase noise, and selectable classical, oracle, or learned phase-tracking receivers.
+suite:
+  id: neural_receiver
+  name: Neural Receiver / AI-PHY
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: qpsk_phase_tracking_receiver
+  codec_profile: bit_source
+  codec_label: Synthetic packet bits
+  codec_output_form: bits
+  codec_format: canonical_uint8_bits
+  semantic_representation: none
+  channel_enabled: true
+  channel_mode: carrier_impaired_awgn
+  wireless_backend: numpy
+  wireless_preset: Pilot-aided QPSK with residual carrier impairment
+  modulation: qpsk
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.modulator_input.bit_count
+  channel_bit_contract: np.uint8 unpacked bits, one bit per element, values 0 or 1
+  seed: 23
+  data_plane_backend: auto
+  matrix:
+    dimensions:
+      channel.snr_db: [-2, 2, 6, 10]
+    step_params:
+      wireless_channel:
+        snr_db:
+          matrix: channel.snr_db
+  ui_configured: true
+  research:
+    dataset:
+      id: synthetic_random_bits
+      modality: bits
+      version: synthetic-random-bits-v1
+      split: fixed_seed
+    task:
+      id: neural_receiver_demapping
+      kind: transport_integrity
+      modality: bits
+      target: demodulator.bits
+      metrics:
+        - channel.coded.ber
+        - channel.coded.bler
+    metrics:
+      - channel.snr_db
+      - channel.coded.ber
+      - channel.coded.bler
+      - channel.pilot_overhead_fraction
+      - channel.carrier.phase_noise_increment_std_rad
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+steps:
+  - id: data
+    op: source.random_bits
+    params:
+      bit_count: 1024
+      batch_size: 256
+      seed: 23
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: data.bits
+    params:
+      label: payload_input
+      role: payload
+
+  - id: channel_encoder
+    op: channel.identity_encoder
+    inputs:
+      bits: payload_bit_boundary.bits
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: modulator_input
+      role: modulator_input
+
+  - id: modulator
+    op: modulation.qpsk_pilot_modulate
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      preamble_symbols: 16
+      pilot_spacing_data_symbols: 16
+      pilot_seed: 1701
+
+  - id: wireless_channel
+    op: wireless.channel
+    inputs:
+      symbols: modulator.symbols
+    params:
+      channel: awgn
+      noise_mode: snr_at_unit_power
+      snr_db: 8
+      wireless_backend: numpy
+      seed: 23001
+
+  - id: carrier_impairment
+    op: wireless.carrier_phase_impairment
+    inputs:
+      rx_symbols: wireless_channel.rx_symbols
+    params:
+      initial_phase_min_rad: -3.141592653589793
+      initial_phase_max_rad: 3.141592653589793
+      cfo_min_cycles_per_symbol: -0.01
+      cfo_max_cycles_per_symbol: 0.01
+      phase_noise_increment_std_rad: 0.04
+      seed: 23002
+
+  - id: demodulator
+    op: demodulation.phase_tracking_receiver_adapter
+    inputs:
+      rx_symbols: carrier_impairment.rx_symbols
+      pilot_context: modulator.pilot_context
+      phase_truth: carrier_impairment.phase_truth
+    params:
+      mode: pilot_smoothing
+      pilot_smoothing_nearest_pilots: 5
+      pll_alpha: 0.12
+      pll_beta: 0.005
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: demodulator.bits
+    params:
+      label: demodulator_output
+      role: demodulator_output
+
+  - id: coded_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+
+  - id: coded_bler
+    op: metrics.block_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+      block_size: 1024
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: channel_io
+
+  - id: channel_decoder
+    op: channel.identity_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits

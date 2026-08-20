@@ -1,0 +1,36 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: mimo_ofdm.channel_estimation_sparse_pilot_dual_domain_v3
+name: Learned 2×2 MIMO-OFDM channel estimation
+status: reference_only
+operation: model.channel_estimator_adapter
+framework: torch
+data:
+  owner: noema_capture_contract
+  inputs:
+    - sparse divided pilot observations
+    - pilot mask
+    - operation-owned LS channel estimate
+    - channel-noise variance
+  target: simulated channel truth
+model:
+  owner: external_researcher
+  reference_architecture: noise-conditioned sparse-pilot residual estimator with frequency- and delay-domain branches
+loss:
+  owner: external_researcher
+  reference_objective: normalized complex mean-squared error
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: single_binding
+  entrypoint: channel_estimator
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison:
+    - least_squares
+    - fixed_prior_lmmse
+    - learned_estimator
+  diagnostic: perfect-CSI ZF spectral efficiency
+  sweep: channel.snr_db
+  pairing: common held-out channel-profile, channel, and pilot-noise seeds at each SNR

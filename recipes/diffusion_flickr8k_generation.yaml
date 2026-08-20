@@ -1,0 +1,184 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: caption_to_image_generation
+description: Caption-to-image semantic transmission on Flickr8k with a pretrained diffusion receiver and CLIP alignment metrics.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  benchmark_id: diffusion_flickr8k_generation
+  benchmark_version: v1
+  research_stage: diffusion_generative_receiver
+  ui_configured: true
+  generation_preset: local_quality
+  channel_enabled: false
+  channel_mode: disabled
+  research:
+    task:
+      id: image_generation
+  codec_profile: semantic_state_diffusion
+  codec_label: SemanticState payload plus Diffusers text-to-image receiver
+  codec_format: semantic_state_json_utf8
+  codec_output_form: generated_images
+  semantic_representation: semantic_state
+  transport_representation: semantic_state_payload_bits
+  channel_bit_contract: np.uint8 unpacked bits, one bit per element, values 0 or 1
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.modulator_input.bit_count
+  seed: 23
+  measure_codec_timing: true
+  codec_timing:
+    enabled: true
+    runner: pytorch
+    runtime_adapter_available: true
+    warmup_runs: 0
+    timed_runs: 1
+steps:
+  - id: data
+    op: source.flickr8k_retrieval
+    inputs: {}
+    params:
+      dataset_dir: .noema/datasets/flickr8k
+      split: validation
+      limit: 1
+      image_size: 512
+      caption_index: 0
+      download: true
+  - id: semantic_encoder
+    op: foundation.text_semantic_state_encode
+    inputs:
+      texts: data.texts
+    params:
+      extractor: local_rules
+      include_text: true
+      max_concepts: 24
+  - id: sender
+    op: foundation.semantic_state_payload_encode
+    inputs:
+      state: semantic_encoder.state
+    params:
+      payload_format: semantic_state_json_utf8
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: sender.bits
+    params:
+      role: payload_input
+      label: payload_input
+      data_plane_backend: auto
+      expected_bit_count: 0
+  - id: channel_encoder
+    op: channel.identity_encoder
+    inputs:
+      bits: payload_bit_boundary.bits
+    params:
+      data_plane_backend: auto
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      role: modulator_input
+      label: modulator_input
+      data_plane_backend: auto
+      expected_bit_count: 0
+  - id: wireless_channel
+    op: channel.identity_link
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      label: disabled_generation_channel
+      data_plane_backend: auto
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: wireless_channel.bits
+    params:
+      role: identity_channel_output
+      label: identity_channel_output
+      data_plane_backend: auto
+      expected_bit_count: 0
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: channel_io
+      data_plane_backend: auto
+  - id: channel_decoder
+    op: channel.identity_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits
+    params:
+      data_plane_backend: auto
+  - id: payload_decoder
+    op: foundation.semantic_state_payload_decode
+    inputs:
+      bits: channel_decoder.bits
+    params:
+      on_error: fail
+  - id: receiver
+    op: foundation.diffusion_state_to_image
+    inputs:
+      state: payload_decoder.state
+    params:
+      backend: diffusers
+      model_id: segmind/tiny-sd
+      device: cpu
+      height: 512
+      width: 512
+      num_inference_steps: 20
+      guidance_scale: 7.5
+      prompt_template: 'A realistic photograph: {prompt}'
+      negative_prompt: low quality, blurry, abstract, distorted, text, watermark
+      disable_safety_checker: false
+      use_safetensors: false
+  - id: text_encoder
+    op: foundation.clip_text_embed
+    inputs:
+      texts: data.texts
+    params:
+      backend: transformers_clip
+      model_id: openai/clip-vit-base-patch32
+      device: cpu
+      dimensions: 128
+  - id: source_image_encoder
+    op: foundation.clip_image_embed
+    inputs:
+      images: data.images
+    params:
+      backend: transformers_clip
+      model_id: openai/clip-vit-base-patch32
+      device: cpu
+      bins: 16
+      dimensions: 128
+  - id: generated_image_encoder
+    op: foundation.clip_image_embed
+    inputs:
+      images: receiver.images
+    params:
+      backend: transformers_clip
+      model_id: openai/clip-vit-base-patch32
+      device: cpu
+      bins: 16
+      dimensions: 128
+  - id: text_image_alignment
+    op: metrics.embedding_similarity
+    inputs:
+      reference: text_encoder.embeddings
+      candidate: generated_image_encoder.embeddings
+    params:
+      label: generation.text_image_clip
+      normalize: true
+  - id: image_image_alignment
+    op: metrics.embedding_similarity
+    inputs:
+      reference: source_image_encoder.embeddings
+      candidate: generated_image_encoder.embeddings
+    params:
+      label: generation.image_image_clip
+      normalize: true

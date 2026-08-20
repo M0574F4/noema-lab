@@ -1,0 +1,685 @@
+/*
+ * Use the browser width for the documentation shell. The upstream theme caps
+ * the whole page at 88rem and the article at 60em, which leaves two large
+ * empty bands on wide displays.
+ */
+@media (min-width: 960px) {
+  .bd-page-width {
+    max-width: none;
+  }
+
+  .bd-sidebar-primary {
+    width: clamp(17rem, 18vw, 20rem);
+  }
+
+  .bd-main .bd-content {
+    justify-content: stretch;
+  }
+
+  .bd-main .bd-content .bd-article-container {
+    max-width: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .bd-main .bd-content .bd-article-container .bd-article {
+    padding-right: 2rem;
+  }
+}
+
+/* Keep the brand compact in the global header. */
+.navbar-brand.logo {
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.navbar-brand.logo .logo__image {
+  height: 2.35rem;
+  width: 2.35rem;
+}
+
+.navbar-brand.logo .logo__title {
+  font-size: 1.1rem;
+  font-weight: 750;
+}
+
+@media (min-width: 960px) {
+  .bd-header .navbar-header-items__end {
+    margin-left: auto;
+  }
+}
+
+.noema-title-logo {
+  display: inline-block;
+  height: 1.05em;
+  margin-right: 0.22em;
+  vertical-align: -0.14em;
+  width: 1.05em;
+}
+
+/* The documentation root also serves as the lightweight project website. */
+.noema-home-hero-figure {
+  margin: 0.5rem 0 1.35rem;
+  max-width: none;
+  width: 100%;
+}
+
+.noema-home-hero {
+  border: 1px solid color-mix(in srgb, var(--pst-color-primary, #1f7658) 52%, transparent);
+  border-radius: 0.85rem;
+  box-shadow: 0 1rem 2.4rem rgb(15 23 42 / 16%);
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.noema-home-actions {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.25rem 0 1.4rem;
+}
+
+.noema-home-action {
+  align-items: center;
+  background: var(--pst-color-surface, #ffffff);
+  border: 1px solid var(--pst-color-border, #cbd5e1);
+  border-radius: 999px;
+  color: var(--pst-color-text-base, #172033);
+  display: inline-flex;
+  font-size: 0.92rem;
+  font-weight: 680;
+  justify-content: center;
+  min-height: 2.8rem;
+  padding: 0.55rem 1rem;
+  text-decoration: none;
+}
+
+.noema-home-action:hover,
+.noema-home-action:focus-visible {
+  border-color: var(--pst-color-primary, #1f7658);
+  color: var(--pst-color-primary, #1f7658);
+  text-decoration: none;
+}
+
+.noema-home-action:focus-visible,
+.noema-home-route:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--pst-color-primary, #1f7658) 72%, transparent);
+  outline-offset: 3px;
+}
+
+.noema-home-action-primary {
+  background: var(--pst-color-primary, #1f7658);
+  border-color: var(--pst-color-primary, #1f7658);
+  color: #ffffff;
+}
+
+.noema-home-action-primary:hover,
+.noema-home-action-primary:focus-visible {
+  background: color-mix(in srgb, var(--pst-color-primary, #1f7658) 88%, #000000);
+  color: #ffffff;
+}
+
+.noema-launch-video {
+  margin: 1rem auto 1.8rem;
+  max-width: 72rem;
+}
+
+.noema-launch-video__frame {
+  aspect-ratio: 16 / 9;
+  background: #050807;
+  border: 1px solid color-mix(in srgb, var(--pst-color-primary, #1f7658) 45%, transparent);
+  border-radius: 0.85rem;
+  box-shadow: 0 1rem 2.4rem rgb(15 23 42 / 16%);
+  overflow: hidden;
+}
+
+.noema-launch-video__frame iframe {
+  border: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.noema-launch-video__caption {
+  color: var(--pst-color-text-muted, #5d6471);
+  font-size: 0.92rem;
+  margin: 0.7rem 0 0;
+  text-align: center;
+}
+
+.noema-launch-video__caption a {
+  font-weight: 680;
+  white-space: nowrap;
+}
+
+.noema-home-routes {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1rem 0 1.8rem;
+}
+
+.noema-home-route {
+  background: var(--pst-color-surface, #ffffff);
+  border: 1px solid var(--pst-color-border, #d6dae1);
+  border-radius: 0.7rem;
+  box-shadow: 0 0.3rem 0.9rem rgb(15 23 42 / 7%);
+  color: var(--pst-color-text-base, #172033);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-height: 8.5rem;
+  padding: 1.05rem;
+  text-decoration: none;
+}
+
+.noema-home-route:hover,
+.noema-home-route:focus-visible {
+  border-color: var(--pst-color-primary, #1f7658);
+  box-shadow: 0 0.75rem 1.5rem rgb(15 23 42 / 12%);
+  color: var(--pst-color-text-base, #172033);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.noema-home-route strong {
+  color: var(--pst-color-primary, #1f7658);
+  font-size: 1.05rem;
+}
+
+.noema-home-route span {
+  color: var(--pst-color-text-muted, #64748b);
+  line-height: 1.45;
+}
+
+.noema-home-workflow-figure {
+  float: none;
+  margin: 1rem 0 1.5rem;
+  max-width: 100%;
+  width: 100%;
+}
+
+.noema-home-result {
+  border: 1px solid var(--pst-color-border, #d6dae1);
+  border-radius: 0.7rem;
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .noema-home-route {
+    transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+  }
+}
+
+@media (max-width: 900px) {
+  .noema-home-routes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 580px) {
+  .noema-home-action {
+    flex: 1 1 100%;
+  }
+
+  .noema-home-routes {
+    grid-template-columns: 1fr;
+  }
+
+  .noema-home-route {
+    min-height: 0;
+  }
+}
+
+.noema-overview-workflow-figure {
+  float: right;
+  margin: 0 0 1.5rem 2rem;
+  max-width: 70%;
+  width: 70%;
+}
+
+.noema-overview-workflow {
+  border: 1px solid var(--pst-color-border, #d6dae1);
+  border-radius: 0.65rem;
+  box-shadow: 0 0.7rem 1.8rem rgb(15 23 42 / 14%);
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.noema-overview-workflow-figure figcaption {
+  color: var(--pst-color-text-muted, #64748b);
+  font-size: 0.88rem;
+  margin-top: 0.65rem;
+  text-align: left;
+}
+
+@media (max-width: 959px) {
+  .noema-overview-workflow-figure {
+    float: none;
+    margin: 1.5rem 0 2rem;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* Make the left documentation architecture read as a tree. */
+.bd-sidebar-primary .bd-links__title {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bd-sidebar-primary .noema-global-docs-tree .nav {
+  row-gap: 0.08rem;
+}
+
+.bd-sidebar-primary .noema-global-docs-tree .noema-home-entry {
+  border-bottom: 1px solid var(--pst-color-border, #d6dae1);
+  margin: 0 0 1rem;
+  padding: 0 0 0.8rem;
+}
+
+.bd-sidebar-primary .noema-global-docs-tree .noema-home-entry a {
+  font-weight: 700;
+}
+
+.bd-sidebar-primary .noema-global-docs-tree .toctree-l1 > a {
+  font-weight: 650;
+}
+
+.bd-sidebar-primary .noema-global-docs-tree .toctree-l2 > a {
+  padding-left: 1.35rem;
+}
+
+.bd-sidebar-primary .noema-global-docs-tree .toctree-l3 > a {
+  padding-left: 2.15rem;
+  font-size: 0.88rem;
+}
+
+.bd-sidebar-primary .noema-global-docs-tree .toctree-l4 > a {
+  padding-left: 2.9rem;
+  font-size: 0.84rem;
+}
+
+.bd-sidebar-primary .noema-global-docs-tree .toctree-l2 > a::before,
+.bd-sidebar-primary .noema-global-docs-tree .toctree-l3 > a::before,
+.bd-sidebar-primary .noema-global-docs-tree .toctree-l4 > a::before {
+  color: var(--pst-color-muted);
+  content: "-";
+  display: inline-block;
+  margin-left: -0.65rem;
+  width: 0.65rem;
+}
+
+.bd-sidebar-secondary .toc-entry a {
+  line-height: 1.35;
+}
+
+/*
+ * Tutorial result figures are rendered from preserved numeric evidence rather
+ * than displayed as static screenshots.  The variables keep the canvas and
+ * surrounding controls aligned with the PyData light and dark themes.
+ */
+.noema-doc-chart {
+  --noema-chart-text: var(--pst-color-text-base, #111827);
+  --noema-chart-muted: var(--pst-color-text-muted, #64748b);
+  --noema-chart-grid: color-mix(in srgb, var(--pst-color-border, #94a3b8) 42%, transparent);
+  --noema-chart-axis: var(--pst-color-border, #64748b);
+  --noema-chart-background: var(--pst-color-background, #ffffff);
+  --noema-chart-tooltip-background: color-mix(in srgb, var(--pst-color-text-base, #0f172a) 94%, transparent);
+  --noema-chart-tooltip-text: var(--pst-color-background, #f8fafc);
+  background: var(--noema-chart-background);
+  border: 1px solid var(--pst-color-border, #d6dae1);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 7%);
+  margin: 1.25rem 0 0.45rem;
+  overflow: hidden;
+}
+
+.noema-chart-heading {
+  align-items: flex-start;
+  border-bottom: 1px solid var(--pst-color-border, #d6dae1);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0.75rem 0.85rem 0.65rem;
+}
+
+.noema-chart-title {
+  color: var(--noema-chart-text);
+  font-size: 1rem;
+  font-weight: 680;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.noema-chart-description {
+  color: var(--noema-chart-muted);
+  font-size: 0.84rem;
+  line-height: 1.35;
+  margin: 0.2rem 0 0;
+}
+
+.noema-chart-controls {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.4rem;
+}
+
+.noema-chart-control {
+  background: var(--pst-color-surface, var(--noema-chart-background));
+  border: 1px solid var(--pst-color-border, #cbd5e1);
+  border-radius: 0.32rem;
+  color: var(--noema-chart-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.55rem;
+  white-space: nowrap;
+}
+
+.noema-chart-control:hover,
+.noema-chart-control:focus-visible {
+  border-color: var(--pst-color-primary, #2563eb);
+}
+
+.noema-chart-control:focus-visible,
+.noema-chart-legend-item:focus-visible,
+.noema-copy-button:focus-visible {
+  outline: 2px solid var(--pst-color-primary, #2563eb);
+  outline-offset: 2px;
+}
+
+.noema-chart-control[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--pst-color-primary, #2563eb) 12%, var(--noema-chart-background));
+  border-color: color-mix(in srgb, var(--pst-color-primary, #2563eb) 64%, var(--pst-color-border, #cbd5e1));
+}
+
+.noema-chart-legend {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.28rem 0.85rem;
+  list-style: none;
+  margin: 0;
+  min-height: 2.15rem;
+  padding: 0.44rem 0.85rem 0.24rem;
+}
+
+.noema-chart-legend li {
+  margin: 0;
+  padding: 0;
+}
+
+.noema-chart-legend-item {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--noema-chart-text);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.82rem;
+  gap: 0.38rem;
+  max-width: 100%;
+  padding: 0.18rem 0;
+}
+
+.noema-chart-legend-item:hover,
+.noema-chart-legend-item:focus-visible {
+  color: var(--series-color);
+}
+
+.noema-chart-legend-item.is-hidden {
+  opacity: 0.38;
+  text-decoration: line-through;
+}
+
+.noema-chart-legend-line {
+  border-top: 3px solid var(--series-color);
+  display: inline-block;
+  flex: 0 0 1.55rem;
+  position: relative;
+  width: 1.55rem;
+}
+
+.noema-chart-legend-line.dashed {
+  border-top-style: dashed;
+}
+
+.noema-chart-legend-marker {
+  background: var(--noema-chart-background);
+  border: 2px solid var(--series-color);
+  border-radius: 50%;
+  height: 0.52rem;
+  left: calc(50% - 0.26rem);
+  position: absolute;
+  top: -0.34rem;
+  width: 0.52rem;
+}
+
+.noema-chart-legend-item[data-marker="square"] .noema-chart-legend-marker {
+  border-radius: 0.05rem;
+}
+
+.noema-chart-legend-item[data-marker="diamond"] .noema-chart-legend-marker {
+  border-radius: 0;
+  transform: rotate(45deg);
+}
+
+.noema-chart-stage {
+  min-height: 340px;
+  position: relative;
+  width: 100%;
+}
+
+.noema-chart-canvas {
+  cursor: grab;
+  display: block;
+  max-width: none;
+  touch-action: pan-y;
+  width: 100%;
+}
+
+.noema-chart-canvas.is-panning {
+  cursor: grabbing;
+}
+
+.noema-chart-canvas:focus-visible {
+  outline: 2px solid var(--pst-color-primary, #2563eb);
+  outline-offset: -3px;
+}
+
+.noema-chart-tooltip {
+  background: var(--noema-chart-tooltip-background);
+  border-radius: 0.35rem;
+  color: var(--noema-chart-tooltip-text);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  max-width: min(22rem, calc(100% - 1rem));
+  padding: 0.42rem 0.56rem;
+  pointer-events: none;
+  position: absolute;
+  z-index: 3;
+}
+
+.noema-chart-tooltip-swatch {
+  border-radius: 50%;
+  display: inline-block;
+  height: 0.52rem;
+  margin-right: 0.3rem;
+  width: 0.52rem;
+}
+
+.noema-chart-interaction-hint {
+  border-top: 1px solid var(--pst-color-border, #d6dae1);
+  color: var(--noema-chart-muted);
+  font-size: 0.78rem;
+  line-height: 1.2;
+  padding: 0.42rem 0.85rem;
+  text-align: right;
+}
+
+.noema-chart-hint-coarse {
+  display: none;
+}
+
+.noema-chart-accessible-summary {
+  border-top: 1px solid var(--pst-color-border, #d6dae1);
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.noema-chart-tooltip-interval {
+  color: color-mix(in srgb, var(--noema-chart-tooltip-text) 82%, transparent);
+  font-size: 0.76rem;
+}
+
+.noema-doc-chart-error {
+  color: var(--pst-color-danger, #b91c1c);
+  padding: 0.75rem;
+}
+
+.noema-copyable-code {
+  position: relative;
+}
+
+.noema-copy-button {
+  background: var(--pst-color-surface, #ffffff);
+  border: 1px solid var(--pst-color-border, #cbd5e1);
+  border-radius: 0.3rem;
+  color: var(--pst-color-text-base, #111827);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  min-height: 2rem;
+  padding: 0.28rem 0.52rem;
+  position: absolute;
+  right: 0.45rem;
+  top: 0.45rem;
+  z-index: 2;
+}
+
+.noema-copyable-code pre {
+  padding-top: 2.7rem;
+}
+
+.pst-scrollable-table-container:has(table.noema-compact-table) {
+  border: 1px solid var(--pst-color-border, #d6dae1);
+  border-radius: 0.35rem;
+  scrollbar-gutter: stable;
+}
+
+.noema-reconstruction-gallery {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1rem 0 1.35rem;
+}
+
+.noema-reconstruction-gallery h4 {
+  border-bottom: 1px solid var(--pst-color-border, #d6dae1);
+  grid-column: 1 / -1;
+  margin: 0.55rem 0 0;
+  padding-bottom: 0.3rem;
+}
+
+.noema-reconstruction-gallery figure {
+  background: var(--pst-color-surface, #ffffff);
+  border: 1px solid var(--pst-color-border, #d6dae1);
+  border-radius: 0.45rem;
+  margin: 0;
+  overflow: hidden;
+}
+
+.noema-reconstruction-gallery img {
+  aspect-ratio: 1;
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+
+.noema-reconstruction-gallery figcaption {
+  color: var(--pst-color-text-muted, #64748b);
+  font-size: 0.72rem;
+  line-height: 1.3;
+  padding: 0.45rem 0.55rem;
+}
+
+@media (max-width: 640px) {
+  .noema-chart-heading {
+    display: block;
+  }
+
+  .noema-chart-controls {
+    margin-top: 0.55rem;
+  }
+
+  .noema-chart-stage {
+    min-height: 320px;
+  }
+
+  .noema-reconstruction-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .bd-main h1 {
+    font-size: 2rem;
+    line-height: 1.12;
+  }
+
+  .noema-reconstruction-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .noema-chart-description,
+  .noema-chart-control,
+  .noema-chart-legend-item,
+  .noema-chart-interaction-hint {
+    font-size: 0.85rem;
+  }
+}
+
+@media (pointer: coarse) {
+  .noema-chart-hint-fine {
+    display: none;
+  }
+
+  .noema-chart-hint-coarse {
+    display: inline;
+  }
+}
+
+@media (forced-colors: active) {
+  .noema-chart-control:focus-visible,
+  .noema-chart-legend-item:focus-visible,
+  .noema-copy-button:focus-visible {
+    outline: 3px solid CanvasText;
+  }
+}
+
+@media print {
+  .noema-chart-controls,
+  .noema-chart-interaction-hint,
+  .noema-copy-button {
+    display: none;
+  }
+
+  .noema-doc-chart {
+    break-inside: avoid;
+  }
+}

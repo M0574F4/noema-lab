@@ -1,0 +1,629 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "52dee4797910933b49dd3ac7386fc58c5441c927897c86c921dc7b083d2e4a0d",
+      "size_bytes": 20959
+    },
+    "chart_data.json": {
+      "sha256": "50f9d2e2f7245bdcc465bdf2f3bbd33e8264f7dbe455ddee3b031356a0f79fab",
+      "size_bytes": 31875
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-csi-feedback-chart-data.js",
+      "sha256": "7f92cc65d47ad670503c71224bbc43806065792c362a64496e25bfcd60bd09cd",
+      "size_bytes": 32037
+    },
+    "rows": 60,
+    "summary_table.csv": {
+      "sha256": "c1864a003a650dac0e11330b7291ad47b6e67ee55bd97fa9086ec699aac525d5",
+      "size_bytes": 679
+    }
+  },
+  "representative_preview": {
+    "paired_seed": 92001,
+    "reports": {
+      "learned_codec": {
+        "recipe_id": "learned_codec_snr10_seed92001",
+        "report": {
+          "sha256": "9667c974f40ead8f95ae312aaea1241db72f94c2fbfea4d404b4f23afeadb996",
+          "size_bytes": 316294
+        },
+        "run_id": "20260727T130018Z_csi_feedback_sionna_train__learned_codec_snr10_seed92001"
+      },
+      "matched_klt": {
+        "recipe_id": "matched_klt_snr10_seed92001",
+        "report": {
+          "sha256": "6c13980944e39f4e80519f778e8f1092a362703f332ac677854e38ceec900499",
+          "size_bytes": 316378
+        },
+        "run_id": "20260727T130015Z_csi_feedback_sionna_train__matched_klt_snr10_seed92001"
+      },
+      "truncated_angular_delay": {
+        "recipe_id": "truncated_angular_delay_snr10_seed92001",
+        "report": {
+          "sha256": "467600c02307136571fe2fe7126d5658094e2727d0fe7e8d9b1a5bb79492769a",
+          "size_bytes": 315854
+        },
+        "run_id": "20260727T130013Z_csi_feedback_sionna_train__truncated_angular_delay_snr10_seed92001"
+      }
+    },
+    "sample_index": 0,
+    "snr_db": 10.0,
+    "tx_antenna_index": 0
+  },
+  "runs": [
+    {
+      "pairing_id": "tdlA:0:91001",
+      "recipe_id": "truncated_angular_delay_snr0_seed91001",
+      "recipe_sha256": "ac5820241185d7093748f802625c0915159ff5b2677a74e7fa386e20f5efd31a",
+      "role": "baseline",
+      "run_id": "20260727T125922Z_csi_feedback_sionna_train__truncated_angular_delay_snr0_seed91001",
+      "semantic_recipe_sha256": "535c79c5f0bbcbf7bcbe7977625e31e4885ace51e36d19ff0731573c75f4c5bf"
+    },
+    {
+      "pairing_id": "tdlA:0:91001",
+      "recipe_id": "matched_klt_snr0_seed91001",
+      "recipe_sha256": "e8f9072cb50cbe259b7a73f8401ab6ce431eed8f8f72dcad054f6dda81614a68",
+      "role": "baseline",
+      "run_id": "20260727T125925Z_csi_feedback_sionna_train__matched_klt_snr0_seed91001",
+      "semantic_recipe_sha256": "87eeb8d42b3e13d8704375ce208e6f88bdb0bd7373db7e8db50f0651260cc7d8"
+    },
+    {
+      "pairing_id": "tdlA:0:91001",
+      "recipe_id": "learned_codec_snr0_seed91001",
+      "recipe_sha256": "03b3f74a517a0e9f747527a78274ea658951b5bb95558ac1aebe5b532f9df776",
+      "role": "candidate",
+      "run_id": "20260727T125927Z_csi_feedback_sionna_train__learned_codec_snr0_seed91001",
+      "semantic_recipe_sha256": "c19510a43067dbc53aecd31bd4d4d6db5bc446c9d4c9168325450badadca73ec"
+    },
+    {
+      "pairing_id": "tdlA:0:91001",
+      "recipe_id": "perfect_csit_snr0_seed91001",
+      "recipe_sha256": "3a09a9a6a05412d739c64adcc80db7eede814a0c958ca10b925ea107063b2002",
+      "role": "upper_bound",
+      "run_id": "20260727T125928Z_csi_feedback_sionna_train__perfect_csit_snr0_seed91001",
+      "semantic_recipe_sha256": "6a5fe893dc05cb8049ffffd8e65860304a87ccbf48e0e59bcb02a0ab70d898ab"
+    },
+    {
+      "pairing_id": "tdlA:0:92001",
+      "recipe_id": "truncated_angular_delay_snr0_seed92001",
+      "recipe_sha256": "912e4d5795360652fc3c040fd94ce043426df6c832e2f95edc712eb0934d0e7d",
+      "role": "baseline",
+      "run_id": "20260727T125929Z_csi_feedback_sionna_train__truncated_angular_delay_snr0_seed92001",
+      "semantic_recipe_sha256": "3283ed0fa5dd422475fb74d06951cdc9e19029f9ae8aa17db9b01465abb17929"
+    },
+    {
+      "pairing_id": "tdlA:0:92001",
+      "recipe_id": "matched_klt_snr0_seed92001",
+      "recipe_sha256": "6caa279355c3f12fa280fb4097aebb8431d5bb2547811a524d299516e469eb42",
+      "role": "baseline",
+      "run_id": "20260727T125930Z_csi_feedback_sionna_train__matched_klt_snr0_seed92001",
+      "semantic_recipe_sha256": "fb2e46bb81f3b30b33f35af964238c869f233d5e706ea1fa8b7ade476f94b93a"
+    },
+    {
+      "pairing_id": "tdlA:0:92001",
+      "recipe_id": "learned_codec_snr0_seed92001",
+      "recipe_sha256": "2d4508141f54cd77acfa90b55590541d01f1e840f36497432fd92a855e6fc130",
+      "role": "candidate",
+      "run_id": "20260727T125932Z_csi_feedback_sionna_train__learned_codec_snr0_seed92001",
+      "semantic_recipe_sha256": "875f88da7828712570975eef4f6774d01dae7fc9eb24b8e92f67ba0e71922dc6"
+    },
+    {
+      "pairing_id": "tdlA:0:92001",
+      "recipe_id": "perfect_csit_snr0_seed92001",
+      "recipe_sha256": "872eec571c29302271f6603dbca587e8d8c149ebc14796720a695389019a9e60",
+      "role": "upper_bound",
+      "run_id": "20260727T125934Z_csi_feedback_sionna_train__perfect_csit_snr0_seed92001",
+      "semantic_recipe_sha256": "296ebfdfa95df98ce8b7ec1ed0f34f499a95952d13ab437bd3aa8cf3f7486fd2"
+    },
+    {
+      "pairing_id": "tdlA:0:93001",
+      "recipe_id": "truncated_angular_delay_snr0_seed93001",
+      "recipe_sha256": "bed37ca70274f6b9918c380ca5fa195cb388343d6422423cb120be7deef2c2fd",
+      "role": "baseline",
+      "run_id": "20260727T125935Z_csi_feedback_sionna_train__truncated_angular_delay_snr0_seed93001",
+      "semantic_recipe_sha256": "2e6b0b04022fe794c808b2b8fe65888f330e3c210785c132290725977536c178"
+    },
+    {
+      "pairing_id": "tdlA:0:93001",
+      "recipe_id": "matched_klt_snr0_seed93001",
+      "recipe_sha256": "1a0b4ddb44e38a6f0e8c20f947740939faa4d077004ed30ab049735f99771008",
+      "role": "baseline",
+      "run_id": "20260727T125937Z_csi_feedback_sionna_train__matched_klt_snr0_seed93001",
+      "semantic_recipe_sha256": "0e71398c404d1c047bbfad330370fa9d9f6a44a419c82c33668113fe348ef710"
+    },
+    {
+      "pairing_id": "tdlA:0:93001",
+      "recipe_id": "learned_codec_snr0_seed93001",
+      "recipe_sha256": "857664766f12615e3ec33b59bb1b8b8effad1586dc9258e844ec8c3c40dfb386",
+      "role": "candidate",
+      "run_id": "20260727T125938Z_csi_feedback_sionna_train__learned_codec_snr0_seed93001",
+      "semantic_recipe_sha256": "83aceb96c250b3ed19730273e5c768d5ccd563e2801c8a9c2274fa7961a63f43"
+    },
+    {
+      "pairing_id": "tdlA:0:93001",
+      "recipe_id": "perfect_csit_snr0_seed93001",
+      "recipe_sha256": "eb1925460ed676d4a88138c71c282eacdf78d4034f37fef7c826be54a81e8db5",
+      "role": "upper_bound",
+      "run_id": "20260727T125940Z_csi_feedback_sionna_train__perfect_csit_snr0_seed93001",
+      "semantic_recipe_sha256": "96605f412b4f88ec1d845c14272eaf355c314117defe1281169a3b4f49c5182d"
+    },
+    {
+      "pairing_id": "tdlA:5:91001",
+      "recipe_id": "truncated_angular_delay_snr5_seed91001",
+      "recipe_sha256": "b3fe57bb3e3a70144683687a4eadab09cc66d36111fcf131177631ba9e068530",
+      "role": "baseline",
+      "run_id": "20260727T125942Z_csi_feedback_sionna_train__truncated_angular_delay_snr5_seed91001",
+      "semantic_recipe_sha256": "aadcafed2f6044239cf51e245aaf443fc115648d49665f67143e9ea813ad00f8"
+    },
+    {
+      "pairing_id": "tdlA:5:91001",
+      "recipe_id": "matched_klt_snr5_seed91001",
+      "recipe_sha256": "a8b102eac7eae88f56a8bb117f138985ec4c5f8a01e06a07c9c084020123223c",
+      "role": "baseline",
+      "run_id": "20260727T125943Z_csi_feedback_sionna_train__matched_klt_snr5_seed91001",
+      "semantic_recipe_sha256": "7a01aeca686ceb2f4f33dcf06e78a4268c7a3734ba882a3acaa94ba85b038051"
+    },
+    {
+      "pairing_id": "tdlA:5:91001",
+      "recipe_id": "learned_codec_snr5_seed91001",
+      "recipe_sha256": "9b16128e9f1a9a064dd2002214acf115ed26d1a8f9541fe1d357fcc1c10beb7f",
+      "role": "candidate",
+      "run_id": "20260727T125945Z_csi_feedback_sionna_train__learned_codec_snr5_seed91001",
+      "semantic_recipe_sha256": "789f4affc0217a0bd569defe714329c03c8d79da44676c8ec32aba72769e8315"
+    },
+    {
+      "pairing_id": "tdlA:5:91001",
+      "recipe_id": "perfect_csit_snr5_seed91001",
+      "recipe_sha256": "0c438a560774b8958d78c6d46f70834d06e67971f485bbaeb66f6abcf9915a7c",
+      "role": "upper_bound",
+      "run_id": "20260727T125947Z_csi_feedback_sionna_train__perfect_csit_snr5_seed91001",
+      "semantic_recipe_sha256": "0be10dbe7882a66fce78a8246cc00ae4b1e7948176f0b769d0495ff4d316a9b2"
+    },
+    {
+      "pairing_id": "tdlA:5:92001",
+      "recipe_id": "truncated_angular_delay_snr5_seed92001",
+      "recipe_sha256": "46c3f539b2f77f18e6d7f8d0a0d6df7b78d490eb50ed71912bed0acea0756a01",
+      "role": "baseline",
+      "run_id": "20260727T125949Z_csi_feedback_sionna_train__truncated_angular_delay_snr5_seed92001",
+      "semantic_recipe_sha256": "91e12b7a883585f658481fd1534e775413b27da42be6ecb74b68f879ea561bd3"
+    },
+    {
+      "pairing_id": "tdlA:5:92001",
+      "recipe_id": "matched_klt_snr5_seed92001",
+      "recipe_sha256": "08b311072f33ecc8015ef1de23538013d116781b78471404010a0922b6a40615",
+      "role": "baseline",
+      "run_id": "20260727T125951Z_csi_feedback_sionna_train__matched_klt_snr5_seed92001",
+      "semantic_recipe_sha256": "f0994d5c8058434f422b10a4be27e51c6b46429a96c8b3c8b35072368926666c"
+    },
+    {
+      "pairing_id": "tdlA:5:92001",
+      "recipe_id": "learned_codec_snr5_seed92001",
+      "recipe_sha256": "bf7746646cd997593d43acf6ea3da51ea3cfb697e679451928f5ab2bf0adbd3e",
+      "role": "candidate",
+      "run_id": "20260727T125952Z_csi_feedback_sionna_train__learned_codec_snr5_seed92001",
+      "semantic_recipe_sha256": "7ebfe4e9360b2f7ff386b637b242557957d802d08887e076f3a7816533a65dab"
+    },
+    {
+      "pairing_id": "tdlA:5:92001",
+      "recipe_id": "perfect_csit_snr5_seed92001",
+      "recipe_sha256": "21360d832a4876d09f74ba498bb9df60e868665d401dfd7c1f31974502bf7bf5",
+      "role": "upper_bound",
+      "run_id": "20260727T125954Z_csi_feedback_sionna_train__perfect_csit_snr5_seed92001",
+      "semantic_recipe_sha256": "3ab7ab0547df450bf9d9fccfd2087b76de5b9ded07ac5a5049bb7ca592dd7e71"
+    },
+    {
+      "pairing_id": "tdlA:5:93001",
+      "recipe_id": "truncated_angular_delay_snr5_seed93001",
+      "recipe_sha256": "3e7171ea9a95a1652aeeea0a95f46fa79260d76f879fa01fa0f05d1a04806a73",
+      "role": "baseline",
+      "run_id": "20260727T125956Z_csi_feedback_sionna_train__truncated_angular_delay_snr5_seed93001",
+      "semantic_recipe_sha256": "1afca345bca2a056b9eff24ca42d7c3fbef2ccd2f0572b495e8507292b1d7648"
+    },
+    {
+      "pairing_id": "tdlA:5:93001",
+      "recipe_id": "matched_klt_snr5_seed93001",
+      "recipe_sha256": "89e89ec12a08e3f7778156b6c6c292552dad4455af03d377084d257f726bab87",
+      "role": "baseline",
+      "run_id": "20260727T125958Z_csi_feedback_sionna_train__matched_klt_snr5_seed93001",
+      "semantic_recipe_sha256": "4d7e975ffe749e287288127e51da89fd060f2295ee6ebc446291aa6fbf9dde6a"
+    },
+    {
+      "pairing_id": "tdlA:5:93001",
+      "recipe_id": "learned_codec_snr5_seed93001",
+      "recipe_sha256": "2eb20582e488b180736f6312b8f7b82af0ac0d489e3545d2a90c8944e705b642",
+      "role": "candidate",
+      "run_id": "20260727T130000Z_csi_feedback_sionna_train__learned_codec_snr5_seed93001",
+      "semantic_recipe_sha256": "29c5c714000115b3ff4582606143883e742acc485271dc5cf2e2de0f83fc7529"
+    },
+    {
+      "pairing_id": "tdlA:5:93001",
+      "recipe_id": "perfect_csit_snr5_seed93001",
+      "recipe_sha256": "c12ddb349a4f9ca1c08e8f5d02bb9b137a3bf3c33162e79d6165628eee275465",
+      "role": "upper_bound",
+      "run_id": "20260727T130002Z_csi_feedback_sionna_train__perfect_csit_snr5_seed93001",
+      "semantic_recipe_sha256": "026bd79ab37b84379eb7cb5b1622be6454d4e616d7a91c1c0e50940bb5bfe410"
+    },
+    {
+      "pairing_id": "tdlA:10:91001",
+      "recipe_id": "truncated_angular_delay_snr10_seed91001",
+      "recipe_sha256": "e54d7d283523a3f2c6804effeb8e92f34619075da5a3c3ba02069930a5c82d0e",
+      "role": "baseline",
+      "run_id": "20260727T130004Z_csi_feedback_sionna_train__truncated_angular_delay_snr10_seed91001",
+      "semantic_recipe_sha256": "7d5ce0aa9db2b63c91930a0fe0efb11dee0ed56b1c5b0ab7bf912c0eb45b1a23"
+    },
+    {
+      "pairing_id": "tdlA:10:91001",
+      "recipe_id": "matched_klt_snr10_seed91001",
+      "recipe_sha256": "0fead7e464716711e63e2d4b2ab445da1f78eda07f76cc04f701eb871fcbb417",
+      "role": "baseline",
+      "run_id": "20260727T130007Z_csi_feedback_sionna_train__matched_klt_snr10_seed91001",
+      "semantic_recipe_sha256": "6ec2714738325caf213b4ddcf0890e289de5c2843d1e86bd9ae56df80ded71fa"
+    },
+    {
+      "pairing_id": "tdlA:10:91001",
+      "recipe_id": "learned_codec_snr10_seed91001",
+      "recipe_sha256": "b1920fe7ae5f6b81968e411402c087ca462d06d9fe3d667fe53b3a4ae68d093e",
+      "role": "candidate",
+      "run_id": "20260727T130009Z_csi_feedback_sionna_train__learned_codec_snr10_seed91001",
+      "semantic_recipe_sha256": "4a14c3cba5b4183c2c477c96d5ba59b9dac064e06dc0a5ac7005ee032155322d"
+    },
+    {
+      "pairing_id": "tdlA:10:91001",
+      "recipe_id": "perfect_csit_snr10_seed91001",
+      "recipe_sha256": "c40e6f7f3e9e455b8b883fdfb48fbd73b65516352e978154bdf3089ae6974df7",
+      "role": "upper_bound",
+      "run_id": "20260727T130011Z_csi_feedback_sionna_train__perfect_csit_snr10_seed91001",
+      "semantic_recipe_sha256": "715222e6263590bcfd4add258270c6455c719ebc88ed108c9d80a47900daddfc"
+    },
+    {
+      "pairing_id": "tdlA:10:92001",
+      "recipe_id": "truncated_angular_delay_snr10_seed92001",
+      "recipe_sha256": "bb8392e3bdb3bd660bd0101c1d5faf3dba0c76ce56fef9c8d01dceded825cf19",
+      "role": "baseline",
+      "run_id": "20260727T130013Z_csi_feedback_sionna_train__truncated_angular_delay_snr10_seed92001",
+      "semantic_recipe_sha256": "9ed76fd451d6c6bd3e51152a31bcae1cdc32fef3e2a49fdc1255dc4eea4801c6"
+    },
+    {
+      "pairing_id": "tdlA:10:92001",
+      "recipe_id": "matched_klt_snr10_seed92001",
+      "recipe_sha256": "451a63aab67ce3f88a1a70336ff4bcde81400a8be7aa7d1cff3b781e695e9b12",
+      "role": "baseline",
+      "run_id": "20260727T130015Z_csi_feedback_sionna_train__matched_klt_snr10_seed92001",
+      "semantic_recipe_sha256": "678abe585f711f37b536efecea4c14c31e825ec9cc56a5844c3ba7aa192f98a5"
+    },
+    {
+      "pairing_id": "tdlA:10:92001",
+      "recipe_id": "learned_codec_snr10_seed92001",
+      "recipe_sha256": "ef829477b0c1ecadaf367e8ab01a6dedb81e2db584c9b399bf2b092809b5dcfb",
+      "role": "candidate",
+      "run_id": "20260727T130018Z_csi_feedback_sionna_train__learned_codec_snr10_seed92001",
+      "semantic_recipe_sha256": "623e4bcce9e1d047ff1fb32abc376d9475d81d395ad386c8303e9d9e1cf56e11"
+    },
+    {
+      "pairing_id": "tdlA:10:92001",
+      "recipe_id": "perfect_csit_snr10_seed92001",
+      "recipe_sha256": "d38f93255f6394cb5ba56e7ab13fb2a53ff5fab1bb676b0831407a2b756d31c1",
+      "role": "upper_bound",
+      "run_id": "20260727T130020Z_csi_feedback_sionna_train__perfect_csit_snr10_seed92001",
+      "semantic_recipe_sha256": "f965e532f434b6f21432221ea6ba06e9568700b31a29c969fb54a8a9a80e9416"
+    },
+    {
+      "pairing_id": "tdlA:10:93001",
+      "recipe_id": "truncated_angular_delay_snr10_seed93001",
+      "recipe_sha256": "565af0ffab015bc487c1a136ec4e5cdef8c8e83c93fae458b10f701d2de8dc62",
+      "role": "baseline",
+      "run_id": "20260727T130022Z_csi_feedback_sionna_train__truncated_angular_delay_snr10_seed93001",
+      "semantic_recipe_sha256": "52f7187d60077329a229e70e5b9814114082e96be325ad8a9fbab619b324dd6e"
+    },
+    {
+      "pairing_id": "tdlA:10:93001",
+      "recipe_id": "matched_klt_snr10_seed93001",
+      "recipe_sha256": "96b826bd9aa6dc65ad44b4f15325f42bfbe7faf1d876b21c9417c64e38c78d51",
+      "role": "baseline",
+      "run_id": "20260727T130025Z_csi_feedback_sionna_train__matched_klt_snr10_seed93001",
+      "semantic_recipe_sha256": "c468dd0d3aec9cdaf996440ec4a0ca33e8cb1db1720b3c34dd3266073874ea5b"
+    },
+    {
+      "pairing_id": "tdlA:10:93001",
+      "recipe_id": "learned_codec_snr10_seed93001",
+      "recipe_sha256": "c05c4b7f13acaa0f7ac573f2685e585b6895f0550752cb7ad22216ba19e9728a",
+      "role": "candidate",
+      "run_id": "20260727T130027Z_csi_feedback_sionna_train__learned_codec_snr10_seed93001",
+      "semantic_recipe_sha256": "6ba062e5ebe9fc3c14d91d21926bcb60f515e7af5ea048d3388f092b9703fccd"
+    },
+    {
+      "pairing_id": "tdlA:10:93001",
+      "recipe_id": "perfect_csit_snr10_seed93001",
+      "recipe_sha256": "bc4f67b8bad808979b6a190b7e3b85e38c0b5ceb09cc48e4a30b561a626d83a1",
+      "role": "upper_bound",
+      "run_id": "20260727T130030Z_csi_feedback_sionna_train__perfect_csit_snr10_seed93001",
+      "semantic_recipe_sha256": "84eb77627cab00f30b84e4d641006c520d69444b9a038cfe6b3e7e8f7c044aaf"
+    },
+    {
+      "pairing_id": "tdlA:15:91001",
+      "recipe_id": "truncated_angular_delay_snr15_seed91001",
+      "recipe_sha256": "c4324f7fd82275f70fcd4a7db2bd4d7e01c8c47fdd8ee34fa5c4b79f55cee65c",
+      "role": "baseline",
+      "run_id": "20260727T130032Z_csi_feedback_sionna_train__truncated_angular_delay_snr15_seed91001",
+      "semantic_recipe_sha256": "5e0cdae543a179dfed6e70ded74420362c60875ab089fea5401e1413f794f5c0"
+    },
+    {
+      "pairing_id": "tdlA:15:91001",
+      "recipe_id": "matched_klt_snr15_seed91001",
+      "recipe_sha256": "620c5d361252e3fc0b2017006e120ede58f04d3d5a739d2565db9517dcadf84a",
+      "role": "baseline",
+      "run_id": "20260727T130035Z_csi_feedback_sionna_train__matched_klt_snr15_seed91001",
+      "semantic_recipe_sha256": "8a20c67fe85b2070c5bba232ab58b22e7e31f32b9d7b1ab2bb8e505989e40acd"
+    },
+    {
+      "pairing_id": "tdlA:15:91001",
+      "recipe_id": "learned_codec_snr15_seed91001",
+      "recipe_sha256": "1534f310f5c6546ddbce3984a49b5463530d12c48e5f0f460c87d0cbcb570626",
+      "role": "candidate",
+      "run_id": "20260727T130037Z_csi_feedback_sionna_train__learned_codec_snr15_seed91001",
+      "semantic_recipe_sha256": "07945b6d127ff641213a3194ab116c2adc54edb88743353d1f4ebd2655f68818"
+    },
+    {
+      "pairing_id": "tdlA:15:91001",
+      "recipe_id": "perfect_csit_snr15_seed91001",
+      "recipe_sha256": "d3cfbcd6f9eea3b7f7f96961daf92134aad42c807f278ce1ce20ead527b1abc4",
+      "role": "upper_bound",
+      "run_id": "20260727T130040Z_csi_feedback_sionna_train__perfect_csit_snr15_seed91001",
+      "semantic_recipe_sha256": "3e19d95dc221c13a0163a4ece16bf2d97516f021c2195cd14889b8a60568ff8d"
+    },
+    {
+      "pairing_id": "tdlA:15:92001",
+      "recipe_id": "truncated_angular_delay_snr15_seed92001",
+      "recipe_sha256": "50b940e5cface5c4072c44546917ab651161ade44d8c93ffee6871f956067cb6",
+      "role": "baseline",
+      "run_id": "20260727T130042Z_csi_feedback_sionna_train__truncated_angular_delay_snr15_seed92001",
+      "semantic_recipe_sha256": "b066ea50a8fceb0c1a93536f3ff5587791e67aae49ff583a5cf1bd0fd091deb6"
+    },
+    {
+      "pairing_id": "tdlA:15:92001",
+      "recipe_id": "matched_klt_snr15_seed92001",
+      "recipe_sha256": "1d10f847c4a38ed73f316ea34065a4c6174a429897ad092818d336143f11b426",
+      "role": "baseline",
+      "run_id": "20260727T130045Z_csi_feedback_sionna_train__matched_klt_snr15_seed92001",
+      "semantic_recipe_sha256": "5ed6acbb0dd884cfd0ae8d9607f342d1c105be425974dfe46c7106922a85103d"
+    },
+    {
+      "pairing_id": "tdlA:15:92001",
+      "recipe_id": "learned_codec_snr15_seed92001",
+      "recipe_sha256": "f7c2d597d73e819a3ffac2782b9f4952f067a2d3b38a38d6ac08b496677c9e01",
+      "role": "candidate",
+      "run_id": "20260727T130048Z_csi_feedback_sionna_train__learned_codec_snr15_seed92001",
+      "semantic_recipe_sha256": "eb903a46c03dac4780eeaf625ed0c0a3c4b8e47844f0e0270fa9976067d67407"
+    },
+    {
+      "pairing_id": "tdlA:15:92001",
+      "recipe_id": "perfect_csit_snr15_seed92001",
+      "recipe_sha256": "dea95a8f960c638364106d3d4a473a529073bb660aad531e2577c637b32e91e0",
+      "role": "upper_bound",
+      "run_id": "20260727T130050Z_csi_feedback_sionna_train__perfect_csit_snr15_seed92001",
+      "semantic_recipe_sha256": "570391d73143f5f7279439d9539d0348d16eec8dfe06b85263d37f7e9dbd24be"
+    },
+    {
+      "pairing_id": "tdlA:15:93001",
+      "recipe_id": "truncated_angular_delay_snr15_seed93001",
+      "recipe_sha256": "d92b777fea8f798c1e5b7a04e8047fd76c67add7fa1746f275f3ac274b42bf0f",
+      "role": "baseline",
+      "run_id": "20260727T130053Z_csi_feedback_sionna_train__truncated_angular_delay_snr15_seed93001",
+      "semantic_recipe_sha256": "99520111018dcb54294aa22ef2bbb40cb07999838b75442699882d5cb009c016"
+    },
+    {
+      "pairing_id": "tdlA:15:93001",
+      "recipe_id": "matched_klt_snr15_seed93001",
+      "recipe_sha256": "fe4b47e39d6821345365960ed4e9752f0e45f13b3e752f03c7329db7607c84db",
+      "role": "baseline",
+      "run_id": "20260727T130056Z_csi_feedback_sionna_train__matched_klt_snr15_seed93001",
+      "semantic_recipe_sha256": "1b09a3eb4b831ebd2e5feb64198f856807a9934a77becaba39a537b0414b1ba7"
+    },
+    {
+      "pairing_id": "tdlA:15:93001",
+      "recipe_id": "learned_codec_snr15_seed93001",
+      "recipe_sha256": "d6bb0be9ffb6419f22a18b5c7c03caa0bffff89ca19bf3fa7da7dd80963abe82",
+      "role": "candidate",
+      "run_id": "20260727T130059Z_csi_feedback_sionna_train__learned_codec_snr15_seed93001",
+      "semantic_recipe_sha256": "8a6dde62c7791e9b96937a9c3a3e6fa5059dde4ec8a8e6d4b1005e5608ec327c"
+    },
+    {
+      "pairing_id": "tdlA:15:93001",
+      "recipe_id": "perfect_csit_snr15_seed93001",
+      "recipe_sha256": "ffaf7795e872f88a51774a2c9ee6c1b1cbff9eaea6b6b636c9826bf527b8fcf0",
+      "role": "upper_bound",
+      "run_id": "20260727T130102Z_csi_feedback_sionna_train__perfect_csit_snr15_seed93001",
+      "semantic_recipe_sha256": "a8c82b7f25016656a0cd51741bf5bdedab6d93ba8da9746b5219df36f014ebcf"
+    },
+    {
+      "pairing_id": "tdlA:20:91001",
+      "recipe_id": "truncated_angular_delay_snr20_seed91001",
+      "recipe_sha256": "fae03f60927a7432a87cfd099dd60ee8d2e525739ce5ea1346a7f77d2af33fec",
+      "role": "baseline",
+      "run_id": "20260727T130104Z_csi_feedback_sionna_train__truncated_angular_delay_snr20_seed91001",
+      "semantic_recipe_sha256": "a8aaa09ca35689bb37a2bad20fcd89fa98b4f44c83819d18b87ffc6d7e3653ef"
+    },
+    {
+      "pairing_id": "tdlA:20:91001",
+      "recipe_id": "matched_klt_snr20_seed91001",
+      "recipe_sha256": "b43f43fcc368eba541341563e07e4d64f66644337a440409b4569cf40888c522",
+      "role": "baseline",
+      "run_id": "20260727T130107Z_csi_feedback_sionna_train__matched_klt_snr20_seed91001",
+      "semantic_recipe_sha256": "b9c85f1544a5dcff444e424b921d9dd7beaf5329e2a6eab0460a451e0944e741"
+    },
+    {
+      "pairing_id": "tdlA:20:91001",
+      "recipe_id": "learned_codec_snr20_seed91001",
+      "recipe_sha256": "47939f50bf525dff92ccfe496dc15726f8d4b851c97b1f90aae6ed45505e52d2",
+      "role": "candidate",
+      "run_id": "20260727T130110Z_csi_feedback_sionna_train__learned_codec_snr20_seed91001",
+      "semantic_recipe_sha256": "0a831cfd1a44badc4f063f344b7d3199e3684522613d4da617643b43e24adb1c"
+    },
+    {
+      "pairing_id": "tdlA:20:91001",
+      "recipe_id": "perfect_csit_snr20_seed91001",
+      "recipe_sha256": "cd51a3463be819823af674db738fc17c24e308cfc091e57f1bae77cf48256748",
+      "role": "upper_bound",
+      "run_id": "20260727T130113Z_csi_feedback_sionna_train__perfect_csit_snr20_seed91001",
+      "semantic_recipe_sha256": "0343ca093efd038da340027f4e73bd200d95ce0b5cbaaa729cb7901fb599fa0f"
+    },
+    {
+      "pairing_id": "tdlA:20:92001",
+      "recipe_id": "truncated_angular_delay_snr20_seed92001",
+      "recipe_sha256": "aec0d0dc9efa3e8346fff2187e9f9efb4d38504eb3c3eb8ab0de5c0f0f9d1803",
+      "role": "baseline",
+      "run_id": "20260727T130116Z_csi_feedback_sionna_train__truncated_angular_delay_snr20_seed92001",
+      "semantic_recipe_sha256": "28dc4a16c2e3aec5241d1d3e9759375548b3a5aad58b047bcccecc827d0e7351"
+    },
+    {
+      "pairing_id": "tdlA:20:92001",
+      "recipe_id": "matched_klt_snr20_seed92001",
+      "recipe_sha256": "4a7d257e9cf39ce498ff1b9ce95e5250504a1d802d72fcadd8affc4dcee3ae68",
+      "role": "baseline",
+      "run_id": "20260727T130119Z_csi_feedback_sionna_train__matched_klt_snr20_seed92001",
+      "semantic_recipe_sha256": "af44236c8bedd3a2812fde54e1f214c3a0a58d24b840c2e4cd482f4b68220cff"
+    },
+    {
+      "pairing_id": "tdlA:20:92001",
+      "recipe_id": "learned_codec_snr20_seed92001",
+      "recipe_sha256": "a853fc2d615be1c47c8964e5d6ef199e12d6022ddf9a4849d8f605f6469be45a",
+      "role": "candidate",
+      "run_id": "20260727T130122Z_csi_feedback_sionna_train__learned_codec_snr20_seed92001",
+      "semantic_recipe_sha256": "17e065d435eec2427d68698fdf259f75f11c340a4dfc4dc9c5da3a8d2e31775d"
+    },
+    {
+      "pairing_id": "tdlA:20:92001",
+      "recipe_id": "perfect_csit_snr20_seed92001",
+      "recipe_sha256": "ba993f268573603e40de9154ed2f5dcc45e335fd0982fa6355de6924c0b89493",
+      "role": "upper_bound",
+      "run_id": "20260727T130126Z_csi_feedback_sionna_train__perfect_csit_snr20_seed92001",
+      "semantic_recipe_sha256": "cdb694ac7f432e6e1b0428d4cca0baca51f051516e784dba032b7aed8975e28c"
+    },
+    {
+      "pairing_id": "tdlA:20:93001",
+      "recipe_id": "truncated_angular_delay_snr20_seed93001",
+      "recipe_sha256": "0f56986461b7bd35108a20650da2a2a47e054d06c5321daa08291fc49fd57bae",
+      "role": "baseline",
+      "run_id": "20260727T130129Z_csi_feedback_sionna_train__truncated_angular_delay_snr20_seed93001",
+      "semantic_recipe_sha256": "7cd02b7cb3a35954416d19964d59121b37fd8b59df6a04c500cba0356beba31d"
+    },
+    {
+      "pairing_id": "tdlA:20:93001",
+      "recipe_id": "matched_klt_snr20_seed93001",
+      "recipe_sha256": "43e0ee4dc524add44f9302cef7771b955cd522c48a931b2376b7f651a0161392",
+      "role": "baseline",
+      "run_id": "20260727T130132Z_csi_feedback_sionna_train__matched_klt_snr20_seed93001",
+      "semantic_recipe_sha256": "91ac35bd839c8463103e0f0874231d203f4f31971b8ea66610ec01fdd18b0f55"
+    },
+    {
+      "pairing_id": "tdlA:20:93001",
+      "recipe_id": "learned_codec_snr20_seed93001",
+      "recipe_sha256": "d3e646b5c5377ef2610e28e1c9667d0d91996b96472bd779c03211279cb2ec24",
+      "role": "candidate",
+      "run_id": "20260727T130135Z_csi_feedback_sionna_train__learned_codec_snr20_seed93001",
+      "semantic_recipe_sha256": "19dabe324f136a0d40d7e4264c35baff57074d024e1586e16922f589f3de51ec"
+    },
+    {
+      "pairing_id": "tdlA:20:93001",
+      "recipe_id": "perfect_csit_snr20_seed93001",
+      "recipe_sha256": "218f8ac0f65a9bb20c13620c501652881f83d5b46f7e3ac18e1b1c20bf3b8ac8",
+      "role": "upper_bound",
+      "run_id": "20260727T130138Z_csi_feedback_sionna_train__perfect_csit_snr20_seed93001",
+      "semantic_recipe_sha256": "87738fc5a8931d6a580ef9b4003f66cdefa956ef87d8124be06897488e8f2f74"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "learned-csi-compression-feedback",
+  "source": {
+    "benchmark_id": "channel_estimation.learned_csi_feedback_post_training_v1",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "1.0.0",
+    "completed_at_utc": "2026-07-27T13:01:41.974Z",
+    "created_at_utc": "2026-07-27T12:59:21.472Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "f9a64bf2713e9f1b3d23968fb53b8e1cde2118f54fab5731625cbaab385e0d6d",
+        "size_bytes": 992197
+      },
+      "recipes.csv": {
+        "sha256": "4a2f369a6b325ceb6e7bec56c72cc4a1384ff2eeddf8d0627cf0f79cf3c10e23",
+        "size_bytes": 18434
+      },
+      "result.json": {
+        "sha256": "9ebeeabf628ff14e19d72be5513c77cdd806fe1f094074051b913c85c671dbfb",
+        "size_bytes": 1636459
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "c4180b18dfb53f7818f0e5541d93feaab4a97ad5f60644600625ed902e94af26",
+        "size_bytes": 2086
+      }
+    },
+    "result_id": "20260727T125921Z_channel_estimation.learned_csi_feedback_post_training_v1",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "downlink SNR",
+    "channel_realizations_per_run": 512,
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out channel seeds",
+    "paired_seeds": [
+      91001,
+      92001,
+      93001
+    ],
+    "sample_count_per_method_and_snr": 3,
+    "statistical_unit": "paired held-out channel seed",
+    "warning": "Three paired channel seeds support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": {
+    "artifact_references": [
+      {
+        "id": "decoder",
+        "kind": "component",
+        "path": "training_evidence/entries/000-learned_codec/artifact/artifacts/csi_feedback_decoder.onnx",
+        "sha256": "292f0eefafa9eb0a6deed3b7f9867b2a6380ce91e2db92ec5a450aa5f862d216",
+        "size_bytes": 986041
+      },
+      {
+        "id": "encoder",
+        "kind": "component",
+        "path": "training_evidence/entries/000-learned_codec/artifact/artifacts/csi_feedback_encoder.onnx",
+        "sha256": "c186ac4cbb9bb4d02ae1453f7befff78497b86053f37ae275e62aa0a7fa2e3dc",
+        "size_bytes": 937427
+      },
+      {
+        "id": "csi_feedback_sionna_train.9f8b7bba222e",
+        "kind": "contract",
+        "path": "training_evidence/entries/000-learned_codec/artifact/training_contract.yaml",
+        "sha256": "096af6f76b7c12db1f9117310562ed13f755ed3d20e28643472144a1114f2e4c",
+        "size_bytes": 9140
+      },
+      {
+        "id": "training_data",
+        "kind": "data_contract",
+        "path": "training_evidence/entries/000-learned_codec/artifact/data_contract.yaml",
+        "sha256": "13c56e43cfa3de52b87adfa1af1ba66ef16eafb3e6aa55a11a258b42f164b679",
+        "size_bytes": 42980
+      }
+    ],
+    "evaluation_metrics": {
+      "path": "training_evidence/entries/000-learned_codec/evidence/evaluation_metrics.json",
+      "sha256": "6249557bdd0753315fd85509d4c84897590cef551a138d9c304664aa5f2ac8fb",
+      "size_bytes": 1057
+    },
+    "series": "learned_codec",
+    "trained_artifact_manifest": {
+      "path": "training_evidence/entries/000-learned_codec/artifact/trained_artifact_manifest.yaml",
+      "sha256": "de493ffdef55dd13f7845567c81f1e3b4dc65f92f25cf3d51d626954480969ca",
+      "size_bytes": 5072
+    },
+    "training_history": {
+      "path": "training_evidence/entries/000-learned_codec/evidence/training_history.json",
+      "sha256": "d5bf9ab6d9d542068d26321335c1592378b906484f688199e17bb66c497dc85c",
+      "size_bytes": 275452
+    }
+  }
+}

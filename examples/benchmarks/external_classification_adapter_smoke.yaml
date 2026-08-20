@@ -1,0 +1,30 @@
+schema_version: 1
+id: external_classification_adapter_smoke
+version: "1"
+name: External Classification Adapter Smoke
+description: Smoke benchmark proving an external source and metric adapter can run without editing Noema core.
+dataset:
+  id: example_external_classification
+  modality: generic
+task:
+  id: classification
+  kind: task_success
+  modality: generic
+metrics:
+  - id: task.accuracy
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+  - id: external.classification.accuracy
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+recipes:
+  - id: external_adapter_example
+    label: External adapter example
+    role: candidate
+    path: ../recipes/external_classification_adapter.yaml
+metadata:
+  benchmark_tier: smoke
+  expected_runtime: short
+  adapter_example: true

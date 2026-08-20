@@ -1,0 +1,77 @@
+schema_version: 1
+id: deepjscc_image_reconstruction.reference_cnn_awgn
+name: End-to-end DeepJSCC image reconstruction over AWGN
+kind: noema_demo_training_template
+exporter: deepjscc-image
+framework: torch
+boundary:
+  noema_role:
+    - select typed trainable sender and receiver slots in a communication recipe
+    - export frozen differentiable power and AWGN channel semantics
+    - discover and atomically apply the returned paired artifact
+  external_training_role:
+    - choose or modify the endpoint model architecture
+    - optimize the sender and receiver jointly through the frozen channel path
+    - return portable hash-pinned ONNX components and optional provenance
+data:
+  mode: file_backed_live_differentiable
+  partition_source: explicit_hash_pinned_data_contract
+  training_splits:
+    - train
+    - validation
+  held_out_test_owner: noema_ordinary_recipe_or_benchmark
+  test_images_exposed_to_trainer: false
+objective:
+  id: image.mse
+  direction: minimize
+  formula: mean((reconstruction - source_image)^2)
+model:
+  class: ReferenceDeepJSCCModel
+  architecture: compact_residual_cnn_v2
+  default_symbol_channels: 32
+  input: normalized_rgb_image_nchw
+  channel_representation: complex_symbols_nchw
+  output: normalized_rgb_reconstruction_nchw
+  downsampling_factor: 8
+  channel_uses_per_source_pixel: 0.5
+frozen_differentiable_path:
+  - channel.symbol_power_normalize
+  - wireless.channel.awgn
+channel:
+  supported:
+    - awgn
+  unsupported:
+    - flat_rayleigh
+    - ofdm_tdl
+  note: The initial closed demonstration intentionally uses a single PyTorch autograd graph.
+returned_artifact:
+  manifest_schema: noema.trained_block_artifact.v2
+  format: onnx
+  architecture: external
+  runtime: onnxruntime
+  integrity: required_sha256
+  contract: training_contract.yaml
+  components:
+    - encoder
+    - decoder
+runtime:
+  binding_group: deepjscc_sender_receiver
+  application: all_group_bindings
+  operations:
+    - model.deepjscc_external_encode
+    - model.deepjscc_external_decode
+evaluation:
+  selection_metric: validation_image_mse
+  benchmark_metrics:
+    - quality.psnr_db
+    - channel.channel_use_count
+    - channel.uses_per_pixel
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison:
+    - jpeg_crc_qpsk_separation
+    - learned_deepjscc
+  sweep: channel.snr_db
+  pairing: common held-out Kodak crops and channel-noise seeds
+  resource_budget: 0.5 complex channel uses per source pixel

@@ -1,0 +1,261 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: resource_water_filling_baseline
+description: Seeded random transport blocks over the canonical perfect-CSIT Sionna TDL OFDM path with theoretical water-filling allocation and allocation-aware bit loading.
+suite:
+  id: resource_allocation
+  name: Resource Allocation
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: seeded_bit_transport_water_filling_oracle
+  codec_profile: bit_source
+  codec_label: Seeded random transport blocks
+  codec_output_form: bits
+  codec_format: canonical_uint8_bits
+  semantic_representation: none
+  transport_representation: uncoded_payload_bits
+  channel_enabled: true
+  channel_mode: ofdm_tdl
+  wireless_backend: sionna
+  wireless_preset: 3GPP TDL-A OFDM
+  modulation: allocation_aware_bpsk_qpsk_qam16_qam64
+  channel_code: identity
+  power_control_mode: fixed_noise_fixed_average_tx_budget
+  power_allocator_policy: water_filling
+  csi_mode: perfect_instantaneous_transmitter_and_receiver
+  allocation_granularity: per_subcarrier_per_ofdm_symbol_state
+  noise_variance: 0.2
+  average_tx_power_budget: 1.0
+  matrix:
+    dimensions:
+      resource.average_transmit_power_budget: [0.5, 1.0, 2.0]
+    step_params:
+      channel_state:
+        average_power_budget:
+          matrix: resource.average_transmit_power_budget
+      tx_power:
+        target_power:
+          matrix: resource.average_transmit_power_budget
+  transport_block_size_bits: 1024
+  transport_block_count: 256
+  source_bit_count: 262144
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.modulator_input.bit_count
+  channel_bit_contract: np.uint8 unpacked bits, one bit per element, values 0 or 1
+  seed: 23
+  ui_configured: false
+  research:
+    dataset:
+      id: synthetic_random_bits_sionna_tdl
+      modality: wireless
+      version: synthetic-random-bits-sionna-tdl-v1
+      split: fixed_seed
+    task:
+      id: resource_allocation
+      kind: policy_optimization
+      modality: wireless
+      target: maximize_parallel_channel_shannon_spectral_efficiency_under_fixed_sum_power
+      metrics:
+        - channel.achieved_payload_goodput_bits_per_resource_element
+        - resource.theoretical_shannon_spectral_efficiency_bps_hz
+        - resource.water_filling_relative_optimality_gap
+        - channel.payload.ber
+        - channel.payload.bler
+        - resource.theoretical_outage_probability
+        - channel.payload_energy_efficiency_bits_per_normalized_energy
+        - resource.power_constraint.max_abs_error
+        - resource.power_constraint.max_negative_violation
+    metrics:
+      - resource.theoretical_shannon_sum_bits_per_ofdm_symbol
+      - resource.theoretical_shannon_spectral_efficiency_bps_hz
+      - resource.water_filling_oracle_spectral_efficiency_bps_hz
+      - resource.water_filling_optimality_gap_bps_hz
+      - resource.water_filling_relative_optimality_gap
+      - resource.water_filling_power_normalized_rmse
+      - resource.water_filling_kkt_normalized_residual
+      - resource.theoretical_p05_state_spectral_efficiency_bps_hz
+      - resource.theoretical_outage_probability
+      - resource.power_constraint.max_abs_error
+      - resource.power_constraint.max_relative_error
+      - resource.power_constraint.max_negative_violation
+      - resource.active_resource_element_fraction
+      - resource.allocation_power_coefficient_of_variation
+      - resource.allocated_power_weighted_channel_gain_lift
+      - channel.offered_payload_bits_per_resource_element
+      - channel.achieved_payload_goodput_bits_per_resource_element
+      - channel.payload_energy_efficiency_bits_per_normalized_energy
+      - channel.tx_energy_per_delivered_payload_bit
+      - channel.payload_delivery_block_error_rate
+      - channel.coded.ber
+      - channel.coded.bler
+      - channel.payload.ber
+      - channel.payload.bler
+steps:
+  - id: data
+    op: source.random_bits
+    params:
+      bit_count: 1024
+      batch_size: 256
+      seed: 23
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: data.bits
+    params:
+      label: payload_input
+      role: payload
+
+  - id: channel_encoder
+    op: channel.identity_encoder
+    inputs:
+      bits: payload_bit_boundary.bits
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: modulator_input
+      role: modulator_input
+
+  - id: modulator
+    op: modulation.digital_modulate
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      modulation: qpsk
+
+  - id: channel_state
+    op: wireless.ofdm_channel_state
+    inputs:
+      symbols: modulator.symbols
+    params:
+      tdl_model: A
+      ofdm_fft_size: 32
+      num_ofdm_symbols: 4
+      subcarrier_spacing_khz: 60.0
+      carrier_frequency_ghz: 3.5
+      delay_spread_ns: 300.0
+      mobility_kmh: 30.0
+      noise_variance: 0.2
+      average_power_budget: 1.0
+      normalize_channel: true
+      capacity_multiplier: 16
+      seed: 23001
+
+  - id: tx_power
+    op: model.symbol_power_allocator
+    inputs:
+      symbols: channel_state.symbols
+      channel_state: channel_state.state
+      bits: tx_bit_boundary.bits
+    params:
+      policy: water_filling
+      granularity: per_subcarrier
+      budget_mode: fixed_average
+      target_power: 1.0
+      subcarrier_count: 32
+      transport_mode: allocation_aware_bit_loading
+      bit_loading_bpsk_min_snr_db: 6.0
+      bit_loading_qpsk_min_snr_db: 10.0
+      bit_loading_qam16_min_snr_db: 17.0
+      bit_loading_qam64_min_snr_db: 23.0
+      bit_loading_max_bits_per_symbol: 6
+      label: tx_power
+
+  - id: wireless_channel
+    op: wireless.channel
+    inputs:
+      symbols: tx_power.symbols
+      channel_state: channel_state.state
+    params:
+      channel: ofdm_tdl
+      noise_mode: fixed_variance
+      noise_variance: 0.2
+      wireless_backend: sionna
+      channel_state_mode: explicit
+      receiver_processing: matched
+      ofdm_fft_size: 32
+      num_ofdm_symbols: 4
+      subcarrier_spacing_khz: 60.0
+      carrier_frequency_ghz: 3.5
+      mobility_kmh: 30.0
+      seed: 23002
+
+  - id: demodulator
+    op: demodulation.digital_demodulate
+    inputs:
+      rx_symbols: wireless_channel.rx_symbols
+      allocation: tx_power.allocation
+    params:
+      modulation: auto
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: demodulator.bits
+    params:
+      label: demodulator_output
+      role: demodulator_output
+
+  - id: coded_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+
+  - id: coded_bler
+    op: metrics.block_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+      block_size: 1024
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: channel_io
+
+  - id: channel_decoder
+    op: channel.identity_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits
+
+  - id: payload_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: payload_bit_boundary.bits
+      candidate: channel_decoder.bits
+    params:
+      label: payload
+
+  - id: payload_bler
+    op: metrics.block_error_rate
+    inputs:
+      reference: payload_bit_boundary.bits
+      candidate: channel_decoder.bits
+    params:
+      label: payload
+      block_size: 1024
+
+  - id: allocation_evaluation
+    op: metrics.ofdm_power_allocation
+    inputs:
+      state: channel_state.state
+      allocation: tx_power.allocation
+      reference: payload_bit_boundary.bits
+      candidate: channel_decoder.bits
+      symbols: tx_power.symbols
+    params:
+      transport_block_size_bits: 1024
+      outage_target_spectral_efficiency_bps_hz: 2.0

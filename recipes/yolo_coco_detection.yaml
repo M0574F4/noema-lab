@@ -1,0 +1,61 @@
+schema_version: 1
+execution_profile:
+  id: task_inference
+  version: 1
+name: object_detection
+description: COCO128 object detection with a pretrained Ultralytics YOLO receiver and IoU metrics.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  benchmark_id: yolo_coco128_detection
+  benchmark_version: v1
+  channel_enabled: false
+  channel_mode: no_channel_full_image_detection_baseline
+  codec_format: pretrained_yolo_full_image
+  codec_label: Ultralytics YOLO object detector
+  codec_output_form: detections
+  codec_profile: yolo_detection
+  codec_timing:
+    enabled: true
+    runner: pytorch
+    runtime_adapter_available: true
+    warmup_runs: 0
+    timed_runs: 1
+  measure_codec_timing: true
+  research:
+    task:
+      id: object_detection
+  research_stage: detection_segmentation
+  semantic_representation: detections
+  transport_representation: none_no_channel_baseline
+  ui_configured: true
+  seed: 23
+steps:
+  - id: data
+    op: source.coco128_detection
+    inputs: {}
+    params:
+      dataset_dir: .noema/datasets/coco128
+      split: train2017
+      limit: 8
+      image_size: 320
+      download: true
+  - id: receiver
+    op: foundation.yolo_detect
+    inputs:
+      images: data.images
+    params:
+      model_id: yolo11n.pt
+      device: cpu
+      confidence: 0.25
+      iou: 0.7
+  - id: evaluation
+    op: metrics.detection
+    inputs:
+      reference: data.detections
+      candidate: receiver.detections
+    params:
+      iou_threshold: 0.5

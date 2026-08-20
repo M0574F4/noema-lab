@@ -1,0 +1,193 @@
+schema_version: 1
+id: resource_allocation.power_allocation_v1
+version: "0.2.0"
+name: Seeded-bit OFDM Subcarrier Power Allocation
+description: Paired equal-power and theoretical water-filling runs on seeded random transport blocks over one shared Sionna TDL OFDM protocol, swept over a fixed-noise transmit-power budget.
+suite:
+  id: resource_allocation
+  name: Resource Allocation
+  status: experimental
+  version: v1-draft
+dataset:
+  id: synthetic_random_bits_sionna_tdl
+  modality: wireless
+  version: synthetic-random-bits-sionna-tdl-v1
+  split: fixed_seed
+task:
+  id: resource_allocation
+  kind: policy_optimization
+  modality: wireless
+metrics:
+  - id: resource.average_transmit_power_budget
+    family: system
+    unit: normalized_power
+    direction: neutral
+  - id: channel.tx_effective_snr_db
+    family: channel
+    unit: dB
+    direction: neutral
+  - id: resource.theoretical_shannon_spectral_efficiency_bps_hz
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+  - id: resource.water_filling_oracle_spectral_efficiency_bps_hz
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+  - id: resource.water_filling_relative_optimality_gap
+    family: system
+    unit: ratio
+    direction: lower_is_better
+  - id: resource.water_filling_power_normalized_rmse
+    family: system
+    unit: ratio
+    direction: lower_is_better
+  - id: resource.water_filling_kkt_normalized_residual
+    family: system
+    unit: ratio
+    direction: lower_is_better
+  - id: resource.theoretical_p05_state_spectral_efficiency_bps_hz
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+  - id: resource.theoretical_outage_probability
+    family: system
+    unit: ratio
+    direction: lower_is_better
+  - id: resource.power_constraint.max_abs_error
+    family: system
+    unit: normalized_power
+    direction: lower_is_better
+  - id: resource.power_constraint.max_negative_violation
+    family: system
+    unit: normalized_power
+    direction: lower_is_better
+  - id: channel.offered_payload_bits_per_resource_element
+    family: channel
+    unit: bit/resource-element
+    direction: neutral
+  - id: channel.achieved_payload_goodput_bits_per_resource_element
+    family: channel
+    unit: bit/resource-element
+    direction: higher_is_better
+  - id: channel.payload.ber
+    family: transport
+    unit: ratio
+    direction: lower_is_better
+  - id: channel.payload.bler
+    family: transport
+    unit: ratio
+    direction: lower_is_better
+  - id: channel.payload_delivery_block_error_rate
+    family: transport
+    unit: ratio
+    direction: lower_is_better
+  - id: channel.payload_energy_efficiency_bits_per_normalized_energy
+    family: channel
+    unit: bit/normalized_energy
+    direction: higher_is_better
+  - id: task.score
+    family: task
+    unit: bit/resource-element
+    direction: higher_is_better
+baselines:
+  - equal_power
+  - theoretical_water_filling
+recipes:
+  - id: equal_power_p05
+    label: Equal power (P=0.5)
+    role: baseline
+    path: ../../recipes/resource_equal_power_baseline.yaml
+    params:
+      method_id: equal_power
+      matrix_selection:
+        resource.average_transmit_power_budget: 0.5
+      step_params:
+        channel_state:
+          average_power_budget: 0.5
+        tx_power:
+          target_power: 0.5
+  - id: water_filling_p05
+    label: Water filling (P=0.5)
+    role: oracle
+    path: ../../recipes/resource_water_filling_baseline.yaml
+    params:
+      method_id: theoretical_water_filling
+      matrix_selection:
+        resource.average_transmit_power_budget: 0.5
+      step_params:
+        channel_state:
+          average_power_budget: 0.5
+        tx_power:
+          target_power: 0.5
+  - id: equal_power_p10
+    label: Equal power (P=1.0)
+    role: baseline
+    path: ../../recipes/resource_equal_power_baseline.yaml
+    params:
+      method_id: equal_power
+      matrix_selection:
+        resource.average_transmit_power_budget: 1.0
+      step_params:
+        channel_state:
+          average_power_budget: 1.0
+        tx_power:
+          target_power: 1.0
+  - id: water_filling_p10
+    label: Water filling (P=1.0)
+    role: oracle
+    path: ../../recipes/resource_water_filling_baseline.yaml
+    params:
+      method_id: theoretical_water_filling
+      matrix_selection:
+        resource.average_transmit_power_budget: 1.0
+      step_params:
+        channel_state:
+          average_power_budget: 1.0
+        tx_power:
+          target_power: 1.0
+  - id: equal_power_p20
+    label: Equal power (P=2.0)
+    role: baseline
+    path: ../../recipes/resource_equal_power_baseline.yaml
+    params:
+      method_id: equal_power
+      matrix_selection:
+        resource.average_transmit_power_budget: 2.0
+      step_params:
+        channel_state:
+          average_power_budget: 2.0
+        tx_power:
+          target_power: 2.0
+  - id: water_filling_p20
+    label: Water filling (P=2.0)
+    role: oracle
+    path: ../../recipes/resource_water_filling_baseline.yaml
+    params:
+      method_id: theoretical_water_filling
+      matrix_selection:
+        resource.average_transmit_power_budget: 2.0
+      step_params:
+        channel_state:
+          average_power_budget: 2.0
+        tx_power:
+          target_power: 2.0
+metadata:
+  benchmark_tier: experimental
+  protocol_revision: seeded-random-transport-blocks-v2
+  fixed_noise_variance: 0.2
+  transport_block_size_bits: 1024
+  transport_block_count: 256
+  paired_bit_seed: 23
+  paired_channel_seed: 23001
+  paired_noise_seed: 23002
+  outage_target_spectral_efficiency_bps_hz: 2.0
+  default_plot:
+    plot: graceful-degradation
+    x: resource.average_transmit_power_budget
+    y: channel.achieved_payload_goodput_bits_per_resource_element
+  literature_basis:
+    - https://doi.org/10.1109/18.641562
+    - https://web.stanford.edu/class/ee359/pdfs/variable_rate_variable_power.pdf
+    - https://web.stanford.edu/~dntse/Chapters_PDF/Fundamentals_Wireless_Communication_chapter5.pdf
+  notes: Equal power and water filling receive identical seeded bits, channel gains, noise samples, fixed noise variance, and per-run sum-power budgets. The primary practical result is error-free 1024-bit-block goodput. Shannon spectral efficiency and the exact oracle gap establish the Gaussian-input water-filling objective; BER, BLER, outage, and RF-only normalized energy efficiency describe the finite-MCS implementation. Classical water filling is not claimed as the exact finite-QAM mutual-information optimum.

@@ -1,0 +1,59 @@
+schema_version: 1
+id: diffusion_flickr8k_generation_v1
+version: "1"
+name: Flickr8k Diffusion Generative Receiver
+description: Real Flickr8k caption-to-image generative receiver benchmark using SemanticState payload bits, Segmind Tiny-SD, and CLIP alignment metrics.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+dataset:
+  id: flickr8k
+  modality: multimodal
+  version: flickr8k-validation
+task:
+  id: image_generation
+  kind: generative_reconstruction
+  modality: multimodal
+channel: disabled
+metrics:
+  - id: generation.text_image_clip.cosine_mean
+    family: generation
+    unit: cosine
+    direction: higher_is_better
+  - id: generation.image_image_clip.cosine_mean
+    family: generation
+    unit: cosine
+    direction: higher_is_better
+  - id: channel.payload_bit_count
+    family: channel
+    unit: bit
+    direction: lower_is_better
+  - id: channel.transmitted_bit_count
+    family: channel
+    unit: bit
+    direction: lower_is_better
+  - id: timing.step.wall_time_s
+    family: timing
+    unit: s
+    direction: lower_is_better
+baselines:
+  - diffusion_flickr8k_generation
+recipes:
+  - id: diffusion_flickr8k_generation
+    label: Flickr8k diffusion receiver
+    role: baseline
+    path: recipes/diffusion_flickr8k_generation.yaml
+metadata:
+  benchmark_tier: experimental
+  benchmark_stage: diffusion_generative_receiver
+  expected_runtime: medium
+  optional_dependencies:
+    - foundation
+    - retrieval-data
+  notes:
+    - This pack uses the trained segmind/tiny-sd Diffusers text-to-image model, its 512px local-quality preset, and real Flickr8k image-caption pairs.
+    - The receiver stores both the raw caption and the exact Diffusers prompt so prompt-conditioning issues can be audited from run artifacts.
+    - Swap the quality preset to the tiny plumbing pipeline only for a fast wiring smoke test; that tiny test pipeline is not research-quality.
+    - The disabled channel is still represented by canonical uint8 bit-boundary blocks so rate accounting remains comparable with communication recipes.

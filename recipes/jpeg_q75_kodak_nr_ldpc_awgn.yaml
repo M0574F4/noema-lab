@@ -1,0 +1,214 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: image_protected_digital_nr_ldpc_link
+description: Kodak image reconstruction with JPEG and a Sionna NR transport-block coder configured against TS 38.212 over an abstract QPSK/AWGN link; this is not a full NR MCS, resource-grid, or PUSCH waveform implementation.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: experimental
+  version: v1
+metadata:
+  research_stage: publication_candidate_protected_digital
+  codec_profile: jpeg
+  codec_label: JPEG + packet CRC + Sionna NR transport-block coding + abstract QPSK/AWGN
+  codec_quality_source: steps.sender.params.quality
+  codec_output_form: bits
+  codec_format: "*.jpg"
+  semantic_representation: bits
+  channel_enabled: true
+  channel_mode: awgn
+  wireless_backend: numpy
+  protected_digital_baseline: sionna_nr_transport_block_coder_qpsk_awgn_abstraction
+  physical_link_claim_scope: transport_block_coding_plus_flat_qpsk_awgn
+  deliberately_not_modeled: mcs_table_or_index,prb_allocation,nr_resource_grid,layer_mapping,dmrs,control_channels,nr_waveform
+  packet_protocol: noema.source_item_crc32.v4
+  channel_code: 3gpp_nr_ldpc
+  channel_code_standard: 3GPP TS 38.212 V18.8.0 Release 18
+  channel_code_backend: sionna.phy.nr.TBEncoder/TBDecoder
+  channel_type_parameter_scope: Sionna transport-block scrambling/configuration selector only; it does not instantiate a PUSCH resource grid
+  target_code_rate: 0.5
+  transport_block_size_bits: 16000
+  nr_decoder_bp_iterations: 20
+  modulation: qpsk
+  bits_per_symbol: 2
+  csi_mode: known_awgn_gain_and_noise_variance
+  pilot_symbol_count: 0
+  physical_header_symbol_count: 0
+  on_tb_crc_failure: zero_fill
+  on_packet_decode_failure: gray_image
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.tx.bit_count
+  resource_accounting_profile: noema.communication_resources.v1
+  matrix:
+    dimensions:
+      channel.snr_db: [-4, -2, 0, 2, 4, 6, 8, 10, 12]
+    step_params:
+      wireless_channel:
+        snr_db:
+          matrix: channel.snr_db
+  measure_codec_timing: true
+  codec_timing:
+    enabled: true
+    runner: pillow
+    warmup_runs: 0
+    timed_runs: 1
+steps:
+  - id: data
+    op: source.image_dataset
+    params:
+      dataset: kodak
+      dataset_dir: .noema/datasets/kodak
+      image_ids: kodim01,kodim02,kodim03,kodim04,kodim05,kodim06,kodim07,kodim08,kodim09,kodim10,kodim11,kodim12,kodim13,kodim14,kodim15,kodim16,kodim17,kodim18,kodim19,kodim20,kodim21,kodim22,kodim23,kodim24
+      crop_size: 0
+
+  - id: sender
+    op: model.jpeg_encode
+    inputs:
+      images: data.images
+    params:
+      quality: 75
+      subsampling: "420"
+      optimize: false
+      progressive: false
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: sender.bits
+    params:
+      label: payload
+      role: payload
+
+  - id: packetizer
+    op: channel.packetize_crc32
+    inputs:
+      bits: payload_bit_boundary.bits
+    params:
+      packet_payload_bits: 4096
+
+  - id: channel_encoder
+    op: channel.nr_ldpc_encoder
+    inputs:
+      bits: packetizer.bits
+    params:
+      target_coderate: 0.5
+      transport_block_size_bits: 16000
+      num_bits_per_symbol: 2
+      num_layers: 1
+      n_rnti: 1
+      n_id: 1
+      channel_type: PUSCH
+      codeword_index: 0
+      num_bp_iter: 20
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: tx
+      role: protected_link_input
+
+  - id: modulator
+    op: modulation.digital_modulate
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      modulation: qpsk
+
+  - id: tx_power
+    op: channel.symbol_power_normalize
+    inputs:
+      symbols: modulator.symbols
+    params:
+      target_power: 1.0
+      normalization_scope: source_item
+      label: publication_tx
+
+  - id: resource_accounting
+    op: channel.communication_resource_accounting
+    inputs:
+      payload_bits: payload_bit_boundary.bits
+      framed_bits: packetizer.bits
+      coded_bits: channel_encoder.coded_bits
+      symbols: tx_power.symbols
+    params:
+      pilot_symbol_count: 0
+      physical_header_symbol_count: 0
+
+  - id: wireless_channel
+    op: wireless.channel
+    inputs:
+      symbols: tx_power.symbols
+    params:
+      channel: awgn
+      snr_db: -4
+      wireless_backend: numpy
+      receiver_processing: matched
+
+  - id: demodulator
+    op: demodulation.digital_demodulate
+    inputs:
+      rx_symbols: wireless_channel.rx_symbols
+    params:
+      modulation: auto
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: demodulator.bits
+    params:
+      label: rx
+      role: protected_link_output
+
+  - id: coded_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: protected_link_io
+
+  - id: channel_decoder
+    op: channel.nr_ldpc_decoder
+    inputs:
+      llr: demodulator.llr
+    params:
+      on_tb_crc_failure: zero_fill
+
+  - id: crc_check
+    op: channel.crc32_check
+    inputs:
+      bits: channel_decoder.bits
+    params:
+      on_decode_failure: gray_image
+
+  - id: payload_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: payload_bit_boundary.bits
+      candidate: crc_check.bits
+    params:
+      label: payload
+
+  - id: receiver
+    op: model.jpeg_decode
+    inputs:
+      bits: crc_check.bits
+    params:
+      on_error: gray_image
+
+  - id: evaluation
+    op: metrics.image_reconstruction
+    inputs:
+      reference: data.images
+      reconstruction: receiver.images

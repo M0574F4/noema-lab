@@ -1,0 +1,123 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: vqa_goal_oriented_smoke
+description: Goal-oriented VQA smoke recipe that sends question-relevant semantic packets over the canonical bit channel.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  benchmark_id: vqa_goal_oriented_smoke_v1
+  benchmark_version: v1
+  channel_enabled: false
+  channel_mode: disabled
+  codec_format: vqa_semantic_packet_json_utf8
+  codec_label: VQA semantic packet JSON payload codec
+  codec_output_form: bits
+  measure_codec_timing: true
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.modulator_input.bit_count
+  research_stage: goal_oriented_vqa
+  seed: 23
+  ui_configured: true
+steps:
+  - id: data
+    op: source.vqa_smoke
+    inputs: {}
+    params:
+      dataset: coco_vqa_smoke
+      sample_ids: ""
+  - id: semantic_selector
+    op: foundation.vqa_semantic_select
+    inputs:
+      images: data.images
+      questions: data.questions
+    params:
+      selector: local_rules
+  - id: sender
+    op: foundation.vqa_payload_encode
+    inputs:
+      packet: semantic_selector.packet
+    params:
+      payload_format: json_utf8
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: sender.bits
+    params:
+      data_plane_backend: auto
+      expected_bit_count: 0
+      label: payload_input
+      role: payload_input
+  - id: channel_encoder
+    op: channel.identity_encoder
+    inputs:
+      bits: payload_bit_boundary.bits
+    params:
+      data_plane_backend: auto
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      data_plane_backend: auto
+      expected_bit_count: 0
+      label: modulator_input
+      role: modulator_input
+  - id: wireless_channel
+    op: channel.identity_link
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      data_plane_backend: auto
+      label: disabled_vqa_channel
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: wireless_channel.bits
+    params:
+      data_plane_backend: auto
+      expected_bit_count: 0
+      label: identity_channel_output
+      role: identity_channel_output
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      data_plane_backend: auto
+      label: channel_io
+  - id: channel_decoder
+    op: channel.identity_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits
+    params:
+      data_plane_backend: auto
+  - id: payload_decoder
+    op: foundation.vqa_payload_decode
+    inputs:
+      bits: channel_decoder.bits
+    params:
+      on_error: fail
+  - id: receiver
+    op: foundation.vqa_answer_from_packet
+    inputs:
+      packet: payload_decoder.packet
+    params:
+      receiver: selected_label
+  - id: evaluation
+    op: metrics.vqa
+    inputs:
+      reference: data.answers
+      candidate: receiver.answers
+    params: {}
+  - id: region_evaluation
+    op: metrics.detection
+    inputs:
+      reference: data.detections
+      candidate: semantic_selector.detections
+    params:
+      iou_threshold: 0.5

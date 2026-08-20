@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Build and inspect experiment contracts and protocol-to-plot evidence for learned-communication comparisons."
+    />
+    <title>Noema — Learned-Communication Experiment Contracts</title>
+    <link rel="stylesheet" href="/static/styles.css?v=noema-release-ui-guards-v1-20260807" />
+  </head>
+  <body>
+    <div id="appShell" class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 96 96" focusable="false">
+              <defs>
+                <mask id="brandRelayCutout" maskUnits="userSpaceOnUse" x="0" y="0" width="96" height="96">
+                  <rect width="96" height="96" fill="#ffffff" />
+                  <path d="M21 39h24c5 0 9 4 9 9s-4 9-9 9H21v-9h24c1 0 2-1 2-2s-1-2-2-2H21z" fill="#000000" />
+                </mask>
+              </defs>
+              <g mask="url(#brandRelayCutout)">
+                <path d="M13 18h22c18 0 32 14 32 30S53 78 35 78H13V64h22c10 0 18-7 18-16s-8-16-18-16H13z" />
+                <path class="brand-mark-secondary" d="M39 26h14l30 22-30 22H39l24-22z" />
+              </g>
+              <path class="brand-mark-accent" d="M9 41h10v14H9z" />
+              <circle class="brand-mark-accent" cx="19" cy="48" r="7" />
+            </svg>
+          </span>
+          <div>
+            <h1>Noema</h1>
+            <span id="workspaceLabel"></span>
+          </div>
+        </div>
+        <nav class="topbar-tabs" aria-label="Experiment view">
+          <div class="toolbar-tabs" role="tablist" aria-label="Experiment view">
+            <button id="graphTabButton" type="button" class="tab-button active" role="tab" aria-selected="true" aria-controls="graphView" tabindex="0">Graph</button>
+            <button id="trainingTabButton" type="button" class="tab-button" role="tab" aria-selected="false" aria-controls="trainingView" tabindex="-1">Workbench</button>
+            <button id="resultsTabButton" type="button" class="tab-button" role="tab" aria-selected="false" aria-controls="resultsView" tabindex="-1">Results</button>
+          </div>
+        </nav>
+        <div id="graphHeaderControls" class="graph-header-controls topbar-runner-controls"></div>
+        <div class="topbar-actions">
+          <button id="themeToggleButton" type="button" class="icon-button theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">
+            <span class="theme-icon theme-icon-sun" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+              </svg>
+            </span>
+            <span class="theme-icon theme-icon-moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+            </span>
+          </button>
+          <button id="saveRecipeButton" type="button">Save</button>
+          <button id="logButton" type="button">Log</button>
+          <button id="runButton" type="button" class="primary">Run All</button>
+        </div>
+      </header>
+
+      <section
+        id="startupStatusBanner"
+        class="startup-status-banner"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        tabindex="-1"
+        hidden
+      >
+        <div class="startup-status-copy">
+          <strong id="startupStatusTitle">Noema could not finish starting.</strong>
+          <span id="startupStatusMessage"></span>
+        </div>
+        <button id="startupRetryButton" type="button">Retry</button>
+      </section>
+
+      <main id="workspace" class="workspace">
+        <aside class="leftbar">
+          <section class="panel configurator-panel">
+            <div class="panel-header">
+              <h2>Recipe</h2>
+              <div class="panel-header-actions">
+                <button id="recipeOpenButton" type="button" class="icon-button" aria-label="Browse template recipes" title="Browse template recipes">
+                  <svg class="open-recipe-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M3 7V5h7l2 2h6v3"></path>
+                    <path d="M3 7v11h15l3-8H7l-4 8"></path>
+                  </svg>
+                </button>
+                <button id="rawRecipeEditorButton" type="button" class="icon-button" aria-label="Edit raw recipe JSON" title="Edit raw recipe JSON">
+                  <span class="raw-recipe-glyph" aria-hidden="true">{ }</span>
+                </button>
+                <button id="recipeSettingsButton" type="button" class="icon-button" aria-label="Recipe settings" title="Recipe settings">
+                  &#9881;
+                </button>
+              </div>
+            </div>
+            <div class="config-body">
+              <div id="recipeConfigurator" class="recipe-configurator"></div>
+            </div>
+          </section>
+        </aside>
+
+        <section class="main-panel">
+          <div class="graph-toolbar">
+            <div class="toolbar-title-group">
+              <div class="toolbar-title-row">
+                <h2 id="recipeTitle">Recipe</h2>
+                <span id="recipeSuiteTag" class="suite-status-tag" hidden></span>
+                <span id="executionProfileTag" class="execution-profile-tag" hidden></span>
+                <span id="resultSourceStatusTag" class="result-source-status" hidden></span>
+              </div>
+              <span id="recipeMeta"></span>
+            </div>
+            <div id="resultsHeaderControls" class="results-header-controls" hidden></div>
+          </div>
+          <nav id="recipeTabbar" class="recipe-tabbar" aria-label="Recipes">
+            <div id="recipeTabs" class="recipe-tabs" role="tablist"></div>
+          </nav>
+          <div id="graphView" class="tab-view active" role="tabpanel" aria-labelledby="graphTabButton">
+            <div id="graphSurface" class="graph-surface"></div>
+          </div>
+          <div id="trainingView" class="tab-view training-view" role="tabpanel" aria-labelledby="trainingTabButton" hidden>
+            <div id="trainingPanel" class="training-panel"></div>
+          </div>
+          <div id="resultsView" class="tab-view results-view" role="tabpanel" aria-labelledby="resultsTabButton" hidden>
+            <span id="resultsSummaryLabel" class="sr-only"></span>
+            <div id="resultsComparison" class="results-comparison"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="settingsOverlay" class="modal-overlay" hidden>
+      <section class="settings-dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" tabindex="-1">
+        <div class="settings-dialog-header">
+          <div>
+            <h2 id="settingsTitle">Settings</h2>
+            <span id="settingsSubtitle" class="count"></span>
+          </div>
+          <button id="settingsCloseButton" type="button" class="icon-button" aria-label="Close settings">&times;</button>
+        </div>
+        <div id="settingsBody" class="settings-dialog-body"></div>
+      </section>
+    </div>
+
+    <div id="logOverlay" class="modal-overlay" hidden>
+      <section class="log-dialog" role="dialog" aria-modal="true" aria-labelledby="logTitle" tabindex="-1">
+        <div class="settings-dialog-header">
+          <div>
+            <h2 id="logTitle">Run Log</h2>
+            <span id="logSubtitle" class="count"></span>
+          </div>
+          <button id="logCloseButton" type="button" class="icon-button" aria-label="Close run log">&times;</button>
+        </div>
+        <div id="logBody" class="log-dialog-body"></div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast" role="status"></div>
+    <script src="/static/app.js?v=noema-release-ui-guards-v1-20260807"></script>
+  </body>
+</html>

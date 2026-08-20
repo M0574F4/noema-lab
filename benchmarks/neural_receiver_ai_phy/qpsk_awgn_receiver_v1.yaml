@@ -1,0 +1,93 @@
+schema_version: 1
+id: neural_receiver_ai_phy.qpsk_awgn_receiver_v1
+version: "0.1.0"
+name: QPSK Neural Receiver Proof Benchmark
+description: Experimental AI-PHY benchmark pack for seeded random bits over QPSK/AWGN with a classical demapper baseline and a receiver-adapter path.
+suite:
+  id: neural_receiver
+  name: Neural Receiver / AI-PHY
+  status: experimental
+  version: v1-draft
+dataset:
+  id: synthetic_random_bits
+  modality: bits
+  version: synthetic-random-bits-v1
+  split: fixed_seed
+task:
+  id: neural_receiver_demapping
+  kind: transport_integrity
+  modality: bits
+metrics:
+  - id: channel.snr_db
+    definition_version: 1
+    source_step: wireless_channel
+    source_operation: wireless.channel
+    family: channel
+    unit: dB
+    direction: neutral
+  - id: channel.coded.ber
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+  - id: channel.coded.bler
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+  - id: channel.transmitted_bit_count
+    family: rate
+    unit: bits
+    direction: lower_is_better
+  - id: channel.channel_use_count
+    definition_version: 1
+    source_step: wireless_channel
+    source_operation: wireless.channel
+    family: rate
+    unit: symbols
+    direction: lower_is_better
+  - id: channel.bits_per_symbol
+    family: transport
+    unit: bit/symbol
+    direction: neutral
+baselines:
+  - classical_qpsk_hard_demapper
+  - neural_receiver_adapter_reference
+recipes:
+  - id: classical_qpsk_snr6
+    label: Classical QPSK demapper
+    role: baseline
+    path: ../../recipes/neural_receiver_qpsk_awgn_classical.yaml
+    params:
+      method_id: classical_qpsk_hard_demapper
+      matrix_selection:
+        channel.snr_db: 6
+  - id: adapter_qpsk_snr6
+    label: Neural receiver adapter
+    role: candidate
+    path: ../../recipes/neural_receiver_qpsk_awgn_adapter.yaml
+    params:
+      method_id: neural_receiver_adapter_reference
+      matrix_selection:
+        channel.snr_db: 6.0
+  - id: classical_qpsk_snr14
+    label: Classical QPSK demapper
+    role: baseline
+    path: ../../recipes/neural_receiver_qpsk_awgn_classical_high_snr.yaml
+    params:
+      method_id: classical_qpsk_hard_demapper
+      matrix_selection:
+        channel.snr_db: 14
+  - id: adapter_qpsk_snr14
+    label: Neural receiver adapter
+    role: candidate
+    path: ../../recipes/neural_receiver_qpsk_awgn_adapter_high_snr.yaml
+    params:
+      method_id: neural_receiver_adapter_reference
+      matrix_selection:
+        channel.snr_db: 14
+metadata:
+  benchmark_tier: experimental
+  benchmark_family: neural_receiver_ai_phy
+  channel_model: awgn
+  modulation: qpsk
+  source: synthetic_random_bits
+  notes: The built-in adapter recipe uses the deterministic reference receiver. Researchers can replace it with a checkpoint-backed or external neural receiver adapter while keeping the same benchmark protocol.

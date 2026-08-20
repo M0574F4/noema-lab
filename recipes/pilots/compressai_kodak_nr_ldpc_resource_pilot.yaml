@@ -1,0 +1,167 @@
+schema_version: 1
+execution_profile:
+  id: custom
+  version: 1
+name: compressai_kodak_nr_ldpc_resource_pilot
+description: Development-only CompressAI/CRC/NR-LDPC/QPSK resource-accounting pilot with a bit-perfect identity link for decoder integrity and no quality outcomes.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: experimental
+  version: v1
+metadata:
+  research_stage: development_only_resource_feasibility
+  publication_test_accessed: false
+  channel_enabled: false
+  codec_profile: compressai
+  codec_wire_format: noema.codec_wire.v1
+  packet_protocol: noema.source_item_crc32.v4
+  channel_code: 3gpp_nr_ldpc
+  channel_code_standard: 3GPP TS 38.212 V18.8.0 Release 18
+  channel_code_backend: sionna.phy.nr.TBEncoder
+  target_code_rate: 0.5
+  transport_block_size_bits: 16000
+  modulation: qpsk
+  bits_per_symbol: 2
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.tx.bit_count
+  resource_accounting_profile: noema.communication_resources.v1
+  decoder_integrity_link: identity_symbol_link
+steps:
+  - id: data
+    op: source.image_dataset
+    params:
+      dataset: kodak
+      dataset_dir: .noema/datasets/kodak
+      image_ids: kodim21,kodim22,kodim23,kodim24
+      resize_shorter_side: 128
+      crop_size: 128
+      repeat_count: 1
+
+  - id: sender
+    op: model.compressai_encode
+    inputs:
+      images: data.images
+    params:
+      model: bmshj2018_factorized
+      quality: 1
+      metric: mse
+      pretrained: true
+      device: cpu
+      wire_format: compact_binary_v1
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: sender.bits
+    params:
+      label: payload
+      role: payload
+
+  - id: packetizer
+    op: channel.packetize_crc32
+    inputs:
+      bits: payload_bit_boundary.bits
+    params:
+      packet_payload_bits: 4096
+
+  - id: channel_encoder
+    op: channel.nr_ldpc_encoder
+    inputs:
+      bits: packetizer.bits
+    params:
+      target_coderate: 0.5
+      transport_block_size_bits: 16000
+      num_bits_per_symbol: 2
+      num_layers: 1
+      n_rnti: 1
+      n_id: 1
+      channel_type: PUSCH
+      codeword_index: 0
+      num_bp_iter: 20
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: tx
+      role: protected_link_input
+
+  - id: modulator
+    op: modulation.digital_modulate
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      modulation: qpsk
+
+  - id: tx_power
+    op: channel.symbol_power_normalize
+    inputs:
+      symbols: modulator.symbols
+    params:
+      target_power: 1.0
+      normalization_scope: source_item
+      label: publication_candidate_tx
+
+  - id: resource_accounting
+    op: channel.communication_resource_accounting
+    inputs:
+      payload_bits: payload_bit_boundary.bits
+      framed_bits: packetizer.bits
+      coded_bits: channel_encoder.coded_bits
+      symbols: tx_power.symbols
+    params:
+      pilot_symbol_count: 0
+      physical_header_symbol_count: 0
+
+  - id: wireless_channel
+    op: channel.identity_symbol_link
+    inputs:
+      symbols: tx_power.symbols
+    params:
+      label: resource_pilot_bit_perfect_integrity_link
+
+  - id: demodulator
+    op: demodulation.digital_demodulate
+    inputs:
+      rx_symbols: wireless_channel.symbols
+    params:
+      modulation: auto
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: demodulator.bits
+    params:
+      label: rx
+      role: protected_link_output
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: resource_pilot_integrity_io
+
+  - id: channel_decoder
+    op: channel.nr_ldpc_decoder
+    inputs:
+      llr: demodulator.llr
+    params:
+      on_tb_crc_failure: raise
+
+  - id: crc_check
+    op: channel.crc32_check
+    inputs:
+      bits: channel_decoder.bits
+    params:
+      on_decode_failure: report_outage
+
+  - id: receiver
+    op: model.compressai_decode
+    inputs:
+      bits: crc_check.bits
+    params:
+      on_error: fail
+      device: cpu

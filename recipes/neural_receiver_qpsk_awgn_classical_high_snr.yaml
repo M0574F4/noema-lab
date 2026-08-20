@@ -1,0 +1,139 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: neural_receiver_qpsk_awgn_classical_high_snr
+description: Classical QPSK demapper high-SNR point for the Neural Receiver / AI-PHY proof suite.
+suite:
+  id: neural_receiver
+  name: Neural Receiver / AI-PHY
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: qpsk_awgn_receiver_demapping
+  codec_profile: bit_source
+  codec_label: Synthetic bit stream
+  codec_output_form: bits
+  codec_format: canonical_uint8_bits
+  semantic_representation: none
+  channel_enabled: true
+  channel_mode: awgn
+  wireless_backend: numpy
+  wireless_preset: AWGN
+  modulation: qpsk
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.modulator_input.bit_count
+  channel_bit_contract: np.uint8 unpacked bits, one bit per element, values 0 or 1
+  seed: 23
+  data_plane_backend: auto
+  ui_configured: true
+  research:
+    dataset:
+      id: synthetic_random_bits
+      modality: bits
+      version: synthetic-random-bits-v1
+      split: fixed_seed
+    task:
+      id: neural_receiver_demapping
+      kind: transport_integrity
+      modality: bits
+      target: demodulator.bits
+      metrics:
+        - channel.coded.ber
+        - channel.coded.bler
+    metrics:
+      - channel.snr_db
+      - channel.coded.ber
+      - channel.coded.bler
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - channel.bits_per_symbol
+steps:
+  - id: data
+    op: source.random_bits
+    params:
+      bit_count: 4096
+      batch_size: 1
+      seed: 23
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: data.bits
+    params:
+      label: payload_input
+      role: payload
+
+  - id: channel_encoder
+    op: channel.identity_encoder
+    inputs:
+      bits: payload_bit_boundary.bits
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: modulator_input
+      role: modulator_input
+
+  - id: modulator
+    op: modulation.digital_modulate
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      modulation: qpsk
+
+  - id: wireless_channel
+    op: wireless.channel
+    inputs:
+      symbols: modulator.symbols
+    params:
+      channel: awgn
+      snr_db: 14
+      wireless_backend: numpy
+      seed: 23002
+
+  - id: demodulator
+    op: demodulation.digital_demodulate
+    inputs:
+      rx_symbols: wireless_channel.rx_symbols
+    params:
+      modulation: auto
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: demodulator.bits
+    params:
+      label: demodulator_output
+      role: demodulator_output
+
+  - id: coded_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+
+  - id: coded_bler
+    op: metrics.block_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+      block_size: 256
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: channel_io
+
+  - id: channel_decoder
+    op: channel.identity_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits

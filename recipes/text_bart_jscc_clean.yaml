@@ -1,0 +1,104 @@
+schema_version: 1
+execution_profile:
+  id: joint_source_channel_symbols
+  version: 1
+name: text_continuous_symbol_jscc
+description: Text reconstruction over continuous channel symbols derived from pretrained BART semantic representations.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: neural_text_jscc
+  codec_profile: text_bart_jscc
+  codec_label: BART JSCC-lite semantic symbols
+  codec_output_form: symbols
+  codec_format: bart_encoder_hidden_state_complex64
+  codec_model_id: facebook/bart-base
+  semantic_representation: bart_encoder_symbols
+  transport_representation: complex_semantic_channel_symbols
+  channel_enabled: false
+  channel_mode: disabled
+  rate_count_fixed_point: tx_symbol_boundary.channel.fixed.modulator_input.symbol_count
+  measure_codec_timing: true
+  codec_timing:
+    enabled: true
+    runner: pytorch
+    warmup_runs: 0
+    timed_runs: 1
+steps:
+  - id: data
+    op: source.text_dataset
+    params:
+      dataset: semantic_text_smoke
+      sample_ids: weather_report,robot_instruction,medical_note,traffic_alert,sensor_summary
+      repeat_count: 1
+
+  - id: sender
+    op: model.text_bart_jscc_encode
+    inputs:
+      texts: data.texts
+    params:
+      model_id: facebook/bart-base
+      model_revision: aadd2ab0ae0c8268c7c9693540e9904811f36177
+      device: cpu
+      max_length: 64
+      power_normalize: false
+
+  - id: tx_power
+    op: channel.symbol_power_normalize
+    inputs:
+      symbols: sender.symbols
+    params:
+      label: tx_power_normalize
+      target_power: 1.0
+      normalization_scope: source_item
+
+  - id: tx_symbol_boundary
+    op: channel.symbol_boundary
+    inputs:
+      symbols: tx_power.symbols
+    params:
+      label: modulator_input
+      role: symbol_channel_input
+
+  - id: wireless_channel
+    op: channel.identity_symbol_link
+    inputs:
+      symbols: tx_symbol_boundary.symbols
+    params:
+      label: disabled_text_symbol_channel
+
+  - id: rx_symbol_boundary
+    op: channel.symbol_boundary
+    inputs:
+      symbols: wireless_channel.symbols
+    params:
+      label: identity_channel_output
+      role: symbol_channel_output
+
+  - id: channel_symbol_count_match
+    op: channel.symbol_count_match
+    inputs:
+      reference: tx_symbol_boundary.symbols
+      candidate: rx_symbol_boundary.symbols
+    params:
+      label: channel_io
+
+  - id: receiver
+    op: model.text_bart_jscc_decode
+    inputs:
+      symbols: rx_symbol_boundary.symbols
+    params:
+      model_id: facebook/bart-base
+      model_revision: aadd2ab0ae0c8268c7c9693540e9904811f36177
+      device: cpu
+      generation_max_length: 64
+      num_beams: 1
+
+  - id: evaluation
+    op: metrics.text_semantic_similarity
+    inputs:
+      reference: data.texts
+      candidate: receiver.texts

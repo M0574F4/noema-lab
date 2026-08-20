@@ -1,0 +1,46 @@
+schema_version: 1
+name: external_classification_adapter
+description: Example recipe using an external dataset source and external metric adapter.
+metadata:
+  research:
+    dataset:
+      id: example_external_classification
+      modality: generic
+      source: source.example_classification_dataset
+    task:
+      id: classification
+      kind: task_success
+      modality: generic
+      metrics:
+        - task.accuracy
+        - external.classification.accuracy
+    metrics:
+      - id: task.accuracy
+        family: classification
+        unit: fraction
+        direction: higher_is_better
+      - id: external.classification.accuracy
+        family: classification
+        unit: fraction
+        direction: higher_is_better
+    benchmark:
+      id: external_classification_adapter_smoke
+      version: "1"
+      dataset: example_external_classification
+      task: classification
+      metrics:
+        - task.accuracy
+        - external.classification.accuracy
+  adapter_example: true
+  benchmark_tier: smoke
+steps:
+  - id: data
+    op: source.example_classification_dataset
+    params:
+      dataset: example_external_classification
+  - id: evaluation
+    op: metrics.example_classification
+    inputs:
+      reference: data.reference
+      candidate: data.candidate
+    params: {}

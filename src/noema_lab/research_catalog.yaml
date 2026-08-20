@@ -1,0 +1,2034 @@
+schema_version: 1
+research_areas:
+  - id: physical_layer_resource_optimization
+    name: Physical layer & resource optimization
+    order: 10
+    description: Link transmission, classical and learned receivers, and radio-resource allocation.
+  - id: channel_estimation_feedback
+    name: Channel estimation & CSI feedback
+    order: 20
+    description: Pilot-aided channel recovery, MIMO-OFDM estimation, and limited-feedback CSI acquisition.
+  - id: antennas_positioning_sensing
+    name: Antennas, positioning & sensing
+    order: 30
+    description: Beamforming, localization, direction finding, and array-based sensing.
+  - id: semantic_goal_oriented_communication
+    name: Semantic & goal-oriented communication
+    order: 40
+    description: Source reconstruction and task-aware communication for text, images, speech, and multimodal AI.
+datasets:
+  - id: sionna_correlated_miso_ofdm_csi
+    name: Sionna correlated MISO-OFDM CSI
+    modality: wireless
+    status: supported
+    source_ops:
+      - wireless.miso_ofdm_csi
+    versions:
+      - sionna-tdl-miso-ofdm-csi-v1
+    description: Seeded complex downlink channel-state tensors from a spatially correlated Sionna 3GPP TDL MISO-OFDM model for CSI compression, feedback, and precoding evaluation.
+  - id: sionna_3gpp_tdl_c_mimo_ofdm_pilots
+    name: Sionna 3GPP TDL-C 2×2 MIMO-OFDM pilots
+    modality: wireless
+    status: experimental
+    source_ops:
+      - source.ai_phy_channel_realization
+      - source.ai_phy_pilot_pattern
+      - wireless.pilot_observation
+    versions:
+      - sionna-tdl-c-2x2-64sc-v1
+    description: Seeded 2×2 frequency-domain channel tensors and sparse orthogonal comb-pilot observations from a Sionna 3GPP TDL-C model for channel-estimation training and paired evaluation.
+  - id: sionna_3gpp_mixed_tdl_mimo_ofdm_pilots
+    name: Sionna mixed-profile 2×2 MIMO-OFDM pilots
+    modality: wireless
+    status: experimental
+    source_ops:
+      - source.ai_phy_channel_realization
+      - source.ai_phy_pilot_pattern
+      - wireless.pilot_observation
+    versions:
+      - sionna-tdl-ace-2x2-64sc-v2
+    description: Seeded 2×2 frequency-domain channel tensors and sparse orthogonal comb-pilot observations across 3GPP TDL-A/C/E profiles for covariance-mismatched channel-estimation training and paired evaluation.
+  - id: synthetic_pilot_channel
+    name: Synthetic pilot channel experiment
+    modality: wireless
+    status: supported
+    source_ops:
+      - source.ai_phy_channel_realization
+      - source.ai_phy_pilot_pattern
+      - wireless.pilot_observation
+      - source.ai_phy_pilot_channel
+    versions:
+      - synthetic-pilot-channel-v1
+    description: Seeded flat-SISO and MIMO-OFDM channel tensors, explicit pilot patterns, and SNR-controlled noisy observations for channel-estimation benchmarks.
+  - id: synthetic_beamforming
+    name: Synthetic beamforming channels
+    modality: wireless
+    status: supported
+    source_ops:
+      - source.beamforming_scenario
+    versions:
+      - synthetic-beamforming-v1
+    description: Seeded multi-antenna channel vectors and codebooks for beam selection and precoding benchmarks.
+  - id: synthetic_localization_geometry
+    name: Synthetic localization geometry
+    modality: wireless
+    status: supported
+    source_ops:
+      - source.localization_geometry
+      - wireless.range_observation
+      - source.localization_sensing_scenario
+    versions:
+      - synthetic-localization-geometry-v1
+    description: Seeded anchor geometry with a separate SNR-controlled range-observation contract for localization/sensing benchmarks.
+  - id: synthetic_ula_aoa
+    name: Synthetic ULA angle-of-arrival snapshots
+    modality: wireless
+    status: supported
+    source_ops:
+      - source.aoa_scene
+      - wireless.ula_array_observation
+    versions:
+      - synthetic-ula-aoa-v1
+    description: Seeded far-field source angles and narrowband complex snapshots from a half-wavelength uniform linear array under AWGN.
+  - id: synthetic_ofdm_power_allocation
+    name: Synthetic OFDM subcarrier power allocation
+    modality: wireless
+    status: supported
+    source_ops:
+      - source.resource_allocation_scenario
+    versions:
+      - synthetic-ofdm-power-allocation-v1
+    description: Seeded tapped frequency-selective channels represented as parallel OFDM subcarrier power gains for fixed-sum-power allocation benchmarks.
+  - id: synthetic_random_bits
+    name: Synthetic random bit stream
+    modality: bits
+    status: supported
+    source_ops:
+      - source.random_bits
+    versions:
+      - synthetic-random-bits-v1
+    description: Seeded canonical uint8 bit source for link-level receiver and transport benchmarks.
+  - id: synthetic_modulation_iq
+    name: Controlled synthetic modulation I/Q frames
+    modality: wireless
+    status: supported
+    source_ops:
+      - source.modulation_frames
+      - wireless.modulation_awgn_observation
+    versions:
+      - synthetic-modulation-iq-blind-carrier-v1
+    description: Balanced, seeded, fixed-length BPSK, QPSK, and 16-QAM frames with label truth kept in a separate artifact and explicit per-frame carrier phase, residual frequency offset, and AWGN.
+  - id: synthetic_random_bits_sionna_tdl
+    name: Synthetic bit stream over Sionna TDL OFDM
+    modality: wireless
+    status: supported
+    source_ops:
+      - source.random_bits
+    versions:
+      - synthetic-random-bits-sionna-tdl-v1
+    description: Seeded canonical bit payloads paired with reproducible Sionna 3GPP TDL OFDM channel-state realizations for end-to-end power-allocation benchmarks and researcher-selected signal capture.
+  - id: synthetic_random_bits_sionna_tdl_delayed_csi
+    name: Synthetic short packets over temporally correlated Sionna TDL OFDM
+    modality: wireless
+    status: experimental
+    source_ops:
+      - source.random_bits
+      - source.bit_manifest
+    versions:
+      - synthetic-random-bits-sionna-tdl-delayed-csi-v1
+      - synthetic-random-bits-sionna-tdl-delayed-csi-v2
+      - synthetic-random-bits-sionna-tdl-delayed-csi-three-tb-v2
+    description: Seeded short-packet payloads over a wideband Sionna 3GPP TDL-C trajectory, with a four-snapshot causal complex-CSI history ending five OFDM symbols before its aligned current propagation state.
+  - id: kodak_over_sionna_tdl
+    name: Kodak payloads over Sionna TDL OFDM
+    modality: wireless
+    status: supported
+    source_ops:
+      - source.image_dataset
+    versions:
+      - kodak-smoke-kodim01-sionna-tdl-v1
+    description: Existing Kodak image-source payloads transmitted through the canonical CompressAI pipeline and paired with reproducible Sionna 3GPP TDL OFDM channel states for power-allocation evaluation and researcher-selected signal capture.
+  - id: kodak
+    name: Kodak PhotoCD image set
+    modality: image
+    status: supported
+    source_ops:
+      - source.image_dataset
+    versions:
+      - kodak-24
+      - kodak-smoke-kodim01
+    description: Standard 24-image Kodak reconstruction benchmark.
+  - id: bsds500
+    name: Berkeley Segmentation Dataset and Benchmark 500
+    modality: image
+    status: experimental
+    source_ops:
+      - source.image_dataset
+    versions:
+      - bsds500-2013-official-splits
+    description: Hash-inventoried retrieve-only BSDS500 train, validation, and test partitions for noncommercial research evaluation.
+  - id: pirm-test
+    name: PIRM 2018 high-resolution test images
+    modality: image
+    status: experimental
+    source_ops:
+      - source.image_dataset
+    versions:
+      - pirm-2018-test-hr
+    description: Hash-inventoried retrieve-only PIRM 2018 high-resolution test split under the publisher-declared CC BY-NC-SA 4.0 terms.
+  - id: local_npz_images
+    name: Local NPZ image batch
+    modality: image
+    status: supported
+    source_ops:
+      - source.local_npz_images
+    description: User-supplied image tensors stored as NumPy arrays.
+  - id: semantic_text_smoke
+    name: Semantic text smoke set
+    modality: text
+    status: supported
+    source_ops:
+      - source.text_dataset
+    versions:
+      - semantic-text-smoke-v1
+    description: Small built-in sentence set for validating text semantic-reconstruction pipelines.
+  - id: task_smoke
+    name: Task-oriented smoke set
+    modality: generic
+    status: supported
+    source_ops:
+      - source.task_labels_smoke
+    versions:
+      - task-smoke-v1
+    description: Small built-in label/prediction set for validating task-oriented benchmark metrics.
+  - id: semantic_artifact_smoke
+    name: Semantic artifact smoke set
+    modality: multimodal
+    status: supported
+    source_ops:
+      - source.semantic_artifacts_smoke
+    versions:
+      - semantic-artifact-smoke-v1
+    description: Built-in typed semantic artifact set for validating embeddings, boxes, masks, captions, VQA answers, rankings, maps, and video-frame contracts.
+  - id: coco_vqa_smoke
+    name: Synthetic VQA smoke set
+    modality: multimodal
+    status: supported
+    source_ops:
+      - source.vqa_smoke
+    versions:
+      - coco-vqa-smoke-v1
+    description: Synthetic image-question-answer set for goal-oriented wireless VQA plumbing only; not a benchmark.
+  - id: vqa_small
+    name: VQA small sample
+    modality: multimodal
+    status: supported
+    source_ops:
+      - source.vqa_small_hf
+    versions:
+      - soumyasj-vqa-dataset-small
+    description: Tiny downloadable VQA-style image/question/answer dataset from Hugging Face, suitable for quick pretrained VQA sanity checks.
+  - id: local_vqa_manifest
+    name: Local VQA manifest
+    modality: multimodal
+    status: supported
+    source_ops:
+      - source.vqa_manifest
+    description: User-provided JSON/JSONL image-question-answer manifest for real local VQA experiments.
+  - id: coco128_detection
+    name: COCO128 object detection
+    modality: image
+    status: supported
+    source_ops:
+      - source.coco128_detection
+    versions:
+      - ultralytics-coco128-v1
+    description: Real COCO-derived 128-image object-detection subset packaged by Ultralytics with YOLO-format labels.
+  - id: coco8_segmentation
+    name: COCO8 segmentation
+    modality: image
+    status: supported
+    source_ops:
+      - source.coco8_segmentation
+    versions:
+      - ultralytics-coco8-seg-v1
+    description: Real COCO-derived 8-image instance-segmentation subset packaged by Ultralytics with YOLO polygon labels.
+  - id: coco_caption_smoke
+    name: COCO caption smoke set
+    modality: multimodal
+    status: planned
+    source_ops: []
+    description: Planned compact captioning benchmark for image/text semantic communication.
+  - id: retrieval_smoke
+    name: Image-text retrieval smoke set
+    modality: multimodal
+    status: supported
+    source_ops:
+      - source.retrieval_smoke
+    versions:
+      - retrieval-smoke-v1
+    description: Small built-in image/text retrieval set for validating CLIP-style ranking pipelines.
+  - id: flickr8k
+    name: Flickr8k image-caption retrieval
+    modality: multimodal
+    status: supported
+    source_ops:
+      - source.flickr8k_retrieval
+    versions:
+      - flickr8k-validation-v1
+    description: Real Flickr8k image-caption pairs for compact CLIP-style image-text retrieval experiments.
+tasks:
+  - id: csi_compression_feedback
+    name: CSI compression and feedback
+    area_id: channel_estimation_feedback
+    kind: feedback_control
+    modality: wireless
+    status: supported
+    target: feedback_decoder.reconstruction
+    metrics:
+      - csi_feedback.achieved_spectral_efficiency_bps_hz
+      - csi_feedback.spectral_efficiency_retention
+      - task.score
+    optional_metrics:
+      - csi_feedback.perfect_csi_spectral_efficiency_bps_hz
+      - csi_feedback.spectral_efficiency_loss_bps_hz
+      - csi_feedback.nmse
+      - csi_feedback.nmse_db
+      - csi_feedback.phase_invariant_cosine
+      - csi_feedback.feedback_dimension
+      - csi_feedback.original_real_dimension
+      - csi_feedback.latent_fraction
+      - csi_feedback.compression_factor
+      - csi_feedback.feedback_bits_per_sample
+      - csi_feedback.quantization_mse
+      - csi_feedback.quantization_clipped_fraction
+      - channel.snr_db
+      - memory.run.peak_rss_bytes
+    description: Compress UE-observed downlink CSI, return it over an explicit limited feedback path, reconstruct it at the base station, and evaluate true-channel downlink precoding performance.
+  - id: image_reconstruction
+    name: Image reconstruction
+    area_id: semantic_goal_oriented_communication
+    kind: reconstruction
+    modality: image
+    status: supported
+    target: receiver.images
+    required_artifacts:
+      reference: image.batch.numpy
+      reconstruction: image.batch.numpy
+    metrics:
+      - quality.psnr_db
+      - quality.mse
+      - quality.mae
+    optional_metrics:
+      - quality.perfect_reconstruction_fraction
+      - quality.ms_ssim
+      - quality.ms_ssim.evaluated_fraction_of_total
+      - quality.ms_ssim.evaluated_fraction_of_eligible
+      - quality.ms_ssim.total_image_count
+      - quality.ms_ssim.eligible_image_count
+      - quality.ms_ssim.evaluated_image_count
+      - codec.bit_count
+      - codec.native_bit_count
+      - codec.bytes
+      - channel.payload_bit_count
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - channel.uses_per_pixel
+      - channel.snr_db
+      - channel.tx_effective_snr_db
+      - channel.packet_success_rate
+      - channel.outage_rate
+      - channel.code_rate
+      - channel.bits_per_symbol
+      - channel.awgn.capacity_bpp
+      - codec.jpeg.selected_quality_mean
+      - codec.jpeg.selected_quality_min
+      - codec.jpeg.selected_quality_max
+      - rate.native_codec_bpp
+      - rate.serialized_payload_bpp
+      - rate.payload_bpp
+      - rate.framed_bpp
+      - rate.coded_bpp
+      - rate.padded_bpp
+      - rate.bpp
+      - rate_bpp
+      - memory.run.peak_rss_bytes
+    description: Compare received image batches against ground-truth source images.
+  - id: pilot_channel_estimation
+    name: Pilot channel estimation
+    area_id: channel_estimation_feedback
+    kind: estimation
+    modality: wireless
+    status: supported
+    target: estimate.h_hat
+    metrics:
+      - channel_estimation.nmse
+      - task.score
+    optional_metrics:
+      - channel_estimation.mse
+      - channel.snr_db
+      - mimo.channel_estimation.nmse
+      - memory.run.peak_rss_bytes
+    description: Estimate channel coefficients from pilot observations under fixed channel/noise protocols.
+  - id: mimo_ofdm_channel_estimation
+    name: MIMO-OFDM channel estimation
+    area_id: channel_estimation_feedback
+    kind: estimation
+    modality: wireless
+    status: supported
+    target: estimate.h_hat
+    metrics:
+      - mimo.channel_estimation.nmse_db
+      - mimo.channel_estimation.zf_spectral_efficiency_bps_hz
+      - mimo.channel_estimation.zf_rate_retention
+    optional_metrics:
+      - mimo.channel_estimation.nmse
+      - mimo.channel_estimation.perfect_csi_zf_spectral_efficiency_bps_hz
+      - channel_estimation.nmse
+      - channel_estimation.nmse_db
+      - channel_estimation.mse
+      - channel_estimation.complex_correlation
+      - channel.snr_db
+      - pilot.density
+      - task.score
+      - memory.run.peak_rss_bytes
+    description: Estimate multi-antenna, multi-subcarrier channel tensors from pilot observations.
+  - id: beamforming_precoding
+    name: Beamforming and precoding
+    area_id: antennas_positioning_sensing
+    kind: link_optimization
+    modality: wireless
+    status: supported
+    target: decision.weights
+    metrics:
+      - beamforming.spectral_efficiency_bps_hz
+      - task.score
+    optional_metrics:
+      - beamforming.normalized_gain
+      - beamforming.array_gain_db
+      - channel.snr_db
+      - memory.run.peak_rss_bytes
+    description: Select or generate transmit beams/precoders under fixed channel and SNR protocols.
+  - id: wireless_localization
+    name: Wireless localization/sensing
+    area_id: antennas_positioning_sensing
+    kind: estimation
+    modality: wireless
+    status: supported
+    target: estimate.positions
+    metrics:
+      - localization.rmse_m
+      - task.score
+    optional_metrics:
+      - localization.mae_m
+      - localization.p90_error_m
+      - channel.snr_db
+      - memory.run.peak_rss_bytes
+    description: Estimate transmitter or object position from explicit wireless range observations.
+  - id: aoa_estimation
+    name: Angle-of-arrival estimation
+    area_id: antennas_positioning_sensing
+    kind: estimation
+    modality: wireless
+    status: supported
+    target: estimate.angles_deg
+    metrics:
+      - aoa.rmse_deg
+      - task.score
+    optional_metrics:
+      - aoa.mae_deg
+      - aoa.median_error_deg
+      - aoa.p90_error_deg
+      - channel.snr_db
+      - memory.run.peak_rss_bytes
+    description: Estimate a far-field source angle from explicit antenna-array snapshots under a declared array geometry and noise protocol.
+  - id: resource_allocation
+    name: Resource allocation
+    area_id: physical_layer_resource_optimization
+    kind: policy_optimization
+    modality: wireless
+    status: supported
+    target: decision.power
+    metrics:
+      - resource.theoretical_shannon_spectral_efficiency_bps_hz
+      - task.score
+    optional_metrics:
+      - resource.theoretical_shannon_sum_bits_per_ofdm_symbol
+      - resource.theoretical_min_subcarrier_spectral_efficiency_bps_hz
+      - resource.theoretical_min_state_spectral_efficiency_bps_hz
+      - resource.theoretical_p05_state_spectral_efficiency_bps_hz
+      - resource.theoretical_outage_probability
+      - resource.theoretical_outage_target_spectral_efficiency_bps_hz
+      - resource.water_filling_oracle_spectral_efficiency_bps_hz
+      - resource.water_filling_optimality_gap_bps_hz
+      - resource.water_filling_relative_optimality_gap
+      - resource.water_filling_power_rmse
+      - resource.water_filling_power_normalized_rmse
+      - resource.water_filling_kkt_normalized_residual
+      - resource.average_transmit_power_budget
+      - resource.fairness_jain
+      - resource.power_constraint.max_abs_error
+      - resource.power_constraint.max_relative_error
+      - resource.power_constraint.max_negative_violation
+      - resource.active_resource_element_fraction
+      - resource.allocation_power_coefficient_of_variation
+      - resource.allocated_power_weighted_channel_gain_lift
+      - resource.water_filling.active_resource_element_fraction
+      - resource.finite_blocklength.expected_goodput_bps_hz
+      - resource.finite_blocklength.predicted_bler
+      - resource.finite_blocklength.mean_capacity_bps_hz
+      - resource.finite_blocklength.p05_goodput_bps_hz
+      - resource.finite_blocklength.blocklength_channel_uses
+      - resource.finite_blocklength.target_rate_bps_hz
+      - resource.nominal_snr_db
+      - resource.csi.feedback_delay_ofdm_symbols
+      - resource.csi.feedback_delay_seconds
+      - resource.csi.observed_actual_complex_correlation
+      - resource.csi.observed_actual_gain_correlation
+      - resource.csi.observed_actual_complex_nmse
+      - channel.noise_variance
+      - channel.snr_db
+      - channel.tx_effective_snr_db
+      - channel.coded.ber
+      - channel.coded.bler
+      - channel.payload.ber
+      - channel.payload.bler
+      - channel.offered_payload_bits_per_resource_element
+      - channel.achieved_payload_goodput_bits_per_resource_element
+      - channel.goodput_to_theoretical_shannon_efficiency_ratio
+      - channel.payload_energy_efficiency_bits_per_normalized_energy
+      - channel.tx_energy_per_delivered_payload_bit
+      - channel.payload_delivery_block_error_rate
+      - channel.payload_delivery_success
+      - channel.scheduled_resource_element_count
+      - channel.data_bearing_resource_element_count
+      - channel.resource_element_utilization
+      - channel.nr_ldpc_ofdm.all_attempt_goodput_bits_per_occupied_data_resource_element
+      - channel.nr_ldpc_ofdm.transport_block_error_rate
+      - channel.nr_ldpc_ofdm.transport_block_crc_failure_count
+      - channel.nr_ldpc_ofdm.attempted_transport_block_count
+      - channel.nr_ldpc_ofdm.delivered_transport_block_count
+      - channel.nr_ldpc_ofdm.attempted_payload_bit_count
+      - channel.nr_ldpc_ofdm.delivered_payload_bit_count
+      - channel.nr_ldpc_ofdm.occupied_data_resource_element_count
+      - channel.nr_ldpc_ofdm.simulator_executed_resource_element_count
+      - channel.nr_ldpc_ofdm.simulator_grid_padding_resource_element_count
+      - quality.psnr_db
+      - memory.run.peak_rss_bytes
+    description: Allocate a fixed sum-power budget across OFDM subcarriers for each frequency-selective channel-state snapshot.
+  - id: neural_receiver_demapping
+    name: Neural receiver demapping
+    area_id: physical_layer_resource_optimization
+    kind: transport_integrity
+    modality: bits
+    status: supported
+    target: demodulator.bits
+    metrics:
+      - channel.coded.ber
+      - channel.coded.bler
+    optional_metrics:
+      - channel.snr_db
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - channel.bits_per_symbol
+      - channel.pilot_overhead_fraction
+      - channel.effective_payload_bits_per_channel_use
+      - channel.carrier.initial_phase_abs_mean_rad
+      - channel.carrier.cfo_abs_mean_cycles_per_symbol
+      - channel.carrier.phase_noise_increment_std_rad
+      - channel.carrier.phase_drift_rms_rad
+      - channel.coded.error_count
+      - channel.coded.compare_bit_count
+      - channel.coded.block_error_count
+      - channel.coded.block_count
+      - receiver.neural_receiver_adapter
+    description: Recover transmitted bits from channel symbols using classical or neural receiver adapters.
+  - id: automatic_modulation_recognition
+    name: Automatic modulation recognition
+    area_id: physical_layer_resource_optimization
+    kind: signal_classification
+    modality: wireless
+    status: supported
+    target: receiver.prediction
+    required_artifacts:
+      reference: ai_phy.modulation_labels.numpy
+      prediction: ai_phy.modulation_predictions.numpy
+    metrics:
+      - modulation_recognition.accuracy
+      - modulation_recognition.balanced_accuracy
+      - modulation_recognition.macro_f1
+    optional_metrics:
+      - modulation_recognition.frame_count
+      - classification.balanced_accuracy
+      - task.accuracy
+      - task.score
+      - channel.snr_db
+      - channel.carrier.initial_phase_abs_mean_rad
+      - channel.carrier.cfo_abs_mean_cycles_per_symbol
+      - memory.run.peak_rss_bytes
+    description: Classify fixed-length received I/Q frames as BPSK, QPSK, or 16-QAM under unknown carrier phase and residual frequency offset using a blind cumulant baseline, an oracle-synchronized diagnostic, or a portable I/Q-only learned classifier.
+  - id: bit_transport
+    name: Bit transport integrity
+    area_id: physical_layer_resource_optimization
+    kind: transport_integrity
+    modality: bits
+    status: supported
+    metrics:
+      - channel.ber
+      - channel.payload.ber
+      - channel.coded.ber
+    optional_metrics:
+      - channel.payload.error_count
+      - channel.coded.error_count
+      - channel.payload.compare_bit_count
+      - channel.coded.compare_bit_count
+    description: Measure bit-level agreement across channel and payload boundaries.
+  - id: text_semantic_similarity
+    name: Text lexical reconstruction similarity
+    area_id: semantic_goal_oriented_communication
+    kind: semantic_reconstruction
+    modality: text
+    status: supported
+    target: receiver.texts
+    required_artifacts:
+      reference: text.batch.json
+      reconstruction: text.batch.json
+    metrics:
+      - semantic.lexical_similarity
+      - text.unigram_bleu_proxy
+      - text.edit_similarity
+      - text.exact_match
+    optional_metrics:
+      - codec.bit_count
+      - codec.bytes
+      - channel.payload_bit_count
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - memory.run.peak_rss_bytes
+      - faithfulness.concept_precision
+      - faithfulness.concept_recall
+      - faithfulness.concept_f1
+      - faithfulness.entity_precision
+      - faithfulness.entity_recall
+      - faithfulness.entity_f1
+      - faithfulness.fact_precision
+      - faithfulness.fact_recall
+      - faithfulness.fact_f1
+      - faithfulness.unsupported_assertion_rate
+      - faithfulness.fact_omission_rate
+      - faithfulness.kb_fact_precision
+      - text.remaining_mask_count
+    description: Text reconstruction evaluated with explicit lexical-overlap proxies, literal exact match, and optional grounded SemanticState faithfulness metrics; no embedding-based semantic similarity is implied.
+  - id: speech_recognition
+    name: Speech recognition
+    area_id: semantic_goal_oriented_communication
+    kind: task_success
+    modality: audio
+    status: planned
+    metrics:
+      - task.wer
+      - task.cer
+      - task.accuracy
+    description: Evaluate semantic transmission by downstream ASR performance.
+  - id: classification
+    name: Classification
+    area_id: semantic_goal_oriented_communication
+    kind: task_success
+    modality: generic
+    status: supported
+    target: candidate.prediction
+    required_artifacts:
+      reference: task.labels.json
+      prediction: task.predictions.json
+    metrics:
+      - task.accuracy
+      - task.exact_match
+      - classification.balanced_accuracy
+    optional_metrics:
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - timing.step.wall_time_s
+      - memory.run.peak_rss_bytes
+    description: Evaluate task-oriented semantic communication by downstream classification success.
+  - id: visual_question_answering
+    name: Visual question answering
+    area_id: semantic_goal_oriented_communication
+    kind: task_success
+    modality: multimodal
+    status: supported
+    target: receiver.answer
+    required_artifacts:
+      reference: vqa.answers.json
+      prediction: vqa.answers.json
+    metrics:
+      - vqa.single_reference_exact_match
+    optional_metrics:
+      - task.accuracy
+      - task.exact_match
+      - channel.payload_bit_count
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - timing.step.wall_time_s
+      - memory.run.peak_rss_bytes
+    description: Goal-oriented image/question answering over semantic channels.
+  - id: object_detection
+    name: Object detection
+    area_id: semantic_goal_oriented_communication
+    kind: task_success
+    modality: image
+    status: supported
+    target: receiver.detections
+    required_artifacts:
+      reference: vision.detections.json
+      prediction: vision.detections.json
+    metrics:
+      - detection.recall_at_iou_0p5_conf_0
+      - detection.precision_at_iou_0p5_conf_0
+      - detection.f1_at_iou_0p5_conf_0
+    optional_metrics:
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - timing.step.wall_time_s
+      - memory.run.peak_rss_bytes
+    description: Evaluate fixed-operating-point, semantic-class box agreement after transmission using deterministic maximum-cardinality matching; this is not AP or mAP.
+  - id: segmentation
+    name: Segmentation
+    area_id: semantic_goal_oriented_communication
+    kind: task_success
+    modality: image
+    status: supported
+    target: receiver.segmentation
+    required_artifacts:
+      reference: vision.segmentation_mask.numpy
+      prediction: vision.segmentation_mask.numpy
+    metrics:
+      - segmentation.semantic_raster_pooled_miou
+      - segmentation.semantic_raster_pooled_pixel_accuracy
+    optional_metrics:
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - timing.step.wall_time_s
+      - memory.run.peak_rss_bytes
+    description: Evaluate pooled semantic-class raster agreement after transmission; this is not instance segmentation or COCO mask AP.
+  - id: image_captioning
+    name: Image captioning
+    area_id: semantic_goal_oriented_communication
+    kind: task_success
+    modality: multimodal
+    status: planned
+    target: receiver.caption
+    required_artifacts:
+      reference: text.batch.json
+      prediction: text.batch.json
+    metrics:
+      - caption.unigram_bleu_proxy
+      - caption.lexical_similarity
+      - caption.exact_match
+    optional_metrics:
+      - caption.edit_similarity
+      - semantic.lexical_similarity
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - timing.step.wall_time_s
+      - memory.run.peak_rss_bytes
+    description: Planned image captioning task; only the caption metric evaluator is currently registered.
+  - id: image_text_retrieval
+    name: Image-text retrieval
+    area_id: semantic_goal_oriented_communication
+    kind: task_success
+    modality: multimodal
+    status: supported
+    target: receiver.ranking
+    required_artifacts:
+      rankings: retrieval.rankings.json
+    metrics:
+      - retrieval.hit_at_1
+      - retrieval.hit_at_5
+      - retrieval.hit_at_10
+    optional_metrics:
+      - retrieval.mrr_at_10
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - timing.step.wall_time_s
+      - memory.run.peak_rss_bytes
+    description: Evaluate one-positive-per-query image-text retrieval against a bound candidate universe and ranking depth.
+  - id: image_generation
+    name: Caption-to-image generation
+    area_id: semantic_goal_oriented_communication
+    kind: generative_reconstruction
+    modality: multimodal
+    status: supported
+    target: receiver.images
+    required_artifacts:
+      prompt: text.batch.json
+      generated: image.batch.numpy
+    metrics:
+      - generation.text_image_clip.cosine_mean
+      - generation.image_image_clip.cosine_mean
+    optional_metrics:
+      - generation.text_image_clip.cosine_min
+      - generation.text_image_clip.cosine_max
+      - generation.image_image_clip.cosine_min
+      - generation.image_image_clip.cosine_max
+      - channel.payload_bit_count
+      - channel.transmitted_bit_count
+      - channel.channel_use_count
+      - timing.step.wall_time_s
+      - memory.run.peak_rss_bytes
+    description: Evaluate text/semantic-state conditioned generative image receivers using CLIP-space alignment to prompts and optional source images.
+metrics:
+  - id: csi_feedback.achieved_spectral_efficiency_bps_hz
+    name: Achieved downlink spectral efficiency with reconstructed CSI
+    family: link
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: csi_feedback.perfect_csi_spectral_efficiency_bps_hz
+    name: Perfect-CSIT downlink spectral efficiency
+    family: link
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: csi_feedback.spectral_efficiency_retention
+    name: Perfect-CSIT spectral-efficiency retention
+    family: link
+    unit: ratio
+    direction: higher_is_better
+    reduction: mean
+  - id: csi_feedback.spectral_efficiency_loss_bps_hz
+    name: Spectral-efficiency loss from imperfect CSI feedback
+    family: link
+    unit: bit/s/Hz
+    direction: lower_is_better
+    reduction: mean
+  - id: csi_feedback.nmse
+    name: CSI reconstruction NMSE
+    family: estimation
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: csi_feedback.nmse_db
+    name: CSI reconstruction NMSE
+    family: estimation
+    unit: dB
+    direction: lower_is_better
+    reduction: mean
+  - id: csi_feedback.phase_invariant_cosine
+    name: Phase-invariant CSI correlation
+    family: estimation
+    unit: ratio
+    direction: higher_is_better
+    reduction: mean
+  - id: csi_feedback.feedback_dimension
+    name: Feedback latent dimension
+    family: rate
+    unit: real values/sample
+    direction: lower_is_better
+    reduction: constant
+  - id: csi_feedback.original_real_dimension
+    name: Uncompressed CSI real dimension
+    family: rate
+    unit: real values/sample
+    direction: neutral
+    reduction: constant
+  - id: csi_feedback.latent_fraction
+    name: Feedback latent fraction
+    family: rate
+    unit: ratio
+    direction: lower_is_better
+    reduction: constant
+  - id: csi_feedback.compression_factor
+    name: CSI feedback compression factor
+    family: rate
+    unit: x
+    direction: higher_is_better
+    reduction: constant
+  - id: csi_feedback.feedback_bits_per_sample
+    name: Actual quantized feedback bits per CSI sample
+    family: rate
+    unit: bit/sample
+    direction: lower_is_better
+    reduction: mean
+  - id: csi_feedback.quantization_mse
+    name: Feedback quantization MSE
+    family: transport
+    unit: squared_error
+    direction: lower_is_better
+    reduction: mean
+  - id: csi_feedback.quantization_clipped_fraction
+    name: Clipped feedback-latent fraction
+    family: transport
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: task.score
+    name: Generic task score
+    family: task
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: channel_estimation.nmse
+    name: Channel-estimation NMSE
+    family: estimation
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: channel_estimation.mse
+    name: Channel-estimation MSE
+    family: estimation
+    unit: squared_error
+    direction: lower_is_better
+    reduction: mean
+  - id: channel_estimation.nmse_db
+    name: Channel-estimation NMSE
+    family: estimation
+    unit: dB
+    direction: lower_is_better
+    reduction: mean
+  - id: channel_estimation.complex_correlation
+    name: Complex channel-estimate correlation
+    family: estimation
+    unit: ratio
+    direction: higher_is_better
+    reduction: mean
+  - id: mimo.channel_estimation.nmse
+    name: MIMO channel-estimation NMSE
+    family: estimation
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: mimo.channel_estimation.nmse_db
+    name: MIMO channel-estimation NMSE
+    family: estimation
+    unit: dB
+    direction: lower_is_better
+    reduction: mean
+  - id: mimo.channel_estimation.zf_spectral_efficiency_bps_hz
+    name: Post-ZF spectral efficiency with estimated CSI
+    family: link
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: mimo.channel_estimation.perfect_csi_zf_spectral_efficiency_bps_hz
+    name: Perfect-CSI ZF spectral-efficiency diagnostic
+    family: diagnostic
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: mimo.channel_estimation.zf_rate_retention
+    name: Perfect-CSI ZF spectral efficiency retained
+    family: link
+    unit: ratio
+    direction: higher_is_better
+    reduction: mean
+  - id: pilot.density
+    name: Pilot density
+    family: channel
+    unit: ratio
+    direction: neutral
+    reduction: constant
+  - id: beamforming.spectral_efficiency_bps_hz
+    name: Beamforming spectral efficiency
+    family: link
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: beamforming.normalized_gain
+    name: Beamforming normalized gain
+    family: link
+    unit: ratio
+    direction: higher_is_better
+    reduction: mean
+  - id: beamforming.array_gain_db
+    name: Beamforming array gain
+    family: link
+    unit: dB
+    direction: higher_is_better
+    reduction: mean
+  - id: localization.rmse_m
+    name: Localization RMSE
+    family: sensing
+    unit: m
+    direction: lower_is_better
+    reduction: mean
+  - id: localization.mae_m
+    name: Localization mean absolute error
+    family: sensing
+    unit: m
+    direction: lower_is_better
+    reduction: mean
+  - id: localization.p90_error_m
+    name: Localization p90 error
+    family: sensing
+    unit: m
+    direction: lower_is_better
+    reduction: p90
+  - id: aoa.rmse_deg
+    name: Angle-of-arrival RMSE
+    family: sensing
+    unit: degree
+    direction: lower_is_better
+    reduction: mean
+  - id: aoa.mae_deg
+    name: Angle-of-arrival mean absolute error
+    family: sensing
+    unit: degree
+    direction: lower_is_better
+    reduction: mean
+  - id: aoa.median_error_deg
+    name: Angle-of-arrival median absolute error
+    family: sensing
+    unit: degree
+    direction: lower_is_better
+    reduction: median
+  - id: aoa.p90_error_deg
+    name: Angle-of-arrival p90 absolute error
+    family: sensing
+    unit: degree
+    direction: lower_is_better
+    reduction: p90
+  - id: resource.theoretical_shannon_sum_bits_per_ofdm_symbol
+    name: Theoretical Shannon sum per OFDM symbol
+    family: system
+    unit: bit/OFDM-symbol
+    direction: higher_is_better
+    reduction: mean
+  - id: resource.theoretical_shannon_spectral_efficiency_bps_hz
+    name: Theoretical Shannon spectral efficiency
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: resource.finite_blocklength.expected_goodput_bps_hz
+    name: Predicted finite-blocklength expected goodput
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: resource.finite_blocklength.predicted_bler
+    name: Predicted finite-blocklength block error rate
+    family: system
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: resource.finite_blocklength.mean_capacity_bps_hz
+    name: Mean current-channel capacity under the allocation
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: resource.finite_blocklength.p05_goodput_bps_hz
+    name: Fifth-percentile predicted finite-blocklength goodput
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: p05
+  - id: resource.finite_blocklength.blocklength_channel_uses
+    name: Finite-blocklength channel uses
+    family: system
+    unit: channel-use
+    direction: neutral
+    reduction: mean
+  - id: resource.finite_blocklength.target_rate_bps_hz
+    name: Finite-blocklength target rate
+    family: system
+    unit: bit/s/Hz
+    direction: neutral
+    reduction: mean
+  - id: resource.nominal_snr_db
+    name: Nominal average-power SNR
+    family: channel
+    unit: dB
+    direction: neutral
+    reduction: mean
+  - id: resource.csi.feedback_delay_ofdm_symbols
+    name: Transmitter CSI feedback delay
+    family: channel
+    unit: OFDM-symbol
+    direction: neutral
+    reduction: mean
+  - id: resource.csi.feedback_delay_seconds
+    name: Transmitter CSI feedback delay
+    family: channel
+    unit: s
+    direction: neutral
+    reduction: mean
+  - id: resource.csi.observed_actual_complex_correlation
+    name: Delayed/current complex CSI correlation magnitude
+    family: channel
+    unit: ratio
+    direction: neutral
+    reduction: mean
+  - id: resource.csi.observed_actual_gain_correlation
+    name: Delayed/current channel-gain correlation
+    family: channel
+    unit: ratio
+    direction: neutral
+    reduction: mean
+  - id: resource.csi.observed_actual_complex_nmse
+    name: Delayed/current complex CSI mismatch NMSE
+    family: channel
+    unit: ratio
+    direction: neutral
+    reduction: mean
+  - id: resource.theoretical_min_subcarrier_spectral_efficiency_bps_hz
+    name: Minimum theoretical subcarrier spectral efficiency
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: min
+  - id: resource.theoretical_min_state_spectral_efficiency_bps_hz
+    name: Minimum theoretical state spectral efficiency
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: min
+  - id: resource.theoretical_p05_state_spectral_efficiency_bps_hz
+    name: Fifth-percentile theoretical state spectral efficiency
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: p05
+  - id: resource.theoretical_outage_probability
+    name: Theoretical capacity-outage probability at the declared target rate
+    family: system
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: resource.theoretical_outage_target_spectral_efficiency_bps_hz
+    name: Declared outage target spectral efficiency
+    family: system
+    unit: bit/s/Hz
+    direction: neutral
+    reduction: mean
+  - id: resource.water_filling_oracle_spectral_efficiency_bps_hz
+    name: Exact water-filling oracle spectral efficiency
+    family: system
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: resource.water_filling_optimality_gap_bps_hz
+    name: Spectral-efficiency gap to the exact water-filling oracle
+    family: system
+    unit: bit/s/Hz
+    direction: lower_is_better
+    reduction: mean
+  - id: resource.water_filling_relative_optimality_gap
+    name: Relative spectral-efficiency gap to the exact water-filling oracle
+    family: system
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: resource.water_filling_power_rmse
+    name: Power-allocation RMSE from the exact water-filling oracle
+    family: system
+    unit: normalized_power
+    direction: lower_is_better
+    reduction: mean
+  - id: resource.water_filling_power_normalized_rmse
+    name: Normalized power-allocation RMSE from the exact water-filling oracle
+    family: system
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: resource.water_filling_kkt_normalized_residual
+    name: Normalized water-filling KKT residual
+    family: system
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: resource.average_transmit_power_budget
+    name: Average transmit-power budget per subcarrier
+    family: system
+    unit: normalized_power
+    direction: neutral
+    reduction: mean
+  - id: resource.fairness_jain
+    name: Jain fairness index
+    family: system
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: resource.power_constraint.max_abs_error
+    name: Maximum sum-power constraint error
+    family: system
+    unit: normalized_power
+    direction: lower_is_better
+    reduction: max
+  - id: resource.power_constraint.max_relative_error
+    name: Maximum relative sum-power constraint error
+    family: system
+    unit: ratio
+    direction: lower_is_better
+    reduction: max
+  - id: resource.power_constraint.max_negative_violation
+    name: Maximum nonnegative-power constraint violation
+    family: system
+    unit: normalized_power
+    direction: lower_is_better
+    reduction: max
+  - id: resource.active_resource_element_fraction
+    name: Active OFDM resource-element fraction
+    family: system
+    unit: ratio
+    direction: neutral
+    reduction: mean
+  - id: resource.allocation_power_coefficient_of_variation
+    name: Allocation power coefficient of variation
+    family: system
+    unit: ratio
+    direction: neutral
+    reduction: mean
+  - id: resource.allocated_power_weighted_channel_gain_lift
+    name: Allocated-power-weighted channel-gain lift
+    family: system
+    unit: ratio
+    direction: higher_is_better
+    reduction: mean
+  - id: resource.water_filling.active_resource_element_fraction
+    name: Water-filling active resource-element fraction
+    family: system
+    unit: ratio
+    direction: neutral
+    reduction: mean
+  - id: channel.achieved_payload_goodput_bits_per_resource_element
+    name: Achieved payload goodput per scheduled resource element
+    family: channel
+    unit: bit/resource-element
+    direction: higher_is_better
+    reduction: mean
+  - id: channel.offered_payload_bits_per_resource_element
+    name: Offered payload bits per scheduled resource element
+    family: channel
+    unit: bit/resource-element
+    direction: neutral
+    reduction: mean
+  - id: channel.goodput_to_theoretical_shannon_efficiency_ratio
+    name: Achieved-goodput to theoretical-Shannon-efficiency ratio
+    family: channel
+    unit: ratio
+    direction: higher_is_better
+    reduction: mean
+  - id: channel.payload_energy_efficiency_bits_per_normalized_energy
+    name: RF-only payload energy efficiency
+    family: channel
+    unit: bit/normalized_energy
+    direction: higher_is_better
+    reduction: mean
+  - id: channel.tx_energy_per_delivered_payload_bit
+    name: Transmit energy per delivered payload bit
+    family: channel
+    unit: normalized_energy/bit
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.payload_delivery_block_error_rate
+    name: Payload delivery block error rate
+    family: channel
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.payload_delivery_success
+    name: Payload delivery success
+    family: channel
+    unit: binary
+    direction: higher_is_better
+    reduction: mean
+  - id: channel.tx_effective_snr_db
+    name: Transmit-power-referenced effective SNR
+    family: channel
+    unit: dB
+    direction: neutral
+    reduction: mean
+  - id: channel.scheduled_resource_element_count
+    name: Scheduled OFDM resource-element count
+    family: channel
+    unit: resource-element
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.data_bearing_resource_element_count
+    name: Data-bearing OFDM resource-element count
+    family: channel
+    unit: resource-element
+    direction: neutral
+    reduction: mean
+  - id: channel.resource_element_utilization
+    name: OFDM resource-element utilization
+    family: channel
+    unit: ratio
+    direction: neutral
+    reduction: mean
+  - id: channel.nr_ldpc_ofdm.all_attempt_goodput_bits_per_occupied_data_resource_element
+    name: CRC-gated NR-LDPC goodput per occupied QPSK data resource element
+    family: transport
+    unit: bit/resource-element
+    direction: higher_is_better
+    reduction: mean
+  - id: channel.nr_ldpc_ofdm.transport_block_error_rate
+    name: NR transport-block CRC error rate
+    family: transport
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.nr_ldpc_ofdm.transport_block_crc_failure_count
+    name: NR transport-block CRC failure count
+    family: transport
+    unit: count
+    direction: lower_is_better
+    reduction: sum
+  - id: channel.nr_ldpc_ofdm.attempted_transport_block_count
+    name: Attempted NR transport-block count
+    family: transport
+    unit: count
+    direction: neutral
+    reduction: sum
+  - id: channel.nr_ldpc_ofdm.delivered_transport_block_count
+    name: CRC-delivered NR transport-block count
+    family: transport
+    unit: count
+    direction: higher_is_better
+    reduction: sum
+  - id: channel.nr_ldpc_ofdm.attempted_payload_bit_count
+    name: Attempted valid NR payload-bit count
+    family: transport
+    unit: bits
+    direction: neutral
+    reduction: sum
+  - id: channel.nr_ldpc_ofdm.delivered_payload_bit_count
+    name: CRC-delivered valid NR payload-bit count
+    family: transport
+    unit: bits
+    direction: higher_is_better
+    reduction: sum
+  - id: channel.nr_ldpc_ofdm.occupied_data_resource_element_count
+    name: Occupied QPSK data resource-element count
+    family: channel
+    unit: resource-element
+    direction: neutral
+    reduction: sum
+  - id: channel.nr_ldpc_ofdm.simulator_executed_resource_element_count
+    name: Simulator-executed OFDM resource-element count
+    family: channel
+    unit: resource-element
+    direction: neutral
+    reduction: sum
+  - id: channel.nr_ldpc_ofdm.simulator_grid_padding_resource_element_count
+    name: Simulator grid-padding resource-element count
+    family: channel
+    unit: resource-element
+    direction: neutral
+    reduction: sum
+  - id: quality.psnr_db
+    name: PSNR
+    family: reconstruction
+    unit: dB
+    direction: higher_is_better
+    reduction: mean
+    description: Arithmetic mean of per-image PSNR; exact reconstructions use a disclosed finite sentinel strictly above the attainable finite PSNR ceiling and are also reported separately.
+  - id: quality.perfect_reconstruction_fraction
+    name: Perfect reconstruction fraction
+    family: reconstruction
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Fraction of evaluated images with exactly zero pixel error.
+  - id: quality.ms_ssim
+    name: MS-SSIM over evaluated eligible images
+    family: reconstruction
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+    description: Arithmetic mean only over images eligible for and successfully evaluated by MS-SSIM; use the accompanying coverage metrics to establish scope.
+  - id: quality.ms_ssim.evaluated_fraction_of_total
+    name: MS-SSIM evaluated fraction of all images
+    family: coverage
+    unit: fraction
+    direction: neutral
+    reduction: mean
+  - id: quality.ms_ssim.evaluated_fraction_of_eligible
+    name: MS-SSIM evaluated fraction of eligible images
+    family: coverage
+    unit: fraction
+    direction: neutral
+    reduction: mean
+  - id: quality.ms_ssim.total_image_count
+    name: MS-SSIM total image count
+    family: coverage
+    unit: images
+    direction: neutral
+    reduction: sum
+  - id: quality.ms_ssim.eligible_image_count
+    name: MS-SSIM eligible image count
+    family: coverage
+    unit: images
+    direction: neutral
+    reduction: sum
+  - id: quality.ms_ssim.evaluated_image_count
+    name: MS-SSIM evaluated image count
+    family: coverage
+    unit: images
+    direction: neutral
+    reduction: sum
+  - id: quality.mse
+    name: Mean squared error
+    family: reconstruction
+    unit: pixel^2
+    direction: lower_is_better
+    reduction: mean
+  - id: quality.mae
+    name: Mean absolute error
+    family: reconstruction
+    unit: pixel
+    direction: lower_is_better
+    reduction: mean
+  - id: codec.bit_count
+    name: Codec bit count
+    family: rate
+    unit: bits
+    direction: lower_is_better
+    reduction: sum
+    description: Serialized safe-wrapper bit count retained for compatibility; use codec.native_bit_count for codec-only rate comparisons.
+  - id: codec.native_bit_count
+    name: Native codec bit count
+    family: rate
+    unit: bits
+    direction: lower_is_better
+    reduction: sum
+    description: Exact native JPEG or learned entropy-coder bytes before Noema serialization, expressed as bits.
+  - id: codec.bytes
+    name: Codec byte count
+    family: rate
+    unit: bytes
+    direction: lower_is_better
+    reduction: sum
+  - id: channel.payload_bit_count
+    name: Payload bit count
+    family: rate
+    unit: bits
+    direction: lower_is_better
+    reduction: sum
+  - id: channel.transmitted_bit_count
+    name: Transmitted bit count
+    family: rate
+    unit: bits
+    direction: lower_is_better
+    reduction: sum
+  - id: channel.channel_use_count
+    name: Channel uses
+    family: rate
+    unit: symbols
+    direction: lower_is_better
+    reduction: sum
+  - id: channel.snr_db
+    name: Channel SNR
+    family: channel
+    unit: dB
+    direction: neutral
+    reduction: mean
+  - id: channel.noise_variance
+    name: Complex-symbol noise variance
+    family: channel
+    unit: normalized_power
+    direction: neutral
+    reduction: mean
+  - id: channel.packet_success_rate
+    name: Packet success rate
+    family: transport
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+  - id: channel.outage_rate
+    name: Outage rate
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.uses_per_pixel
+    name: Channel uses per pixel
+    family: rate
+    unit: channel_use/pixel
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.code_rate
+    name: Channel code rate
+    family: transport
+    unit: fraction
+    direction: neutral
+    reduction: mean
+  - id: channel.bits_per_symbol
+    name: Bits per modulation symbol
+    family: transport
+    unit: bit/symbol
+    direction: neutral
+    reduction: mean
+  - id: channel.pilot_overhead_fraction
+    name: Pilot overhead
+    family: rate
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.effective_payload_bits_per_channel_use
+    name: Effective payload rate
+    family: rate
+    unit: bit/channel_use
+    direction: higher_is_better
+    reduction: mean
+  - id: channel.carrier.initial_phase_abs_mean_rad
+    name: Mean absolute initial carrier phase
+    family: channel
+    unit: rad
+    direction: neutral
+    reduction: mean
+  - id: channel.carrier.cfo_abs_mean_cycles_per_symbol
+    name: Mean absolute residual frequency offset
+    family: channel
+    unit: cycle/symbol
+    direction: neutral
+    reduction: mean
+  - id: channel.carrier.phase_noise_increment_std_rad
+    name: Carrier phase-noise increment standard deviation
+    family: channel
+    unit: rad
+    direction: neutral
+    reduction: mean
+  - id: channel.carrier.phase_drift_rms_rad
+    name: RMS carrier phase drift
+    family: channel
+    unit: rad
+    direction: neutral
+    reduction: mean
+  - id: rate.bpp
+    name: Ambiguous bits per pixel (deprecated)
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+    reduction: mean
+    description: Deprecated compatibility metric whose accounting boundary is ambiguous; use rate.payload_bpp, rate.framed_bpp, rate.coded_bpp, or rate.padded_bpp.
+  - id: rate_bpp
+    name: Ambiguous bits per pixel (legacy)
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+    reduction: mean
+    description: Legacy compatibility spelling with an ambiguous accounting boundary; do not use for new comparisons.
+  - id: rate.payload_bpp
+    name: Serialized payload bits per source pixel (compatibility)
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+    reduction: mean
+    description: Compatibility metric for the payload artifact actually passed into framing. For codec comparisons use rate.native_codec_bpp for native JPEG/entropy bytes and rate.serialized_payload_bpp for the Noema safe wrapper explicitly.
+  - id: rate.native_codec_bpp
+    name: Native codec bits per source pixel
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+    reduction: mean
+    description: Bytes emitted by the native JPEG or entropy coder before Noema serialization, divided by the declared source-pixel count.
+  - id: channel.awgn.capacity_bpp
+    name: Ideal AWGN capacity per source pixel
+    family: rate
+    unit: bit/pixel
+    direction: neutral
+    reduction: mean
+    description: Fixed complex channel uses per source pixel multiplied by log2(1+SNR); this is a theoretical capacity-achieving reference rather than an implemented channel-code throughput.
+  - id: codec.jpeg.selected_quality_mean
+    name: Mean capacity-matched JPEG quality
+    family: codec
+    unit: jpeg_quality_factor
+    direction: neutral
+    reduction: mean
+    description: Arithmetic mean of the per-image JPEG quality factors selected under the ideal-capacity bit budget; zero denotes an image for which even the minimum JPEG quality did not fit.
+  - id: codec.jpeg.selected_quality_min
+    name: Minimum capacity-matched JPEG quality
+    family: codec
+    unit: jpeg_quality_factor
+    direction: neutral
+    reduction: min
+    description: Minimum per-image JPEG quality selected under the ideal-capacity bit budget; zero denotes an outage at the minimum supported quality.
+  - id: codec.jpeg.selected_quality_max
+    name: Maximum capacity-matched JPEG quality
+    family: codec
+    unit: jpeg_quality_factor
+    direction: neutral
+    reduction: max
+    description: Maximum per-image JPEG quality selected under the ideal-capacity bit budget.
+  - id: rate.serialized_payload_bpp
+    name: Serialized payload bits per source pixel
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+    reduction: mean
+    description: Native codec data plus the declared codec wire envelope (for example Noema's safe artifact format or compact communication format), divided by the declared source-pixel count, before packet framing and FEC.
+  - id: rate.framed_bpp
+    name: Framed bits per source pixel
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+    reduction: mean
+    description: Payload plus declared framing and transport-header bits divided by the declared source-pixel count, before error-control coding.
+  - id: rate.coded_bpp
+    name: Coded bits per source pixel
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+    reduction: mean
+    description: Error-control-coded bits divided by the declared source-pixel count, before modulation padding.
+  - id: rate.padded_bpp
+    name: Transmitted padded bits per source pixel
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+    reduction: mean
+    description: Final transmitted bit count after framing, error-control coding, and modulation padding, divided by the declared source-pixel count.
+  - id: memory.run.peak_rss_bytes
+    name: Peak run memory
+    family: resource
+    unit: bytes
+    direction: lower_is_better
+    reduction: max
+  - id: channel.ber
+    name: Bit error rate
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.payload.ber
+    name: Payload BER
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.coded.ber
+    name: Coded BER
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.bler
+    name: Block error rate
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.coded.bler
+    name: Coded BLER
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.payload.bler
+    name: Payload BLER
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+  - id: channel.coded.block_error_count
+    name: Coded block errors
+    family: transport
+    unit: count
+    direction: lower_is_better
+    reduction: sum
+  - id: channel.coded.block_count
+    name: Compared coded blocks
+    family: transport
+    unit: count
+    direction: neutral
+    reduction: sum
+  - id: channel.payload.error_count
+    name: Payload bit errors
+    family: transport
+    unit: count
+    direction: lower_is_better
+    reduction: sum
+  - id: channel.coded.error_count
+    name: Coded bit errors
+    family: transport
+    unit: count
+    direction: lower_is_better
+    reduction: sum
+  - id: channel.payload.compare_bit_count
+    name: Payload compared bits
+    family: transport
+    unit: bits
+    direction: neutral
+    reduction: sum
+  - id: channel.coded.compare_bit_count
+    name: Coded compared bits
+    family: transport
+    unit: bits
+    direction: neutral
+    reduction: sum
+  - id: receiver.neural_receiver_adapter
+    name: Neural receiver adapter used
+    family: receiver
+    unit: indicator
+    direction: neutral
+    reduction: max
+  - id: semantic.similarity
+    name: Semantic similarity
+    family: semantic
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+    status: planned
+  - id: semantic.lexical_similarity
+    name: Token F1 lexical similarity
+    family: semantic
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: semantic.bert_score
+    name: BERTScore
+    family: semantic
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+    status: planned
+  - id: faithfulness.concept_precision
+    name: SemanticState concept precision
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: faithfulness.concept_recall
+    name: SemanticState concept recall
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: faithfulness.concept_f1
+    name: SemanticState concept F1
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: faithfulness.entity_precision
+    name: SemanticState entity precision
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: faithfulness.entity_recall
+    name: SemanticState entity recall
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: faithfulness.entity_f1
+    name: SemanticState entity F1
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: faithfulness.fact_precision
+    name: SemanticState fact precision
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: faithfulness.fact_recall
+    name: SemanticState fact recall
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: faithfulness.fact_f1
+    name: SemanticState fact F1
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: faithfulness.unsupported_assertion_rate
+    name: Reference-relative unsupported assertion rate
+    family: faithfulness
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+    description: Candidate facts absent from the supplied reference divided by candidate fact count; an empty candidate has rate zero. This does not establish real-world hallucination.
+  - id: faithfulness.fact_omission_rate
+    name: Reference-relative fact omission rate
+    family: faithfulness
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+    description: Reference facts absent from the candidate divided by reference fact count; an empty reference has rate zero.
+  - id: faithfulness.kb_fact_precision
+    name: KB-grounded fact precision
+    family: faithfulness
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: text.unigram_bleu_proxy
+    name: Sentence unigram BLEU proxy
+    family: text
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+    description: Mean sentence-level clipped unigram precision with the BLEU brevity penalty; not standard corpus BLEU.
+  - id: text.edit_similarity
+    name: Normalized edit similarity
+    family: text
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: text.exact_match
+    name: Exact text match
+    family: text
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Literal Unicode string equality, including case, punctuation, and whitespace.
+  - id: text.remaining_mask_count
+    name: Remaining mask tokens
+    family: repair
+    unit: count
+    direction: lower_is_better
+    reduction: sum
+  - id: classification.balanced_accuracy
+    name: Balanced accuracy
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+  - id: modulation_recognition.accuracy
+    name: Modulation-recognition accuracy
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+  - id: modulation_recognition.balanced_accuracy
+    name: Modulation-recognition balanced accuracy
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+  - id: modulation_recognition.macro_f1
+    name: Modulation-recognition macro F1
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+  - id: modulation_recognition.frame_count
+    name: Evaluated modulation frames
+    family: classification
+    unit: frames
+    direction: neutral
+    reduction: sum
+  - id: vqa.single_reference_exact_match
+    name: VQA single-reference exact match
+    family: vqa
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Literal, case-sensitive Unicode string equality against one answer; not the consensus-based standard VQA accuracy.
+  - id: detection.precision_at_iou_0p5_conf_0
+    name: Fixed-point detection precision at IoU 0.5 and confidence 0
+    family: detection
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Semantic-class box precision after deterministic maximum-cardinality matching; not AP.
+  - id: detection.recall_at_iou_0p5_conf_0
+    name: Fixed-point detection recall at IoU 0.5 and confidence 0
+    family: detection
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Semantic-class box recall after deterministic maximum-cardinality matching; not AP.
+  - id: detection.f1_at_iou_0p5_conf_0
+    name: Fixed-point detection F1 at IoU 0.5 and confidence 0
+    family: detection
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: F1 at one explicitly bound IoU/confidence operating point; not AP or mAP.
+  - id: detection.precision_at_iou_0p5
+    name: Deprecated detection precision compatibility alias
+    family: detection
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Deprecated exact alias for detection.precision_at_iou_0p5_conf_0 only.
+  - id: detection.recall_at_iou_0p5
+    name: Deprecated detection recall compatibility alias
+    family: detection
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Deprecated exact alias for detection.recall_at_iou_0p5_conf_0 only.
+  - id: detection.f1_at_iou_0p5
+    name: Deprecated detection F1 compatibility alias
+    family: detection
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Deprecated exact alias for detection.f1_at_iou_0p5_conf_0 only.
+  - id: segmentation.semantic_raster_pooled_miou
+    name: Pooled semantic-raster macro IoU
+    family: segmentation
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Pool pixels across samples, compute IoU per observed semantic class, then take the unweighted class mean; not an instance-segmentation metric.
+  - id: segmentation.semantic_raster_pooled_pixel_accuracy
+    name: Pooled semantic-raster pixel accuracy
+    family: segmentation
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Pixel agreement pooled across all evaluated semantic rasters.
+  - id: segmentation.miou
+    name: Deprecated pooled semantic-raster mIoU alias
+    family: segmentation
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Deprecated exact alias for segmentation.semantic_raster_pooled_miou.
+  - id: segmentation.pixel_accuracy
+    name: Deprecated pooled semantic-raster pixel-accuracy alias
+    family: segmentation
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Deprecated exact alias for segmentation.semantic_raster_pooled_pixel_accuracy.
+  - id: caption.unigram_bleu_proxy
+    name: Caption sentence unigram BLEU proxy
+    family: captioning
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+    description: Mean sentence-level clipped unigram precision with brevity penalty; not standard corpus BLEU.
+  - id: caption.lexical_similarity
+    name: Caption lexical similarity
+    family: captioning
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: caption.edit_similarity
+    name: Caption edit similarity
+    family: captioning
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+  - id: caption.exact_match
+    name: Caption exact match
+    family: captioning
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Literal Unicode string equality, including case, punctuation, and whitespace.
+  - id: retrieval.hit_at_1
+    name: Single-positive retrieval Hit@1
+    family: retrieval
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+  - id: retrieval.hit_at_5
+    name: Single-positive retrieval Hit@5
+    family: retrieval
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+  - id: retrieval.hit_at_10
+    name: Single-positive retrieval Hit@10
+    family: retrieval
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+  - id: retrieval.recall_at_1
+    name: Deprecated single-positive Recall@1 alias
+    family: retrieval
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Deprecated exact alias for retrieval.hit_at_1 when each query declares exactly one positive target.
+  - id: retrieval.recall_at_5
+    name: Deprecated single-positive Recall@5 alias
+    family: retrieval
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Deprecated exact alias for retrieval.hit_at_5 when each query declares exactly one positive target.
+  - id: retrieval.recall_at_10
+    name: Deprecated single-positive Recall@10 alias
+    family: retrieval
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Deprecated exact alias for retrieval.hit_at_10 when each query declares exactly one positive target.
+  - id: retrieval.mrr_at_10
+    name: Mean reciprocal rank at 10
+    family: retrieval
+    unit: score
+    direction: higher_is_better
+    reduction: mean
+    description: Mean reciprocal rank evaluated only within the first 10 ranked candidates.
+  - id: generation.text_image_clip.cosine_mean
+    name: Text-image CLIP cosine
+    family: generation
+    unit: cosine
+    direction: higher_is_better
+    reduction: mean
+  - id: generation.text_image_clip.cosine_min
+    name: Text-image CLIP cosine min
+    family: generation
+    unit: cosine
+    direction: higher_is_better
+    reduction: min
+  - id: generation.text_image_clip.cosine_max
+    name: Text-image CLIP cosine max
+    family: generation
+    unit: cosine
+    direction: higher_is_better
+    reduction: max
+  - id: generation.image_image_clip.cosine_mean
+    name: Source-generated image CLIP cosine
+    family: generation
+    unit: cosine
+    direction: higher_is_better
+    reduction: mean
+  - id: generation.image_image_clip.cosine_min
+    name: Source-generated image CLIP cosine min
+    family: generation
+    unit: cosine
+    direction: higher_is_better
+    reduction: min
+  - id: generation.image_image_clip.cosine_max
+    name: Source-generated image CLIP cosine max
+    family: generation
+    unit: cosine
+    direction: higher_is_better
+    reduction: max
+  - id: timing.step.wall_time_s
+    name: Step wall time
+    family: timing
+    unit: s
+    direction: lower_is_better
+    reduction: sum
+  - id: task.wer
+    name: Word error rate
+    family: speech
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+    status: planned
+  - id: task.cer
+    name: Character error rate
+    family: speech
+    unit: fraction
+    direction: lower_is_better
+    reduction: mean
+    status: planned
+  - id: task.accuracy
+    name: Task accuracy
+    family: task
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+  - id: task.exact_match
+    name: Exact match
+    family: task
+    unit: fraction
+    direction: higher_is_better
+    reduction: mean
+    description: Literal equality after scalar JSON label values are rendered as strings; no case folding or punctuation normalization is applied.

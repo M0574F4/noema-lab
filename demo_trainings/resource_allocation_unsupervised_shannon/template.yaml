@@ -1,0 +1,86 @@
+schema_version: 1
+id: resource_allocation.unsupervised_shannon_deepsets
+name: Label-free OFDM power allocation from CSI
+kind: noema_demo_training_template
+exporter: resource-allocation
+framework: torch
+boundary:
+  noema_role:
+    - capture reproducible CSI from the canonical communication recipe
+    - export this standalone training project
+    - discover and verify the frozen hash-pinned block artifact
+  external_training_role:
+    - define and optimize the neural model
+    - select a checkpoint using validation spectral efficiency
+    - export a portable ONNX policy and optional provenance
+objective:
+  id: resource.negative_shannon_spectral_efficiency
+  direction: minimize
+  supervised: false
+  oracle_labels_used: false
+  formula: -mean_batch(mean_subcarrier(log2(1 + gain * allocated_power / noise_variance)))
+constraints:
+  nonnegative_power: exact_euclidean_simplex_projection
+  instantaneous_sum_power: exact
+  formula: sum_subcarrier(allocated_power) = subcarrier_count * average_power_budget
+model:
+  architecture: permutation_equivariant_deepsets_mean_pool
+  hidden_dim: 64
+  input: log(max(channel_gain * average_power_budget / noise_variance, eps))
+  output: unconstrained_per_subcarrier_allocation_scores
+  rationale: OFDM subcarriers form an unordered set coupled only by the shared power budget
+data:
+  required_training_taps:
+    - channel_gains
+  prohibited_training_taps:
+    - power_allocation
+    - oracle_power
+  required_splits:
+    - train
+    - validation
+    - test
+  split_unit: independent_channel_seed
+returned_artifact:
+  manifest_schema: noema.trained_block_artifact.v2
+  format: onnx
+  runtime: onnxruntime
+  contract: training_contract.yaml
+  integrity: required_sha256
+evaluation:
+  selection_metric: validation_shannon_spectral_efficiency_bps_hz
+  held_out_oracle: theoretical_water_filling_for_shannon_objective
+  metrics:
+    - capacity_ratio_learned_to_water_filling
+    - absolute_rate_regret_bps_hz
+    - relative_rate_regret
+    - allocation_power_normalized_rmse
+    - active_subcarrier_precision_recall_f1
+    - power_constraint_violations
+    - kkt_normalized_residual
+    - inference_latency
+    - seeded_bit_ber_bler_goodput_transport_diagnostics_not_oracle_metrics
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison:
+    - equal_power
+    - learned_allocator
+    - water_filling
+  pairing: common held-out payload, channel, and noise seeds at each power budget
+  presentation: metadata.demo@1
+references:
+  - title: Learning Optimal Resource Allocations in Wireless Systems
+    url: https://arxiv.org/abs/1807.08088
+    relevance: label-free native-objective resource allocation
+  - title: Graph Neural Networks for Scalable Radio Resource Management
+    url: https://arxiv.org/abs/2007.07632
+    relevance: permutation equivariance and objective-driven training
+  - title: Power Control with QoS Guarantees
+    url: https://arxiv.org/abs/2306.01787
+    relevance: differentiable projection for exact constraints
+  - title: Improving Learning Efficiency for Wireless Resource Allocation with Symmetric Prior
+    url: https://arxiv.org/abs/2005.08510
+    relevance: permutation equivariance of multicarrier water filling
+  - title: Deep Sets
+    url: https://arxiv.org/abs/1703.06114
+    relevance: set-model architecture

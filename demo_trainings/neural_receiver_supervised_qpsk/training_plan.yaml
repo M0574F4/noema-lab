@@ -1,0 +1,18 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps:
+  - demodulator
+dataset_capture:
+  taps:
+    - id: rx_symbols
+      from: receiver_frontend.rx_symbols
+    - id: target_bits
+      from: tx_bit_boundary.bits
+  split_plan:
+    total_samples: 48
+    percentages:
+      train: 66.6666666667
+      validation: 16.66666666665
+      test: 16.66666666665
+objective: bit.bce
+framework: torch

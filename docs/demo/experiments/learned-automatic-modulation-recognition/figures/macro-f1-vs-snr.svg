@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-labelledby="title desc">
+<title id="title">Macro F1 vs SNR</title>
+<desc id="desc">Generated deterministically from stored benchmark metrics. Each plotted point is the arithmetic mean of the observations represented by its row; 95 percent confidence intervals are shown where estimable.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:system-ui,-apple-system,sans-serif;fill:#172033}.axis{stroke:#697386;stroke-width:1}.grid{stroke:#e5e9f0;stroke-width:1}.label{font-size:13px}.tick{font-size:12px}.title{font-size:19px;font-weight:650}.legend{font-size:12px}</style>
+<text class="title" x="88" y="32">Macro F1 vs SNR</text>
+<line class="grid" x1="88" y1="438" x2="888" y2="438"/>
+<text class="tick" x="78" y="442" text-anchor="end">0.099885</text>
+<line class="grid" x1="88" y1="362.8" x2="888" y2="362.8"/>
+<text class="tick" x="78" y="366.8" text-anchor="end">0.29355</text>
+<line class="grid" x1="88" y1="287.6" x2="888" y2="287.6"/>
+<text class="tick" x="78" y="291.6" text-anchor="end">0.48722</text>
+<line class="grid" x1="88" y1="212.4" x2="888" y2="212.4"/>
+<text class="tick" x="78" y="216.4" text-anchor="end">0.68088</text>
+<line class="grid" x1="88" y1="137.2" x2="888" y2="137.2"/>
+<text class="tick" x="78" y="141.2" text-anchor="end">0.87455</text>
+<line class="grid" x1="88" y1="62" x2="888" y2="62"/>
+<text class="tick" x="78" y="66" text-anchor="end">1.0682</text>
+<line class="axis" x1="88" y1="438" x2="888" y2="438"/>
+<line class="axis" x1="88" y1="62" x2="88" y2="438"/>
+<polyline points="143.172414,412.068966 281.103448,412.068966 419.034483,412.068966 556.965517,258.772565 694.896552,88.487698 832.827586,88.487698" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<circle cx="143.172414" cy="412.068966" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5"><title>Blind differential cumulant · x=-2 · y=0.16667</title></circle>
+<circle cx="281.103448" cy="412.068966" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5"><title>Blind differential cumulant · x=2 · y=0.16667</title></circle>
+<circle cx="419.034483" cy="412.068966" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5"><title>Blind differential cumulant · x=6 · y=0.16667</title></circle>
+<circle cx="556.965517" cy="258.772565" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5"><title>Blind differential cumulant · x=10 · y=0.56146</title></circle>
+<circle cx="694.896552" cy="88.487698" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5"><title>Blind differential cumulant · x=14 · y=1</title></circle>
+<circle cx="832.827586" cy="88.487698" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5"><title>Blind differential cumulant · x=18 · y=1</title></circle>
+<polyline points="143.172414,330.162235 281.103448,214.526135 419.034483,157.615773 556.965517,97.68465 694.896552,90.510232 832.827586,89.667456" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+<circle cx="143.172414" cy="330.162235" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"><title>Learned blind-carrier classifier · x=-2 · y=0.3776</title></circle>
+<circle cx="281.103448" cy="214.526135" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"><title>Learned blind-carrier classifier · x=2 · y=0.67541</title></circle>
+<circle cx="419.034483" cy="157.615773" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"><title>Learned blind-carrier classifier · x=6 · y=0.82197</title></circle>
+<circle cx="556.965517" cy="97.68465" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"><title>Learned blind-carrier classifier · x=10 · y=0.97631</title></circle>
+<circle cx="694.896552" cy="90.510232" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"><title>Learned blind-carrier classifier · x=14 · y=0.99479</title></circle>
+<circle cx="832.827586" cy="89.667456" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"><title>Learned blind-carrier classifier · x=18 · y=0.99696</title></circle>
+<polyline points="143.172414,195.381409 281.103448,131.047741 419.034483,88.65623 556.965517,88.487698 694.896552,88.487698 832.827586,88.487698" fill="none" stroke="#059669" stroke-width="2.5"/>
+<circle cx="143.172414" cy="195.381409" r="5" fill="#059669" stroke="#ffffff" stroke-width="1.5"><title>Oracle-synchronized likelihood · x=-2 · y=0.72471</title></circle>
+<circle cx="281.103448" cy="131.047741" r="5" fill="#059669" stroke="#ffffff" stroke-width="1.5"><title>Oracle-synchronized likelihood · x=2 · y=0.89039</title></circle>
+<circle cx="419.034483" cy="88.65623" r="5" fill="#059669" stroke="#ffffff" stroke-width="1.5"><title>Oracle-synchronized likelihood · x=6 · y=0.99957</title></circle>
+<circle cx="556.965517" cy="88.487698" r="5" fill="#059669" stroke="#ffffff" stroke-width="1.5"><title>Oracle-synchronized likelihood · x=10 · y=1</title></circle>
+<circle cx="694.896552" cy="88.487698" r="5" fill="#059669" stroke="#ffffff" stroke-width="1.5"><title>Oracle-synchronized likelihood · x=14 · y=1</title></circle>
+<circle cx="832.827586" cy="88.487698" r="5" fill="#059669" stroke="#ffffff" stroke-width="1.5"><title>Oracle-synchronized likelihood · x=18 · y=1</title></circle>
+<line x1="556.965517" y1="261.756447" x2="556.965517" y2="255.788684" stroke="#2563eb" stroke-width="1.4"/>
+<line x1="552.965517" y1="261.756447" x2="560.965517" y2="261.756447" stroke="#2563eb" stroke-width="1.4"/>
+<line x1="552.965517" y1="255.788684" x2="560.965517" y2="255.788684" stroke="#2563eb" stroke-width="1.4"/>
+<line x1="143.172414" y1="339.402734" x2="143.172414" y2="320.921736" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="139.172414" y1="339.402734" x2="147.172414" y2="339.402734" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="139.172414" y1="320.921736" x2="147.172414" y2="320.921736" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="281.103448" y1="221.861477" x2="281.103448" y2="207.190792" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="277.103448" y1="221.861477" x2="285.103448" y2="221.861477" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="277.103448" y1="207.190792" x2="285.103448" y2="207.190792" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="419.034483" y1="159.816671" x2="419.034483" y2="155.414876" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="415.034483" y1="159.816671" x2="423.034483" y2="159.816671" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="415.034483" y1="155.414876" x2="423.034483" y2="155.414876" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="556.965517" y1="100.663248" x2="556.965517" y2="94.706051" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="552.965517" y1="100.663248" x2="560.965517" y2="100.663248" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="552.965517" y1="94.706051" x2="560.965517" y2="94.706051" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="694.896552" y1="92.172222" x2="694.896552" y2="88.848243" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="690.896552" y1="92.172222" x2="698.896552" y2="92.172222" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="690.896552" y1="88.848243" x2="698.896552" y2="88.848243" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="832.827586" y1="91.117914" x2="832.827586" y2="88.216999" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="828.827586" y1="91.117914" x2="836.827586" y2="91.117914" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="828.827586" y1="88.216999" x2="836.827586" y2="88.216999" stroke="#dc2626" stroke-width="1.4"/>
+<line x1="143.172414" y1="199.498619" x2="143.172414" y2="191.264198" stroke="#059669" stroke-width="1.4"/>
+<line x1="139.172414" y1="199.498619" x2="147.172414" y2="199.498619" stroke="#059669" stroke-width="1.4"/>
+<line x1="139.172414" y1="191.264198" x2="147.172414" y2="191.264198" stroke="#059669" stroke-width="1.4"/>
+<line x1="281.103448" y1="138.499697" x2="281.103448" y2="123.595786" stroke="#059669" stroke-width="1.4"/>
+<line x1="277.103448" y1="138.499697" x2="285.103448" y2="138.499697" stroke="#059669" stroke-width="1.4"/>
+<line x1="277.103448" y1="123.595786" x2="285.103448" y2="123.595786" stroke="#059669" stroke-width="1.4"/>
+<line x1="419.034483" y1="89.381426" x2="419.034483" y2="87.931034" stroke="#059669" stroke-width="1.4"/>
+<line x1="415.034483" y1="89.381426" x2="423.034483" y2="89.381426" stroke="#059669" stroke-width="1.4"/>
+<line x1="415.034483" y1="87.931034" x2="423.034483" y2="87.931034" stroke="#059669" stroke-width="1.4"/>
+<text class="tick" x="88" y="458" text-anchor="middle">-3.6</text>
+<text class="tick" x="248" y="458" text-anchor="middle">1.04</text>
+<text class="tick" x="408" y="458" text-anchor="middle">5.68</text>
+<text class="tick" x="568" y="458" text-anchor="middle">10.32</text>
+<text class="tick" x="728" y="458" text-anchor="middle">14.96</text>
+<text class="tick" x="888" y="458" text-anchor="middle">19.6</text>
+<text class="label" x="488" y="496" text-anchor="middle">Snr Db</text>
+<text class="label" x="18" y="250" text-anchor="middle" transform="rotate(-90 18 250)">Macro F1</text>
+<circle cx="96" cy="74" r="4" fill="#2563eb"/>
+<text class="legend" x="105" y="78">Blind differential cumulant</text>
+<circle cx="351" cy="74" r="4" fill="#dc2626"/>
+<text class="legend" x="360" y="78">Learned blind-carrier classifier</text>
+<circle cx="606" cy="74" r="4" fill="#059669"/>
+<text class="legend" x="615" y="78">Oracle-synchronized likelihood</text>
+</svg>

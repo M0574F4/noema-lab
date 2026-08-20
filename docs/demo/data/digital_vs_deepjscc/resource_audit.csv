@@ -1,0 +1,3 @@
+Method,Budgeted channel uses/source pixel,Maximum per-image channel uses/source pixel,Budget limit,Admitted
+Capacity-matched JPEG,0.5,0.5,0.5,yes
+Learned DeepJSCC,0.5,0.5,0.5,yes

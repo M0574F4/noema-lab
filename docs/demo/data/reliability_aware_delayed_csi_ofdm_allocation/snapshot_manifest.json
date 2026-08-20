@@ -1,0 +1,630 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "f333d6e5fa481fe95540cfc9e8de0245856e81e7e9af6ecae57b07abb3d92a4b",
+      "size_bytes": 23664
+    },
+    "chart_data.json": {
+      "sha256": "da25aebdf5cd3fa8f6c4a47128fd76fa0e73b4ac1deb841d09e37a86e73df622",
+      "size_bytes": 39526
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-delayed-csi-demo-chart-data.js",
+      "sha256": "da5d46cd2d66c3fedf2a3840d591e230990702701d03d51da202def1d3605185",
+      "size_bytes": 39689
+    },
+    "rows": 60,
+    "summary_table.csv": {
+      "sha256": "5ad59ce4143d3e6f67fd05da8127e4479b8c0dda13f0480d64d378f69a8050ab",
+      "size_bytes": 1319
+    }
+  },
+  "representative_preview": {
+    "average_power_budget": 0.8,
+    "display_stride": 2,
+    "evidence": {
+      "equal_power": {
+        "recipe_id": "equal_power_p0p8_seed95101",
+        "run_id": "20260726T193649Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p8_seed95101",
+        "snapshot_index": 0,
+        "summary": {
+          "path": "run_evidence/024-equal_power_p0p8_seed95101/summary.json",
+          "sha256": "80980ae85c2edd3287c29b86eb543e5aa02f21732bc20177a9468c76b39a8281",
+          "size_bytes": 8419392
+        }
+      },
+      "learned_allocator": {
+        "recipe_id": "learned_allocator_p0p8_seed95101",
+        "run_id": "20260726T193744Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p8_seed95101",
+        "snapshot_index": 0,
+        "summary": {
+          "path": "run_evidence/027-learned_allocator_p0p8_seed95101/summary.json",
+          "sha256": "cea77725f99d0c9c79a85185822da59da6b03436489968a5b61be4212c4fdd85",
+          "size_bytes": 8961295
+        }
+      },
+      "observed_csi_water_filling": {
+        "recipe_id": "observed_csi_water_filling_p0p8_seed95101",
+        "run_id": "20260726T193705Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p8_seed95101",
+        "snapshot_index": 0,
+        "summary": {
+          "path": "run_evidence/025-observed_csi_water_filling_p0p8_seed95101/summary.json",
+          "sha256": "73d379a380318981407070431273a425ecec469bc1ae50bff9637d6841fc5259",
+          "size_bytes": 8918968
+        }
+      },
+      "robust_csi_water_filling": {
+        "recipe_id": "robust_csi_water_filling_p0p8_seed95101",
+        "run_id": "20260726T193724Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p8_seed95101",
+        "snapshot_index": 0,
+        "summary": {
+          "path": "run_evidence/026-robust_csi_water_filling_p0p8_seed95101/summary.json",
+          "sha256": "1895040f8b5bea8b06d65c7158c3047eb6243e256c5167f6213dec5e6905edf7",
+          "size_bytes": 8989901
+        }
+      }
+    },
+    "feedback_delay_ofdm_symbols": 5,
+    "paired_seed": 95101,
+    "snapshot_index": 0,
+    "subcarrier_count": 128
+  },
+  "runs": [
+    {
+      "pairing_id": "95101",
+      "recipe_id": "equal_power_p0p4_seed95101",
+      "recipe_sha256": "4a0a5bc7b287ccd8bf29b3295a18b901e696b9a9c66545cf76d4b48b2117c557",
+      "role": "baseline",
+      "run_id": "20260726T192947Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p4_seed95101",
+      "semantic_recipe_sha256": "de5a8a60f611dca7172ba482f73e7ba2c97995afbd3378e62d1035e3791063fb"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "observed_csi_water_filling_p0p4_seed95101",
+      "recipe_sha256": "f86c142977d722b4d80e80b1e36fccca703105a41feea50edae05c1d4054cdf0",
+      "role": "baseline",
+      "run_id": "20260726T193003Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p4_seed95101",
+      "semantic_recipe_sha256": "4ed55f4c35977a3c03ca35f741c26f325823cde91ed42d44bdf1b1d0fadf812d"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "robust_csi_water_filling_p0p4_seed95101",
+      "recipe_sha256": "da5ba37a6a86cde430d34c2ad484159a4c68b2c4fe2490a00d2efbc74e6d8ca5",
+      "role": "baseline",
+      "run_id": "20260726T193020Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p4_seed95101",
+      "semantic_recipe_sha256": "4d821a1cdfcd34df9b89917fd02d72dea7070ec13d73b05023a972d0ac683dc0"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "learned_allocator_p0p4_seed95101",
+      "recipe_sha256": "e224eb28992fb4beb725d3037af7b2b91a958d671d2f5e86aced4fead21a8773",
+      "role": "candidate",
+      "run_id": "20260726T193038Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p4_seed95101",
+      "semantic_recipe_sha256": "7c191f661b22742445a6e2c04874d74ee321ba3be1b0eda3266616a7578bd785"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "equal_power_p0p4_seed95201",
+      "recipe_sha256": "453139ceac840986f21f5e0ca839bb82363024914801c12855e3d0ca5b36a9b5",
+      "role": "baseline",
+      "run_id": "20260726T193055Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p4_seed95201",
+      "semantic_recipe_sha256": "5c7ecb3bfcf2552d588ff5ec6b948038de68ef7f3d90c0be271e209c3ba958eb"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "observed_csi_water_filling_p0p4_seed95201",
+      "recipe_sha256": "cd34f5238dc5c6c59d429cdf57de6cbe1b9502b364cd7c6498e8108e854934e3",
+      "role": "baseline",
+      "run_id": "20260726T193109Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p4_seed95201",
+      "semantic_recipe_sha256": "ee61881a5b28934386dc528dfc898c3efe52da67ef7e1ad7dfc54759954b47dc"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "robust_csi_water_filling_p0p4_seed95201",
+      "recipe_sha256": "5652a1fce6088cd391901a19e92aec8b99e6ce4fd5397e9527131031a90c22fa",
+      "role": "baseline",
+      "run_id": "20260726T193126Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p4_seed95201",
+      "semantic_recipe_sha256": "c86c721dde7e2e6ab78b680f125f2cea686b54bb636abcba05410b4321d83596"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "learned_allocator_p0p4_seed95201",
+      "recipe_sha256": "2258b4fe98d8ad81491a17b8bd29761ae75afd5c051f21bd81ad7faa85356876",
+      "role": "candidate",
+      "run_id": "20260726T193145Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p4_seed95201",
+      "semantic_recipe_sha256": "5e0e27deddd15538cc0816c68b5d720c6a9d5c7a05c97755bd98c93236b5197f"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "equal_power_p0p4_seed95301",
+      "recipe_sha256": "21af95bde3e17a98ab5eedf16c30c2dec7b4d02945a80890de9bb82613f8547e",
+      "role": "baseline",
+      "run_id": "20260726T193202Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p4_seed95301",
+      "semantic_recipe_sha256": "4dd5112fd49ef4c9e71d876b163b01050929bb8aa02f7be6278ecf51c48b70ff"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "observed_csi_water_filling_p0p4_seed95301",
+      "recipe_sha256": "5078c584fdcd4b919a023a6e13f643c8105efe2cff72520b0baf7736f9b0b8dd",
+      "role": "baseline",
+      "run_id": "20260726T193216Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p4_seed95301",
+      "semantic_recipe_sha256": "e7b69b20ec2b36331e18122591924548dcc5fd91a6f60573dfca20b17b09cb53"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "robust_csi_water_filling_p0p4_seed95301",
+      "recipe_sha256": "1bcd17ee1b41f1d23f1009389eee4ceacb4bcce87b917cf1139303b1089080ac",
+      "role": "baseline",
+      "run_id": "20260726T193233Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p4_seed95301",
+      "semantic_recipe_sha256": "da951db668e9bcd424834da909268019a636d3ac965b6cf8fefd5d9fc867cb83"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "learned_allocator_p0p4_seed95301",
+      "recipe_sha256": "ed5b274385282e9821e4ef6bfedac489b53b2ef8bf958aee3baf0db3231834b3",
+      "role": "candidate",
+      "run_id": "20260726T193253Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p4_seed95301",
+      "semantic_recipe_sha256": "9e0dc97ed725b677d3200810e82df6959444bef87c0a8aa5b470a94b8fe3a81d"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "equal_power_p0p6_seed95101",
+      "recipe_sha256": "61cc29c3d11a73dd65393a2396c115dc07b818d12c17ed66e069e5fdb73fea70",
+      "role": "baseline",
+      "run_id": "20260726T193311Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p6_seed95101",
+      "semantic_recipe_sha256": "628b9b3ea0096cd8e1c17f62fe66193361941399ee93a02c2d6ee92cb4cf36f1"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "observed_csi_water_filling_p0p6_seed95101",
+      "recipe_sha256": "ddf2860921a5154d2c47bc1c554acd4210d00eb8f3c6912bca8509fed72fb896",
+      "role": "baseline",
+      "run_id": "20260726T193328Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p6_seed95101",
+      "semantic_recipe_sha256": "7fc60553b5f777ac9a39682578fd609f5a8c5a3abec4dda9810d43f062790374"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "robust_csi_water_filling_p0p6_seed95101",
+      "recipe_sha256": "fc989487a18fb952f981c7f2699873a59457fdc143bb77daa6369d836421e4cc",
+      "role": "baseline",
+      "run_id": "20260726T193347Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p6_seed95101",
+      "semantic_recipe_sha256": "ef98425a40bbe1c4e9a4296200080eedc5fbd772282fd4571a5a94b73fe58cd9"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "learned_allocator_p0p6_seed95101",
+      "recipe_sha256": "2d6f17e56a8dec018acaef6636a4509659aa16d24b6c1cfaaf2b266d81a4a07a",
+      "role": "candidate",
+      "run_id": "20260726T193406Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p6_seed95101",
+      "semantic_recipe_sha256": "502f6f7086fb9d32a8174144a9ddc1b231e131f4a88bd47e5b58a6619d7b03ad"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "equal_power_p0p6_seed95201",
+      "recipe_sha256": "3fa4b301ab31bb6f317e891ed95e5b82ea0079244c5c4d4238ff7317f5006807",
+      "role": "baseline",
+      "run_id": "20260726T193424Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p6_seed95201",
+      "semantic_recipe_sha256": "75064646b462d775ecff1bb51fe3270ef692626581a7d44dac6756f3934e852c"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "observed_csi_water_filling_p0p6_seed95201",
+      "recipe_sha256": "1bb368f6eed00444acfacbef2a708108dbba3d5bdc6dddcd4f68fc7ceedf90d9",
+      "role": "baseline",
+      "run_id": "20260726T193440Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p6_seed95201",
+      "semantic_recipe_sha256": "ca6de51045da19fe466613259c53f0609d7f064544d0162671910e4930898024"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "robust_csi_water_filling_p0p6_seed95201",
+      "recipe_sha256": "0b805cda9bb8bb677a43ce84ecfb406dba71ab6cf05f59710820e15972b90322",
+      "role": "baseline",
+      "run_id": "20260726T193459Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p6_seed95201",
+      "semantic_recipe_sha256": "33091a1a7cb95cbb7467a203dbdf9c608445f3d143675ebd090f05282d5e711a"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "learned_allocator_p0p6_seed95201",
+      "recipe_sha256": "a93209144a4e362ea26d5124e1a6d67cf65763ecafe305c6e8c5309736c82fe1",
+      "role": "candidate",
+      "run_id": "20260726T193518Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p6_seed95201",
+      "semantic_recipe_sha256": "d03ba6d396b2eb5c95d305e7c1d020c6c1eb34be9302a9b9581930eca55df2de"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "equal_power_p0p6_seed95301",
+      "recipe_sha256": "de8f1949c1349627048d0b2e10d13a9f7b33320f8524562694bb4166c651af22",
+      "role": "baseline",
+      "run_id": "20260726T193536Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p6_seed95301",
+      "semantic_recipe_sha256": "df49f99bcfb3904b5194caee698ca56013f5ffe60711fec8e02d04e5ef065e1f"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "observed_csi_water_filling_p0p6_seed95301",
+      "recipe_sha256": "ac9cfcc3237356105351e8afbec2f2482fd91ae3538f341cfb83dbcf62d38659",
+      "role": "baseline",
+      "run_id": "20260726T193551Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p6_seed95301",
+      "semantic_recipe_sha256": "2272bfb14aa51a736cd82021e0555d0efbedea1cc6bcf2f2d1d208225c98dd6a"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "robust_csi_water_filling_p0p6_seed95301",
+      "recipe_sha256": "3ca33b45084682dd8809eb469f3cd4f6b4c3bbc19ab9abbf1b42880338c244a5",
+      "role": "baseline",
+      "run_id": "20260726T193611Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p6_seed95301",
+      "semantic_recipe_sha256": "9f27f0f9ead39c8dc3cd5e3710e191e9e77efdaccb54a45563f037a487f969ad"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "learned_allocator_p0p6_seed95301",
+      "recipe_sha256": "06310e8b0cca777dc48ef1194b76c9034cbac32501fafe9a38b9d7ba44a56ae6",
+      "role": "candidate",
+      "run_id": "20260726T193631Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p6_seed95301",
+      "semantic_recipe_sha256": "08c9cbcfbc39f2c305461205ecfc3d32f12cd29079690ed8ff43dc154c665a3e"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "equal_power_p0p8_seed95101",
+      "recipe_sha256": "56d708614d89e3b63bee3494f03fe19a08bb7c303970d6eb68a69340e00b1f0c",
+      "role": "baseline",
+      "run_id": "20260726T193649Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p8_seed95101",
+      "semantic_recipe_sha256": "1ff5a5c186ec3829ec2ae50254c323cadc5d312a2e760cda660f76605283f035"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "observed_csi_water_filling_p0p8_seed95101",
+      "recipe_sha256": "a625558ed3aecc4bb8433709ff2e142f7a7124e95c8072a7604d3640b27ad961",
+      "role": "baseline",
+      "run_id": "20260726T193705Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p8_seed95101",
+      "semantic_recipe_sha256": "470086e432eb920e62861897ae75e31c345e53d835c92f5d52448584ce69c256"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "robust_csi_water_filling_p0p8_seed95101",
+      "recipe_sha256": "3b439ad19663c23a5bdbd19278866ba95f4d1ad2217892b9e07c14b013b25fe7",
+      "role": "baseline",
+      "run_id": "20260726T193724Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p8_seed95101",
+      "semantic_recipe_sha256": "c0f1a7a959b6762af273fa95f5f2d77922e55a1d7d64b3032265802389577040"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "learned_allocator_p0p8_seed95101",
+      "recipe_sha256": "6d4e5c0b3268341491b9b22feb5b8a4c773296d726d7dca31f7d082265f19db7",
+      "role": "candidate",
+      "run_id": "20260726T193744Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p8_seed95101",
+      "semantic_recipe_sha256": "b33f97c2ea14a2548ee4736e8d8674d60ff4b0efec53abebd60e4937e4941c22"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "equal_power_p0p8_seed95201",
+      "recipe_sha256": "12c0e57b01ea464a7c265d3c357a3d860d44f1a018bfdc633e12bacfa0554791",
+      "role": "baseline",
+      "run_id": "20260726T193802Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p8_seed95201",
+      "semantic_recipe_sha256": "ab89f3f7405d8660cbc8567f724f92a2f818ab7ce3c49a0ec61959810b16c455"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "observed_csi_water_filling_p0p8_seed95201",
+      "recipe_sha256": "cdb8a34d115fb7bdd06d991a82f9ea02e7a742dc31bcd05884ffcbdcb113a967",
+      "role": "baseline",
+      "run_id": "20260726T193818Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p8_seed95201",
+      "semantic_recipe_sha256": "06851cfbd7a0f3f27fba6365cbe6b526c78a3b96a5e414b90a7e15a83f0dcbac"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "robust_csi_water_filling_p0p8_seed95201",
+      "recipe_sha256": "3bfc30d1644bfee2cf332df8f479f7acfb6ec04f8f6cef0a5596d1d5a24cf9a1",
+      "role": "baseline",
+      "run_id": "20260726T193837Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p8_seed95201",
+      "semantic_recipe_sha256": "e6e8b5f329d2dd601de48befef761f21190bce6ee696f282b65db220b0589cfd"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "learned_allocator_p0p8_seed95201",
+      "recipe_sha256": "e0e13772c37b3f5214b3ff8a533ac24da987d3b027d0074146cef0775c394483",
+      "role": "candidate",
+      "run_id": "20260726T193857Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p8_seed95201",
+      "semantic_recipe_sha256": "9964518917fbd6c12d7cbe600fc2da478f981789c8a4c7508d65b7dc136bcfd9"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "equal_power_p0p8_seed95301",
+      "recipe_sha256": "15255ab919ad7a071e9139c5415f6f2da78d2bb3d141bfa8eaf695dd7408a94f",
+      "role": "baseline",
+      "run_id": "20260726T193916Z_ofdm_reliability_allocation_delayed_csi__equal_power_p0p8_seed95301",
+      "semantic_recipe_sha256": "d52b804f0d9411dec0b90888635d3ebcac07fb0d134efe4af477fe25e66fa395"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "observed_csi_water_filling_p0p8_seed95301",
+      "recipe_sha256": "cde4eb19fdb5842f24e1e48442c111b04fa07de49d7878e1a1c5e7f0872848da",
+      "role": "baseline",
+      "run_id": "20260726T193932Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p0p8_seed95301",
+      "semantic_recipe_sha256": "a314234e82afb30e53aa3aa4c62c571b65de9ecdfb0550a6a9e9515a6e0b3339"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "robust_csi_water_filling_p0p8_seed95301",
+      "recipe_sha256": "abe79c75e5c29e87c6a08866f2ca52d5cda266afadccb1d5955db2042c6706ea",
+      "role": "baseline",
+      "run_id": "20260726T193951Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p0p8_seed95301",
+      "semantic_recipe_sha256": "55ff8529dd1caff593cd4a1ebf5d28b72db445b050b51acc616e15d77950ad50"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "learned_allocator_p0p8_seed95301",
+      "recipe_sha256": "fcf7ab8ac320827080b963fb169a8f2289ebcb333a4332db49886b25aac45f11",
+      "role": "candidate",
+      "run_id": "20260726T194010Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p0p8_seed95301",
+      "semantic_recipe_sha256": "de1491c96c8019a19f88a255166034f559e2a4419670f9d9045b5ad0f643e948"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "equal_power_p1_seed95101",
+      "recipe_sha256": "6cc988b16267547e5a09cefbd5999c67da1b9fbbf629cc736f9771fd4f4fd566",
+      "role": "baseline",
+      "run_id": "20260726T194027Z_ofdm_reliability_allocation_delayed_csi__equal_power_p1_seed95101",
+      "semantic_recipe_sha256": "eb6002d36d4b330249fac1367a753998388c9fab26683a79a889f7f87cc83522"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "observed_csi_water_filling_p1_seed95101",
+      "recipe_sha256": "b235f3216e3019a73a5181e54f792c49209f43019dac221d9eccb7b698846b92",
+      "role": "baseline",
+      "run_id": "20260726T194042Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p1_seed95101",
+      "semantic_recipe_sha256": "264de05e6633997bb8b64ef3c94ec2d3cf5a84f5c8bdf9a9352c2c07b1b8fe53"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "robust_csi_water_filling_p1_seed95101",
+      "recipe_sha256": "8c5be21e559e9d69145475d3b9cd63e60b9b1f9f6f950eb30aea67b3d7d96081",
+      "role": "baseline",
+      "run_id": "20260726T194101Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p1_seed95101",
+      "semantic_recipe_sha256": "a583004b4afc6c99159466f2797709042bc3680f35362ea30f984250ea988468"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "learned_allocator_p1_seed95101",
+      "recipe_sha256": "86f503c5282760b04a8ddcaf453c3fe62cffed97468c461ae745bf50bb0a96b7",
+      "role": "candidate",
+      "run_id": "20260726T194120Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p1_seed95101",
+      "semantic_recipe_sha256": "4382dfc741033f9e2ab94dd3679d0f1a9c58fafbbab2f2781fdce78fe1e1f127"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "equal_power_p1_seed95201",
+      "recipe_sha256": "a9dc88abbab4ae197f6bb6e910ad0b3825387a38ea048485d3669d1f4f64c788",
+      "role": "baseline",
+      "run_id": "20260726T194137Z_ofdm_reliability_allocation_delayed_csi__equal_power_p1_seed95201",
+      "semantic_recipe_sha256": "36b664c1af83538f795889771e8bc869272ecf293267e7f378928377cffe2398"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "observed_csi_water_filling_p1_seed95201",
+      "recipe_sha256": "bedb0870638505daa97fd04dd5f8ad57ba9e064dcdd7a8a2024d9e7212a0226f",
+      "role": "baseline",
+      "run_id": "20260726T194151Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p1_seed95201",
+      "semantic_recipe_sha256": "49bf815b7538f371a5c1b4198f112eb5eb6729c6d4b5b16119125827ef73b61d"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "robust_csi_water_filling_p1_seed95201",
+      "recipe_sha256": "f0f0384d283ed2c2c64187a5c6d7fa334224edaf7566bbe83ca1dcffcae7c4b2",
+      "role": "baseline",
+      "run_id": "20260726T194210Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p1_seed95201",
+      "semantic_recipe_sha256": "cb0dbdec2cf64f903046a5cb9ec8d3592f7cebe3c439b48567e0f2f9a7f14a1a"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "learned_allocator_p1_seed95201",
+      "recipe_sha256": "f1fccf33c5fe4e5d7bcfc939adfaad71619af0189d30688a15d6f11fbcd4b4e1",
+      "role": "candidate",
+      "run_id": "20260726T194230Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p1_seed95201",
+      "semantic_recipe_sha256": "e56f5b3eb1368013b908dadad64c068837390acc93762660c96a81bc05e2a952"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "equal_power_p1_seed95301",
+      "recipe_sha256": "c4c94f7efdcd8ac5f762725919d925e5069071894ccf7d2a6d40388ed4b33e08",
+      "role": "baseline",
+      "run_id": "20260726T194247Z_ofdm_reliability_allocation_delayed_csi__equal_power_p1_seed95301",
+      "semantic_recipe_sha256": "ecd31d04480af594219e2a8aeb63d887b9428aa301751e9862b0ae3b577e348d"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "observed_csi_water_filling_p1_seed95301",
+      "recipe_sha256": "908b9f9c62306bfd1f16eee6c7d875ed8e28b72b4528850983a92a14fe4ce8a0",
+      "role": "baseline",
+      "run_id": "20260726T194301Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p1_seed95301",
+      "semantic_recipe_sha256": "c8e60578ed2cf2b8a26ba507953d9829f26047f4860548139f15a27bec242c05"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "robust_csi_water_filling_p1_seed95301",
+      "recipe_sha256": "bbea12fa962f2b126dc9def2416318e374eabc85a27c143339083273c1315934",
+      "role": "baseline",
+      "run_id": "20260726T194320Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p1_seed95301",
+      "semantic_recipe_sha256": "6095049fd25595186bfba971c537509c06798d788bb5af3c058b3ffb07e25c92"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "learned_allocator_p1_seed95301",
+      "recipe_sha256": "044633c0da56f961fef5d5a6707cdc701df087a33eb64289bd3394209c3c25f0",
+      "role": "candidate",
+      "run_id": "20260726T194339Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p1_seed95301",
+      "semantic_recipe_sha256": "1f46070a26133899ba3c5045e946238b9b12632b52b37faac271eec54f4750c4"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "equal_power_p1p4_seed95101",
+      "recipe_sha256": "d4635faa98d5e322ddbddeeee8d562501d4e288c20e439fc43aa61f8a623a9ff",
+      "role": "baseline",
+      "run_id": "20260726T194356Z_ofdm_reliability_allocation_delayed_csi__equal_power_p1p4_seed95101",
+      "semantic_recipe_sha256": "5efda9c5fd341f77136f079ad87f09447ac86a6db726acb828b88ce76cd6136b"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "observed_csi_water_filling_p1p4_seed95101",
+      "recipe_sha256": "2fc50f780d7162f1bbfcf587afd7d7199c2a59af6ea3c038a0fc234ae2f6e796",
+      "role": "baseline",
+      "run_id": "20260726T194410Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p1p4_seed95101",
+      "semantic_recipe_sha256": "7ddfdefc8dc25e61729c4e18eda5155fec36925e473698c0c19a13de228dc31b"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "robust_csi_water_filling_p1p4_seed95101",
+      "recipe_sha256": "b7cdaa92f608d1227340377c68dbc23bac9689e17f4f0a06c62dc35dc3aec757",
+      "role": "baseline",
+      "run_id": "20260726T194429Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p1p4_seed95101",
+      "semantic_recipe_sha256": "aa29de937a2a2e5a1b378729d9e1532dfa159ab9dedefdaa8df4313a92e4279d"
+    },
+    {
+      "pairing_id": "95101",
+      "recipe_id": "learned_allocator_p1p4_seed95101",
+      "recipe_sha256": "36be287f5e936c5af784eb2599b17d492b9f1e6f3d7441f11e98f6c46e4de692",
+      "role": "candidate",
+      "run_id": "20260726T194448Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p1p4_seed95101",
+      "semantic_recipe_sha256": "d252fc66e69172bde884b3000196904486093bbc2e6917c9377bf45c5da2cc8d"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "equal_power_p1p4_seed95201",
+      "recipe_sha256": "eab30ae51b3931cd696d80d1c48f6ede19a4f81dbc97565167e0ac01a88746a7",
+      "role": "baseline",
+      "run_id": "20260726T194505Z_ofdm_reliability_allocation_delayed_csi__equal_power_p1p4_seed95201",
+      "semantic_recipe_sha256": "1208d0c0f342c16c057f8f30024c76483697ab52a020c82b35253fb321e04a52"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "observed_csi_water_filling_p1p4_seed95201",
+      "recipe_sha256": "e502576e5d2319e934983f38c90cf25a04eeb4ecf98f8d63afdec94f5f37b1e0",
+      "role": "baseline",
+      "run_id": "20260726T194520Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p1p4_seed95201",
+      "semantic_recipe_sha256": "a04d583243750880cf3b0628a409eb27292594fa9cabe80177b246b61db2cda5"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "robust_csi_water_filling_p1p4_seed95201",
+      "recipe_sha256": "a00db4574893cf60c1fb2e3bd0359b073ebd7926807266fe487a56b92fa80f2d",
+      "role": "baseline",
+      "run_id": "20260726T194539Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p1p4_seed95201",
+      "semantic_recipe_sha256": "f102b9238027581930765750d0f7a289ef674e0401dfabbe15b09add9efe3065"
+    },
+    {
+      "pairing_id": "95201",
+      "recipe_id": "learned_allocator_p1p4_seed95201",
+      "recipe_sha256": "532846fd1afb4a990c4951cfb2f586b4d714f375be8ddc367d811f99d78b2348",
+      "role": "candidate",
+      "run_id": "20260726T194559Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p1p4_seed95201",
+      "semantic_recipe_sha256": "a6290a7614ea61ee799423ea7e56a7807382df198af928a607d505b50a752cdc"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "equal_power_p1p4_seed95301",
+      "recipe_sha256": "b28c8bc0bc697371bb5cdc104ce79f4197d801fb43835c59e58d3079d9bae2d2",
+      "role": "baseline",
+      "run_id": "20260726T194616Z_ofdm_reliability_allocation_delayed_csi__equal_power_p1p4_seed95301",
+      "semantic_recipe_sha256": "f6132b973e89a8860366acf4ff9c1072bea26db24f023ae259664ed0fb1ca86f"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "observed_csi_water_filling_p1p4_seed95301",
+      "recipe_sha256": "836415575b75529e681a221d3df1c17a3c8c0620c72befdc1f54761d99507888",
+      "role": "baseline",
+      "run_id": "20260726T194631Z_ofdm_reliability_allocation_delayed_csi__observed_csi_water_filling_p1p4_seed95301",
+      "semantic_recipe_sha256": "1990d29de08509735ef318c822a727caacca64e12fe550255af29448d6a9e2e8"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "robust_csi_water_filling_p1p4_seed95301",
+      "recipe_sha256": "d2c8d2a03caf24769be088cbfa75b64b70f5bf8339956c112db9a0f40d3920c6",
+      "role": "baseline",
+      "run_id": "20260726T194651Z_ofdm_reliability_allocation_delayed_csi__robust_csi_water_filling_p1p4_seed95301",
+      "semantic_recipe_sha256": "c8778f9b963b9aeb46a875d88c0f008d58215265fd2dbfeaa63f05bd8a677070"
+    },
+    {
+      "pairing_id": "95301",
+      "recipe_id": "learned_allocator_p1p4_seed95301",
+      "recipe_sha256": "cde64c24f586a4dacd96ac78e7c5d66285a81f65019cd88e65ce87cb8059089b",
+      "role": "candidate",
+      "run_id": "20260726T194711Z_ofdm_reliability_allocation_delayed_csi__learned_allocator_p1p4_seed95301",
+      "semantic_recipe_sha256": "a85740d5584393714b9d849dc255c059daa491e03cd572b30d492796cf55ff11"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "reliability-aware-delayed-csi-ofdm-allocation",
+  "source": {
+    "benchmark_id": "resource_allocation.delayed_csi_finite_blocklength_post_training_v2",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "2.0.0",
+    "completed_at_utc": "2026-07-26T19:47:28.794Z",
+    "created_at_utc": "2026-07-26T19:29:46.104Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "b5b39b81d4374a5b6bb3226a17c64a14e310f79f53654f6a229dd5c6db97793f",
+        "size_bytes": 5294682
+      },
+      "recipes.csv": {
+        "sha256": "ffe6916ecc8ca61079d38bd8de23ca2246cadd05e45751083ff6bcd799a220b5",
+        "size_bytes": 23795
+      },
+      "result.json": {
+        "sha256": "9208bea28be10b8e90329ed4a2b620c07460089de7329d0cb26a7417a3eb77c8",
+        "size_bytes": 2703205
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "61666edea3801f3141cdce890d393bab91e73124b3149b0a62ad777d887f0ea2",
+        "size_bytes": 1660
+      }
+    },
+    "result_id": "20260726T192946Z_resource_allocation.delayed_csi_finite_blocklength_post_training_v2",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "average transmit-power budget",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out trajectory seeds",
+    "paired_seeds": [
+      95101,
+      95201,
+      95301
+    ],
+    "sample_count_per_method_and_budget": 3,
+    "statistical_unit": "paired held-out TDL trajectory seed",
+    "warning": "Three paired seeds support an experimental demonstration, not a paper-grade population claim."
+  },
+  "training_evidence": {
+    "component": {
+      "id": "policy",
+      "kind": "component",
+      "path": "training_evidence/entries/000-learned_allocator/artifact/artifacts/power_policy.onnx",
+      "sha256": "18868922a2bd109c65150bd6f10aec039c80ec42b180a43a44af6e1e486a8225",
+      "size_bytes": 96233
+    },
+    "contract": {
+      "id": "ofdm_reliability_allocation_delayed_csi.b8f3da53e951",
+      "kind": "contract",
+      "path": "training_evidence/entries/000-learned_allocator/artifact/training_contract.yaml",
+      "sha256": "784bb0576ae1860fb14ebd19bc90cd5e258604ea64d37dcfeb25bafc53f40ac2",
+      "size_bytes": 6470
+    },
+    "evaluation_metrics": {
+      "path": "training_evidence/entries/000-learned_allocator/evidence/evaluation_metrics.json",
+      "sha256": "b008e2a4762ab6135e3f1a9fedfe823461a1b8e6503f62f11f10b0b645df7225",
+      "size_bytes": 226758
+    },
+    "series": "learned_allocator",
+    "trained_artifact_manifest": {
+      "path": "training_evidence/entries/000-learned_allocator/artifact/trained_artifact_manifest.yaml",
+      "sha256": "94473e9417cc1fb65afe9aefb1710482df1a047e4f9c21334fc2be294447550b",
+      "size_bytes": 194328
+    },
+    "training_history": {
+      "path": "training_evidence/entries/000-learned_allocator/evidence/training_history.json",
+      "sha256": "c3df0880b48a48583aed0c8e02082e20eaf70c3873b03e6d1a913c238ec0db16",
+      "size_bytes": 1575499
+    }
+  }
+}

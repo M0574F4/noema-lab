@@ -1,0 +1,48 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: neural_receiver.phase_tracking_qpsk
+name: Neural receiver · packet phase tracking
+status: reference_only
+operation: demodulation.phase_tracking_receiver_adapter
+framework: torch
+data:
+  owner: noema_capture_contract
+  runtime_features:
+    - strong pilot-smoother-corrected I/Q and raw received QPSK I/Q
+    - pilot mask and pilot innovation relative to the smoother
+    - pilot-smoother phasor and normalized fourth-power phase cue
+  target: transmitted data-bit boundary
+  training_only_auxiliary_target: oracle carrier phase trace
+model:
+  owner: external_researcher
+  reference_candidates:
+    - depthwise-separable pilot-smoother residual TCN, width 32
+    - depthwise-separable pilot-smoother residual TCN, width 48
+  selection: material validation-BER improvement with per-SNR non-regression; otherwise exact baseline fallback
+loss:
+  owner: external_researcher
+  reference_objective: phase-only pretraining followed by masked bit BCE plus circular residual-phase loss
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: single_binding
+  entrypoint: phase_tracking_receiver
+  inputs:
+    - receiver_features_v3 [packet, frame_symbol, 11]
+  outputs:
+    - residual_phase_rad [packet, frame_symbol]
+  excludes:
+    - phase_truth
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison:
+    - uncompensated_qpsk
+    - pilot_interpolation
+    - pilot_smoothing
+    - decision_directed_pll
+    - learned_receiver
+    - oracle_phase
+  sweep: wireless_channel.snr_db
+  pairing: common payload, AWGN, and carrier-impairment seeds at each SNR
+  presentation: metadata.demo@1

@@ -1,0 +1,26 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps:
+  - estimator
+dataset_capture:
+  taps:
+    - id: pilot_observations
+      from: pilot_observation.observation
+    - id: pilot_ls
+      from: pilot_observation.pilot_ls
+    - id: pilot_mask
+      from: pilot_observation.pilot_mask
+    - id: ls_estimate
+      from: pilot_observation.ls_estimate
+    - id: noise_variance
+      from: pilot_observation.noise_variance
+    - id: channel_truth
+      from: pilot_observation.truth
+  split_plan:
+    total_samples: 18432
+    percentages:
+      train: 66.6666666667
+      validation: 16.66666666665
+      test: 16.66666666665
+objective: channel.normalized_mse
+framework: torch

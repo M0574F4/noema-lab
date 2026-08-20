@@ -1,0 +1,120 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: eflic_kodak_default
+description: EF-LIC entropy-free image compression on the Kodak image set.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: cli_default
+  codec_profile: eflic
+  codec_label: EF-LIC
+  codec_output_form: indices
+  codec_format: "*.pth.tar"
+  semantic_representation: indices
+  transport_representation: indices_packed_to_bits
+  channel_enabled: false
+  channel_mode: disabled
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.modulator_input.bit_count
+  measure_codec_timing: true
+  codec_timing:
+    enabled: true
+    runner: pytorch
+    warmup_runs: 0
+    timed_runs: 1
+steps:
+  - id: data
+    op: source.image_dataset
+    params:
+      dataset: kodak
+      dataset_dir: .noema/datasets/kodak
+      image_ids: kodim01,kodim02,kodim03,kodim04,kodim05,kodim06,kodim07,kodim08,kodim09,kodim10,kodim11,kodim12,kodim13,kodim14,kodim15,kodim16,kodim17,kodim18,kodim19,kodim20,kodim21,kodim22,kodim23,kodim24
+      crop_size: 0
+
+  - id: sender
+    op: model.eflic_encode_indices
+    inputs:
+      images: data.images
+    params:
+      repo_path: .noema/upstreams/EF-LIC
+      checkpoint: .noema/checkpoints/eflic/checkpoint.pth.tar
+      auto_setup: false
+      force_ind: 2
+      device: cpu
+      pad_to_multiple: 64
+
+  - id: payload_encoder
+    op: model.eflic_indices_to_bits
+    inputs:
+      indices: sender.indices
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: payload_encoder.bits
+    params:
+      label: payload_input
+      role: payload_input
+
+  - id: channel_encoder
+    op: channel.identity_encoder
+    inputs:
+      bits: payload_bit_boundary.bits
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: modulator_input
+      role: modulator_input
+
+  - id: wireless_channel
+    op: channel.identity_link
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      label: disabled_channel
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: wireless_channel.bits
+    params:
+      label: identity_channel_output
+      role: identity_channel_output
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: channel_io
+
+  - id: channel_decoder
+    op: channel.identity_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits
+
+  - id: payload_decoder
+    op: model.eflic_bits_to_indices
+    inputs:
+      bits: channel_decoder.bits
+
+  - id: receiver
+    op: model.eflic_decode_indices
+    inputs:
+      indices: payload_decoder.indices
+    params:
+      on_error: fail
+
+  - id: evaluation
+    op: metrics.image_reconstruction
+    inputs:
+      reference: data.images
+      reconstruction: receiver.images

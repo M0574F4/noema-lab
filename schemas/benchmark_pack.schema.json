@@ -1,0 +1,423 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lab.dev/schemas/benchmark_pack.schema.json",
+  "title": "Noema benchmark pack",
+  "type": "object",
+  "required": ["schema_version", "id", "version", "dataset", "task", "metrics", "recipes"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "name": {"type": "string"},
+    "description": {"type": "string"},
+    "dataset": {"$ref": "#/$defs/datasetDefinition"},
+    "task": {"type": "object"},
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/metricDefinition"}
+    },
+    "baselines": {"type": "array", "items": {"type": "string"}},
+    "recipes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "path"],
+        "properties": {
+          "id": {"type": "string"},
+          "path": {"type": "string"},
+          "label": {"type": "string"},
+          "role": {"type": "string"},
+          "params": {
+            "type": "object",
+            "properties": {
+              "resource_budget": {"$ref": "#/$defs/resourceBudget"},
+              "run_evidence": {
+                "type": "object",
+                "required": ["retained_artifact_paths"],
+                "properties": {
+                  "retained_artifact_paths": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "minLength": 11,
+                      "pattern": "^artifacts/[^\\\\\\u0000-\\u001f\\u007f]+$"
+                    },
+                    "description": "Exact manifest-relative artifact paths to retain in this recipe entry's result-local run-evidence snapshot."
+                  }
+                },
+                "additionalProperties": false
+              },
+              "fixed_channel_use_budget": {
+                "type": "number",
+                "minimum": 0,
+                "deprecated": true,
+                "description": "Deprecated alias for a steps.wireless_channel.channel.uses_per_pixel resource budget."
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "benchmark_tier": {"enum": ["smoke", "canonical", "experimental"]},
+        "traceability_profile_requested": {
+          "type": "boolean",
+          "description": "Requests Noema's strongest local traceability profile; this is not a claim of scientific validity, legal clearance, independent reproduction, or publication acceptance."
+        },
+        "publication_ready": {
+          "type": "boolean",
+          "deprecated": true,
+          "description": "Deprecated compatibility alias for traceability_profile_requested."
+        },
+        "verification_profile": {
+          "$ref": "#/$defs/publicationVerificationProfileBinding"
+        },
+        "protocol_id": {"type": "string"},
+        "protocol_version": {"type": "string"},
+        "frozen": {"type": "boolean"},
+        "dataset_split": {"type": "object"},
+        "resource_budget": {"$ref": "#/$defs/resourceBudget"},
+        "require_disjoint_training_lineage": {"type": "boolean"},
+        "common_conditions": {"$ref": "#/$defs/commonConditions"},
+        "channel": {"type": "object"},
+        "rate_accounting": {"type": "object"},
+        "expected_outputs": {"type": "array", "items": {"type": "string"}}
+      },
+      "allOf": [
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {"traceability_profile_requested": {"const": true}},
+                "required": ["traceability_profile_requested"]
+              },
+              {
+                "properties": {"publication_ready": {"const": true}},
+                "required": ["publication_ready"]
+              }
+            ]
+          },
+          "then": {
+            "properties": {"benchmark_tier": {"const": "canonical"}},
+            "required": ["benchmark_tier", "verification_profile"]
+          }
+        },
+        {
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "traceability_profile_requested": {"const": true},
+                  "publication_ready": {"const": false}
+                },
+                "required": [
+                  "traceability_profile_requested",
+                  "publication_ready"
+                ]
+              },
+              {
+                "properties": {
+                  "traceability_profile_requested": {"const": false},
+                  "publication_ready": {"const": true}
+                },
+                "required": [
+                  "traceability_profile_requested",
+                  "publication_ready"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "publicationVerificationProfileBinding": {
+      "type": "object",
+      "required": ["id", "sha256"],
+      "properties": {
+        "id": {"const": "noema.traceability.v2"},
+        "sha256": {
+          "const": "1ee5af4e236df50eef50612cc1d6912fa58442a8a46d0b00adc3ee6d857f45b1"
+        }
+      },
+      "additionalProperties": false
+    },
+    "datasetDefinition": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "split": {"type": ["string", "object"]},
+        "sample_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "selection_role": {
+          "enum": [
+            "development_only",
+            "development_regression",
+            "adaptation_validation",
+            "publication_test",
+            "sealed_test"
+          ]
+        },
+        "preprocessing": {
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "operation_params": {"type": "object"},
+            "color_space": {"type": "string", "minLength": 1},
+            "sample_domain": {"type": "string", "minLength": 1},
+            "spatial_policy": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": true
+        },
+        "source_bindings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/sourceBinding"}
+        },
+        "access_policy": {
+          "type": "object",
+          "required": ["state", "publication_test"],
+          "properties": {
+            "state": {
+              "enum": [
+                "unsealed_reusable",
+                "reusable_validation",
+                "sealed_single_access"
+              ]
+            },
+            "publication_test": {"type": "boolean"},
+            "access_ledger": {"type": "string", "minLength": 1},
+            "access_budget": {"type": "integer", "minimum": 1},
+            "seal_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "redistribution": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Dataset redistribution grant, restriction, or license identifier bound by the access policy."
+            }
+          },
+          "additionalProperties": false
+        },
+        "manifest": {"type": "object"}
+      },
+      "additionalProperties": true
+    },
+    "metricDefinition": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "definition_version": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1,
+          "description": "Version of the normalized Noema benchmark metric definition; omitted v1 declarations normalize to 1."
+        },
+        "family": {"type": "string", "minLength": 1},
+        "unit": {"type": "string", "minLength": 1},
+        "direction": {
+          "enum": ["higher_is_better", "lower_is_better", "neutral"]
+        },
+        "source_step": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Authoritative recipe step that emits this publication metric."
+        },
+        "producer_step": {
+          "type": "string",
+          "minLength": 1,
+          "deprecated": true,
+          "description": "Deprecated alias for source_step."
+        },
+        "source_operation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional authoritative operation ID for the source step."
+        },
+        "source_operations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1},
+          "description": "Closed set of authoritative operation IDs when methods use distinct implementations at the same logical source step."
+        },
+        "applicable_roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1},
+          "description": "When present, this metric is required and provenance-checked only for entries with one of these exact recipe roles."
+        }
+      },
+      "not": {"required": ["source_operation", "source_operations"]},
+      "additionalProperties": true
+    },
+    "sourceBinding": {
+      "type": "object",
+      "required": ["operation", "selection_param", "params"],
+      "properties": {
+        "operation": {"type": "string", "minLength": 1},
+        "selection_param": {"type": "string", "minLength": 1},
+        "selection_format": {"enum": ["comma_separated", "list"]},
+        "dataset_param": {"type": "string", "minLength": 1},
+        "params": {"type": "object"},
+        "match_params": {"type": "object"},
+        "required": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "resourceBudget": {
+      "type": "object",
+      "required": ["metric", "maximum", "tolerance", "policy"],
+      "properties": {
+        "metric": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^steps\\.[^.]+\\..+$",
+          "description": "Step-scoped measured metric in the form steps.<step_id>.<metric>."
+        },
+        "maximum": {"type": "number", "minimum": 0},
+        "tolerance": {"type": "number", "minimum": 0},
+        "policy": {"const": "reject"},
+        "unit": {"type": "string", "minLength": 1},
+        "metric_unit": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Physical unit of the measured source metric before any declared conversion."
+        },
+        "aggregation_policy": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Frozen rule by which item-level resources become the scalar admission observation."
+        },
+        "conversion": {
+          "$ref": "#/$defs/idealizedNativePayloadUseProxy"
+        }
+      },
+      "allOf": [
+        {
+          "if": {"required": ["conversion"]},
+          "then": {
+            "required": ["unit", "metric_unit", "aggregation_policy"]
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "idealizedNativePayloadUseProxy": {
+      "type": "object",
+      "required": [
+        "kind",
+        "source_unit",
+        "output_unit",
+        "modulation_order",
+        "nominal_code_rate"
+      ],
+      "properties": {
+        "kind": {
+          "const": "noema.resource_conversion.idealized_native_payload_use_proxy"
+        },
+        "source_unit": {"type": "string", "minLength": 1},
+        "output_unit": {"type": "string", "minLength": 1},
+        "modulation_order": {
+          "type": "integer",
+          "minimum": 2,
+          "description": "Power-of-two constellation size M; runtime validation enforces the power-of-two constraint."
+        },
+        "nominal_code_rate": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "executed_bindings": {
+          "type": "object",
+          "required": ["modulation_order", "code_rate"],
+          "properties": {
+            "modulation_order": {"type": "integer", "minimum": 2},
+            "code_rate": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1
+            },
+            "source_unit": {"type": "string", "minLength": 1},
+            "output_unit": {"type": "string", "minLength": 1},
+            "binding_identity": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "commonConditions": {
+      "type": "object",
+      "required": ["power", "randomness", "receiver", "failure"],
+      "properties": {
+        "power": {
+          "type": "object",
+          "required": ["coordinate", "normalization_scope", "target"],
+          "properties": {
+            "coordinate": {"type": "string", "minLength": 1},
+            "normalization_scope": {"type": "string", "minLength": 1},
+            "target": {"type": "number", "exclusiveMinimum": 0}
+          },
+          "additionalProperties": true
+        },
+        "randomness": {
+          "type": "object",
+          "required": ["pairing_keys", "seed_derivation", "paired_operation_ids"],
+          "properties": {
+            "pairing_keys": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "seed_derivation": {"type": "string", "minLength": 1},
+            "paired_operation_ids": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            }
+          },
+          "additionalProperties": true
+        },
+        "receiver": {
+          "type": "object",
+          "required": ["channel_state_information", "receiver_processing"],
+          "properties": {
+            "channel_state_information": {"type": "string", "minLength": 1},
+            "receiver_processing": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": true
+        },
+        "failure": {
+          "type": "object",
+          "required": ["outage_definition", "decode_failure_policy", "denominator_policy"],
+          "properties": {
+            "outage_definition": {"type": "string", "minLength": 1},
+            "decode_failure_policy": {"type": "string", "minLength": 1},
+            "denominator_policy": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

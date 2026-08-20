@@ -1,0 +1,47 @@
+schema_version: 1
+id: vqa_goal_oriented_smoke_v1
+version: "1"
+name: Goal-oriented VQA smoke benchmark
+dataset:
+  id: coco_vqa_smoke
+  modality: multimodal
+  version: coco-vqa-smoke-v1
+task:
+  id: visual_question_answering
+  kind: task_success
+  modality: multimodal
+channel: disabled
+metrics:
+  - id: vqa.single_reference_exact_match
+    family: vqa
+    unit: fraction
+    direction: higher_is_better
+  - id: task.exact_match
+    family: vqa
+    unit: fraction
+    direction: higher_is_better
+  - id: channel.payload_bit_count
+    family: channel
+    unit: bit
+    direction: lower_is_better
+  - id: channel.transmitted_bit_count
+    family: channel
+    unit: bit
+    direction: lower_is_better
+baselines:
+  - vqa_goal_oriented_smoke
+recipes:
+  - id: vqa_goal_oriented_smoke
+    label: VQA semantic packet smoke
+    role: baseline
+    path: recipes/vqa_goal_oriented_smoke.yaml
+description: Dependency-light VQA benchmark that validates semantic packet transmission, fixed bit boundaries, and task-answer metrics.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  benchmark_tier: smoke
+  benchmark_stage: goal_oriented_vqa
+  expected_runtime: short

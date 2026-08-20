@@ -1,0 +1,90 @@
+schema_version: 1
+id: beamforming_precoding.beam_selection_v1
+version: "0.1.0"
+name: Beam Selection / Precoding
+description: Single-user flat-fading MISO upper-bound benchmark comparing perfect-CSIT MRT with a finite DFT-codebook selection oracle.
+suite:
+  id: beamforming_precoding
+  name: Beamforming / Precoding
+  status: experimental
+  version: v1-draft
+dataset:
+  id: synthetic_beamforming
+  modality: wireless
+  version: synthetic-beamforming-v1
+  split: fixed_seed
+task:
+  id: beamforming_precoding
+  kind: link_optimization
+  modality: wireless
+metrics:
+  - id: channel.snr_db
+    definition_version: 1
+    source_step: data
+    source_operation: source.beamforming_scenario
+    family: channel
+    unit: dB
+    direction: neutral
+  - id: beamforming.spectral_efficiency_bps_hz
+    family: link
+    unit: bit/s/Hz
+    direction: higher_is_better
+  - id: task.score
+    family: task
+    unit: score
+    direction: higher_is_better
+baselines:
+  - mrt_beamformer
+  - beamforming_adapter
+recipes:
+  - id: mrt_snr0
+    label: Perfect-CSIT MRT upper bound
+    role: oracle
+    path: ../../recipes/beamforming_mrt_baseline.yaml
+    params:
+      method_id: mrt_beamformer
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        data:
+          snr_db: 0
+  - id: adapter_snr0
+    label: Finite-codebook selection oracle
+    role: baseline
+    path: ../../recipes/beamforming_adapter_baseline.yaml
+    params:
+      method_id: beamforming_adapter
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        data:
+          snr_db: 0
+  - id: mrt_snr15
+    label: Perfect-CSIT MRT upper bound
+    role: oracle
+    path: ../../recipes/beamforming_mrt_baseline.yaml
+    params:
+      method_id: mrt_beamformer
+      matrix_selection:
+        channel.snr_db: 15
+      step_params:
+        data:
+          snr_db: 15
+  - id: adapter_snr15
+    label: Finite-codebook selection oracle
+    role: baseline
+    path: ../../recipes/beamforming_adapter_baseline.yaml
+    params:
+      method_id: beamforming_adapter
+      matrix_selection:
+        channel.snr_db: 15
+      step_params:
+        data:
+          snr_db: 15
+metadata:
+  benchmark_tier: experimental
+  default_plot:
+    plot: graceful-degradation
+    x: channel.snr_db
+    y: task.score
+  notes: Both policies observe the realized channel; MRT is an upper bound and exhaustive DFT-codebook selection is an oracle within the finite codebook. The adapter block is the replacement point for learned or feedback-constrained policies.

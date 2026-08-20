@@ -1,0 +1,504 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://M0574F4.github.io/noema-lab/schemas/launch_evidence.schema.json",
+  "title": "Noema launch evidence projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "schema_version",
+    "projection_id",
+    "role",
+    "scientific_status",
+    "distribution_clearance",
+    "identity",
+    "design",
+    "series",
+    "comparisons",
+    "headline",
+    "presentation",
+    "consumer_contract",
+    "provenance",
+    "sha256"
+  ],
+  "properties": {
+    "kind": {"const": "noema.launch_evidence_projection"},
+    "schema_version": {"const": 1},
+    "projection_id": {"const": "noema.qpsk_iq_calibration.launch.v1"},
+    "role": {"const": "launch_demonstration"},
+    "scientific_status": {"$ref": "#/$defs/scientific_status"},
+    "distribution_clearance": {"$ref": "#/$defs/distribution_clearance"},
+    "identity": {"$ref": "#/$defs/identity"},
+    "design": {"$ref": "#/$defs/design"},
+    "series": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {"$ref": "#/$defs/series"}
+    },
+    "comparisons": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {"$ref": "#/$defs/comparison"}
+    },
+    "headline": {"$ref": "#/$defs/headline"},
+    "presentation": {"$ref": "#/$defs/presentation"},
+    "consumer_contract": {"$ref": "#/$defs/consumer_contract"},
+    "provenance": {"$ref": "#/$defs/provenance"},
+    "sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "file_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "size_bytes"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "size_bytes": {"type": "integer", "minimum": 0}
+      }
+    },
+    "scientific_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_level",
+        "benchmark_tier",
+        "verification_status",
+        "publication_ready",
+        "disclosure",
+        "warnings",
+        "limitations",
+        "aggregation",
+        "uncertainty_display",
+        "reference_role"
+      ],
+      "properties": {
+        "evidence_level": {"const": "completed_experimental_benchmark"},
+        "benchmark_tier": {"const": "experimental"},
+        "verification_status": {"const": "warning"},
+        "publication_ready": {"const": false},
+        "disclosure": {"type": "string", "minLength": 1},
+        "warnings": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "aggregation": {"const": "arithmetic_mean_across_paired_seeds"},
+        "uncertainty_display": {"const": "observed_min_max_not_confidence_interval"},
+        "reference_role": {"type": "string", "minLength": 1}
+      }
+    },
+    "distribution_clearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "handoff_status",
+        "paper_review_status",
+        "paper_final_binding_status",
+        "overall_rights_status",
+        "rights_final_review_status",
+        "included_rights_status",
+        "launch_asset_rights_status",
+        "release_gate_blocked"
+      ],
+      "properties": {
+        "status": {"enum": ["candidate", "cleared"]},
+        "handoff_status": {"enum": ["review_in_progress", "ready_for_release"]},
+        "paper_review_status": {"enum": ["in_progress", "finalized"]},
+        "paper_final_binding_status": {"enum": ["missing", "declared"]},
+        "overall_rights_status": {"enum": ["required", "cleared"]},
+        "rights_final_review_status": {"enum": ["missing", "approved"]},
+        "included_rights_status": {"enum": ["pending", "all_cleared"]},
+        "launch_asset_rights_status": {"enum": ["review_required", "cleared"]},
+        "release_gate_blocked": {"type": "boolean"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"status": {"const": "cleared"}},
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "handoff_status": {"const": "ready_for_release"},
+              "paper_review_status": {"const": "finalized"},
+              "paper_final_binding_status": {"const": "declared"},
+              "overall_rights_status": {"const": "cleared"},
+              "rights_final_review_status": {"const": "approved"},
+              "included_rights_status": {"const": "all_cleared"},
+              "launch_asset_rights_status": {"const": "cleared"},
+              "release_gate_blocked": {"const": false}
+            }
+          }
+        }
+      ]
+    },
+    "origin_digests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result_json_sha256",
+        "benchmark_json_sha256",
+        "metrics_csv_sha256",
+        "benchmark_semantic_sha256",
+        "trained_artifact_runtime_identity_sha256"
+      ],
+      "properties": {
+        "result_json_sha256": {"$ref": "#/$defs/sha256"},
+        "benchmark_json_sha256": {"$ref": "#/$defs/sha256"},
+        "metrics_csv_sha256": {"$ref": "#/$defs/sha256"},
+        "benchmark_semantic_sha256": {"$ref": "#/$defs/sha256"},
+        "trained_artifact_runtime_identity_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project",
+        "current_version",
+        "target_version",
+        "experiment_id",
+        "title",
+        "tutorial_path",
+        "result_id",
+        "benchmark_id",
+        "benchmark_version",
+        "result_status",
+        "completed_at_utc",
+        "manifest_recorded_origin_digests"
+      ],
+      "properties": {
+        "project": {"const": "Noema"},
+        "current_version": {"type": "string", "minLength": 1},
+        "target_version": {"type": "string", "minLength": 1},
+        "experiment_id": {"const": "learned_qpsk_demapper_demo"},
+        "title": {"const": "Learned QPSK Receiver Calibration"},
+        "tutorial_path": {"const": "docs/tutorials/learned_qpsk_demapper_demo.md"},
+        "result_id": {"type": "string", "minLength": 1},
+        "benchmark_id": {"type": "string", "minLength": 1},
+        "benchmark_version": {"type": "string", "minLength": 1},
+        "result_status": {"const": "completed"},
+        "completed_at_utc": {"type": "string", "minLength": 1},
+        "manifest_recorded_origin_digests": {"$ref": "#/$defs/origin_digests"}
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "role"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1},
+        "role": {"enum": ["baseline", "reference", "candidate"]}
+      }
+    },
+    "design": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methods",
+        "snr_db",
+        "paired_seeds",
+        "bits_per_run",
+        "blocks_per_run",
+        "runs_per_method_and_snr",
+        "run_count",
+        "statistical_unit",
+        "frozen_observation_grid_sha256"
+      ],
+      "properties": {
+        "methods": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"$ref": "#/$defs/method"}
+        },
+        "snr_db": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": {"type": "number"}
+        },
+        "paired_seeds": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"type": "integer"}
+        },
+        "bits_per_run": {"type": "integer", "minimum": 1},
+        "blocks_per_run": {"type": "integer", "minimum": 1},
+        "runs_per_method_and_snr": {"type": "integer", "minimum": 1},
+        "run_count": {"type": "integer", "minimum": 1},
+        "statistical_unit": {"type": "string", "minLength": 1},
+        "frozen_observation_grid_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paired_seed",
+        "recipe_id",
+        "run_id",
+        "bit_errors",
+        "compared_bits",
+        "ber",
+        "block_errors",
+        "compared_blocks",
+        "bler",
+        "recipe_sha256",
+        "semantic_recipe_sha256"
+      ],
+      "properties": {
+        "paired_seed": {"type": "integer"},
+        "recipe_id": {"type": "string", "minLength": 1},
+        "run_id": {"type": "string", "minLength": 1},
+        "bit_errors": {"type": "integer", "minimum": 0},
+        "compared_bits": {"type": "integer", "minimum": 1},
+        "ber": {"type": "number", "minimum": 0, "maximum": 1},
+        "block_errors": {"type": "integer", "minimum": 0},
+        "compared_blocks": {"type": "integer", "minimum": 1},
+        "bler": {"type": "number", "minimum": 0, "maximum": 1},
+        "recipe_sha256": {"$ref": "#/$defs/sha256"},
+        "semantic_recipe_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mean_ber", "minimum_ber", "maximum_ber"],
+      "properties": {
+        "mean_ber": {"type": "number", "minimum": 0, "maximum": 1},
+        "minimum_ber": {"type": "number", "minimum": 0, "maximum": 1},
+        "maximum_ber": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snr_db", "observations", "summary"],
+      "properties": {
+        "snr_db": {"type": "number"},
+        "observations": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"$ref": "#/$defs/observation"}
+        },
+        "summary": {"$ref": "#/$defs/summary"}
+      }
+    },
+    "series": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "role", "points"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1},
+        "role": {"enum": ["baseline", "reference", "candidate"]},
+        "points": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": {"$ref": "#/$defs/point"}
+        }
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snr_db",
+        "uncompensated_mean_ber",
+        "calibrated_reference_mean_ber",
+        "learned_mean_ber",
+        "learned_minimum_ber",
+        "learned_maximum_ber",
+        "learned_reduction_percent",
+        "learned_relative_gap_to_reference_percent"
+      ],
+      "properties": {
+        "snr_db": {"type": "number"},
+        "uncompensated_mean_ber": {"type": "number", "minimum": 0, "maximum": 1},
+        "calibrated_reference_mean_ber": {"type": "number", "minimum": 0, "maximum": 1},
+        "learned_mean_ber": {"type": "number", "minimum": 0, "maximum": 1},
+        "learned_minimum_ber": {"type": "number", "minimum": 0, "maximum": 1},
+        "learned_maximum_ber": {"type": "number", "minimum": 0, "maximum": 1},
+        "learned_reduction_percent": {"type": "number"},
+        "learned_relative_gap_to_reference_percent": {"type": "number"}
+      }
+    },
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum", "maximum"],
+      "properties": {
+        "minimum": {"type": "number"},
+        "maximum": {"type": "number"}
+      }
+    },
+    "headline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "accessible_summary",
+        "selection_rules",
+        "primary_snr_db",
+        "primary_learned_reduction_percent",
+        "observed_reduction_range_percent",
+        "maximum_absolute_relative_gap_to_reference_percent"
+      ],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "accessible_summary": {"type": "string", "minLength": 1},
+        "selection_rules": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["primary_cell", "reference_gap"],
+          "properties": {
+            "primary_cell": {"const": "highest_predeclared_snr"},
+            "reference_gap": {"const": "maximum_absolute_relative_gap_across_all_predeclared_cells"}
+          }
+        },
+        "primary_snr_db": {"type": "number"},
+        "primary_learned_reduction_percent": {"type": "number"},
+        "observed_reduction_range_percent": {"$ref": "#/$defs/range"},
+        "maximum_absolute_relative_gap_to_reference_percent": {"type": "number", "minimum": 0}
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["figure", "table", "video_overlay"],
+      "properties": {
+        "figure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "path", "generator_path", "id", "title", "type", "x_axis", "y_axis", "data_path"],
+          "properties": {
+            "status": {"const": "canonical_asset_generated"},
+            "path": {"const": "docs/_static/launch/f3-receiver-ber-vs-snr.svg"},
+            "generator_path": {"const": "tools/generate_launch_assets.py"},
+            "id": {"const": "qpsk_iq_calibration_ber"},
+            "title": {"type": "string", "minLength": 1},
+            "type": {"const": "line_with_observed_range"},
+            "x_axis": {"const": "SNR (dB)"},
+            "y_axis": {"const": "Pre-decoder bit error rate (log scale)"},
+            "data_path": {"const": "series"}
+          }
+        },
+        "table": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "paths", "generator_path", "id", "title", "data_path"],
+          "properties": {
+            "status": {"const": "canonical_asset_generated"},
+            "paths": {
+              "const": [
+                "docs/_static/launch/tables/t0-result-summary.csv",
+                "docs/_static/launch/tables/t0-result-summary.md"
+              ]
+            },
+            "generator_path": {"const": "tools/generate_launch_assets.py"},
+            "id": {"const": "qpsk_iq_calibration_ber_table"},
+            "title": {"type": "string", "minLength": 1},
+            "data_path": {"const": "comparisons"}
+          }
+        },
+        "video_overlay": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "provider",
+            "video_id",
+            "watch_url",
+            "embed_url",
+            "title",
+            "data_paths"
+          ],
+          "properties": {
+            "status": {"const": "recorded_external_video"},
+            "provider": {"const": "youtube"},
+            "video_id": {"const": "bKNXS_vHLHc"},
+            "watch_url": {"const": "https://www.youtube.com/watch?v=bKNXS_vHLHc"},
+            "embed_url": {"const": "https://www.youtube-nocookie.com/embed/bKNXS_vHLHc"},
+            "title": {"type": "string", "minLength": 1},
+            "data_paths": {
+              "type": "array",
+              "minItems": 3,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    },
+    "consumer_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_for", "rules"],
+      "properties": {
+        "canonical_for": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "readme",
+              "documentation",
+              "webpage",
+              "experiment_figure",
+              "result_table",
+              "video_overlay"
+            ]
+          }
+        },
+        "rules": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verified_inputs",
+        "generator",
+        "upstream_generator",
+        "schema"
+      ],
+      "properties": {
+        "verified_inputs": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {"$ref": "#/$defs/file_binding"}
+        },
+        "generator": {"$ref": "#/$defs/file_binding"},
+        "upstream_generator": {"$ref": "#/$defs/file_binding"},
+        "schema": {"$ref": "#/$defs/file_binding"}
+      }
+    }
+  }
+}

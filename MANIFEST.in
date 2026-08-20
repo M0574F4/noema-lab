@@ -1,0 +1,57 @@
+include LICENSE
+include CITATION.cff
+include README.md
+include CHANGELOG.md
+include CONTRIBUTING.md
+include CODE_OF_CONDUCT.md
+include SECURITY.md
+include GOVERNANCE.md
+include launch_evidence.json
+include tools/check_launch_video_demo.py
+include tools/smoke_installed_release.py
+include tools/audit_image_manifest_overlap.py
+include tools/build_evc_mlcodec.py
+include tools/finalize_interrupted_benchmark.py
+include tools/generate_csi_feedback_demo_assets.py
+include tools/generate_deepjscc_demo_assets.py
+include tools/generate_deepjscc_slow_rayleigh_demo_assets.py
+include tools/generate_delayed_csi_ofdm_demo_assets.py
+include tools/generate_docs_reference.py
+include tools/generate_hosted_demo_catalog.py
+include tools/generate_launch_evidence.py
+include tools/generate_launch_assets.py
+include tools/generate_mimo_channel_estimation_demo_assets.py
+include tools/generate_modulation_recognition_demo_assets.py
+include tools/generate_ofdm_resource_allocation_benchmark_assets.py
+include tools/generate_ofdm_resource_allocation_demo_assets.py
+include tools/generate_qpsk_iq_calibration_demo_assets.py
+include tools/generate_qpsk_phase_tracking_benchmark_assets.py
+include tools/generate_qpsk_phase_tracking_demo_assets.py
+include tools/prepare_bsds500_all_manifest.py
+include tools/probe_break_the_comparison_demo.py
+include tools/ui_browser_probe.py
+include src/noema_lab/research_catalog.yaml
+include src/noema_lab/recipe_templates.yaml
+recursive-include src/noema_lab/recipe_starters *.yaml
+include src/noema_lab/ops/models/model_catalog.yaml
+recursive-include src/noema_lab/ui/static *
+recursive-include src/noema_lab/native *.cpp *.h
+recursive-include src/noema_lab/native/ort *.h
+recursive-include docs *.md *.txt *.py *.svg *.png *.drawio *.css *.js *.html *.csv *.json
+prune docs/_build
+prune docs/demo/data/digital_vs_deepjscc/reconstructions
+prune docs/demo/data/deepjscc_slow_rayleigh/reconstructions
+recursive-include benchmarks *.yaml
+recursive-include recipes *.yaml
+recursive-include examples *.py *.yaml
+recursive-include demo_trainings *.py *.yaml *.md *.txt
+prune demo_trainings/csi_feedback_autoencoder/.noema
+global-exclude *.py[cod]
+global-exclude __pycache__
+recursive-include schemas *.json
+
+# Defense in depth: local data, model artifacts, and build products are never package payload.
+prune .noema
+prune differentiable_exports
+prune trained_artifacts
+prune training_exports

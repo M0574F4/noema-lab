@@ -1,0 +1,13 @@
+{
+  "demos": [
+    {
+      "path": "learned-automatic-modulation-recognition/index.html",
+      "result_id": "20260727T150344Z_neural_receiver_ai_phy.learned_modulation_recognition_blind_carrier_post_training_v1",
+      "slug": "learned-automatic-modulation-recognition",
+      "source_bundle_sha256": "2aa97175c6dd2795c896e4af445631301febbc3cbcc50233ffa04220a6b0f6bf",
+      "title": "Blind automatic modulation recognition under carrier uncertainty"
+    }
+  ],
+  "kind": "noema.demo_registry",
+  "schema_version": 1
+}

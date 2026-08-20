@@ -1,0 +1,646 @@
+schema_version: 1
+id: semantic_comm_v1.protected_digital_vs_deepjscc_awgn
+version: "0.3.1-draft"
+name: Protected SSCC vs DeepJSCC over AWGN
+description: Experimental semantic-communication v1 benchmark pack for Sionna NR transport-block coding configured against TS 38.212, an abstract QPSK/AWGN link, a theoretical capacity oracle, and a returned DeepJSCC artifact on Kodak. This is not a full NR MCS, resource-grid, or PUSCH waveform implementation. Native codec rate and every modeled Noema/link overhead boundary are reported separately.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+dataset:
+  id: kodak
+  modality: image
+  version: kodak-development-21-24-v1
+  split: development
+  selection_role: development_only
+  access_policy:
+    state: unsealed_reusable
+    publication_test: false
+  preprocessing:
+    operation_params:
+      crop_size: 256
+    color_space: RGB
+    sample_domain: uint8_0_255
+    spatial_policy: deterministic_center_crop
+  sample_ids: [kodim21, kodim22, kodim23, kodim24]
+  manifest:
+    id: r0k.us-png-sha256-v1
+    source_page: https://r0k.us/graphics/kodak/
+    license_status: unverified_third_party_statement
+    publication_ready: false
+    files:
+      - {sample_id: kodim21, filename: kodim21.png, size_bytes: 637051, sha256: ac958597c82073f6bb65129c68f72b651db5b9efd82e11547d07350214bc268b}
+      - {sample_id: kodim22, filename: kodim22.png, size_bytes: 701970, sha256: 1cee58eb1f2d9c7ebb254d208a03c783ce6cf2c4d8c2cf45e235dd23b4ce1b29}
+      - {sample_id: kodim23, filename: kodim23.png, size_bytes: 557596, sha256: e3111a2fd4da24af15d6459ef9eacfe54106b38e27b4a21821b75c3f5d2d5baf}
+      - {sample_id: kodim24, filename: kodim24.png, size_bytes: 706397, sha256: 1071c68372cc5a01435c2c225a5cf7d4bb803846ec08bb6b3d6721b156d7cb96}
+task:
+  id: image_reconstruction
+  kind: reconstruction
+  modality: image
+metrics:
+  - id: channel.snr_db
+    source_step: wireless_channel
+    source_operations: [channel.capacity_oracle_digital_link, wireless.channel]
+    family: channel
+    unit: dB
+    direction: neutral
+  - id: quality.psnr_db
+    source_step: evaluation
+    source_operation: metrics.image_reconstruction
+    family: reconstruction
+    unit: dB
+    direction: higher_is_better
+  - id: channel.packet_success_rate
+    applicable_roles: &digital_all_roles [theoretical_baseline, baseline, baseline_operating_point]
+    source_operations: [channel.capacity_oracle_digital_link, channel.crc32_check]
+    family: transport
+    unit: fraction
+    direction: higher_is_better
+  - id: channel.outage_rate
+    applicable_roles: *digital_all_roles
+    source_operations: [channel.capacity_oracle_digital_link, channel.crc32_check]
+    family: transport
+    unit: fraction
+    direction: lower_is_better
+  - id: channel.transmitted_bit_count
+    applicable_roles: &physical_digital_roles [baseline, baseline_operating_point]
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: bits
+    direction: lower_is_better
+  - id: channel.channel_use_count
+    source_step: wireless_channel
+    source_operations: [channel.capacity_oracle_digital_link, wireless.channel]
+    family: rate
+    unit: symbols
+    direction: lower_is_better
+  - id: channel.uses_per_pixel
+    source_step: wireless_channel
+    source_operations: [channel.capacity_oracle_digital_link, wireless.channel]
+    family: rate
+    unit: channel_use/pixel
+    direction: lower_is_better
+  - id: channel.code_rate
+    applicable_roles: *physical_digital_roles
+    source_step: channel_encoder
+    source_operation: channel.nr_ldpc_encoder
+    family: transport
+    unit: fraction
+    direction: neutral
+  - id: channel.bits_per_symbol
+    applicable_roles: *physical_digital_roles
+    source_step: modulator
+    source_operation: modulation.digital_modulate
+    family: transport
+    unit: bit/symbol
+    direction: neutral
+  - id: rate.payload_bpp
+    applicable_roles: *digital_all_roles
+    source_step: sender
+    source_operations: [model.jpeg_encode, model.compressai_encode]
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+  - id: rate.native_codec_bpp
+    applicable_roles: *digital_all_roles
+    source_step: sender
+    source_operations: [model.jpeg_encode, model.compressai_encode]
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+  - id: rate.serialized_payload_bpp
+    applicable_roles: *digital_all_roles
+    source_step: sender
+    source_operations: [model.jpeg_encode, model.compressai_encode]
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+  - id: rate.framed_bpp
+    applicable_roles: *physical_digital_roles
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+  - id: rate.coded_bpp
+    applicable_roles: *physical_digital_roles
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+  - id: rate.padded_bpp
+    applicable_roles: *physical_digital_roles
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+baselines:
+  - jpeg_q75_capacity_oracle
+  - compressai_q3_capacity_oracle
+  - jpeg_q75_nr_tb_qpsk_awgn_abstraction
+  - jpeg_q50_nr_tb_qpsk_awgn_abstraction
+  - jpeg_q90_nr_tb_qpsk_awgn_abstraction
+  - compressai_q3_nr_tb_qpsk_awgn_abstraction
+  - compressai_q1_nr_tb_qpsk_awgn_abstraction
+  - compressai_q5_nr_tb_qpsk_awgn_abstraction
+  - deepjscc_adapter_baseline
+recipes:
+  - id: jpeg_q75_capacity_snr_m4
+    label: JPEG q75 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/jpeg_q75_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: jpeg_q75_capacity_oracle
+      matrix_selection:
+        channel.snr_db: -4
+      step_params:
+        wireless_channel:
+          snr_db: -4
+  - id: jpeg_q75_capacity_snr_0
+    label: JPEG q75 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/jpeg_q75_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: jpeg_q75_capacity_oracle
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        wireless_channel:
+          snr_db: 0
+  - id: jpeg_q75_capacity_snr_4
+    label: JPEG q75 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/jpeg_q75_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: jpeg_q75_capacity_oracle
+      matrix_selection:
+        channel.snr_db: 4
+      step_params:
+        wireless_channel:
+          snr_db: 4
+  - id: jpeg_q75_capacity_snr_8
+    label: JPEG q75 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/jpeg_q75_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: jpeg_q75_capacity_oracle
+      matrix_selection:
+        channel.snr_db: 8
+      step_params:
+        wireless_channel:
+          snr_db: 8
+  - id: jpeg_q75_capacity_snr_12
+    label: JPEG q75 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/jpeg_q75_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: jpeg_q75_capacity_oracle
+      matrix_selection:
+        channel.snr_db: 12
+      step_params:
+        wireless_channel:
+          snr_db: 12
+  - id: compressai_q3_capacity_snr_m4
+    label: CompressAI q3 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/compressai_q3_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: compressai_q3_capacity_oracle
+      matrix_selection:
+        channel.snr_db: -4
+      step_params:
+        wireless_channel:
+          snr_db: -4
+  - id: compressai_q3_capacity_snr_0
+    label: CompressAI q3 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/compressai_q3_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: compressai_q3_capacity_oracle
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        wireless_channel:
+          snr_db: 0
+  - id: compressai_q3_capacity_snr_4
+    label: CompressAI q3 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/compressai_q3_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: compressai_q3_capacity_oracle
+      matrix_selection:
+        channel.snr_db: 4
+      step_params:
+        wireless_channel:
+          snr_db: 4
+  - id: compressai_q3_capacity_snr_8
+    label: CompressAI q3 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/compressai_q3_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: compressai_q3_capacity_oracle
+      matrix_selection:
+        channel.snr_db: 8
+      step_params:
+        wireless_channel:
+          snr_db: 8
+  - id: compressai_q3_capacity_snr_12
+    label: CompressAI q3 + capacity oracle
+    role: theoretical_baseline
+    path: ../../recipes/compressai_q3_kodak_capacity_oracle_awgn.yaml
+    params:
+      method_id: compressai_q3_capacity_oracle
+      matrix_selection:
+        channel.snr_db: 12
+      step_params:
+        wireless_channel:
+          snr_db: 12
+  - id: jpeg_q75_nr_ldpc_snr_m4
+    label: JPEG q75 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q75_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: -4
+      step_params:
+        wireless_channel:
+          snr_db: -4
+  - id: jpeg_q75_nr_ldpc_snr_0
+    label: JPEG q75 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q75_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        wireless_channel:
+          snr_db: 0
+  - id: jpeg_q75_nr_ldpc_snr_4
+    label: JPEG q75 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q75_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: 4
+      step_params:
+        wireless_channel:
+          snr_db: 4
+  - id: jpeg_q75_nr_ldpc_snr_8
+    label: JPEG q75 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q75_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: 8
+      step_params:
+        wireless_channel:
+          snr_db: 8
+  - id: jpeg_q75_nr_ldpc_snr_12
+    label: JPEG q75 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q75_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: 12
+      step_params:
+        wireless_channel:
+          snr_db: 12
+  - id: compressai_q3_nr_ldpc_snr_m4
+    label: CompressAI q3 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q3_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: -4
+      step_params:
+        wireless_channel:
+          snr_db: -4
+  - id: compressai_q3_nr_ldpc_snr_0
+    label: CompressAI q3 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q3_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: 0
+      step_params:
+        wireless_channel:
+          snr_db: 0
+  - id: compressai_q3_nr_ldpc_snr_4
+    label: CompressAI q3 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q3_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: 4
+      step_params:
+        wireless_channel:
+          snr_db: 4
+  - id: compressai_q3_nr_ldpc_snr_8
+    label: CompressAI q3 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q3_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: 8
+      step_params:
+        wireless_channel:
+          snr_db: 8
+  - id: compressai_q3_nr_ldpc_snr_12
+    label: CompressAI q3 + packet CRC/NR LDPC/QPSK
+    role: baseline
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q3_nr_tb_qpsk_awgn_abstraction
+      matrix_selection:
+        channel.snr_db: 12
+      step_params:
+        wireless_channel:
+          snr_db: 12
+  - id: jpeg_q50_nr_ldpc_snr_m4
+    label: JPEG q50 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q50_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: -4, codec.quality: 50}
+      step_params:
+        sender: {quality: 50}
+        wireless_channel: {snr_db: -4}
+  - id: jpeg_q50_nr_ldpc_snr_0
+    label: JPEG q50 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q50_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 0, codec.quality: 50}
+      step_params:
+        sender: {quality: 50}
+        wireless_channel: {snr_db: 0}
+  - id: jpeg_q50_nr_ldpc_snr_4
+    label: JPEG q50 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q50_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 4, codec.quality: 50}
+      step_params:
+        sender: {quality: 50}
+        wireless_channel: {snr_db: 4}
+  - id: jpeg_q50_nr_ldpc_snr_8
+    label: JPEG q50 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q50_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 8, codec.quality: 50}
+      step_params:
+        sender: {quality: 50}
+        wireless_channel: {snr_db: 8}
+  - id: jpeg_q50_nr_ldpc_snr_12
+    label: JPEG q50 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q50_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 12, codec.quality: 50}
+      step_params:
+        sender: {quality: 50}
+        wireless_channel: {snr_db: 12}
+  - id: jpeg_q90_nr_ldpc_snr_m4
+    label: JPEG q90 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q90_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: -4, codec.quality: 90}
+      step_params:
+        sender: {quality: 90}
+        wireless_channel: {snr_db: -4}
+  - id: jpeg_q90_nr_ldpc_snr_0
+    label: JPEG q90 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q90_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 0, codec.quality: 90}
+      step_params:
+        sender: {quality: 90}
+        wireless_channel: {snr_db: 0}
+  - id: jpeg_q90_nr_ldpc_snr_4
+    label: JPEG q90 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q90_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 4, codec.quality: 90}
+      step_params:
+        sender: {quality: 90}
+        wireless_channel: {snr_db: 4}
+  - id: jpeg_q90_nr_ldpc_snr_8
+    label: JPEG q90 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q90_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 8, codec.quality: 90}
+      step_params:
+        sender: {quality: 90}
+        wireless_channel: {snr_db: 8}
+  - id: jpeg_q90_nr_ldpc_snr_12
+    label: JPEG q90 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/jpeg_q75_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: jpeg_q90_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 12, codec.quality: 90}
+      step_params:
+        sender: {quality: 90}
+        wireless_channel: {snr_db: 12}
+  - id: compressai_q1_nr_ldpc_snr_m4
+    label: CompressAI q1 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q1_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: -4, codec.quality: 1}
+      step_params:
+        sender: {quality: 1}
+        wireless_channel: {snr_db: -4}
+  - id: compressai_q1_nr_ldpc_snr_0
+    label: CompressAI q1 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q1_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 0, codec.quality: 1}
+      step_params:
+        sender: {quality: 1}
+        wireless_channel: {snr_db: 0}
+  - id: compressai_q1_nr_ldpc_snr_4
+    label: CompressAI q1 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q1_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 4, codec.quality: 1}
+      step_params:
+        sender: {quality: 1}
+        wireless_channel: {snr_db: 4}
+  - id: compressai_q1_nr_ldpc_snr_8
+    label: CompressAI q1 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q1_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 8, codec.quality: 1}
+      step_params:
+        sender: {quality: 1}
+        wireless_channel: {snr_db: 8}
+  - id: compressai_q1_nr_ldpc_snr_12
+    label: CompressAI q1 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q1_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 12, codec.quality: 1}
+      step_params:
+        sender: {quality: 1}
+        wireless_channel: {snr_db: 12}
+  - id: compressai_q5_nr_ldpc_snr_m4
+    label: CompressAI q5 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q5_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: -4, codec.quality: 5}
+      step_params:
+        sender: {quality: 5}
+        wireless_channel: {snr_db: -4}
+  - id: compressai_q5_nr_ldpc_snr_0
+    label: CompressAI q5 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q5_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 0, codec.quality: 5}
+      step_params:
+        sender: {quality: 5}
+        wireless_channel: {snr_db: 0}
+  - id: compressai_q5_nr_ldpc_snr_4
+    label: CompressAI q5 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q5_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 4, codec.quality: 5}
+      step_params:
+        sender: {quality: 5}
+        wireless_channel: {snr_db: 4}
+  - id: compressai_q5_nr_ldpc_snr_8
+    label: CompressAI q5 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q5_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 8, codec.quality: 5}
+      step_params:
+        sender: {quality: 5}
+        wireless_channel: {snr_db: 8}
+  - id: compressai_q5_nr_ldpc_snr_12
+    label: CompressAI q5 + packet CRC/NR LDPC/QPSK
+    role: baseline_operating_point
+    path: ../../recipes/compressai_q3_kodak_nr_ldpc_awgn.yaml
+    params:
+      method_id: compressai_q5_nr_tb_qpsk_awgn_abstraction
+      matrix_selection: {channel.snr_db: 12, codec.quality: 5}
+      step_params:
+        sender: {quality: 5}
+        wireless_channel: {snr_db: 12}
+  - id: deepjscc_publication_artifact_pending
+    label: DeepJSCC baseline
+    role: baseline_pending_artifact
+    path: ../../recipes/deepjscc_kodak_awgn_train.yaml
+    params:
+      method_id: deepjscc_adapter_baseline
+      skip: true
+      skip_reason: Development checkpoints exist, but RQ1 requires a publication-ready artifact selected only on validation data with complete training and selection lineage and a frozen benchmark binding.
+      metadata:
+        method_family: deepjscc
+metadata:
+  benchmark_tier: experimental
+  protocol_id: noema.semantic_comm_v1.protected_digital_vs_deepjscc_awgn
+  protocol_version: "0.3.1-draft"
+  benchmark_stage: semantic_comm_v1_seed
+  publication_ready: false
+  require_disjoint_training_lineage: true
+  require_identical_source_transform: true
+  heldout_status: unsealed_development_only
+  resource_budget:
+    metric: steps.wireless_channel.channel.max_source_item_uses_per_pixel
+    maximum: 0.5
+    tolerance: 1.0e-9
+    policy: reject
+    unit: channel_use/source_pixel
+  resource_budget_feasibility:
+    status: development_pilot_required_before_protocol_freeze
+    current_threshold_is_provisional: true
+    known_risk: the current SSCC operating-point grid may be rejection-only at 0.5 channel uses per source pixel
+    freeze_rule: select a feasible budget and rate grid from development-only pilot evidence before sealed-test access; retain rejected attempts in the denominator
+  snr_grid_db: [-4, 0, 4, 8, 12]
+  native_codec_operating_points:
+    jpeg_quality: [50, 75, 90]
+    compressai_quality: [1, 3, 5]
+    execution_status: protocol_materialized_results_pending
+  nominal_link_configuration:
+    scope: sionna_nr_transport_block_coder_plus_qpsk_awgn_abstraction
+    packet_integrity: noema.source_item_crc32.v4
+    channel_code: 3gpp_nr_ldpc
+    channel_code_standard: 3GPP TS 38.212 V18.8.0 Release 18
+    channel_code_backend: sionna.phy.nr.TBEncoder/TBDecoder
+    standards_claim_scope: transport-block CRC, segmentation, LDPC coding, rate matching, interleaving, and scrambling as exposed by the pinned Sionna backend
+    deliberately_not_modeled: [mcs_table_or_index, prb_allocation, nr_resource_grid, layer_mapping, dmrs, control_channels, nr_waveform]
+    target_code_rate: 0.5
+    transport_block_size_bits: 16000
+    decoder_bp_iterations: 20
+    modulation: qpsk
+    channel: awgn
+    csi_mode: known_awgn_gain_and_noise_variance
+    pilot_symbol_count: 0
+    physical_header_symbol_count: 0
+    on_tb_crc_failure: zero_fill
+    on_packet_decode_failure: gray_image
+    scientific_status: implemented_internal_roundtrip_external_conformance_pending
+  theoretical_reference:
+    channel_code: capacity_oracle
+    ldpc_rate: 0.5
+    modulation: qpsk
+  rate_accounting:
+    native_codec_bits: resource_accounting.codec.native_bit_count
+    safe_serialization_wrapper_bits: resource_accounting.codec.safe_serialization_wrapper_bit_count
+    payload_bits: resource_accounting.channel.payload_bit_count
+    framing_overhead_bits: resource_accounting.channel.framing_overhead_bit_count
+    fec_overhead_bits: resource_accounting.channel.fec_overhead_bit_count
+    modulation_padding_bits: resource_accounting.channel.modulation_padding_bit_count
+    transmitted_bits: tx_bit_boundary.channel.fixed.tx.bit_count
+    pilot_symbols: resource_accounting.channel.pilot_symbol_count
+    grid_padding_symbols: resource_accounting.channel.grid_padding_symbol_count
+    channel_uses: resource_accounting.channel.total_channel_use_count
+    channel_uses_per_pixel: resource_accounting.channel.uses_per_pixel
+  expected_outputs:
+    - result.json
+    - metrics.csv
+    - recipes.csv
+    - summary.md

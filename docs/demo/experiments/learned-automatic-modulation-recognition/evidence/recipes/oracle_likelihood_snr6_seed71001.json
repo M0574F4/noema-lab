@@ -1,0 +1,139 @@
+{
+  "dataset_capture": {
+    "split_plan": {
+      "percentages": {
+        "test": 16.6666,
+        "train": 66.6667,
+        "validation": 16.6667
+      },
+      "total_samples": 10368
+    },
+    "taps": [
+      {
+        "from": "observation.observation",
+        "id": "iq_frames"
+      },
+      {
+        "from": "data.labels",
+        "id": "modulation_labels"
+      }
+    ]
+  },
+  "description": "BPSK, QPSK, and 16-QAM recognition with unknown per-frame carrier phase, residual frequency offset, AWGN, a blind cumulant baseline, and a portable learned-classifier slot.",
+  "execution_profile": {
+    "id": "task_inference",
+    "version": 1
+  },
+  "metadata": {
+    "aggregation_cell_id": "snr_db=6",
+    "benchmark_held_out": true,
+    "benchmark_method": "oracle_likelihood",
+    "benchmark_paired_seed": 71001,
+    "channel_enabled": true,
+    "channel_mode": "blind_carrier_awgn",
+    "frame_contract": "fixed-length symbol-timed complex baseband I/Q with unknown carrier phase and residual frequency offset",
+    "matrix_index": 2,
+    "matrix_selection": {
+      "benchmark.paired_seed": 71001,
+      "channel.snr_db": 6.0
+    },
+    "matrix_variant_id": "mxv1-f915219bfebafe54defe45570def711338bc729d47fd28f141e0499d34cef11e",
+    "modulation_classes": [
+      "bpsk",
+      "qpsk",
+      "qam16"
+    ],
+    "pairing_id": "71001",
+    "research": {
+      "dataset": {
+        "id": "synthetic_modulation_iq",
+        "modality": "wireless",
+        "split": "fixed_seed",
+        "version": "synthetic-modulation-iq-blind-carrier-v1"
+      },
+      "metrics": [
+        "modulation_recognition.accuracy",
+        "modulation_recognition.balanced_accuracy",
+        "modulation_recognition.macro_f1",
+        "channel.snr_db"
+      ],
+      "task": {
+        "id": "automatic_modulation_recognition",
+        "kind": "signal_classification",
+        "metrics": [
+          "modulation_recognition.accuracy",
+          "modulation_recognition.balanced_accuracy",
+          "modulation_recognition.macro_f1"
+        ],
+        "modality": "wireless",
+        "target": "receiver.prediction"
+      }
+    },
+    "research_stage": "blind_carrier_modulation_recognition",
+    "seed": 23,
+    "statistical_unit": "paired held-out symbol/carrier/noise seed",
+    "ui_configured": true,
+    "wireless_backend": "numpy",
+    "wireless_preset": "Blind carrier phase and residual frequency offset over AWGN"
+  },
+  "name": "modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed71001",
+  "schema_version": 1,
+  "steps": [
+    {
+      "id": "data",
+      "inputs": {},
+      "op": "source.modulation_frames",
+      "params": {
+        "frame_count": 1536,
+        "seed": 71001,
+        "symbols_per_frame": 128
+      }
+    },
+    {
+      "id": "observation",
+      "inputs": {
+        "frames": "data.frames"
+      },
+      "op": "wireless.modulation_awgn_observation",
+      "params": {
+        "carrier_phase_max_rad": 3.141592653589793,
+        "carrier_phase_min_rad": -3.141592653589793,
+        "frequency_offset_max_cycles_per_symbol": 0.006,
+        "frequency_offset_min_cycles_per_symbol": -0.006,
+        "seed": 171001,
+        "snr_db_max": 6.0,
+        "snr_db_min": 6.0
+      }
+    },
+    {
+      "id": "receiver",
+      "inputs": {
+        "observation": "observation.observation"
+      },
+      "op": "model.modulation_classifier_adapter",
+      "params": {
+        "artifact_entrypoint": "modulation_classifier",
+        "artifact_manifest_path": "",
+        "artifact_package_sha256": "",
+        "mode": "classical_likelihood"
+      }
+    },
+    {
+      "id": "evaluation",
+      "inputs": {
+        "prediction": "receiver.prediction",
+        "truth": "data.labels"
+      },
+      "op": "metrics.modulation_classification",
+      "params": {
+        "snr_bin_width_db": 2
+      }
+    }
+  ],
+  "suite": {
+    "id": "neural_receiver",
+    "name": "Neural Receiver / AI-PHY",
+    "status": "experimental",
+    "version": "v1-draft"
+  }
+}

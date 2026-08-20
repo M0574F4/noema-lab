@@ -1,0 +1,107 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: jpeg_kodak_default
+description: Baseline JPEG image compression recipe on the full Kodak image set.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: benchmark_baseline
+  codec_profile: jpeg
+  codec_label: JPEG baseline
+  codec_output_form: bits
+  codec_format: "*.jpg"
+  semantic_representation: bits
+  channel_enabled: false
+  channel_mode: disabled
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.tx.bit_count
+  measure_codec_timing: true
+  codec_timing:
+    enabled: true
+    runner: pillow
+    warmup_runs: 0
+    timed_runs: 1
+steps:
+  - id: data
+    op: source.image_dataset
+    params:
+      dataset: kodak
+      dataset_dir: .noema/datasets/kodak
+      image_ids: kodim01,kodim02,kodim03,kodim04,kodim05,kodim06,kodim07,kodim08,kodim09,kodim10,kodim11,kodim12,kodim13,kodim14,kodim15,kodim16,kodim17,kodim18,kodim19,kodim20,kodim21,kodim22,kodim23,kodim24
+      crop_size: 0
+
+  - id: sender
+    op: model.jpeg_encode
+    inputs:
+      images: data.images
+    params:
+      quality: 75
+      subsampling: "420"
+      optimize: false
+      progressive: false
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: sender.bits
+    params:
+      label: payload
+      role: payload
+
+  - id: channel_encoder
+    op: channel.identity_encoder
+    inputs:
+      bits: payload_bit_boundary.bits
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: tx
+      role: tx
+
+  - id: wireless_channel
+    op: channel.identity_link
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      label: disabled_image_channel
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: wireless_channel.bits
+    params:
+      label: rx
+      role: rx
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: channel_io
+
+  - id: channel_decoder
+    op: channel.identity_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits
+
+  - id: receiver
+    op: model.jpeg_decode
+    inputs:
+      bits: channel_decoder.bits
+    params:
+      on_error: fail
+
+  - id: evaluation
+    op: metrics.image_reconstruction
+    inputs:
+      reference: data.images
+      reconstruction: receiver.images

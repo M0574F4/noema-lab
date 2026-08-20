@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore Noema benchmark comparisons from the same stored evidence used by the documentation tutorials."
+    />
+    <title>Noema Demo Explorer</title>
+    <link rel="icon" href="../_static/noema-logo.svg" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="../_static/noema-docs.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="catalog.js" defer></script>
+    <script src="../_static/noema-demo-charts-v2.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell hosted-app-shell">
+      <header class="topbar hosted-topbar">
+        <a class="brand hosted-brand" href="../index.html" aria-label="Noema documentation home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 96 96" focusable="false">
+              <defs>
+                <mask id="brandRelayCutout" maskUnits="userSpaceOnUse" x="0" y="0" width="96" height="96">
+                  <rect width="96" height="96" fill="#ffffff"></rect>
+                  <path d="M21 39h24c5 0 9 4 9 9s-4 9-9 9H21v-9h24c1 0 2-1 2-2s-1-2-2-2H21z" fill="#000000"></path>
+                </mask>
+              </defs>
+              <g mask="url(#brandRelayCutout)">
+                <path d="M13 18h22c18 0 32 14 32 30S53 78 35 78H13V64h22c10 0 18-7 18-16s-8-16-18-16H13z"></path>
+                <path class="brand-mark-secondary" d="M39 26h14l30 22-30 22H39l24-22z"></path>
+              </g>
+              <path class="brand-mark-accent" d="M9 41h10v14H9z"></path>
+              <circle class="brand-mark-accent" cx="19" cy="48" r="7"></circle>
+            </svg>
+          </span>
+          <span>
+            <strong>Noema</strong>
+            <small>evidence-backed demo results</small>
+          </span>
+        </a>
+
+        <nav class="topbar-tabs" aria-label="Demo view">
+          <div class="toolbar-tabs" role="tablist" aria-label="Demo view">
+            <button
+              id="graphTabButton"
+              type="button"
+              class="tab-button active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="graphView"
+              data-hosted-view="graph"
+            >Graph</button>
+            <button
+              id="resultsTabButton"
+              type="button"
+              class="tab-button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="resultsView"
+              tabindex="-1"
+              data-hosted-view="results"
+            >Results</button>
+          </div>
+        </nav>
+
+        <label class="hosted-experiment-picker">
+          <span>Experiment</span>
+          <select id="experimentSelect" aria-label="Select a documentation experiment" disabled>
+            <option>Loading…</option>
+          </select>
+        </label>
+
+        <div class="topbar-actions">
+          <button
+            id="themeToggleButton"
+            type="button"
+            class="icon-button theme-toggle"
+            aria-label="Switch to light mode"
+            title="Switch to light mode"
+          >
+            <span class="theme-icon theme-icon-sun" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+              </svg>
+            </span>
+            <span class="theme-icon theme-icon-moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+            </span>
+          </button>
+          <a class="hosted-action" href="../index.html">Docs</a>
+          <a class="hosted-action primary" href="https://github.com/M0574F4/noema-lab">Repository</a>
+        </div>
+      </header>
+
+      <main class="workspace results-mode hosted-workspace">
+        <section id="resultsPanel" class="main-panel" aria-busy="true">
+          <div class="graph-toolbar hosted-results-toolbar">
+            <div class="toolbar-title-group">
+              <div class="toolbar-title-row">
+                <h1 id="experimentTitle">Demo results</h1>
+                <span id="sourceStatus" class="result-source-status loaded-benchmark">checked-in recipe</span>
+              </div>
+              <span id="experimentMeta">Loading the documentation demo catalog…</span>
+            </div>
+          </div>
+
+          <section
+            id="graphView"
+            class="hosted-primary-view hosted-graph-view"
+            role="tabpanel"
+            aria-labelledby="graphTabButton"
+            data-hosted-view-panel="graph"
+          >
+            <div id="recipeGraph" class="hosted-graph-loading">
+              Loading the documentation demo recipe…
+            </div>
+          </section>
+
+          <div
+            id="resultsView"
+            class="hosted-primary-view"
+            role="tabpanel"
+            aria-labelledby="resultsTabButton"
+            data-hosted-view-panel="results"
+            hidden
+          >
+            <div id="resultsComparison" class="results-comparison">
+              <div class="result-empty hosted-loading">Loading stored result evidence…</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <noscript>
+      <p class="hosted-noscript">
+        JavaScript is required to select and render the checked-in result snapshots. The underlying
+        CSV and JSON evidence remains available under <code>docs/demo/data/</code>.
+      </p>
+    </noscript>
+  </body>
+</html>

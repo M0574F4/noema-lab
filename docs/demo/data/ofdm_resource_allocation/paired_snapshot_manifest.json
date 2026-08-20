@@ -1,0 +1,375 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "chart_javascript": {
+      "path": "docs/_static/noema-ofdm-resource-allocation-chart-data.js",
+      "sha256": "ccc6e6a95fe09b29ef91e53cc61c140d8ac056b1f18dbf3253bbb82735ab8973",
+      "size_bytes": 15779
+    },
+    "paired_benchmark_projection.csv": {
+      "sha256": "a26cf33b7bc8653234852203ba70dce54f6d815140ce63a821ddfa71ece22388",
+      "size_bytes": 9804
+    },
+    "paired_chart_data.json": {
+      "sha256": "06b857112bd3a2308e20dbda0a9bd9aae6e5b4b16a914989b0eb4d9fd0b31dc0",
+      "size_bytes": 15617
+    },
+    "paired_summary_table.csv": {
+      "sha256": "979836d25c98b968a0e203e7f8af0fb27c7eca153f963c0a963df5c05da1739d",
+      "size_bytes": 446
+    },
+    "rows": 27
+  },
+  "representative_preview": {
+    "average_power_budget": 1.0,
+    "paired_seed": 72001,
+    "recipes": {
+      "equal_power": {
+        "recipe_id": "equal_power_p1_seed72001",
+        "report": {
+          "sha256": "7f5ec8bf5aba069a851d9acc408371aaf0b239d374c05be6f260e7e1be2b7bab",
+          "size_bytes": 405767
+        },
+        "run_id": "20260727T002750Z_ofdm_subcarrier_resource_allocation__equal_power_p1_seed72001"
+      },
+      "learned_allocator": {
+        "recipe_id": "learned_allocator_p1_seed72001",
+        "report": {
+          "sha256": "68be02fad77b30a9d27070dd338d658806ad8f3d4583166af029e7893043bb5b",
+          "size_bytes": 449353
+        },
+        "run_id": "20260727T002806Z_ofdm_subcarrier_resource_allocation__learned_allocator_p1_seed72001"
+      },
+      "water_filling": {
+        "recipe_id": "water_filling_p1_seed72001",
+        "report": {
+          "sha256": "a6b66f5925ac25d0d9863fb19333360a31ff68322c3262aea0f08aeb5e2182fe",
+          "size_bytes": 452793
+        },
+        "run_id": "20260727T002824Z_ofdm_subcarrier_resource_allocation__water_filling_p1_seed72001"
+      }
+    },
+    "snapshot_index": 0,
+    "subcarrier_count": 32
+  },
+  "runs": [
+    {
+      "pairing_id": "71001",
+      "pairing_seed": 71001,
+      "recipe_id": "equal_power_p0p5_seed71001",
+      "recipe_sha256": "c4f867ef568f817dbb69e0aeca7e0f285c7c7b235577c32ec4529e242c724fe8",
+      "role": "baseline",
+      "run_id": "20260727T002420Z_ofdm_subcarrier_resource_allocation__equal_power_p0p5_seed71001",
+      "semantic_recipe_sha256": "14ec0422f9bbad02228590754c72ec4b96ebbbc7eea0159048a19ec68a4fa415"
+    },
+    {
+      "pairing_id": "71001",
+      "pairing_seed": 71001,
+      "recipe_id": "learned_allocator_p0p5_seed71001",
+      "recipe_sha256": "2fd0a9bede56ca361eaa6ca27172f460b70c615e878d7e5c89edb95ed49435fb",
+      "role": "candidate",
+      "run_id": "20260727T002436Z_ofdm_subcarrier_resource_allocation__learned_allocator_p0p5_seed71001",
+      "semantic_recipe_sha256": "668d88cc043bedbc287f8b07597456fc57a672f9351e0c26685f19d5895e3f3c"
+    },
+    {
+      "pairing_id": "71001",
+      "pairing_seed": 71001,
+      "recipe_id": "water_filling_p0p5_seed71001",
+      "recipe_sha256": "e3fc949ab5f7f44c2e9470358be62c8c4dae79328dbbb41764c519d8e8334407",
+      "role": "oracle",
+      "run_id": "20260727T002453Z_ofdm_subcarrier_resource_allocation__water_filling_p0p5_seed71001",
+      "semantic_recipe_sha256": "9b5cf7f7974b7ad3e9c7e9cdee7ba44b9e7f73a758228716475c680f80e2f49b"
+    },
+    {
+      "pairing_id": "72001",
+      "pairing_seed": 72001,
+      "recipe_id": "equal_power_p0p5_seed72001",
+      "recipe_sha256": "f8c077062555c920354539ede83aaf4671dc7b2893ef129f131da7b708b02b3c",
+      "role": "baseline",
+      "run_id": "20260727T002514Z_ofdm_subcarrier_resource_allocation__equal_power_p0p5_seed72001",
+      "semantic_recipe_sha256": "b59447b2cba5504e0b7c3184afdb6af6767e7fa01d1d99871e21a8471828937c"
+    },
+    {
+      "pairing_id": "72001",
+      "pairing_seed": 72001,
+      "recipe_id": "learned_allocator_p0p5_seed72001",
+      "recipe_sha256": "1026987836bfdcfb1614a54fa508cb7f4b97dc01db77f6671182eb3080c0285b",
+      "role": "candidate",
+      "run_id": "20260727T002530Z_ofdm_subcarrier_resource_allocation__learned_allocator_p0p5_seed72001",
+      "semantic_recipe_sha256": "494963e159a3a36bbd8bf9f7245dd5427743d1d0a8b152d91413ea1e4dc40745"
+    },
+    {
+      "pairing_id": "72001",
+      "pairing_seed": 72001,
+      "recipe_id": "water_filling_p0p5_seed72001",
+      "recipe_sha256": "7d6e33ed06e63856492de967bbdccf5e6dc9d3ee50eba2667fa8faf65a892e97",
+      "role": "oracle",
+      "run_id": "20260727T002546Z_ofdm_subcarrier_resource_allocation__water_filling_p0p5_seed72001",
+      "semantic_recipe_sha256": "38fec34bf5e6ce28ea74f350350209d786a9639af51dbfe903966a5bce7e76d1"
+    },
+    {
+      "pairing_id": "73001",
+      "pairing_seed": 73001,
+      "recipe_id": "equal_power_p0p5_seed73001",
+      "recipe_sha256": "692fdfa4ccb9c963ef99ff2a346b90a0588103eada440df5b521f5e1660e2a90",
+      "role": "baseline",
+      "run_id": "20260727T002607Z_ofdm_subcarrier_resource_allocation__equal_power_p0p5_seed73001",
+      "semantic_recipe_sha256": "59deb9ed6d4c70a8689c5440adee51c091d44c56f4e2c6f41b92d164f962c9c6"
+    },
+    {
+      "pairing_id": "73001",
+      "pairing_seed": 73001,
+      "recipe_id": "learned_allocator_p0p5_seed73001",
+      "recipe_sha256": "96604333108e6b174961ab6a2f81fc778af41be8dc1378802c7eed9212eba127",
+      "role": "candidate",
+      "run_id": "20260727T002621Z_ofdm_subcarrier_resource_allocation__learned_allocator_p0p5_seed73001",
+      "semantic_recipe_sha256": "d95fc838a1fa25357d704b1b29f119902327bceab1dc4aca87a523905b1d09f9"
+    },
+    {
+      "pairing_id": "73001",
+      "pairing_seed": 73001,
+      "recipe_id": "water_filling_p0p5_seed73001",
+      "recipe_sha256": "6ee75fdaefebd9109a333328b50466c258ca8c3fda9e5476ff1634d875d85572",
+      "role": "oracle",
+      "run_id": "20260727T002636Z_ofdm_subcarrier_resource_allocation__water_filling_p0p5_seed73001",
+      "semantic_recipe_sha256": "1186d7b0bad7a0f153b7222f3ff8836017c9f07be9cb0b3fac84257b3486291d"
+    },
+    {
+      "pairing_id": "71001",
+      "pairing_seed": 71001,
+      "recipe_id": "equal_power_p1_seed71001",
+      "recipe_sha256": "5247e969beec9bfdbfed52208b9c38b1f754a0d08f8b318289b9b487dce83ef7",
+      "role": "baseline",
+      "run_id": "20260727T002657Z_ofdm_subcarrier_resource_allocation__equal_power_p1_seed71001",
+      "semantic_recipe_sha256": "6075935c5f7bf8ae6c87ede11ad1e925d45f77f8ab94f6fd6172c0b25442a122"
+    },
+    {
+      "pairing_id": "71001",
+      "pairing_seed": 71001,
+      "recipe_id": "learned_allocator_p1_seed71001",
+      "recipe_sha256": "3f04d378acdacfc4d4dba1f0305c40009b8b7505b50e779bef7449b851f21816",
+      "role": "candidate",
+      "run_id": "20260727T002711Z_ofdm_subcarrier_resource_allocation__learned_allocator_p1_seed71001",
+      "semantic_recipe_sha256": "257245cdccb8c64258b64742fbdbe594a159045fb01aad85f476afede4aa090f"
+    },
+    {
+      "pairing_id": "71001",
+      "pairing_seed": 71001,
+      "recipe_id": "water_filling_p1_seed71001",
+      "recipe_sha256": "a2c5f3279963a1ee44d196197bd5b32fe7095bd650a2267ba2036f7e93b0cdad",
+      "role": "oracle",
+      "run_id": "20260727T002727Z_ofdm_subcarrier_resource_allocation__water_filling_p1_seed71001",
+      "semantic_recipe_sha256": "bcd1a953bd39d01bedaaf2b2f5b41b19a42f8f12cafe07a17554d71f29b81aa6"
+    },
+    {
+      "pairing_id": "72001",
+      "pairing_seed": 72001,
+      "recipe_id": "equal_power_p1_seed72001",
+      "recipe_sha256": "8427f9311660c6f611311db5f1095d66330e99c9c8d4d54705c6e6e703f57cbe",
+      "role": "baseline",
+      "run_id": "20260727T002750Z_ofdm_subcarrier_resource_allocation__equal_power_p1_seed72001",
+      "semantic_recipe_sha256": "77f6f0b7a2f63a388732c4fa074602de8ffffe5727466a64dc8a906f6190b487"
+    },
+    {
+      "pairing_id": "72001",
+      "pairing_seed": 72001,
+      "recipe_id": "learned_allocator_p1_seed72001",
+      "recipe_sha256": "ac8410e9204e3c86255957ad9215f21b3ca2f2dcd4218be05dbaded078f1aaed",
+      "role": "candidate",
+      "run_id": "20260727T002806Z_ofdm_subcarrier_resource_allocation__learned_allocator_p1_seed72001",
+      "semantic_recipe_sha256": "8764aefe7a0d654cb44a970671d50967a04dfb96a78ba089a6a6e5583f1b55fc"
+    },
+    {
+      "pairing_id": "72001",
+      "pairing_seed": 72001,
+      "recipe_id": "water_filling_p1_seed72001",
+      "recipe_sha256": "a07e9202863b1c3687fca44afa4abcff631f714999d357bb9c9217b6940ca467",
+      "role": "oracle",
+      "run_id": "20260727T002824Z_ofdm_subcarrier_resource_allocation__water_filling_p1_seed72001",
+      "semantic_recipe_sha256": "fd46b6949763425d96eec7fa839d4cb8d76b90e869fff7b4d186736109d6d164"
+    },
+    {
+      "pairing_id": "73001",
+      "pairing_seed": 73001,
+      "recipe_id": "equal_power_p1_seed73001",
+      "recipe_sha256": "e95c1a355916101b7118b7d6cef50b1d6a4bce532d5019c278bc7e68b60522bf",
+      "role": "baseline",
+      "run_id": "20260727T002847Z_ofdm_subcarrier_resource_allocation__equal_power_p1_seed73001",
+      "semantic_recipe_sha256": "d542e1fe95c4d5606fd2661fed99813c19be17d61de1fca54fe81cbfc8fa2e1f"
+    },
+    {
+      "pairing_id": "73001",
+      "pairing_seed": 73001,
+      "recipe_id": "learned_allocator_p1_seed73001",
+      "recipe_sha256": "084118e8c69bfef93abcd47e87fc9acf7e45f6175dd34536a106550f18926910",
+      "role": "candidate",
+      "run_id": "20260727T002903Z_ofdm_subcarrier_resource_allocation__learned_allocator_p1_seed73001",
+      "semantic_recipe_sha256": "44236e176e594df1b350c684d61a14e5da974602c22e6970cb54e1bb34195645"
+    },
+    {
+      "pairing_id": "73001",
+      "pairing_seed": 73001,
+      "recipe_id": "water_filling_p1_seed73001",
+      "recipe_sha256": "21515ef957f7a943d65907a6e665512ebd6e2ab39c2bcbbba15db6793d6bc2fe",
+      "role": "oracle",
+      "run_id": "20260727T002921Z_ofdm_subcarrier_resource_allocation__water_filling_p1_seed73001",
+      "semantic_recipe_sha256": "dd3780913895a51b9da111a0dea758cffacf236058437794f61ea017ffcc93b9"
+    },
+    {
+      "pairing_id": "71001",
+      "pairing_seed": 71001,
+      "recipe_id": "equal_power_p2_seed71001",
+      "recipe_sha256": "721e3643c026308c863e1577a74d55fdddadc1911e3343d3d80a70aa1639f35f",
+      "role": "baseline",
+      "run_id": "20260727T002946Z_ofdm_subcarrier_resource_allocation__equal_power_p2_seed71001",
+      "semantic_recipe_sha256": "bad327e7bf46d017ea2f565f9ea929122e1b6e4ea9b896205eb1cc744304554d"
+    },
+    {
+      "pairing_id": "71001",
+      "pairing_seed": 71001,
+      "recipe_id": "learned_allocator_p2_seed71001",
+      "recipe_sha256": "daa1cc19e58e735f181be4b0c714e4b5332fef469def96608bd0e9ed0ed03e42",
+      "role": "candidate",
+      "run_id": "20260727T003003Z_ofdm_subcarrier_resource_allocation__learned_allocator_p2_seed71001",
+      "semantic_recipe_sha256": "ec9ea28872e6bcc15f46068de0122bb4192beb0d0fefe7e566e0cbdbeda6559b"
+    },
+    {
+      "pairing_id": "71001",
+      "pairing_seed": 71001,
+      "recipe_id": "water_filling_p2_seed71001",
+      "recipe_sha256": "74065b10c7d52e718b43cbc1250ea6962236ab0836df66b7ffec611369d3393a",
+      "role": "oracle",
+      "run_id": "20260727T003022Z_ofdm_subcarrier_resource_allocation__water_filling_p2_seed71001",
+      "semantic_recipe_sha256": "501a90dee330e8a849b45d265544356f57f647d3c85d9c9db631605d1a274751"
+    },
+    {
+      "pairing_id": "72001",
+      "pairing_seed": 72001,
+      "recipe_id": "equal_power_p2_seed72001",
+      "recipe_sha256": "403e16e5511629566411a347b4dbbea6d45320627601280bb783abb392fb153e",
+      "role": "baseline",
+      "run_id": "20260727T003047Z_ofdm_subcarrier_resource_allocation__equal_power_p2_seed72001",
+      "semantic_recipe_sha256": "a2179a4aee8d7f001bf8b8475ba189206a7468d2e606fad4e5ee6f4b33f0e9d0"
+    },
+    {
+      "pairing_id": "72001",
+      "pairing_seed": 72001,
+      "recipe_id": "learned_allocator_p2_seed72001",
+      "recipe_sha256": "f25d3507e0ecdc71a88900024b6455e8a770a1bf640c48288814a2cdcec96dbe",
+      "role": "candidate",
+      "run_id": "20260727T003104Z_ofdm_subcarrier_resource_allocation__learned_allocator_p2_seed72001",
+      "semantic_recipe_sha256": "f45d9019f7aa2773d92464973c97ee097164a984c6017fa52726a7f4c526bfd0"
+    },
+    {
+      "pairing_id": "72001",
+      "pairing_seed": 72001,
+      "recipe_id": "water_filling_p2_seed72001",
+      "recipe_sha256": "34cc00084ab54905a3aa89b22af28d0edc4c2a51799743dc43e5f991759cb502",
+      "role": "oracle",
+      "run_id": "20260727T003123Z_ofdm_subcarrier_resource_allocation__water_filling_p2_seed72001",
+      "semantic_recipe_sha256": "5c46212f2ed01fe638ae9104496abbb65db36c9012a70df05083ce32e6468960"
+    },
+    {
+      "pairing_id": "73001",
+      "pairing_seed": 73001,
+      "recipe_id": "equal_power_p2_seed73001",
+      "recipe_sha256": "59156bbf7cc4c9ad007379054c020b7dddedcb0f859aa5b7719839eb761fea35",
+      "role": "baseline",
+      "run_id": "20260727T003147Z_ofdm_subcarrier_resource_allocation__equal_power_p2_seed73001",
+      "semantic_recipe_sha256": "84312d19058f5e7b84332d081d7e05523f448decf8c1dc06fb8214cfb3b577e4"
+    },
+    {
+      "pairing_id": "73001",
+      "pairing_seed": 73001,
+      "recipe_id": "learned_allocator_p2_seed73001",
+      "recipe_sha256": "e9949afb0e1d494d9ba1357479c5283f589f574cd450e499c52324932434a5d8",
+      "role": "candidate",
+      "run_id": "20260727T003205Z_ofdm_subcarrier_resource_allocation__learned_allocator_p2_seed73001",
+      "semantic_recipe_sha256": "98ceac33f5548f6a3621cf9b9aae7417704e9272b367b284b5b35adddc35b352"
+    },
+    {
+      "pairing_id": "73001",
+      "pairing_seed": 73001,
+      "recipe_id": "water_filling_p2_seed73001",
+      "recipe_sha256": "914e991d7841e30f6e2d8ac969dde71867ca083482246853e4376f7d3aa2a3df",
+      "role": "oracle",
+      "run_id": "20260727T003225Z_ofdm_subcarrier_resource_allocation__water_filling_p2_seed73001",
+      "semantic_recipe_sha256": "616f7fa04295bddec6afd57fa63d764e3f1b926e953fcabc4866b1b1c171cee0"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "learned-ofdm-resource-allocation",
+  "source": {
+    "benchmark_id": "resource_allocation.learned_allocator_post_training_v2",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "2.0.0",
+    "completed_at_utc": "2026-07-27T00:32:49.904Z",
+    "created_at_utc": "2026-07-27T00:24:19.822Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "a961c37bc64677260a919dac1a50bd1011632583578231a62085b5669437c325",
+        "size_bytes": 2303840
+      },
+      "recipes.csv": {
+        "sha256": "7a6c31d3675b085a91cd847c186c44bbf734ea446b4351035d7a39ccdded0279",
+        "size_bytes": 9431
+      },
+      "result.json": {
+        "sha256": "b8208b33a26241e7870db72e6facddac62640f0bd298a23b4bfe422ac0c5279b",
+        "size_bytes": 1446317
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "f736a8fd181d387205d15e6462636bf3e178f69fdd015016e355f60d7ebe0d5a",
+        "size_bytes": 1654
+      }
+    },
+    "result_id": "20260727T002419Z_resource_allocation.learned_allocator_post_training_v2",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "average transmit-power budget",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out seeds",
+    "paired_seeds": [
+      71001,
+      72001,
+      73001
+    ],
+    "sample_count_per_method_and_budget": 3,
+    "statistical_unit": "paired held-out payload/channel/noise seed",
+    "warning": "Three paired held-out seeds support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": {
+    "component": {
+      "id": "policy",
+      "kind": "component",
+      "path": "training_evidence/entries/000-learned_allocator/artifact/artifacts/power_policy.onnx",
+      "sha256": "6c5927fa5ba43b65403d29270ed8c9d22b5955b916e266116d65d33ecc13eb25",
+      "size_bytes": 53842
+    },
+    "contract": {
+      "id": "ofdm_subcarrier_resource_allocation.9357bfefa888",
+      "kind": "contract",
+      "path": "training_evidence/entries/000-learned_allocator/artifact/training_contract.yaml",
+      "sha256": "f8925eddd3fc16a083889ad3fc4e55fb73dc2367938474f1de884dbac199f445",
+      "size_bytes": 7054
+    },
+    "evaluation_metrics": {
+      "path": "training_evidence/entries/000-learned_allocator/evidence/evaluation_metrics.json",
+      "sha256": "45fff8ad00a9041ed00ba1d7184876443f5db366667265649cb18915ffcff324",
+      "size_bytes": 5963
+    },
+    "series": "learned_allocator",
+    "trained_artifact_manifest": {
+      "path": "training_evidence/entries/000-learned_allocator/artifact/trained_artifact_manifest.yaml",
+      "sha256": "e874f6fea559b88be187983df535d9b1efdce7264a13b94102db3fafad750928",
+      "size_bytes": 3426
+    },
+    "training_history": {
+      "path": "training_evidence/entries/000-learned_allocator/evidence/training_history.json",
+      "sha256": "f27e4f816050079d0ee351ce4de91b217e8624078435755b7ccd2aa1cfe4f6bc",
+      "size_bytes": 52216
+    }
+  }
+}

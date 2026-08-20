@@ -1,0 +1,2013 @@
+{
+  "experiment_count": 9,
+  "experiments": [
+    {
+      "chart_ids": [
+        "deepjscc-slow-psnr-snr",
+        "deepjscc-slow-ms-ssim-snr",
+        "deepjscc-slow-rate-psnr"
+      ],
+      "chart_scripts": [
+        "../_static/noema-deepjscc-slow-rayleigh-chart-data-v2.js"
+      ],
+      "data_directories": [
+        "data/deepjscc_slow_rayleigh"
+      ],
+      "description": "Train one image encoder/decoder pair for a channel whose complex gain is unknown and constant over each image:",
+      "documentation_path": "../tutorials/deepjscc_slow_rayleigh.html",
+      "evidence": [
+        {
+          "label": "snr summary.csv",
+          "path": "data/deepjscc_slow_rayleigh/snr_summary.csv",
+          "sha256": "201735ca30f82c8453a94defe2fb938c35ec02a683e2111406744877bfafbd4e",
+          "size_bytes": 530,
+          "type": "csv"
+        },
+        {
+          "label": "rate summary.csv",
+          "path": "data/deepjscc_slow_rayleigh/rate_summary.csv",
+          "sha256": "e0fa1487b75044ee2bbd6ef478fb2d372fb8d225c9ed819beb6fff530338cc7f",
+          "size_bytes": 323,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/deepjscc_slow_rayleigh/benchmark_projection.csv",
+          "sha256": "4c405063d9a62a5ade14d1597bd2a1e875d66a391d0e1e308296cd0e1bb8b24c",
+          "size_bytes": 19195,
+          "type": "csv"
+        },
+        {
+          "label": "pairing audit.csv",
+          "path": "data/deepjscc_slow_rayleigh/pairing_audit.csv",
+          "sha256": "f2d8ffa74d717c39bfbe738cafb84bfad0baf3fa9fcca33b4e8c4d81c88b9e00",
+          "size_bytes": 1626,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/deepjscc_slow_rayleigh/chart_data.json",
+          "sha256": "7bc33c29e5ebc4850a32159dab177f3261f18355f23938f2881cdfba3597123a",
+          "size_bytes": 7235,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/deepjscc_slow_rayleigh/snapshot_manifest.json",
+          "sha256": "dbe703d7b3f91c520c67c0ae35da76abfe57319085c5623c7cf14796257a33f3",
+          "size_bytes": 20938,
+          "type": "json"
+        }
+      ],
+      "id": "deepjscc_slow_rayleigh",
+      "published_results": [],
+      "recipe": {
+        "description": "Nested-bandwidth DeepJSCC image scenario with trainable sender and receiver slots around a blind slow-Rayleigh channel: one unknown complex gain per source image, no receiver equalization, and no CSI or pilots.",
+        "execution_profile": {
+          "id": "joint_source_channel_symbols",
+          "version": 1
+        },
+        "name": "deepjscc_kodak_slow_rayleigh_train",
+        "sha256": "b669dfb07fe86960a24c813d0bf2aadc862362c697bfe68f2d797d0bde5fa706",
+        "source_path": "recipes/deepjscc_kodak_slow_rayleigh_train.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.image_dataset",
+            "params": {
+              "crop_size": 128,
+              "dataset": "kodak",
+              "dataset_dir": ".noema/datasets/kodak",
+              "image_ids": "kodim01,kodim02,kodim03,kodim04,kodim05,kodim06,kodim07,kodim08,kodim09,kodim10,kodim11,kodim12,kodim13,kodim14,kodim15,kodim16,kodim17,kodim18,kodim19,kodim20",
+              "repeat_count": 8
+            }
+          },
+          {
+            "id": "sender",
+            "inputs": {
+              "images": "data.images"
+            },
+            "op": "model.deepjscc_external_encode",
+            "params": {
+              "runtime": "training_interface"
+            }
+          },
+          {
+            "id": "tx_power",
+            "inputs": {
+              "symbols": "sender.symbols"
+            },
+            "op": "channel.symbol_power_normalize",
+            "params": {
+              "label": "tx_power_normalize",
+              "normalization_scope": "source_item",
+              "target_power": 1.0
+            }
+          },
+          {
+            "id": "tx_symbol_boundary",
+            "inputs": {
+              "symbols": "tx_power.symbols"
+            },
+            "op": "channel.symbol_boundary",
+            "params": {
+              "label": "modulator_input",
+              "role": "symbol_channel_input"
+            }
+          },
+          {
+            "id": "wireless_channel",
+            "inputs": {
+              "symbols": "tx_symbol_boundary.symbols"
+            },
+            "op": "wireless.channel",
+            "params": {
+              "channel": "flat_rayleigh",
+              "fading_scope": "source_item",
+              "noise_mode": "snr_at_unit_power",
+              "receiver_processing": "none",
+              "seed": 33001,
+              "snr_db": 10,
+              "wireless_backend": "numpy"
+            }
+          },
+          {
+            "id": "rx_symbol_boundary",
+            "inputs": {
+              "symbols": "wireless_channel.rx_symbols"
+            },
+            "op": "channel.symbol_boundary",
+            "params": {
+              "label": "channel_output",
+              "role": "symbol_channel_output"
+            }
+          },
+          {
+            "id": "channel_symbol_count_match",
+            "inputs": {
+              "candidate": "rx_symbol_boundary.symbols",
+              "reference": "tx_symbol_boundary.symbols"
+            },
+            "op": "channel.symbol_count_match",
+            "params": {
+              "label": "channel_io"
+            }
+          },
+          {
+            "id": "receiver",
+            "inputs": {
+              "symbols": "rx_symbol_boundary.symbols"
+            },
+            "op": "model.deepjscc_external_decode",
+            "params": {
+              "runtime": "training_interface"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "reconstruction": "receiver.images",
+              "reference": "data.images"
+            },
+            "op": "metrics.image_reconstruction",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "semantic_comm",
+          "name": "Semantic Communication",
+          "status": "active",
+          "version": "v1"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/deepjscc_slow_rayleigh/snapshot_manifest.json",
+        "manifest_sha256": "dbe703d7b3f91c520c67c0ae35da76abfe57319085c5623c7cf14796257a33f3",
+        "projection_rows": 48,
+        "run_count": 48
+      },
+      "source_path": "docs/tutorials/deepjscc_slow_rayleigh.md",
+      "tables": [
+        {
+          "label": "snr summary.csv",
+          "path": "data/deepjscc_slow_rayleigh/snr_summary.csv",
+          "sha256": "201735ca30f82c8453a94defe2fb938c35ec02a683e2111406744877bfafbd4e",
+          "size_bytes": 530,
+          "type": "csv"
+        },
+        {
+          "label": "rate summary.csv",
+          "path": "data/deepjscc_slow_rayleigh/rate_summary.csv",
+          "sha256": "e0fa1487b75044ee2bbd6ef478fb2d372fb8d225c9ed819beb6fff530338cc7f",
+          "size_bytes": 323,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/deepjscc_slow_rayleigh/benchmark_projection.csv",
+          "sha256": "4c405063d9a62a5ade14d1597bd2a1e875d66a391d0e1e308296cd0e1bb8b24c",
+          "size_bytes": 19195,
+          "type": "csv"
+        },
+        {
+          "label": "pairing audit.csv",
+          "path": "data/deepjscc_slow_rayleigh/pairing_audit.csv",
+          "sha256": "f2d8ffa74d717c39bfbe738cafb84bfad0baf3fa9fcca33b4e8c4d81c88b9e00",
+          "size_bytes": 1626,
+          "type": "csv"
+        }
+      ],
+      "title": "Blind DeepJSCC over Slow Rayleigh Fading"
+    },
+    {
+      "chart_ids": [
+        "csi-feedback-rate",
+        "csi-feedback-retention",
+        "csi-feedback-nmse",
+        "csi-feedback-response-preview",
+        "csi-feedback-error-preview"
+      ],
+      "chart_scripts": [
+        "../_static/noema-csi-feedback-chart-data.js"
+      ],
+      "data_directories": [
+        "data/csi_feedback"
+      ],
+      "description": "Train a paired encoder/decoder that compresses MISO-OFDM CSI to a 128-bit feedback message, then compare it with a matched KLT/PCA codec at the same feedback budget. The base station reconstructs CSI, forms an MRT precoder, and evaluates spectral efficiency on the original channel realization. The fixed protocol is Sionna TDL-A with CSI shape 2 \u00d7 8 \u00d7 32, 32 feedback values, 4-bit uniform quantization, and 512 channel realizations per benchmark run. The learned codec changes only the feedback encoder and decoder. For the general contract and artifact workflow, see Physical-Layer System Templates and Learned-Method Examples.",
+      "documentation_path": "../tutorials/learned_csi_feedback.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/csi_feedback/summary_table.csv",
+          "sha256": "c1864a003a650dac0e11330b7291ad47b6e67ee55bd97fa9086ec699aac525d5",
+          "size_bytes": 679,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/csi_feedback/benchmark_projection.csv",
+          "sha256": "52dee4797910933b49dd3ac7386fc58c5441c927897c86c921dc7b083d2e4a0d",
+          "size_bytes": 20959,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/csi_feedback/chart_data.json",
+          "sha256": "50f9d2e2f7245bdcc465bdf2f3bbd33e8264f7dbe455ddee3b031356a0f79fab",
+          "size_bytes": 31875,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/csi_feedback/snapshot_manifest.json",
+          "sha256": "e94f99c2a8e46b637a3450c4d5efb0d2703d1a6f004d6feb1d7d2dcc8330ba7a",
+          "size_bytes": 30426,
+          "type": "json"
+        }
+      ],
+      "id": "learned_csi_feedback",
+      "published_results": [],
+      "recipe": {
+        "description": "Architecture-neutral paired CSI feedback slots over a quantized limited-feedback path, with reconstructed-CSI MRT evaluated on held-out Sionna TDL MISO-OFDM channels.",
+        "execution_profile": {
+          "id": "csi_feedback_downlink",
+          "version": 1
+        },
+        "name": "csi_feedback_sionna_train",
+        "sha256": "6b7bb2867a4a716c7acc717bc1bc2f14e5b8478dc8fa54c91584af76d334ba58",
+        "source_path": "recipes/csi_feedback_sionna_train.yaml",
+        "steps": [
+          {
+            "id": "channel_state",
+            "inputs": {},
+            "op": "wireless.miso_ofdm_csi",
+            "params": {
+              "carrier_frequency_ghz": 3.5,
+              "delay_spread_ns": 300.0,
+              "downlink_snr_db": 10.0,
+              "mobility_kmh": 3.0,
+              "normalize_channel": true,
+              "num_ofdm_symbols": 1,
+              "ofdm_fft_size": 32,
+              "sample_count": 512,
+              "seed": 53001,
+              "subcarrier_spacing_khz": 30.0,
+              "tdl_model": "A",
+              "tx_antennas": 8,
+              "tx_correlation_coefficient": 0.7,
+              "wireless_backend": "sionna"
+            }
+          },
+          {
+            "id": "feedback_encoder",
+            "inputs": {
+              "csi": "channel_state.csi"
+            },
+            "op": "model.csi_feedback_encoder",
+            "params": {
+              "feedback_dimension": 32,
+              "runtime": "training_interface"
+            }
+          },
+          {
+            "id": "feedback_link",
+            "inputs": {
+              "feedback_code": "feedback_encoder.feedback_code"
+            },
+            "op": "channel.csi_feedback_link",
+            "params": {
+              "bits_per_latent": 4,
+              "clip_value": 1.0,
+              "mode": "uniform_quantized"
+            }
+          },
+          {
+            "id": "feedback_decoder",
+            "inputs": {
+              "received_code": "feedback_link.received_code"
+            },
+            "op": "model.csi_feedback_decoder",
+            "params": {
+              "feedback_dimension": 32,
+              "runtime": "training_interface"
+            }
+          },
+          {
+            "id": "precoder",
+            "inputs": {
+              "reconstruction": "feedback_decoder.reconstruction"
+            },
+            "op": "model.csi_mrt_precoder",
+            "params": {}
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "precoder": "precoder.precoder",
+              "reconstruction": "feedback_decoder.reconstruction",
+              "true_csi": "channel_state.csi"
+            },
+            "op": "metrics.csi_feedback",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "channel_estimation",
+          "name": "Channel Estimation",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/csi_feedback/snapshot_manifest.json",
+        "manifest_sha256": "e94f99c2a8e46b637a3450c4d5efb0d2703d1a6f004d6feb1d7d2dcc8330ba7a",
+        "projection_rows": 60,
+        "run_count": 60
+      },
+      "source_path": "docs/tutorials/learned_csi_feedback.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/csi_feedback/summary_table.csv",
+          "sha256": "c1864a003a650dac0e11330b7291ad47b6e67ee55bd97fa9086ec699aac525d5",
+          "size_bytes": 679,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/csi_feedback/benchmark_projection.csv",
+          "sha256": "52dee4797910933b49dd3ac7386fc58c5441c927897c86c921dc7b083d2e4a0d",
+          "size_bytes": 20959,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned CSI Compression and Feedback"
+    },
+    {
+      "chart_ids": [
+        "deepjscc-psnr",
+        "deepjscc-ms-ssim"
+      ],
+      "chart_scripts": [
+        "../_static/noema-deepjscc-chart-data.js"
+      ],
+      "data_directories": [
+        "data/digital_vs_deepjscc"
+      ],
+      "description": "Train an image encoder and decoder jointly over an additive white Gaussian noise (AWGN) channel, then compare the learned system with a capacity-matched JPEG reference at a fixed bandwidth ratio.",
+      "documentation_path": "../tutorials/digital_vs_deepjscc_sionna.html",
+      "evidence": [
+        {
+          "label": "quality summary table.csv",
+          "path": "data/digital_vs_deepjscc/quality_summary_table.csv",
+          "sha256": "1731d9d2257a14d208959de61e02427e825ea224c7d5c71d7e7330186b8a42a7",
+          "size_bytes": 295,
+          "type": "csv"
+        },
+        {
+          "label": "jpeg operating points table.csv",
+          "path": "data/digital_vs_deepjscc/jpeg_operating_points_table.csv",
+          "sha256": "ae289e80ab75fa5b1ee8691773a6f86f7f1239124aad91607e95344d7a644453",
+          "size_bytes": 311,
+          "type": "csv"
+        },
+        {
+          "label": "resource audit.csv",
+          "path": "data/digital_vs_deepjscc/resource_audit.csv",
+          "sha256": "4452a22c79ee8f77ae6a2eb024e2711faae1ed7822bea744c5e478f6dbcebcb9",
+          "size_bytes": 182,
+          "type": "csv"
+        },
+        {
+          "label": "summary table.csv",
+          "path": "data/digital_vs_deepjscc/summary_table.csv",
+          "sha256": "55fbde69f6093fcdeed59e9fa9fdebfe98b7cd9b03229652d07cd320e67c86ba",
+          "size_bytes": 967,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/digital_vs_deepjscc/benchmark_projection.csv",
+          "sha256": "d71e74573074182661880a9c4b95a50e20168422f23a009fc36b8d4907eaed71",
+          "size_bytes": 11694,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/digital_vs_deepjscc/chart_data.json",
+          "sha256": "8433ac3a43d9db55030f7c8123cb7fe121af67d5d7a65eecf2db4cbd3b8be17b",
+          "size_bytes": 7713,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/digital_vs_deepjscc/snapshot_manifest.json",
+          "sha256": "a37840e5be10bb15683aabae6ca9f850e19c37e1a94ec038fbc30e3b46c5aebf",
+          "size_bytes": 14660,
+          "type": "json"
+        }
+      ],
+      "id": "digital_vs_deepjscc_sionna",
+      "published_results": [],
+      "recipe": {
+        "description": "DeepJSCC image scenario with typed trainable sender/receiver slots around the canonical power-normalized AWGN path.",
+        "execution_profile": {
+          "id": "joint_source_channel_symbols",
+          "version": 1
+        },
+        "name": "deepjscc_kodak_awgn_train",
+        "sha256": "4957ab1496d1ec4be89ac04db6fdae649d79b3565a8807a5b5fcf6db35bbd8d7",
+        "source_path": "recipes/deepjscc_kodak_awgn_train.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.image_dataset",
+            "params": {
+              "crop_size": 128,
+              "dataset": "kodak",
+              "dataset_dir": ".noema/datasets/kodak",
+              "image_ids": "kodim01,kodim02,kodim03,kodim04,kodim05,kodim06,kodim07,kodim08,kodim09,kodim10,kodim11,kodim12,kodim13,kodim14,kodim15,kodim16,kodim17,kodim18,kodim19,kodim20",
+              "repeat_count": 8
+            }
+          },
+          {
+            "id": "sender",
+            "inputs": {
+              "images": "data.images"
+            },
+            "op": "model.deepjscc_external_encode",
+            "params": {
+              "runtime": "training_interface"
+            }
+          },
+          {
+            "id": "tx_power",
+            "inputs": {
+              "symbols": "sender.symbols"
+            },
+            "op": "channel.symbol_power_normalize",
+            "params": {
+              "label": "tx_power_normalize",
+              "normalization_scope": "source_item",
+              "target_power": 1.0
+            }
+          },
+          {
+            "id": "tx_symbol_boundary",
+            "inputs": {
+              "symbols": "tx_power.symbols"
+            },
+            "op": "channel.symbol_boundary",
+            "params": {
+              "label": "modulator_input",
+              "role": "symbol_channel_input"
+            }
+          },
+          {
+            "id": "wireless_channel",
+            "inputs": {
+              "symbols": "tx_symbol_boundary.symbols"
+            },
+            "op": "wireless.channel",
+            "params": {
+              "channel": "awgn",
+              "seed": 23001,
+              "snr_db": 10,
+              "wireless_backend": "sionna"
+            }
+          },
+          {
+            "id": "rx_symbol_boundary",
+            "inputs": {
+              "symbols": "wireless_channel.rx_symbols"
+            },
+            "op": "channel.symbol_boundary",
+            "params": {
+              "label": "channel_output",
+              "role": "symbol_channel_output"
+            }
+          },
+          {
+            "id": "channel_symbol_count_match",
+            "inputs": {
+              "candidate": "rx_symbol_boundary.symbols",
+              "reference": "tx_symbol_boundary.symbols"
+            },
+            "op": "channel.symbol_count_match",
+            "params": {
+              "label": "channel_io"
+            }
+          },
+          {
+            "id": "receiver",
+            "inputs": {
+              "symbols": "rx_symbol_boundary.symbols"
+            },
+            "op": "model.deepjscc_external_decode",
+            "params": {
+              "runtime": "training_interface"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "reconstruction": "receiver.images",
+              "reference": "data.images"
+            },
+            "op": "metrics.image_reconstruction",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "semantic_comm",
+          "name": "Semantic Communication",
+          "status": "active",
+          "version": "v1"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/digital_vs_deepjscc/snapshot_manifest.json",
+        "manifest_sha256": "a37840e5be10bb15683aabae6ca9f850e19c37e1a94ec038fbc30e3b46c5aebf",
+        "projection_rows": 32,
+        "run_count": 32
+      },
+      "source_path": "docs/tutorials/digital_vs_deepjscc_sionna.md",
+      "tables": [
+        {
+          "label": "quality summary table.csv",
+          "path": "data/digital_vs_deepjscc/quality_summary_table.csv",
+          "sha256": "1731d9d2257a14d208959de61e02427e825ea224c7d5c71d7e7330186b8a42a7",
+          "size_bytes": 295,
+          "type": "csv"
+        },
+        {
+          "label": "jpeg operating points table.csv",
+          "path": "data/digital_vs_deepjscc/jpeg_operating_points_table.csv",
+          "sha256": "ae289e80ab75fa5b1ee8691773a6f86f7f1239124aad91607e95344d7a644453",
+          "size_bytes": 311,
+          "type": "csv"
+        },
+        {
+          "label": "resource audit.csv",
+          "path": "data/digital_vs_deepjscc/resource_audit.csv",
+          "sha256": "4452a22c79ee8f77ae6a2eb024e2711faae1ed7822bea744c5e478f6dbcebcb9",
+          "size_bytes": 182,
+          "type": "csv"
+        },
+        {
+          "label": "summary table.csv",
+          "path": "data/digital_vs_deepjscc/summary_table.csv",
+          "sha256": "55fbde69f6093fcdeed59e9fa9fdebfe98b7cd9b03229652d07cd320e67c86ba",
+          "size_bytes": 967,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/digital_vs_deepjscc/benchmark_projection.csv",
+          "sha256": "d71e74573074182661880a9c4b95a50e20168422f23a009fc36b8d4907eaed71",
+          "size_bytes": 11694,
+          "type": "csv"
+        }
+      ],
+      "title": "DeepJSCC vs. Capacity-Matched JPEG over AWGN"
+    },
+    {
+      "chart_ids": [
+        "ofdm-allocation-spectral-efficiency",
+        "ofdm-allocation-shannon-optimum-achievement",
+        "ofdm-allocation-representative-power"
+      ],
+      "chart_scripts": [
+        "../_static/noema-demo-chart-data.js",
+        "../_static/noema-ofdm-resource-allocation-chart-data.js"
+      ],
+      "data_directories": [
+        "data/ofdm_resource_allocation"
+      ],
+      "description": "Train an OFDM power-allocation policy and compare it with equal power and theoretical water filling under the same nonnegative, fixed-sum power constraint. The scenario stays fixed; only the TX power Block changes.",
+      "documentation_path": "../tutorials/ofdm_resource_allocation_demo.html",
+      "evidence": [
+        {
+          "label": "paired summary table.csv",
+          "path": "data/ofdm_resource_allocation/paired_summary_table.csv",
+          "sha256": "979836d25c98b968a0e203e7f8af0fb27c7eca153f963c0a963df5c05da1739d",
+          "size_bytes": 446,
+          "type": "csv"
+        },
+        {
+          "label": "paired benchmark projection.csv",
+          "path": "data/ofdm_resource_allocation/paired_benchmark_projection.csv",
+          "sha256": "a26cf33b7bc8653234852203ba70dce54f6d815140ce63a821ddfa71ece22388",
+          "size_bytes": 9804,
+          "type": "csv"
+        },
+        {
+          "label": "paired snapshot manifest.json",
+          "path": "data/ofdm_resource_allocation/paired_snapshot_manifest.json",
+          "sha256": "965facb6c2e1c198a7844e8d553f466226e209fb60e82e118da756ceda0f43b4",
+          "size_bytes": 16832,
+          "type": "json"
+        },
+        {
+          "label": "current results all metrics.csv",
+          "path": "data/ofdm_resource_allocation/current_results_all_metrics.csv",
+          "sha256": "e37f400827d9bc2a53b50e3090a1f2dfd3c99cdc5834b9947ee5f666bd008611",
+          "size_bytes": 562878,
+          "type": "csv"
+        }
+      ],
+      "id": "ofdm_resource_allocation_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "OFDM subcarrier power allocation over seeded Sionna TDL channels with selectable equal-power, Shannon water-filling, and learned policies.",
+        "execution_profile": {
+          "id": "layered_digital",
+          "version": 1
+        },
+        "name": "ofdm_subcarrier_resource_allocation",
+        "sha256": "94d80775f30d518fa7d1e0cb50701e56f0caba0ff291c946159c12ede6f37e48",
+        "source_path": "recipes/resource_equal_power_baseline.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.random_bits",
+            "params": {
+              "batch_size": 256,
+              "bit_count": 1024,
+              "seed": 23
+            }
+          },
+          {
+            "id": "payload_bit_boundary",
+            "inputs": {
+              "bits": "data.bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "payload_input",
+              "role": "payload"
+            }
+          },
+          {
+            "id": "channel_encoder",
+            "inputs": {
+              "bits": "payload_bit_boundary.bits"
+            },
+            "op": "channel.identity_encoder",
+            "params": {}
+          },
+          {
+            "id": "tx_bit_boundary",
+            "inputs": {
+              "bits": "channel_encoder.coded_bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "modulator_input",
+              "role": "modulator_input"
+            }
+          },
+          {
+            "id": "modulator",
+            "inputs": {
+              "bits": "tx_bit_boundary.bits"
+            },
+            "op": "modulation.digital_modulate",
+            "params": {
+              "modulation": "qpsk"
+            }
+          },
+          {
+            "id": "channel_state",
+            "inputs": {
+              "symbols": "modulator.symbols"
+            },
+            "op": "wireless.ofdm_channel_state",
+            "params": {
+              "average_power_budget": 1.0,
+              "capacity_multiplier": 16,
+              "carrier_frequency_ghz": 3.5,
+              "delay_spread_ns": 300.0,
+              "mobility_kmh": 30.0,
+              "noise_variance": 0.2,
+              "normalize_channel": true,
+              "num_ofdm_symbols": 4,
+              "ofdm_fft_size": 32,
+              "seed": 23001,
+              "subcarrier_spacing_khz": 60.0,
+              "tdl_model": "A"
+            }
+          },
+          {
+            "id": "tx_power",
+            "inputs": {
+              "bits": "tx_bit_boundary.bits",
+              "channel_state": "channel_state.state",
+              "symbols": "channel_state.symbols"
+            },
+            "op": "model.symbol_power_allocator",
+            "params": {
+              "bit_loading_bpsk_min_snr_db": 6.0,
+              "bit_loading_max_bits_per_symbol": 6,
+              "bit_loading_qam16_min_snr_db": 17.0,
+              "bit_loading_qam64_min_snr_db": 23.0,
+              "bit_loading_qpsk_min_snr_db": 10.0,
+              "budget_mode": "fixed_average",
+              "granularity": "per_subcarrier",
+              "label": "tx_power",
+              "policy": "fixed",
+              "subcarrier_count": 32,
+              "target_power": 1.0,
+              "transport_mode": "allocation_aware_bit_loading"
+            }
+          },
+          {
+            "id": "wireless_channel",
+            "inputs": {
+              "channel_state": "channel_state.state",
+              "symbols": "tx_power.symbols"
+            },
+            "op": "wireless.channel",
+            "params": {
+              "carrier_frequency_ghz": 3.5,
+              "channel": "ofdm_tdl",
+              "channel_state_mode": "explicit",
+              "mobility_kmh": 30.0,
+              "noise_mode": "fixed_variance",
+              "noise_variance": 0.2,
+              "num_ofdm_symbols": 4,
+              "ofdm_fft_size": 32,
+              "receiver_processing": "matched",
+              "seed": 23002,
+              "subcarrier_spacing_khz": 60.0,
+              "wireless_backend": "sionna"
+            }
+          },
+          {
+            "id": "demodulator",
+            "inputs": {
+              "allocation": "tx_power.allocation",
+              "rx_symbols": "wireless_channel.rx_symbols"
+            },
+            "op": "demodulation.digital_demodulate",
+            "params": {
+              "modulation": "auto"
+            }
+          },
+          {
+            "id": "rx_bit_boundary",
+            "inputs": {
+              "bits": "demodulator.bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "demodulator_output",
+              "role": "demodulator_output"
+            }
+          },
+          {
+            "id": "coded_ber",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "metrics.bit_error_rate",
+            "params": {
+              "label": "coded"
+            }
+          },
+          {
+            "id": "coded_bler",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "metrics.block_error_rate",
+            "params": {
+              "block_size": 1024,
+              "label": "coded"
+            }
+          },
+          {
+            "id": "channel_bit_count_match",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "channel.bit_count_match",
+            "params": {
+              "label": "channel_io"
+            }
+          },
+          {
+            "id": "channel_decoder",
+            "inputs": {
+              "coded_bits": "rx_bit_boundary.bits"
+            },
+            "op": "channel.identity_decoder",
+            "params": {}
+          },
+          {
+            "id": "payload_ber",
+            "inputs": {
+              "candidate": "channel_decoder.bits",
+              "reference": "payload_bit_boundary.bits"
+            },
+            "op": "metrics.bit_error_rate",
+            "params": {
+              "label": "payload"
+            }
+          },
+          {
+            "id": "payload_bler",
+            "inputs": {
+              "candidate": "channel_decoder.bits",
+              "reference": "payload_bit_boundary.bits"
+            },
+            "op": "metrics.block_error_rate",
+            "params": {
+              "block_size": 1024,
+              "label": "payload"
+            }
+          },
+          {
+            "id": "allocation_evaluation",
+            "inputs": {
+              "allocation": "tx_power.allocation",
+              "candidate": "channel_decoder.bits",
+              "reference": "payload_bit_boundary.bits",
+              "state": "channel_state.state",
+              "symbols": "tx_power.symbols"
+            },
+            "op": "metrics.ofdm_power_allocation",
+            "params": {
+              "outage_target_spectral_efficiency_bps_hz": 2.0,
+              "transport_block_size_bits": 1024
+            }
+          }
+        ],
+        "suite": {
+          "id": "resource_allocation",
+          "name": "Resource Allocation",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/ofdm_resource_allocation/paired_snapshot_manifest.json",
+        "manifest_sha256": "965facb6c2e1c198a7844e8d553f466226e209fb60e82e118da756ceda0f43b4",
+        "projection_rows": 27,
+        "run_count": 27
+      },
+      "source_path": "docs/tutorials/ofdm_resource_allocation_demo.md",
+      "tables": [
+        {
+          "label": "paired summary table.csv",
+          "path": "data/ofdm_resource_allocation/paired_summary_table.csv",
+          "sha256": "979836d25c98b968a0e203e7f8af0fb27c7eca153f963c0a963df5c05da1739d",
+          "size_bytes": 446,
+          "type": "csv"
+        },
+        {
+          "label": "paired benchmark projection.csv",
+          "path": "data/ofdm_resource_allocation/paired_benchmark_projection.csv",
+          "sha256": "a26cf33b7bc8653234852203ba70dce54f6d815140ce63a821ddfa71ece22388",
+          "size_bytes": 9804,
+          "type": "csv"
+        },
+        {
+          "label": "current results all metrics.csv",
+          "path": "data/ofdm_resource_allocation/current_results_all_metrics.csv",
+          "sha256": "e37f400827d9bc2a53b50e3090a1f2dfd3c99cdc5834b9947ee5f666bd008611",
+          "size_bytes": 562878,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned OFDM Subcarrier Allocation"
+    },
+    {
+      "chart_ids": [
+        "delayed-csi-goodput",
+        "delayed-csi-predicted-bler",
+        "delayed-csi-representative-state"
+      ],
+      "chart_scripts": [
+        "../_static/noema-delayed-csi-demo-chart-data.js"
+      ],
+      "data_directories": [
+        "data/reliability_aware_delayed_csi_ofdm_allocation"
+      ],
+      "description": "Train an OFDM power allocator for short packets when the transmitter sees an old, noisy channel history. Each example gives the model four consecutive complex CSI snapshots, ordered oldest to newest. The newest snapshot is five OFDM symbols older than the channel used for transmission. The current state is captured only for the training objective and held-out evaluation. In other words, the current channel never enters the returned model ABI. The history and current state are causal slices of one Sionna 3GPP TDL-C trajectory. A 1 \u00b5s RMS delay spread creates frequency selectivity across 128 subcarriers, while 120 km/h mobility creates temporal evolution. Channel normalization is disabled, so the policy must also handle absolute fading changes. This gives delayed CSI useful but imperfect predictive information. The objective is expected short-packet goodput, target rate \u00d7 (1 \u2212 predicted BLER). Predicted BLER uses the finite-blocklength normal approximation for parallel complex AWGN channels. It is a reliability model, not a claim that a specific deployed FEC decoder was simulated.",
+      "documentation_path": "../tutorials/reliability_aware_ofdm_allocation_demo.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/reliability_aware_delayed_csi_ofdm_allocation/summary_table.csv",
+          "sha256": "5ad59ce4143d3e6f67fd05da8127e4479b8c0dda13f0480d64d378f69a8050ab",
+          "size_bytes": 1319,
+          "type": "csv"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/reliability_aware_delayed_csi_ofdm_allocation/snapshot_manifest.json",
+          "sha256": "4490cd3d5e46367f2b3b5a474f839dec5b1e4b14c5b4e79c9bb02bac3a66d105",
+          "size_bytes": 31635,
+          "type": "json"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/reliability_aware_delayed_csi_ofdm_allocation/benchmark_projection.csv",
+          "sha256": "f333d6e5fa481fe95540cfc9e8de0245856e81e7e9af6ecae57b07abb3d92a4b",
+          "size_bytes": 23664,
+          "type": "csv"
+        }
+      ],
+      "id": "reliability_aware_ofdm_allocation_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "Reliability-aware wideband OFDM power allocation for short packets using a causal history of delayed, noisy transmitter CSI derived from the same temporally correlated Sionna TDL-C trajectory as the current propagation channel.",
+        "execution_profile": {
+          "id": "layered_digital",
+          "version": 1
+        },
+        "name": "ofdm_reliability_allocation_delayed_csi",
+        "sha256": "6fa1e1591d00c64e805703202c9e8824c3f7811b5860331490a6f43d26dc922f",
+        "source_path": "recipes/resource_delayed_csi_finite_blocklength.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.random_bits",
+            "params": {
+              "batch_size": 256,
+              "bit_count": 1024,
+              "seed": 83
+            }
+          },
+          {
+            "id": "payload_bit_boundary",
+            "inputs": {
+              "bits": "data.bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "payload_input",
+              "role": "payload"
+            }
+          },
+          {
+            "id": "channel_encoder",
+            "inputs": {
+              "bits": "payload_bit_boundary.bits"
+            },
+            "op": "channel.identity_encoder",
+            "params": {}
+          },
+          {
+            "id": "tx_bit_boundary",
+            "inputs": {
+              "bits": "channel_encoder.coded_bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "modulator_input",
+              "role": "modulator_input"
+            }
+          },
+          {
+            "id": "modulator",
+            "inputs": {
+              "bits": "tx_bit_boundary.bits"
+            },
+            "op": "modulation.digital_modulate",
+            "params": {
+              "modulation": "qpsk"
+            }
+          },
+          {
+            "id": "channel_state",
+            "inputs": {
+              "symbols": "modulator.symbols"
+            },
+            "op": "wireless.ofdm_channel_state",
+            "params": {
+              "average_power_budget": 0.8,
+              "capacity_multiplier": 16,
+              "carrier_frequency_ghz": 3.5,
+              "delay_spread_ns": 1000.0,
+              "mobility_kmh": 120.0,
+              "noise_variance": 0.2,
+              "normalize_channel": false,
+              "num_ofdm_symbols": 32,
+              "ofdm_fft_size": 128,
+              "seed": 83001,
+              "subcarrier_spacing_khz": 15.0,
+              "tdl_model": "C"
+            }
+          },
+          {
+            "id": "csi_observation",
+            "inputs": {
+              "state": "channel_state.state"
+            },
+            "op": "wireless.ofdm_delayed_csi",
+            "params": {
+              "add_estimation_noise": true,
+              "allocation_ofdm_symbols": 24,
+              "capture_temporal_stride": 12,
+              "csi_estimation_snr_db": 20.0,
+              "csi_history_length": 4,
+              "feedback_delay_ofdm_symbols": 5,
+              "seed": 83002
+            }
+          },
+          {
+            "id": "tx_power",
+            "inputs": {
+              "bits": "tx_bit_boundary.bits",
+              "channel_state": "csi_observation.transmitter_csi",
+              "symbols": "channel_state.symbols"
+            },
+            "op": "model.causal_csi_power_allocator",
+            "params": {
+              "budget_mode": "fixed_average",
+              "csi_gain_shrinkage": 0.6,
+              "granularity": "per_subcarrier",
+              "label": "tx_power",
+              "policy": "fixed",
+              "subcarrier_count": 128,
+              "target_power": 0.8,
+              "transport_mode": "fixed_modulation"
+            }
+          },
+          {
+            "id": "wireless_channel",
+            "inputs": {
+              "channel_state": "csi_observation.actual_state",
+              "symbols": "tx_power.symbols"
+            },
+            "op": "wireless.channel",
+            "params": {
+              "carrier_frequency_ghz": 3.5,
+              "channel": "ofdm_tdl",
+              "channel_state_mode": "explicit",
+              "mobility_kmh": 120.0,
+              "noise_mode": "fixed_variance",
+              "noise_variance": 0.2,
+              "num_ofdm_symbols": 24,
+              "ofdm_fft_size": 128,
+              "seed": 83003,
+              "subcarrier_spacing_khz": 15.0,
+              "wireless_backend": "sionna"
+            }
+          },
+          {
+            "id": "demodulator",
+            "inputs": {
+              "allocation": "tx_power.allocation",
+              "rx_symbols": "wireless_channel.rx_symbols"
+            },
+            "op": "demodulation.digital_demodulate",
+            "params": {
+              "modulation": "auto"
+            }
+          },
+          {
+            "id": "rx_bit_boundary",
+            "inputs": {
+              "bits": "demodulator.bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "demodulator_output",
+              "role": "demodulator_output"
+            }
+          },
+          {
+            "id": "coded_ber",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "metrics.bit_error_rate",
+            "params": {
+              "label": "coded"
+            }
+          },
+          {
+            "id": "coded_bler",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "metrics.block_error_rate",
+            "params": {
+              "block_size": 1024,
+              "label": "coded"
+            }
+          },
+          {
+            "id": "channel_bit_count_match",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "channel.bit_count_match",
+            "params": {
+              "label": "channel_io"
+            }
+          },
+          {
+            "id": "channel_decoder",
+            "inputs": {
+              "coded_bits": "rx_bit_boundary.bits"
+            },
+            "op": "channel.identity_decoder",
+            "params": {}
+          },
+          {
+            "id": "payload_ber",
+            "inputs": {
+              "candidate": "channel_decoder.bits",
+              "reference": "payload_bit_boundary.bits"
+            },
+            "op": "metrics.bit_error_rate",
+            "params": {
+              "label": "payload"
+            }
+          },
+          {
+            "id": "payload_bler",
+            "inputs": {
+              "candidate": "channel_decoder.bits",
+              "reference": "payload_bit_boundary.bits"
+            },
+            "op": "metrics.block_error_rate",
+            "params": {
+              "block_size": 1024,
+              "label": "payload"
+            }
+          },
+          {
+            "id": "allocation_evaluation",
+            "inputs": {
+              "actual_state": "csi_observation.actual_state",
+              "allocation": "tx_power.allocation",
+              "transmitter_csi": "csi_observation.transmitter_csi"
+            },
+            "op": "metrics.ofdm_finite_blocklength_allocation",
+            "params": {
+              "blocklength_channel_uses": 128,
+              "include_third_order_term": true,
+              "target_rate_bps_hz": 2.0
+            }
+          }
+        ],
+        "suite": {
+          "id": "resource_allocation",
+          "name": "Resource Allocation",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/reliability_aware_delayed_csi_ofdm_allocation/snapshot_manifest.json",
+        "manifest_sha256": "4490cd3d5e46367f2b3b5a474f839dec5b1e4b14c5b4e79c9bb02bac3a66d105",
+        "projection_rows": 60,
+        "run_count": 60
+      },
+      "source_path": "docs/tutorials/reliability_aware_ofdm_allocation_demo.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/reliability_aware_delayed_csi_ofdm_allocation/summary_table.csv",
+          "sha256": "5ad59ce4143d3e6f67fd05da8127e4479b8c0dda13f0480d64d378f69a8050ab",
+          "size_bytes": 1319,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/reliability_aware_delayed_csi_ofdm_allocation/benchmark_projection.csv",
+          "sha256": "f333d6e5fa481fe95540cfc9e8de0245856e81e7e9af6ecae57b07abb3d92a4b",
+          "size_bytes": 23664,
+          "type": "csv"
+        }
+      ],
+      "title": "Reliability-Aware OFDM Allocation with Delayed CSI"
+    },
+    {
+      "chart_ids": [
+        "mimo-channel-estimation-nmse",
+        "mimo-channel-estimation-profile-gain",
+        "mimo-channel-estimation-zf-rate",
+        "mimo-channel-estimation-zf-retention",
+        "mimo-channel-estimation-response-preview"
+      ],
+      "chart_scripts": [
+        "../_static/noema-mimo-channel-estimation-chart-data.js"
+      ],
+      "data_directories": [
+        "data/mimo_ofdm_channel_estimation"
+      ],
+      "description": "Train a portable estimator for a 2\u00d72, 64-subcarrier MIMO-OFDM link with sparse orthogonal comb pilots. Training and benchmarking mix Sionna 3GPP TDL-A, TDL-C, and TDL-E profiles at 3.5 GHz, 30 kHz subcarrier spacing, 300 ns RMS delay spread, and 30 km/h mobility. The receiver is not told which profile generated a realization. Noema owns pilot division and frequency interpolation. The returned model gets:",
+      "documentation_path": "../tutorials/learned_mimo_ofdm_channel_estimation_demo.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/mimo_ofdm_channel_estimation/summary_table.csv",
+          "sha256": "6441a202fb17f1dd24187e5c1ce41d0a4fff79bc989f384fce5c9c28589b34ad",
+          "size_bytes": 963,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/mimo_ofdm_channel_estimation/benchmark_projection.csv",
+          "sha256": "22199e96f0b683aca5e1e5e08e32b7a8855907bc3c9d28937f4b9dbd35b87650",
+          "size_bytes": 21444,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/mimo_ofdm_channel_estimation/chart_data.json",
+          "sha256": "ff91998227569c81aec7304c158292783a1ebbe6f42eebae0e8ffdf96214825a",
+          "size_bytes": 30340,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/mimo_ofdm_channel_estimation/snapshot_manifest.json",
+          "sha256": "996e554b2b6bad430def140e5d19f065839d8d74990611ded472a8b10bb4f200",
+          "size_bytes": 27797,
+          "type": "json"
+        }
+      ],
+      "id": "learned_mimo_ofdm_channel_estimation_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "2\u00d72 MIMO-OFDM sparse-pilot channel estimation across mixed Sionna 3GPP TDL-A/C/E profiles with LS, fixed-prior LMMSE, and portable learned estimators.",
+        "execution_profile": {
+          "id": "mimo_ofdm_channel_estimation",
+          "version": 1
+        },
+        "name": "mimo_ofdm_mixed_tdl_channel_estimation",
+        "sha256": "1f119008c06d3bba499a1b25aa96e16f60034708b74cce8d91ccdb70ae897307",
+        "source_path": "recipes/mimo_ofdm_adapter_channel_estimation.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.ai_phy_channel_realization",
+            "params": {
+              "carrier_frequency_ghz": 3.5,
+              "delay_spread_ns": 300,
+              "example_count": 64,
+              "mobility_kmh": 30,
+              "normalize_channel": true,
+              "rx_antennas": 2,
+              "scenario": "mimo_ofdm",
+              "subcarrier_spacing_khz": 30,
+              "subcarriers": 64,
+              "tdl_model": "C",
+              "tx_antennas": 2,
+              "wireless_backend": "sionna"
+            }
+          },
+          {
+            "id": "pilots",
+            "inputs": {},
+            "op": "source.ai_phy_pilot_pattern",
+            "params": {
+              "pilot_spacing": 4,
+              "scenario": "comb",
+              "seed": 1701,
+              "subcarriers": 64,
+              "tx_antennas": 2
+            }
+          },
+          {
+            "id": "pilot_observation",
+            "inputs": {
+              "channel": "data.channel",
+              "pilots": "pilots.pilots"
+            },
+            "op": "wireless.pilot_observation",
+            "params": {
+              "snr_db": 10,
+              "wireless_backend": "sionna"
+            }
+          },
+          {
+            "id": "estimator",
+            "inputs": {
+              "problem": "pilot_observation.observation"
+            },
+            "op": "model.channel_estimator_adapter",
+            "params": {
+              "lmmse_assumed_tap_count": 4,
+              "mode": "linear_mmse_reference"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "estimate": "estimator.estimate",
+              "problem": "pilot_observation.truth"
+            },
+            "op": "metrics.channel_estimation",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "mimo_ofdm",
+          "name": "MIMO-OFDM",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/mimo_ofdm_channel_estimation/snapshot_manifest.json",
+        "manifest_sha256": "996e554b2b6bad430def140e5d19f065839d8d74990611ded472a8b10bb4f200",
+        "projection_rows": 54,
+        "run_count": 54
+      },
+      "source_path": "docs/tutorials/learned_mimo_ofdm_channel_estimation_demo.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/mimo_ofdm_channel_estimation/summary_table.csv",
+          "sha256": "6441a202fb17f1dd24187e5c1ce41d0a4fff79bc989f384fce5c9c28589b34ad",
+          "size_bytes": 963,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/mimo_ofdm_channel_estimation/benchmark_projection.csv",
+          "sha256": "22199e96f0b683aca5e1e5e08e32b7a8855907bc3c9d28937f4b9dbd35b87650",
+          "size_bytes": 21444,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned 2\u00d72 MIMO-OFDM Channel Estimation"
+    },
+    {
+      "chart_ids": [
+        "qpsk-iq-calibration-ber",
+        "qpsk-iq-calibration-boundaries"
+      ],
+      "chart_scripts": [
+        "../_static/noema-demo-chart-data.js"
+      ],
+      "data_directories": [
+        "data/qpsk_iq_calibration"
+      ],
+      "description": "Train a receiver that maps one impaired QPSK symbol, represented as [I, Q], to two bit logits. The scenario applies AWGN followed by one stable receiver front-end distortion: I/Q gain imbalance, quadrature error, carrier-phase offset, and DC offset. The paired benchmark compares:",
+      "documentation_path": "../tutorials/learned_qpsk_demapper_demo.html",
+      "evidence": [
+        {
+          "label": "ber table.csv",
+          "path": "data/qpsk_iq_calibration/ber_table.csv",
+          "sha256": "fc5a21ae583892945c73edf5f6cf28858082338222522ba3b1f29d08cc5851c1",
+          "size_bytes": 692,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/qpsk_iq_calibration/benchmark_projection.csv",
+          "sha256": "1a1211d8aa2f45293111c135d4d669f8496610dfc41ded446ebbb3ed4ed6985a",
+          "size_bytes": 30342,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark manifest.json",
+          "path": "data/qpsk_iq_calibration/benchmark_manifest.json",
+          "sha256": "d33498f44877bc32bb31b52c2acd67d8c49df820f8eeb22d34d7368b006b0e9c",
+          "size_bytes": 2362,
+          "type": "json"
+        }
+      ],
+      "id": "learned_qpsk_demapper_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "QPSK over AWGN with a stable receiver I/Q front-end impairment and selectable uncompensated, calibrated-oracle, and learned demappers.",
+        "execution_profile": {
+          "id": "layered_digital",
+          "version": 1
+        },
+        "name": "qpsk_iq_imbalance_receiver_calibration",
+        "sha256": "4b955070012edac58f1c041795e392707c8c40267dded87051d26a3f578bce89",
+        "source_path": "recipes/neural_receiver_qpsk_iq_calibration.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.random_bits",
+            "params": {
+              "batch_size": 1,
+              "bit_count": 4096,
+              "seed": 23
+            }
+          },
+          {
+            "id": "payload_bit_boundary",
+            "inputs": {
+              "bits": "data.bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "payload_input",
+              "role": "payload"
+            }
+          },
+          {
+            "id": "channel_encoder",
+            "inputs": {
+              "bits": "payload_bit_boundary.bits"
+            },
+            "op": "channel.identity_encoder",
+            "params": {}
+          },
+          {
+            "id": "tx_bit_boundary",
+            "inputs": {
+              "bits": "channel_encoder.coded_bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "modulator_input",
+              "role": "modulator_input"
+            }
+          },
+          {
+            "id": "modulator",
+            "inputs": {
+              "bits": "tx_bit_boundary.bits"
+            },
+            "op": "modulation.digital_modulate",
+            "params": {
+              "modulation": "qpsk"
+            }
+          },
+          {
+            "id": "wireless_channel",
+            "inputs": {
+              "symbols": "modulator.symbols"
+            },
+            "op": "wireless.channel",
+            "params": {
+              "channel": "awgn",
+              "seed": 23001,
+              "snr_db": 6,
+              "wireless_backend": "numpy"
+            }
+          },
+          {
+            "id": "receiver_frontend",
+            "inputs": {
+              "rx_symbols": "wireless_channel.rx_symbols"
+            },
+            "op": "hardware.receiver_iq_imbalance",
+            "params": {
+              "dc_offset_i": 0.18,
+              "dc_offset_q": -0.12,
+              "gain_imbalance_db": 5,
+              "phase_offset_deg": 20,
+              "quadrature_error_deg": 12
+            }
+          },
+          {
+            "id": "demodulator",
+            "inputs": {
+              "rx_symbols": "receiver_frontend.rx_symbols"
+            },
+            "op": "demodulation.neural_receiver_adapter",
+            "params": {
+              "mode": "reference_qpsk"
+            }
+          },
+          {
+            "id": "rx_bit_boundary",
+            "inputs": {
+              "bits": "demodulator.bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "demodulator_output",
+              "role": "demodulator_output"
+            }
+          },
+          {
+            "id": "coded_ber",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "metrics.bit_error_rate",
+            "params": {
+              "label": "coded"
+            }
+          },
+          {
+            "id": "coded_bler",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "metrics.block_error_rate",
+            "params": {
+              "block_size": 256,
+              "label": "coded"
+            }
+          },
+          {
+            "id": "channel_bit_count_match",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "channel.bit_count_match",
+            "params": {
+              "label": "channel_io"
+            }
+          },
+          {
+            "id": "channel_decoder",
+            "inputs": {
+              "coded_bits": "rx_bit_boundary.bits"
+            },
+            "op": "channel.identity_decoder",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "neural_receiver",
+          "name": "Neural Receiver / AI-PHY",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.completed_benchmark_projection",
+        "manifest_path": "data/qpsk_iq_calibration/benchmark_manifest.json",
+        "manifest_sha256": "d33498f44877bc32bb31b52c2acd67d8c49df820f8eeb22d34d7368b006b0e9c"
+      },
+      "source_path": "docs/tutorials/learned_qpsk_demapper_demo.md",
+      "tables": [
+        {
+          "label": "ber table.csv",
+          "path": "data/qpsk_iq_calibration/ber_table.csv",
+          "sha256": "fc5a21ae583892945c73edf5f6cf28858082338222522ba3b1f29d08cc5851c1",
+          "size_bytes": 692,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/qpsk_iq_calibration/benchmark_projection.csv",
+          "sha256": "1a1211d8aa2f45293111c135d4d669f8496610dfc41ded446ebbb3ed4ed6985a",
+          "size_bytes": 30342,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned QPSK Receiver Calibration"
+    },
+    {
+      "chart_ids": [
+        "qpsk-phase-tracking-ber",
+        "qpsk-phase-tracking-phase-estimates",
+        "qpsk-phase-tracking-phase-error"
+      ],
+      "chart_scripts": [
+        "../_static/noema-demo-chart-data.js",
+        "../_static/noema-qpsk-phase-tracking-chart-data.js"
+      ],
+      "data_directories": [
+        "data/qpsk_phase_tracking"
+      ],
+      "description": "Train a packet-context receiver for pilot-aided QPSK with unknown packet phase, residual carrier frequency offset, Wiener phase noise, and AWGN. At frame position t, the receiver observes y[t] = x[t] exp(j phi[t]) + noise, where x[t] is the transmitted QPSK symbol and phi[t] is a phase trajectory that drifts across the packet. The model estimates the phase correction at every symbol, derotates y[t], and then uses the ordinary QPSK sign decisions. Its runtime inputs are the complete received I/Q packet and the public pilot mask and pilot values; simulator phase truth is used only as a training target. The returned ONNX model is compared with six receivers using the same payload, noise, and carrier-impairment seeds: | Receiver | Information used at inference | Role | | --- | --- | --- | | Uncompensated QPSK | Received I/Q | Weak practical baseline | | Pilot interpolation | Received I/Q and public pilots | Feed-forward classical tracker | | Pilot smoothing | Received I/Q and public pilots | Denoised local-linear classical tracker | | Decision-directed PLL | Received I/Q and public pilots | Adaptive classical tracker | | Learned temporal receiver | Received I/Q and public pilots | Trainable method under study | | True-phase correction | Received I/Q and simulator phase truth | Non-deployable expected-BER reference | The research question is whether a learned packet-context detector can use the same public pilot information as the practical trackers to improve carrier-impaired reception. It is not expected to systematically beat a receiver that receives hidden simulator phase truth. The reusable system template is the built-in Pilot-aided QPSK carrier tracking entry under Template Recipes > Physical layer & resource optimization > Neural receiver demapping. Its version-controlled recipe source describes the communication system independently of the example model and trainer; users normally open it from Template Recipes rather than loading the YAML file manually.",
+      "documentation_path": "../tutorials/learned_qpsk_phase_tracking_demo.html",
+      "evidence": [
+        {
+          "label": "paired summary table.csv",
+          "path": "data/qpsk_phase_tracking/paired_summary_table.csv",
+          "sha256": "3cf85a8a115c87343d133ac009f268c824f8384ce4b8e8594a6d56ba1ab4371b",
+          "size_bytes": 1081,
+          "type": "csv"
+        },
+        {
+          "label": "paired benchmark projection.csv",
+          "path": "data/qpsk_phase_tracking/paired_benchmark_projection.csv",
+          "sha256": "fff26443fdb22f6a7a7cce7519309f61fb8e111a3d0dedb9b80e28ca5e68edeb",
+          "size_bytes": 42704,
+          "type": "csv"
+        },
+        {
+          "label": "paired snapshot manifest.json",
+          "path": "data/qpsk_phase_tracking/paired_snapshot_manifest.json",
+          "sha256": "1a0d20dba45637badaa53d36315c481bf0aa5371166384c1bc40a5808cf51c99",
+          "size_bytes": 55926,
+          "type": "json"
+        },
+        {
+          "label": "representative phase trace.csv",
+          "path": "data/qpsk_phase_tracking/representative_phase_trace.csv",
+          "sha256": "f8547c071e3092d6f2bd5bb7322c2ffe9ee1ed4fad37a92526004358f2fc3814",
+          "size_bytes": 20750,
+          "type": "csv"
+        }
+      ],
+      "id": "learned_qpsk_phase_tracking_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "Pilot-aided QPSK packet reception over AWGN with random carrier phase, residual frequency offset, Wiener phase noise, and selectable classical, oracle, or learned phase-tracking receivers.",
+        "execution_profile": {
+          "id": "layered_digital",
+          "version": 1
+        },
+        "name": "qpsk_pilot_phase_tracking",
+        "sha256": "f4d0cd5827869c1c405fc386686bd9adabfd27b2318dff23abc043867468e0ea",
+        "source_path": "recipes/neural_receiver_qpsk_phase_tracking.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.random_bits",
+            "params": {
+              "batch_size": 256,
+              "bit_count": 1024,
+              "seed": 23
+            }
+          },
+          {
+            "id": "payload_bit_boundary",
+            "inputs": {
+              "bits": "data.bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "payload_input",
+              "role": "payload"
+            }
+          },
+          {
+            "id": "channel_encoder",
+            "inputs": {
+              "bits": "payload_bit_boundary.bits"
+            },
+            "op": "channel.identity_encoder",
+            "params": {}
+          },
+          {
+            "id": "tx_bit_boundary",
+            "inputs": {
+              "bits": "channel_encoder.coded_bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "modulator_input",
+              "role": "modulator_input"
+            }
+          },
+          {
+            "id": "modulator",
+            "inputs": {
+              "bits": "tx_bit_boundary.bits"
+            },
+            "op": "modulation.qpsk_pilot_modulate",
+            "params": {
+              "pilot_seed": 1701,
+              "pilot_spacing_data_symbols": 16,
+              "preamble_symbols": 16
+            }
+          },
+          {
+            "id": "wireless_channel",
+            "inputs": {
+              "symbols": "modulator.symbols"
+            },
+            "op": "wireless.channel",
+            "params": {
+              "channel": "awgn",
+              "noise_mode": "snr_at_unit_power",
+              "seed": 23001,
+              "snr_db": 8,
+              "wireless_backend": "numpy"
+            }
+          },
+          {
+            "id": "carrier_impairment",
+            "inputs": {
+              "rx_symbols": "wireless_channel.rx_symbols"
+            },
+            "op": "wireless.carrier_phase_impairment",
+            "params": {
+              "cfo_max_cycles_per_symbol": 0.01,
+              "cfo_min_cycles_per_symbol": -0.01,
+              "initial_phase_max_rad": 3.141592653589793,
+              "initial_phase_min_rad": -3.141592653589793,
+              "phase_noise_increment_std_rad": 0.04,
+              "seed": 23002
+            }
+          },
+          {
+            "id": "demodulator",
+            "inputs": {
+              "phase_truth": "carrier_impairment.phase_truth",
+              "pilot_context": "modulator.pilot_context",
+              "rx_symbols": "carrier_impairment.rx_symbols"
+            },
+            "op": "demodulation.phase_tracking_receiver_adapter",
+            "params": {
+              "mode": "pilot_smoothing",
+              "pilot_smoothing_nearest_pilots": 5,
+              "pll_alpha": 0.12,
+              "pll_beta": 0.005
+            }
+          },
+          {
+            "id": "rx_bit_boundary",
+            "inputs": {
+              "bits": "demodulator.bits"
+            },
+            "op": "channel.bit_boundary",
+            "params": {
+              "label": "demodulator_output",
+              "role": "demodulator_output"
+            }
+          },
+          {
+            "id": "coded_ber",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "metrics.bit_error_rate",
+            "params": {
+              "label": "coded"
+            }
+          },
+          {
+            "id": "coded_bler",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "metrics.block_error_rate",
+            "params": {
+              "block_size": 1024,
+              "label": "coded"
+            }
+          },
+          {
+            "id": "channel_bit_count_match",
+            "inputs": {
+              "candidate": "rx_bit_boundary.bits",
+              "reference": "tx_bit_boundary.bits"
+            },
+            "op": "channel.bit_count_match",
+            "params": {
+              "label": "channel_io"
+            }
+          },
+          {
+            "id": "channel_decoder",
+            "inputs": {
+              "coded_bits": "rx_bit_boundary.bits"
+            },
+            "op": "channel.identity_decoder",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "neural_receiver",
+          "name": "Neural Receiver / AI-PHY",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/qpsk_phase_tracking/paired_snapshot_manifest.json",
+        "manifest_sha256": "1a0d20dba45637badaa53d36315c481bf0aa5371166384c1bc40a5808cf51c99",
+        "projection_rows": 126,
+        "run_count": 126
+      },
+      "source_path": "docs/tutorials/learned_qpsk_phase_tracking_demo.md",
+      "tables": [
+        {
+          "label": "paired summary table.csv",
+          "path": "data/qpsk_phase_tracking/paired_summary_table.csv",
+          "sha256": "3cf85a8a115c87343d133ac009f268c824f8384ce4b8e8594a6d56ba1ab4371b",
+          "size_bytes": 1081,
+          "type": "csv"
+        },
+        {
+          "label": "paired benchmark projection.csv",
+          "path": "data/qpsk_phase_tracking/paired_benchmark_projection.csv",
+          "sha256": "fff26443fdb22f6a7a7cce7519309f61fb8e111a3d0dedb9b80e28ca5e68edeb",
+          "size_bytes": 42704,
+          "type": "csv"
+        },
+        {
+          "label": "representative phase trace.csv",
+          "path": "data/qpsk_phase_tracking/representative_phase_trace.csv",
+          "sha256": "f8547c071e3092d6f2bd5bb7322c2ffe9ee1ed4fad37a92526004358f2fc3814",
+          "size_bytes": 20750,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned QPSK Carrier Tracking"
+    },
+    {
+      "chart_ids": [
+        "modulation-recognition-accuracy",
+        "modulation-recognition-macro-f1"
+      ],
+      "chart_scripts": [
+        "../_static/noema-modulation-recognition-chart-data.js"
+      ],
+      "data_directories": [
+        "data/modulation_recognition"
+      ],
+      "description": "Train an I/Q-only classifier to recognize BPSK, QPSK, and 16-QAM when each received frame has an unknown carrier phase, residual frequency offset, and AWGN. The learned model replaces only the Classifier block; the waveform source, impairment distribution, class vocabulary, SNR grid, and evaluation protocol remain fixed. The comparison contains three methods:",
+      "documentation_path": "../tutorials/automatic_modulation_recognition_demo.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/modulation_recognition/summary_table.csv",
+          "sha256": "473460e95d4262d7642da2deb31ba2c61defd75bbd6ea4dc0fe3443d2d41fc58",
+          "size_bytes": 533,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/modulation_recognition/benchmark_projection.csv",
+          "sha256": "eb81fa9d756ccbbb05647ca29f903fdd1ccaadebca8daf6d5b2f517db344d1e8",
+          "size_bytes": 19318,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/modulation_recognition/chart_data.json",
+          "sha256": "75e416a633e5103f01c520658cdb8eb78a58f24c3b746c0fb8ee7eee84c4d542",
+          "size_bytes": 8124,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/modulation_recognition/snapshot_manifest.json",
+          "sha256": "b6f5a27eb4fb7d507d4c8bf7e4321e2916172b6c024841a645e06b11913098dd",
+          "size_bytes": 22155,
+          "type": "json"
+        }
+      ],
+      "id": "automatic_modulation_recognition_demo",
+      "published_results": [
+        {
+          "path": "experiments/learned-automatic-modulation-recognition/index.html",
+          "result_id": "20260727T150344Z_neural_receiver_ai_phy.learned_modulation_recognition_blind_carrier_post_training_v1",
+          "source_bundle_sha256": "2aa97175c6dd2795c896e4af445631301febbc3cbcc50233ffa04220a6b0f6bf",
+          "title": "Blind automatic modulation recognition under carrier uncertainty"
+        }
+      ],
+      "recipe": {
+        "description": "BPSK, QPSK, and 16-QAM recognition with unknown per-frame carrier phase, residual frequency offset, AWGN, a blind cumulant baseline, and a portable learned-classifier slot.",
+        "execution_profile": {
+          "id": "task_inference",
+          "version": 1
+        },
+        "name": "modulation_recognition_blind_carrier",
+        "sha256": "7b070ae739104e6cf2d3e0f88db2b6d7732167290c26cf706bd72beba0cefda0",
+        "source_path": "recipes/modulation_recognition_awgn.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.modulation_frames",
+            "params": {
+              "frame_count": 96,
+              "symbols_per_frame": 128
+            }
+          },
+          {
+            "id": "observation",
+            "inputs": {
+              "frames": "data.frames"
+            },
+            "op": "wireless.modulation_awgn_observation",
+            "params": {
+              "carrier_phase_max_rad": 3.141592653589793,
+              "carrier_phase_min_rad": -3.141592653589793,
+              "frequency_offset_max_cycles_per_symbol": 0.006,
+              "frequency_offset_min_cycles_per_symbol": -0.006,
+              "snr_db_max": 8,
+              "snr_db_min": 8
+            }
+          },
+          {
+            "id": "receiver",
+            "inputs": {
+              "observation": "observation.observation"
+            },
+            "op": "model.modulation_classifier_adapter",
+            "params": {
+              "mode": "classical_cumulant"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "prediction": "receiver.prediction",
+              "truth": "data.labels"
+            },
+            "op": "metrics.modulation_classification",
+            "params": {
+              "snr_bin_width_db": 2
+            }
+          }
+        ],
+        "suite": {
+          "id": "neural_receiver",
+          "name": "Neural Receiver / AI-PHY",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/modulation_recognition/snapshot_manifest.json",
+        "manifest_sha256": "b6f5a27eb4fb7d507d4c8bf7e4321e2916172b6c024841a645e06b11913098dd",
+        "projection_rows": 54,
+        "run_count": 54
+      },
+      "source_path": "docs/tutorials/automatic_modulation_recognition_demo.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/modulation_recognition/summary_table.csv",
+          "sha256": "473460e95d4262d7642da2deb31ba2c61defd75bbd6ea4dc0fe3443d2d41fc58",
+          "size_bytes": 533,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/modulation_recognition/benchmark_projection.csv",
+          "sha256": "eb81fa9d756ccbbb05647ca29f903fdd1ccaadebca8daf6d5b2f517db344d1e8",
+          "size_bytes": 19318,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned Automatic Modulation Recognition"
+    }
+  ],
+  "kind": "noema.hosted_demo_catalog",
+  "source": "chart-bearing tutorials, their representative recipes, and checked-in demo evidence",
+  "version": 2
+}

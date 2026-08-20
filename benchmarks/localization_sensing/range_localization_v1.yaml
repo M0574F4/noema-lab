@@ -1,0 +1,90 @@
+schema_version: 1
+id: localization_sensing.range_localization_v1
+version: "0.1.0"
+name: Range Localization
+description: Four-anchor 2D range localization with SNR-derived observation noise, trilateration, and trainable-localizer endpoints.
+suite:
+  id: localization_sensing
+  name: Localization / Sensing
+  status: experimental
+  version: v1-draft
+dataset:
+  id: synthetic_localization_geometry
+  modality: wireless
+  version: synthetic-localization-geometry-v1
+  split: fixed_seed
+task:
+  id: wireless_localization
+  kind: estimation
+  modality: wireless
+metrics:
+  - id: channel.snr_db
+    definition_version: 1
+    source_step: range_observation
+    source_operation: wireless.range_observation
+    family: channel
+    unit: dB
+    direction: neutral
+  - id: localization.rmse_m
+    family: sensing
+    unit: m
+    direction: lower_is_better
+  - id: task.score
+    family: task
+    unit: score
+    direction: higher_is_better
+baselines:
+  - trilateration
+  - localization_adapter
+recipes:
+  - id: trilateration_snr10
+    label: Trilateration
+    role: baseline
+    path: ../../recipes/localization_trilateration_baseline.yaml
+    params:
+      method_id: trilateration
+      matrix_selection:
+        channel.snr_db: 10
+      step_params:
+        range_observation:
+          snr_db: 10
+  - id: adapter_snr10
+    label: Regularized trilateration (trainable endpoint)
+    role: baseline
+    path: ../../recipes/localization_adapter_baseline.yaml
+    params:
+      method_id: localization_adapter
+      matrix_selection:
+        channel.snr_db: 10
+      step_params:
+        range_observation:
+          snr_db: 10
+  - id: trilateration_snr25
+    label: Trilateration
+    role: baseline
+    path: ../../recipes/localization_trilateration_baseline.yaml
+    params:
+      method_id: trilateration
+      matrix_selection:
+        channel.snr_db: 25
+      step_params:
+        range_observation:
+          snr_db: 25
+  - id: adapter_snr25
+    label: Regularized trilateration (trainable endpoint)
+    role: baseline
+    path: ../../recipes/localization_adapter_baseline.yaml
+    params:
+      method_id: localization_adapter
+      matrix_selection:
+        channel.snr_db: 25
+      step_params:
+        range_observation:
+          snr_db: 25
+metadata:
+  benchmark_tier: experimental
+  default_plot:
+    plot: graceful-degradation
+    x: channel.snr_db
+    y: task.score
+  notes: SNR now causally controls range uncertainty while a separately declared measurement floor remains fixed. The adapter recipe uses a deterministic regularized-trilateration reference until replaced by a trained artifact.

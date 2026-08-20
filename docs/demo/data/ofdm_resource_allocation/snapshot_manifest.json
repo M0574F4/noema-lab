@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "kind": "noema.authored_demo_result_snapshot",
+  "source": {
+    "path": "current_results_all_metrics.csv",
+    "sha256": "e37f400827d9bc2a53b50e3090a1f2dfd3c99cdc5834b9947ee5f666bd008611",
+    "data_row_count": 2505
+  },
+  "evidence_level": "illustrative_smoke",
+  "limitations": [
+    "ordinary UI runs, not a benchmark result bundle",
+    "one seed family per policy and operating point",
+    "payload/channel seeds overlap the demonstration capture seed family",
+    "payload BLER uses identity-coded threshold bit loading and is not an optimality metric for the Gaussian-input water-filling objective",
+    "power budgets 3 and 4 exceed the learned artifact training range"
+  ],
+  "learned_artifact": {
+    "manifest_sha256": "e874f6fea559b88be187983df535d9b1efdce7264a13b94102db3fafad750928",
+    "component_sha256": "6c5927fa5ba43b65403d29270ed8c9d22b5955b916e266116d65d33ecc13eb25",
+    "training_average_power_budget_range": [
+      0.5,
+      2.0
+    ]
+  },
+  "runs": [
+    {
+      "run_id": "20260722T123820Z_ofdm_subcarrier_resource_allocation__resource.average_transmit_power_budget_0.5",
+      "policy": "learned_allocator",
+      "average_transmit_power_budget": 0.5,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:39:24.231Z",
+      "authored_recipe_sha256": "0276a55cbcef38d31cd7ec3eb62221e0b58dae937af361779cb8bcbc6e96ae33",
+      "effective_recipe_sha256": "0b77d4e378d5264d200106810d63d5b772e9e9525eee35515d7aa16e875f9b24",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      },
+      "trained_artifact_manifest_sha256": "e874f6fea559b88be187983df535d9b1efdce7264a13b94102db3fafad750928"
+    },
+    {
+      "run_id": "20260722T123931Z_ofdm_subcarrier_resource_allocation__resource.average_transmit_power_budget_1",
+      "policy": "learned_allocator",
+      "average_transmit_power_budget": 1,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:40:36.520Z",
+      "authored_recipe_sha256": "453c0e2f8cba4f738fad1bbc0a09a62b02030465159d98638bf8f5787789e7f7",
+      "effective_recipe_sha256": "52fcba531b09b13a2a44282b998b1267a10afd063a82d337238242aeea04e1e2",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      },
+      "trained_artifact_manifest_sha256": "e874f6fea559b88be187983df535d9b1efdce7264a13b94102db3fafad750928"
+    },
+    {
+      "run_id": "20260722T124044Z_ofdm_subcarrier_resource_allocation__resource.average_transmit_power_budget_2",
+      "policy": "learned_allocator",
+      "average_transmit_power_budget": 2,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:41:50.758Z",
+      "authored_recipe_sha256": "80247553ac528b72dd0ea6c45c14078ba88cfc07adcbe8dae512842763efc297",
+      "effective_recipe_sha256": "aeed6f7161cc245d00f5241d14589425cc137160475c1cf2f7c5fae3216160c0",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      },
+      "trained_artifact_manifest_sha256": "e874f6fea559b88be187983df535d9b1efdce7264a13b94102db3fafad750928"
+    },
+    {
+      "run_id": "20260722T124158Z_ofdm_subcarrier_resource_allocation__resource.average_transmit_power_budget_3",
+      "policy": "learned_allocator",
+      "average_transmit_power_budget": 3,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:43:03.948Z",
+      "authored_recipe_sha256": "48025bf5da6d019b86cff72caad9cc36feb467f2a179b7ff1f905f26cf46c9ab",
+      "effective_recipe_sha256": "e09f396ffa31102be56fc39d1bb5362238d4a012d3af9736aceda9bd9d029e97",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      },
+      "trained_artifact_manifest_sha256": "e874f6fea559b88be187983df535d9b1efdce7264a13b94102db3fafad750928"
+    },
+    {
+      "run_id": "20260722T124310Z_ofdm_subcarrier_resource_allocation__resource.average_transmit_power_budget_4",
+      "policy": "learned_allocator",
+      "average_transmit_power_budget": 4,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:44:15.826Z",
+      "authored_recipe_sha256": "54f28494751f9902115694c4f24c03449224708562d3b122967248c45fca3c33",
+      "effective_recipe_sha256": "b5b1ef969b2d28b3f1e1ee6c8770c3ccfc8fa9f983d00056edfe1ffa9fcce431",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      },
+      "trained_artifact_manifest_sha256": "e874f6fea559b88be187983df535d9b1efdce7264a13b94102db3fafad750928"
+    },
+    {
+      "run_id": "20260722T124423Z_ofdm_subcarrier_resource_allocation_1__resource.average_transmit_power_budget_0.5",
+      "policy": "equal_power",
+      "average_transmit_power_budget": 0.5,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:45:21.861Z",
+      "authored_recipe_sha256": "12ebcad8c87507fc9dcc3a6ee13e3c2dd54e79a94aaf2083fdc8d6e5fd36335e",
+      "effective_recipe_sha256": "f6d264f9148e2a29296f1ae514b7e12e9f8bba60edb03e9b454590b99721f9c9",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    },
+    {
+      "run_id": "20260722T124528Z_ofdm_subcarrier_resource_allocation_1__resource.average_transmit_power_budget_1",
+      "policy": "equal_power",
+      "average_transmit_power_budget": 1,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:46:26.090Z",
+      "authored_recipe_sha256": "f36486255a9812c131133eac889f8e9ba7387bced58fc0716fc2d38503e63540",
+      "effective_recipe_sha256": "6afff77ea32167731cdeb351983108dfbb93a5141a5f52a2c2e4e8320a8888a3",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    },
+    {
+      "run_id": "20260722T124633Z_ofdm_subcarrier_resource_allocation_1__resource.average_transmit_power_budget_2",
+      "policy": "equal_power",
+      "average_transmit_power_budget": 2,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:47:31.449Z",
+      "authored_recipe_sha256": "2122e687acde26aa531820e73eaca01cc9c50f957ff4deb2f5218aea19c496d2",
+      "effective_recipe_sha256": "5e3d8b4b9207e58395b424a254d1c17417c5565322f3b343f6c950bf6c7fdf1e",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    },
+    {
+      "run_id": "20260722T124738Z_ofdm_subcarrier_resource_allocation_1__resource.average_transmit_power_budget_3",
+      "policy": "equal_power",
+      "average_transmit_power_budget": 3,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:48:36.816Z",
+      "authored_recipe_sha256": "08e8413f0f07711ebe326bf4d1738e698dc5c106ea4e0d8103bdab4e0fc46ad7",
+      "effective_recipe_sha256": "e09d6ab6ad50f2a209b68116a0d3d0e250ac46097ae2a4a20054101715fbaadc",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    },
+    {
+      "run_id": "20260722T124844Z_ofdm_subcarrier_resource_allocation_1__resource.average_transmit_power_budget_4",
+      "policy": "equal_power",
+      "average_transmit_power_budget": 4,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:49:44.451Z",
+      "authored_recipe_sha256": "2e689401456c26fd90cf837780c83aa92f5429a810b3975ff26bf2b998478eba",
+      "effective_recipe_sha256": "dba47c5418482019e4e0291401cc94f637ce4d79d64d3e7b1e8bcafbdbd859a0",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    },
+    {
+      "run_id": "20260722T124953Z_ofdm_subcarrier_resource_allocation_2__resource.average_transmit_power_budget_0.5",
+      "policy": "water_filling",
+      "average_transmit_power_budget": 0.5,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:51:31.474Z",
+      "authored_recipe_sha256": "635ac53d4b6d6d3acfa4d171214bdd93eb80fac60b119f7e09cf98b59cbe8250",
+      "effective_recipe_sha256": "d40ea2911241f706fb9a7722da182abbc6fd414b7d5a98d8dd51de59cb980a3e",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    },
+    {
+      "run_id": "20260722T125140Z_ofdm_subcarrier_resource_allocation_2__resource.average_transmit_power_budget_1",
+      "policy": "water_filling",
+      "average_transmit_power_budget": 1,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:53:10.606Z",
+      "authored_recipe_sha256": "3b4f68622631aa3ea4d3a2a1c30fdf9a84a6aa7e123340c2b206919de46a87db",
+      "effective_recipe_sha256": "73fdbb4c3621a1cb4e988403cd7f9d3a493abdf562846e57737e1e3d581c63c0",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    },
+    {
+      "run_id": "20260722T125320Z_ofdm_subcarrier_resource_allocation_2__resource.average_transmit_power_budget_2",
+      "policy": "water_filling",
+      "average_transmit_power_budget": 2,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:55:04.588Z",
+      "authored_recipe_sha256": "9ebc6d982d9709e6fb8606f0348aca86dd67a2827b733f1c0e457dfa3c01eed8",
+      "effective_recipe_sha256": "c2992a4fb3c37e6f37f070064ad4decb81ea5e1c3724e38c19d9212458498f85",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    },
+    {
+      "run_id": "20260722T125512Z_ofdm_subcarrier_resource_allocation_2__resource.average_transmit_power_budget_3",
+      "policy": "water_filling",
+      "average_transmit_power_budget": 3,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:56:48.229Z",
+      "authored_recipe_sha256": "d36da2e97ef76ae5f2129e341d704f4889afa91d0de8bacd5beda5abf6181e23",
+      "effective_recipe_sha256": "8897b219c4c370a11fb1b81d16a65cdda24267861b0f85b113f9f5229b4f1f89",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    },
+    {
+      "run_id": "20260722T125657Z_ofdm_subcarrier_resource_allocation_2__resource.average_transmit_power_budget_4",
+      "policy": "water_filling",
+      "average_transmit_power_budget": 4,
+      "status": "completed",
+      "completed_at_utc": "2026-07-22T12:58:43.652Z",
+      "authored_recipe_sha256": "ce2dae139534e85246284aa4c3408526ad9bf4ef05b0074425381c7099144816",
+      "effective_recipe_sha256": "e88f4dae315b05b6ea820812dd74ac33c63db6ac1a0709a92a82750062d87237",
+      "seeds": {
+        "data": 23,
+        "channel_state": 23001,
+        "wireless_channel": 23002
+      }
+    }
+  ]
+}

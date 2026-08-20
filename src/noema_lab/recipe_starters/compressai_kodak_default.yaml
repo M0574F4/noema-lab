@@ -1,0 +1,183 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: image_source_coded_link
+description: Image reconstruction over a source-coded link using Kodak images and a pretrained CompressAI codec.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: cli_default
+  codec_profile: compressai
+  codec_label: CompressAI image codec
+  codec_output_form: latents
+  codec_format: "*.pt"
+  semantic_representation: latents
+  transport_representation: entropy_coded_bits
+  channel_enabled: false
+  channel_mode: disabled
+  channel_disabled_mode: bit_perfect_bypass
+  channel_bit_contract: np.uint8 unpacked bits, one bit per element, values 0 or 1
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.modulator_input.bit_count
+  measure_codec_timing: true
+  codec_timing:
+    enabled: true
+    runner: pytorch
+    warmup_runs: 0
+    timed_runs: 1
+steps:
+  - id: data
+    op: source.image_dataset
+    params:
+      dataset: kodak
+      dataset_dir: .noema/datasets/kodak
+      image_ids: kodim01,kodim02,kodim03,kodim04,kodim05,kodim06,kodim07,kodim08,kodim09,kodim10,kodim11,kodim12,kodim13,kodim14,kodim15,kodim16,kodim17,kodim18,kodim19,kodim20,kodim21,kodim22,kodim23,kodim24
+      crop_size: 0
+
+  - id: sender
+    op: model.compressai_analysis_encode
+    inputs:
+      images: data.images
+    params:
+      model: bmshj2018_hyperprior
+      quality: 3
+      metric: mse
+      pretrained: true
+      device: cpu
+      pad_to_multiple: 64
+      quantize_latents: false
+
+  - id: sender_representation_noise
+    op: noise.representation_latents
+    inputs:
+      latents: sender.latents
+    params:
+      mode: none
+      probability: 0.0
+      sigma: 0.05
+      seed: 1383495274
+
+  - id: payload_encoder
+    op: model.compressai_entropy_encode
+    inputs:
+      latents: sender_representation_noise.latents
+    params:
+      device: cpu
+      data_plane_backend: auto
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: payload_encoder.bits
+    params:
+      label: payload_input
+      role: payload_input
+      data_plane_backend: auto
+
+  - id: channel_encoder
+    op: channel.identity_encoder
+    inputs:
+      bits: payload_bit_boundary.bits
+    params:
+      data_plane_backend: auto
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: modulator_input
+      role: modulator_input
+      data_plane_backend: auto
+
+  - id: modulator
+    op: modulation.identity_modulate
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      label: bit_perfect_bypass_modulator
+      data_plane_backend: auto
+
+  - id: tx_power
+    op: channel.symbol_power_identity
+    inputs:
+      symbols: modulator.symbols
+    params:
+      label: tx_power_off
+      power_unit: normalized
+
+  - id: wireless_channel
+    op: channel.identity_symbol_link
+    inputs:
+      symbols: tx_power.symbols
+    params:
+      label: bit_perfect_bypass_symbol_channel
+
+  - id: demodulator
+    op: demodulation.identity_demodulate
+    inputs:
+      rx_symbols: wireless_channel.symbols
+    params:
+      label: bit_perfect_bypass_demodulator
+      data_plane_backend: auto
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: demodulator.bits
+    params:
+      label: identity_channel_output
+      role: identity_channel_output
+      data_plane_backend: auto
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: channel_io
+      data_plane_backend: auto
+
+  - id: channel_decoder
+    op: channel.identity_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits
+    params:
+      data_plane_backend: auto
+
+  - id: payload_decoder
+    op: model.compressai_entropy_decode
+    inputs:
+      bits: channel_decoder.bits
+    params:
+      device: cpu
+      on_error: fail
+      data_plane_backend: auto
+
+  - id: receiver_representation_noise
+    op: noise.representation_latents
+    inputs:
+      latents: payload_decoder.latents
+    params:
+      mode: none
+      probability: 0.0
+      sigma: 0.05
+      seed: 4070400430
+
+  - id: receiver
+    op: model.compressai_synthesis_decode
+    inputs:
+      latents: receiver_representation_noise.latents
+    params:
+      device: cpu
+      on_error: fail
+
+  - id: evaluation
+    op: metrics.image_reconstruction
+    inputs:
+      reference: data.images
+      reconstruction: receiver.images

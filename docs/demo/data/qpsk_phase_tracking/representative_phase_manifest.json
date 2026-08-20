@@ -1,0 +1,59 @@
+{
+  "kind": "noema.docs_representative_phase_trace",
+  "limitation": "Qualitative paired packet from the preserved UI snapshot; statistical claims use the completed 126-run benchmark.",
+  "packet_index": 0,
+  "projected_point_count": 160,
+  "schema_version": 1,
+  "snr_db": 6,
+  "source_runs": {
+    "decision_directed_pll": {
+      "diagnostics": {
+        "sha256": "c396996fe4923ba55b613c3a135ff80c5214f66018429d51b731e795ab4bda2b",
+        "size_bytes": 7281
+      },
+      "phase_truth": {
+        "sha256": "75fcda8332f3ebbb7397d0471574310f7385f5cfd3b9f036264c33abd35d3422",
+        "size_bytes": 14302
+      },
+      "run_id": "20260723T222137Z_qpsk_pilot_phase_tracking_2048_snapshot__channel.snr_db_6__receiver.mode_decision_directed_pll"
+    },
+    "learned_receiver": {
+      "diagnostics": {
+        "sha256": "259b525b7391430df66513c9745627cf505d9761d48956a7b7b200b7c9a63fef",
+        "size_bytes": 7438
+      },
+      "phase_truth": {
+        "sha256": "75fcda8332f3ebbb7397d0471574310f7385f5cfd3b9f036264c33abd35d3422",
+        "size_bytes": 14302
+      },
+      "run_id": "20260723T222140Z_qpsk_pilot_phase_tracking_2048_snapshot__channel.snr_db_6__receiver.mode_learned_artifact"
+    },
+    "oracle_phase": {
+      "diagnostics": {
+        "sha256": "89270bbcd36d278f09ce399f6ef4a93299b6aa34e954720c4327ff153cf1390a",
+        "size_bytes": 7269
+      },
+      "phase_truth": {
+        "sha256": "75fcda8332f3ebbb7397d0471574310f7385f5cfd3b9f036264c33abd35d3422",
+        "size_bytes": 14302
+      },
+      "run_id": "20260723T222138Z_qpsk_pilot_phase_tracking_2048_snapshot__channel.snr_db_6__receiver.mode_oracle"
+    },
+    "pilot_smoothing": {
+      "diagnostics": {
+        "sha256": "b7c50ec613b4356859d8665d8d938fafe1405d55646e46d63ccd18bbe3f7cceb",
+        "size_bytes": 7300
+      },
+      "phase_truth": {
+        "sha256": "75fcda8332f3ebbb7397d0471574310f7385f5cfd3b9f036264c33abd35d3422",
+        "size_bytes": 14302
+      },
+      "run_id": "20260723T222136Z_qpsk_pilot_phase_tracking_2048_snapshot__channel.snr_db_6__receiver.mode_pilot_smoothing"
+    }
+  },
+  "source_symbol_count": 560,
+  "trace": {
+    "sha256": "f8547c071e3092d6f2bd5bb7322c2ffe9ee1ed4fad37a92526004358f2fc3814",
+    "size_bytes": 20750
+  }
+}

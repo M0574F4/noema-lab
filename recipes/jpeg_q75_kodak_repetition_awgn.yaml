@@ -1,0 +1,170 @@
+schema_version: 1
+execution_profile:
+  id: layered_digital
+  version: 1
+name: image_protected_digital_link
+description: Kodak image reconstruction over a protected digital AWGN link with JPEG, CRC32, repetition coding, and QPSK.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: protected_digital_physical_mvp
+  codec_profile: jpeg
+  codec_label: JPEG q75 + CRC/repetition/QPSK/AWGN protected digital link
+  codec_output_form: bits
+  codec_format: "*.jpg"
+  semantic_representation: bits
+  channel_enabled: true
+  channel_mode: awgn
+  protected_digital_baseline: crc32_repetition_qpsk_awgn
+  channel_code: repetition
+  repetition_factor: 3
+  code_rate: 0.3333333333333333
+  modulation: qpsk
+  on_decode_failure: gray_image
+  rate_count_fixed_point: tx_bit_boundary.channel.fixed.tx.bit_count
+  matrix:
+    dimensions:
+      channel.snr_db: [-4, -2, 0, 2, 4, 6, 8, 10, 12, 16]
+    step_params:
+      wireless_channel:
+        snr_db:
+          matrix: channel.snr_db
+  measure_codec_timing: true
+  codec_timing:
+    enabled: true
+    runner: pillow
+    warmup_runs: 0
+    timed_runs: 1
+steps:
+  - id: data
+    op: source.image_dataset
+    params:
+      dataset: kodak
+      dataset_dir: .noema/datasets/kodak
+      image_ids: kodim01,kodim02,kodim03,kodim04,kodim05,kodim06,kodim07,kodim08,kodim09,kodim10,kodim11,kodim12,kodim13,kodim14,kodim15,kodim16,kodim17,kodim18,kodim19,kodim20,kodim21,kodim22,kodim23,kodim24
+      crop_size: 0
+
+  - id: sender
+    op: model.jpeg_encode
+    inputs:
+      images: data.images
+    params:
+      quality: 75
+      subsampling: "420"
+      optimize: false
+      progressive: false
+
+  - id: payload_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: sender.bits
+    params:
+      label: payload
+      role: payload
+
+  - id: packetizer
+    op: channel.packetize_crc32
+    inputs:
+      bits: payload_bit_boundary.bits
+    params:
+      packet_payload_bits: 4096
+
+  - id: channel_encoder
+    op: channel.repetition_encoder
+    inputs:
+      bits: packetizer.bits
+    params:
+      factor: 3
+
+  - id: tx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: channel_encoder.coded_bits
+    params:
+      label: tx
+      role: protected_link_input
+
+  - id: modulator
+    op: modulation.digital_modulate
+    inputs:
+      bits: tx_bit_boundary.bits
+    params:
+      modulation: qpsk
+
+  - id: wireless_channel
+    op: wireless.channel
+    inputs:
+      symbols: modulator.symbols
+    params:
+      channel: awgn
+      snr_db: -4
+      wireless_backend: numpy
+
+  - id: demodulator
+    op: demodulation.digital_demodulate
+    inputs:
+      rx_symbols: wireless_channel.rx_symbols
+    params:
+      modulation: auto
+
+  - id: rx_bit_boundary
+    op: channel.bit_boundary
+    inputs:
+      bits: demodulator.bits
+    params:
+      label: rx
+      role: protected_link_output
+
+  - id: coded_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: coded
+
+  - id: channel_bit_count_match
+    op: channel.bit_count_match
+    inputs:
+      reference: tx_bit_boundary.bits
+      candidate: rx_bit_boundary.bits
+    params:
+      label: protected_link_io
+
+  - id: channel_decoder
+    op: channel.repetition_decoder
+    inputs:
+      coded_bits: rx_bit_boundary.bits
+    params:
+      factor: 3
+
+  - id: crc_check
+    op: channel.crc32_check
+    inputs:
+      bits: channel_decoder.bits
+    params:
+      on_decode_failure: gray_image
+
+  - id: payload_ber
+    op: metrics.bit_error_rate
+    inputs:
+      reference: payload_bit_boundary.bits
+      candidate: crc_check.bits
+    params:
+      label: payload
+
+  - id: receiver
+    op: model.jpeg_decode
+    inputs:
+      bits: crc_check.bits
+    params:
+      on_error: gray_image
+
+  - id: evaluation
+    op: metrics.image_reconstruction
+    inputs:
+      reference: data.images
+      reconstruction: receiver.images

@@ -1,0 +1,18 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps:
+  - tx_power
+dataset_capture:
+  taps:
+    - id: csi_history
+      from: csi_observation.transmitter_csi
+    - id: current_csi
+      from: csi_observation.actual_state
+  split_plan:
+    total_samples: 3072
+    percentages:
+      train: 66.6666666667
+      validation: 16.66666666665
+      test: 16.66666666665
+objective: resource.negative_expected_finite_blocklength_goodput
+framework: torch

@@ -1,0 +1,18 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps:
+  - receiver
+dataset_capture:
+  taps:
+    - id: iq_frames
+      from: observation.observation
+    - id: modulation_labels
+      from: data.labels
+  split_plan:
+    total_samples: 10368
+    percentages:
+      train: 66.6667
+      validation: 16.6667
+      test: 16.6666
+objective: classification.cross_entropy
+framework: torch

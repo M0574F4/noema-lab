@@ -1,0 +1,176 @@
+schema_version: 1
+id: semantic_comm_v1.kodak_nr_ldpc_resource_feasibility_pilot
+version: "0.1.0"
+name: Kodak protected-SSCC resource feasibility pilot
+description: Development-only accounting pilot used to construct a feasible protected-SSCC operating-point grid before publication protocol freeze. It executes no noisy channel and produces no held-out publication outcome.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+dataset:
+  id: kodak
+  modality: image
+  version: kodak-development-21-24-128-v1
+  split: development
+  selection_role: development_only
+  access_policy:
+    state: unsealed_reusable
+    publication_test: false
+  preprocessing:
+    operation_params:
+      resize_shorter_side: 128
+      crop_size: 128
+      repeat_count: 1
+    color_space: RGB
+    sample_domain: uint8_0_255
+    spatial_policy: aspect_resize_then_center_crop
+  sample_ids: [kodim21, kodim22, kodim23, kodim24]
+task:
+  id: image_reconstruction
+  kind: reconstruction
+  modality: image
+metrics:
+  - id: channel.uses_per_pixel
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: channel_use/pixel
+    direction: lower_is_better
+  - id: rate.native_codec_bpp
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+  - id: rate.serialized_payload_bpp
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+  - id: rate.framed_bpp
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+  - id: rate.coded_bpp
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+  - id: rate.padded_bpp
+    source_step: resource_accounting
+    source_operation: channel.communication_resource_accounting
+    family: rate
+    unit: bit/pixel
+    direction: lower_is_better
+baselines:
+  - compressai_q1
+recipes:
+  - id: jpeg_q1
+    label: JPEG q1
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 1}}}
+  - id: jpeg_q5
+    label: JPEG q5
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 5}}}
+  - id: jpeg_q10
+    label: JPEG q10
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 10}}}
+  - id: jpeg_q12
+    label: JPEG q12
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 12}}}
+  - id: jpeg_q15
+    label: JPEG q15
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 15}}}
+  - id: jpeg_q20
+    label: JPEG q20
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 20}}}
+  - id: jpeg_q30
+    label: JPEG q30
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 30}}}
+  - id: jpeg_q40
+    label: JPEG q40
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 40}}}
+  - id: jpeg_q50
+    label: JPEG q50
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 50}}}
+  - id: jpeg_q75
+    label: JPEG q75
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 75}}}
+  - id: jpeg_q90
+    label: JPEG q90
+    role: robustness_operating_point
+    path: recipes/pilots/jpeg_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 90}}}
+  - id: compressai_q1
+    label: CompressAI q1
+    role: primary_operating_point
+    path: recipes/pilots/compressai_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 1}}}
+  - id: compressai_q2
+    label: CompressAI q2
+    role: primary_operating_point
+    path: recipes/pilots/compressai_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 2}}}
+  - id: compressai_q3
+    label: CompressAI q3
+    role: primary_operating_point
+    path: recipes/pilots/compressai_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 3}}}
+  - id: compressai_q4
+    label: CompressAI q4
+    role: primary_operating_point
+    path: recipes/pilots/compressai_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 4}}}
+  - id: compressai_q5
+    label: CompressAI q5
+    role: primary_operating_point
+    path: recipes/pilots/compressai_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 5}}}
+  - id: compressai_q6
+    label: CompressAI q6
+    role: primary_operating_point
+    path: recipes/pilots/compressai_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 6}}}
+  - id: compressai_q7
+    label: CompressAI q7
+    role: primary_operating_point
+    path: recipes/pilots/compressai_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 7}}}
+  - id: compressai_q8
+    label: CompressAI q8
+    role: primary_operating_point
+    path: recipes/pilots/compressai_kodak_nr_ldpc_resource_pilot.yaml
+    params: {step_params: {sender: {quality: 8}}}
+metadata:
+  benchmark_tier: experimental
+  publication_ready: false
+  benchmark_stage: development_only_resource_feasibility
+  publication_test_accessed: false
+  candidate_budget:
+    value: 0.5
+    unit: channel_use/source_pixel
+  expected_outputs: [result.json, metrics.csv, recipes.csv, summary.md]

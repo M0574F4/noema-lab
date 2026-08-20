@@ -1,0 +1,68 @@
+schema_version: 1
+execution_profile:
+  id: range_localization
+  version: 1
+name: range_based_wireless_localization
+description: Four-anchor 2D range localization with SNR-derived measurement noise and selectable trilateration methods.
+suite:
+  id: localization_sensing
+  name: Localization / Sensing
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: sionna_backed_expansion
+  channel_enabled: true
+  channel_mode: ai_phy_synthetic
+  wireless_backend: auto
+  seed: 23
+  ui_configured: true
+  research:
+    dataset:
+      id: synthetic_localization_geometry
+      modality: wireless
+      version: synthetic-localization-geometry-v1
+      split: fixed_seed
+    task:
+      id: wireless_localization
+      kind: estimation
+      modality: wireless
+      metrics:
+        - localization.rmse_m
+        - task.score
+        - channel.snr_db
+    metrics:
+        - localization.rmse_m
+        - task.score
+        - channel.snr_db
+steps:
+  - id: data
+    op: source.localization_geometry
+    params:
+      example_count: 24
+      area_m: 20
+      anchor_count: 4
+      seed: 23001
+
+  - id: range_observation
+    op: wireless.range_observation
+    inputs:
+      scene: data.scene
+    params:
+      snr_db: 15
+      range_noise_floor_m: 0.05
+      nlos_probability: 0
+      nlos_bias_m: 0
+      seed: 23
+
+  - id: localizer
+    op: model.localization_adapter
+    inputs:
+      problem: range_observation.observation
+    params:
+      mode: regularized_trilateration
+
+  - id: evaluation
+    op: metrics.localization
+    inputs:
+      problem: range_observation.truth
+      estimate: localizer.estimate

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">Noema graceful degradation hero plot layout</title>
+  <desc id="desc">Illustrative plot showing a protected digital cliff and a smoother learned semantic communication curve.</desc>
+  <rect width="960" height="520" fill="#0b1020"/>
+  <rect x="56" y="42" width="848" height="406" rx="18" fill="#111827" stroke="#263248"/>
+  <text x="84" y="84" fill="#f8fafc" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="27" font-weight="700">Graceful degradation from benchmark result bundles</text>
+  <text x="84" y="113" fill="#a8b3c7" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15">Generate measured curves with noema benchmark plot after running your frozen benchmark.</text>
+  <line x1="122" y1="377" x2="818" y2="377" stroke="#6b7280" stroke-width="2"/>
+  <line x1="122" y1="377" x2="122" y2="145" stroke="#6b7280" stroke-width="2"/>
+  <text x="441" y="424" fill="#cbd5e1" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17">SNR (dB)</text>
+  <text transform="translate(78 292) rotate(-90)" fill="#cbd5e1" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17">PSNR or task score</text>
+  <g stroke="#263248" stroke-width="1">
+    <line x1="122" y1="320" x2="818" y2="320"/>
+    <line x1="122" y1="263" x2="818" y2="263"/>
+    <line x1="122" y1="206" x2="818" y2="206"/>
+    <line x1="222" y1="145" x2="222" y2="377"/>
+    <line x1="362" y1="145" x2="362" y2="377"/>
+    <line x1="502" y1="145" x2="502" y2="377"/>
+    <line x1="642" y1="145" x2="642" y2="377"/>
+    <line x1="782" y1="145" x2="782" y2="377"/>
+  </g>
+  <path d="M138 348 C208 329 272 306 334 281 C398 255 462 227 526 203 C596 176 676 157 802 149" fill="none" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
+  <g fill="#38bdf8" stroke="#0b1020" stroke-width="3">
+    <circle cx="138" cy="348" r="6"/>
+    <circle cx="334" cy="281" r="6"/>
+    <circle cx="526" cy="203" r="6"/>
+    <circle cx="802" cy="149" r="6"/>
+  </g>
+  <path d="M138 360 L334 360 L482 360 L482 160 L802 160" fill="none" stroke="#f97316" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <g fill="#f97316" stroke="#0b1020" stroke-width="3">
+    <circle cx="138" cy="360" r="6"/>
+    <circle cx="334" cy="360" r="6"/>
+    <circle cx="482" cy="160" r="6"/>
+    <circle cx="802" cy="160" r="6"/>
+  </g>
+  <path d="M138 340 C254 325 366 289 500 242 C612 203 720 181 802 170" fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 9"/>
+  <g transform="translate(584 260)">
+    <rect width="244" height="104" rx="12" fill="#0f172a" stroke="#334155"/>
+    <line x1="20" y1="28" x2="72" y2="28" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
+    <text x="86" y="33" fill="#e2e8f0" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15">DeepJSCC / user method</text>
+    <line x1="20" y1="58" x2="72" y2="58" stroke="#f97316" stroke-width="5" stroke-linecap="round"/>
+    <text x="86" y="63" fill="#e2e8f0" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15">Protected digital cliff</text>
+    <line x1="20" y1="88" x2="72" y2="88" stroke="#22c55e" stroke-width="5" stroke-dasharray="9 8" stroke-linecap="round"/>
+    <text x="86" y="93" fill="#e2e8f0" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15">Returned checkpoint</text>
+  </g>
+  <text x="56" y="484" fill="#94a3b8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13">Illustrative layout only. Measured figures are generated from .noema/benchmarks/&lt;result_id&gt;/result.json.</text>
+</svg>

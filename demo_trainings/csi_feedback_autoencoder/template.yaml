@@ -1,0 +1,35 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: csi_feedback.klt_initialized_quantization_residual_v3
+name: CSI feedback · KLT-initialized quantization-aware residual codec
+status: reference_only
+operations:
+  - model.csi_feedback_encoder
+  - model.csi_feedback_decoder
+framework: torch
+data:
+  owner: noema_capture_contract
+  feature_and_target: realized complex MISO-OFDM CSI in real/imaginary layout
+  labels: none
+model:
+  owner: external_researcher
+  reference_architecture: example-only training-split KLT codec with an angular-delay nonlinear residual path
+loss:
+  owner: external_researcher
+  reference_objective: staged quantized NMSE followed by per-subcarrier direction and MRT spectral-efficiency retention
+  ablation_objective: normalized CSI reconstruction MSE
+frozen_feedback_link:
+  quantizer: recipe-defined uniform scalar quantizer with straight-through training surrogate
+  bit_budget: feedback_dimension multiplied by bits_per_latent
+training:
+  owner: external_researcher
+  reference_optimizer: AdamW
+  reference_schedule: frozen KLT prior, quantized NMSE pretraining, then low-rate prior and nonlinear residual fine-tuning
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: all_group_bindings
+  binding_group: csi_feedback_codec
+  entrypoints:
+    - encoder
+    - decoder

@@ -1,0 +1,35 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: modulation_recognition.supervised_cnn1d
+name: Automatic modulation recognition · cumulant-prior residual CNN
+status: reference_only
+operation: model.modulation_classifier_adapter
+framework: torch
+data:
+  owner: noema_capture_contract
+  feature: fixed-length synchronized received I/Q frames
+  target: separate BPSK/QPSK/16-QAM class IDs discovered from the metric graph
+model:
+  owner: external_researcher
+  reference_architecture: fixed differential-cumulant prior with a regularized temporal residual classifier
+loss:
+  owner: external_researcher
+  reference_objective: label-smoothed cross entropy with residual regularization and validation-loss early stopping
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: single_binding
+  entrypoint: modulation_classifier
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison:
+    - blind_differential_cumulant
+    - learned_classifier
+    - oracle_synchronized_likelihood
+  sweep: channel.snr_db
+  plots:
+    - kind: line
+      y: modulation_recognition.accuracy
+    - kind: line
+      y: modulation_recognition.macro_f1

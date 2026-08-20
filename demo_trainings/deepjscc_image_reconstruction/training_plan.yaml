@@ -1,0 +1,7 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps:
+  - sender
+  - receiver
+objective: image.mse
+framework: torch

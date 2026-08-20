@@ -1,0 +1,74 @@
+schema_version: 1
+execution_profile:
+  id: task_inference
+  version: 1
+name: image_text_retrieval
+description: Flickr8k image-text retrieval with pretrained CLIP embeddings and single-positive Hit@K metrics.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  benchmark_id: clip_retrieval_flickr8k_clip
+  benchmark_version: v1
+  channel_enabled: false
+  channel_mode: no_channel_embedding_retrieval_baseline
+  codec_format: clip_embedding_retrieval
+  codec_label: Transformers CLIP image/text retrieval
+  codec_output_form: rankings
+  codec_profile: clip_retrieval
+  measure_codec_timing: true
+  research:
+    task:
+      id: image_text_retrieval
+  research_stage: clip_retrieval
+  seed: 23
+  semantic_representation: image_text_embeddings
+  transport_representation: none_no_channel_baseline
+  ui_configured: true
+steps:
+  - id: data
+    op: source.flickr8k_retrieval
+    inputs: {}
+    params:
+      dataset_dir: .noema/datasets/flickr8k
+      split: validation
+      limit: 16
+      image_size: 224
+      caption_index: 0
+      download: true
+  - id: image_encoder
+    op: foundation.clip_image_embed
+    inputs:
+      images: data.images
+    params:
+      backend: transformers_clip
+      model_id: openai/clip-vit-base-patch32
+      bins: 16
+      dimensions: 128
+      device: cpu
+  - id: text_encoder
+    op: foundation.clip_text_embed
+    inputs:
+      texts: data.texts
+    params:
+      backend: transformers_clip
+      model_id: openai/clip-vit-base-patch32
+      dimensions: 128
+      device: cpu
+  - id: receiver
+    op: foundation.clip_retrieval_rank
+    inputs:
+      image_embeddings: image_encoder.embeddings
+      text_embeddings: text_encoder.embeddings
+      targets: data.targets
+    params:
+      normalize: true
+      top_k: 10
+  - id: evaluation
+    op: metrics.retrieval
+    inputs:
+      rankings: receiver.rankings
+    params:
+      k_values: 1,5,10

@@ -1,0 +1,45 @@
+schema_version: 1
+id: task_oriented_smoke
+version: "1"
+name: Task-Oriented Semantic Communication Smoke
+description: Dependency-light benchmark pack for task-success metric contracts.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+dataset:
+  id: task_smoke
+  modality: generic
+  version: task-smoke-v1
+task:
+  id: classification
+  kind: task_success
+  modality: generic
+metrics:
+  - id: task.accuracy
+    family: task
+    unit: fraction
+    direction: higher_is_better
+  - id: task.exact_match
+    family: task
+    unit: fraction
+    direction: higher_is_better
+  - id: classification.balanced_accuracy
+    family: classification
+    unit: fraction
+    direction: higher_is_better
+baselines:
+  - classification_smoke
+recipes:
+  - id: classification_smoke
+    label: Classification task smoke
+    role: baseline
+    path: recipes/task_classification_smoke.yaml
+metadata:
+  benchmark_tier: smoke
+  benchmark_stage: task_contract_smoke
+  expected_runtime: short
+  notes:
+    - This pack validates task-success benchmark plumbing before heavy VQA/detection/segmentation models are attached.
+    - The source emits typed reference labels and candidate predictions; future task recipes should replace it with real dataset/model blocks.

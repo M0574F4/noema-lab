@@ -1,0 +1,54 @@
+schema_version: 1
+id: text_semantic_smoke
+version: "1"
+name: Text Semantic Reconstruction Smoke
+description: Smoke benchmark for text semantic reconstruction recipes.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+dataset:
+  id: semantic_text_smoke
+  modality: text
+  version: semantic-text-smoke-v1
+task:
+  id: text_semantic_similarity
+  kind: semantic_reconstruction
+  modality: text
+metrics:
+  - id: semantic.lexical_similarity
+    family: semantic
+    unit: score
+    direction: higher_is_better
+  - id: text.unigram_bleu_proxy
+    family: text
+    unit: score
+    direction: higher_is_better
+  - id: text.edit_similarity
+    family: text
+    unit: score
+    direction: higher_is_better
+  - id: text.exact_match
+    family: text
+    unit: fraction
+    direction: higher_is_better
+  - id: codec.bit_count
+    family: rate
+    unit: bits
+    direction: lower_is_better
+baselines:
+  - utf8_clean
+recipes:
+  - id: utf8_clean
+    label: UTF-8 clean
+    role: baseline
+    path: recipes/text_semantic_utf8_clean.yaml
+  - id: utf8_source_perturbation
+    label: UTF-8 source perturbation
+    role: candidate
+    path: recipes/text_semantic_utf8_source_perturbation.yaml
+metadata:
+  benchmark_tier: smoke
+  benchmark_stage: text_transport_smoke
+  expected_runtime: short

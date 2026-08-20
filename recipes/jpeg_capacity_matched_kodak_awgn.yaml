@@ -1,0 +1,59 @@
+schema_version: 1
+execution_profile:
+  id: task_evaluation
+  version: 1
+name: jpeg_capacity_matched_kodak_awgn
+description: >-
+  JPEG separation upper bound for Kodak: at each AWGN SNR, select the highest
+  per-image JPEG quality whose native bitstream fits an ideal capacity-achieving
+  channel code under a fixed complex-channel-use budget.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+metadata:
+  research_stage: theoretical_digital_baseline
+  purpose: image_reconstruction
+  channel_enabled: true
+  channel_mode: capacity_oracle_awgn
+  protected_digital_baseline: jpeg_capacity_oracle
+  resource_budget: 0.5 complex channel uses per spatial source pixel
+  protocol_reference: Bourtsoulatze_Kurka_Gunduz_DeepJSCC_2019
+  matrix:
+    dimensions:
+      channel.snr_db: [-6, -4, -2, 0, 4, 8, 12, 16]
+    step_params:
+      wireless_channel:
+        snr_db:
+          matrix: channel.snr_db
+steps:
+  - id: data
+    op: source.image_dataset
+    params:
+      dataset: kodak
+      dataset_dir: .noema/datasets/kodak
+      image_ids: kodim21,kodim22,kodim23,kodim24
+      crop_size: 256
+      repeat_count: 1
+
+  - id: wireless_channel
+    op: channel.jpeg_capacity_oracle
+    inputs:
+      images: data.images
+    params:
+      snr_db: -6
+      channel_uses_per_pixel: 0.5
+      minimum_quality: 1
+      maximum_quality: 95
+      subsampling: "420"
+      optimize: false
+      progressive: false
+      on_outage: gray_image
+
+  - id: evaluation
+    op: metrics.image_reconstruction
+    inputs:
+      reference: data.images
+      reconstruction: wireless_channel.images
+    params: {}

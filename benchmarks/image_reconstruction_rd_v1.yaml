@@ -1,0 +1,54 @@
+schema_version: 1
+id: image_reconstruction_rd
+version: "2"
+name: Kodak Image Reconstruction Rate-Distortion
+description: Experimental image reconstruction seed pack for rate-distortion comparisons on Kodak.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+dataset:
+  id: kodak
+  modality: image
+  version: kodak-24
+task:
+  id: image_reconstruction
+  kind: reconstruction
+  modality: image
+metrics:
+  - id: quality.psnr_db
+    family: reconstruction
+    unit: dB
+    direction: higher_is_better
+  - id: quality.mse
+    family: reconstruction
+    unit: pixel^2
+    direction: lower_is_better
+  - id: quality.mae
+    family: reconstruction
+    unit: pixel
+    direction: lower_is_better
+  - id: codec.native_bit_count
+    family: rate
+    unit: bits
+    direction: lower_is_better
+  - id: channel.payload_bit_count
+    family: rate
+    unit: bits
+    direction: lower_is_better
+baselines:
+  - jpeg_q75
+recipes:
+  - id: jpeg_q75
+    label: JPEG q75
+    role: baseline
+    path: recipes/jpeg_kodak_default.yaml
+  - id: compressai_hyperprior_q3
+    label: CompressAI bmshj2018 hyperprior q3
+    role: candidate
+    path: recipes/compressai_kodak_default.yaml
+metadata:
+  benchmark_tier: experimental
+  benchmark_stage: rate_distortion_smoke
+  note: Add additional RD points by adding recipes or generated recipe variants.

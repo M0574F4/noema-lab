@@ -1,0 +1,70 @@
+schema_version: 1
+execution_profile:
+  id: aoa_array_estimation
+  version: 1
+name: aoa_music_ula_baseline
+description: Far-field single-source narrowband AoA estimation with a half-wavelength ULA, noisy snapshots, and a MUSIC baseline.
+suite:
+  id: localization_sensing
+  name: Localization / Sensing
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: runnable_baseline
+  channel_enabled: true
+  channel_mode: ula_narrowband_awgn
+  wireless_backend: numpy
+  seed: 23
+  ui_configured: true
+  research:
+    dataset:
+      id: synthetic_ula_aoa
+      modality: wireless
+      version: synthetic-ula-aoa-v1
+      split: fixed_seed
+    task:
+      id: aoa_estimation
+      kind: estimation
+      modality: wireless
+      metrics:
+        - aoa.rmse_deg
+        - aoa.mae_deg
+        - task.score
+        - channel.snr_db
+    metrics:
+      - aoa.rmse_deg
+      - aoa.mae_deg
+      - task.score
+      - channel.snr_db
+steps:
+  - id: data
+    op: source.aoa_scene
+    params:
+      example_count: 24
+      angle_min_deg: -60
+      angle_max_deg: 60
+      seed: 23001
+
+  - id: array_observation
+    op: wireless.ula_array_observation
+    inputs:
+      scene: data.scene
+    params:
+      antenna_count: 8
+      snapshot_count: 64
+      snr_db: 10
+      element_spacing_wavelengths: 0.5
+      seed: 23
+
+  - id: estimator
+    op: model.music_aoa_estimator
+    inputs:
+      problem: array_observation.observation
+    params:
+      grid_size: 721
+
+  - id: evaluation
+    op: metrics.aoa_estimation
+    inputs:
+      problem: array_observation.truth
+      estimate: estimator.estimate

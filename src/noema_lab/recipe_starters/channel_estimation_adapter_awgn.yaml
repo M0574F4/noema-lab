@@ -1,0 +1,77 @@
+schema_version: 1
+execution_profile:
+  id: pilot_channel_estimation
+  version: 1
+name: siso_pilot_channel_estimation
+description: Flat-fading SISO pilot observations over AWGN evaluated with selectable least-squares and linear-MMSE channel estimators.
+suite:
+  id: channel_estimation
+  name: Channel Estimation
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: sionna_backed_expansion
+  channel_enabled: true
+  channel_mode: ai_phy_synthetic
+  wireless_backend: auto
+  seed: 23
+  ui_configured: true
+  research:
+    dataset:
+      id: synthetic_pilot_channel
+      modality: wireless
+      version: synthetic-pilot-channel-v1
+      split: fixed_seed
+    task:
+      id: pilot_channel_estimation
+      kind: estimation
+      modality: wireless
+      metrics:
+        - channel_estimation.nmse
+        - task.score
+        - channel.snr_db
+    metrics:
+        - channel_estimation.nmse
+        - task.score
+        - channel.snr_db
+steps:
+  - id: data
+    op: source.ai_phy_channel_realization
+    params:
+      scenario: flat_siso
+      example_count: 32
+      rx_antennas: 1
+      tx_antennas: 1
+      subcarriers: 1
+      seed: 23001
+
+  - id: pilots
+    op: source.ai_phy_pilot_pattern
+    params:
+      scenario: unit
+      tx_antennas: 1
+      subcarriers: 1
+      pilot_spacing: 1
+      seed: 23
+
+  - id: pilot_observation
+    op: wireless.pilot_observation
+    inputs:
+      channel: data.channel
+      pilots: pilots.pilots
+    params:
+      snr_db: 10
+      wireless_backend: auto
+
+  - id: estimator
+    op: model.channel_estimator_adapter
+    inputs:
+      problem: pilot_observation.observation
+    params:
+      mode: linear_mmse_reference
+
+  - id: evaluation
+    op: metrics.channel_estimation
+    inputs:
+      problem: pilot_observation.truth
+      estimate: estimator.estimate

@@ -1,0 +1,3246 @@
+{
+  "benchmark": {
+    "benchmark_id": "neural_receiver_ai_phy.learned_modulation_recognition_blind_carrier_post_training_v1",
+    "benchmark_version": "1.0.0",
+    "checks": [
+      {
+        "id": "structure.benchmark_dir",
+        "message": "benchmark result directory exists",
+        "status": "pass"
+      },
+      {
+        "id": "schema.benchmark_result_json",
+        "message": "benchmark result.json parses",
+        "status": "pass"
+      },
+      {
+        "id": "schema.benchmark_pack_json",
+        "message": "benchmark pack.json parses",
+        "status": "pass"
+      },
+      {
+        "id": "schema.benchmark.schema_version",
+        "message": "benchmark.schema_version has expected type",
+        "status": "pass"
+      },
+      {
+        "id": "schema.benchmark.kind",
+        "message": "benchmark.kind has expected type",
+        "status": "pass"
+      },
+      {
+        "id": "schema.benchmark.benchmark",
+        "message": "benchmark.benchmark has expected type",
+        "status": "pass"
+      },
+      {
+        "id": "schema.benchmark.status",
+        "message": "benchmark.status has expected type",
+        "status": "pass"
+      },
+      {
+        "id": "schema.benchmark.recipes",
+        "message": "benchmark.recipes has expected type",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.attempt_ledger.result_identity",
+        "message": "live result.json matches the terminal attempt-ledger identity",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.attempt_ledger.outcomes",
+        "message": "attempt-ledger recipe outcomes match result.json",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.status",
+        "message": "benchmark result completed",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metrics.plausibility",
+        "message": "2106 numeric metrics are finite/plausible",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.run_evidence_snapshot",
+        "message": "result-local run evidence verifies (54 completed runs)",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snrm2_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snrm2_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snrm2_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snrm2_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snrm2_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snrm2_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr2_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr2_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr2_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr2_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr2_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr2_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr2_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr2_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr2_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr6_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr6_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr6_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr6_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr6_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr6_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr6_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr6_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr6_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr10_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr10_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr10_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr10_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr10_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr10_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr10_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr10_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr10_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr14_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr14_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr14_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr14_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr14_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr14_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr14_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr14_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr14_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr18_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr18_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed71001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed71001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed71001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed71001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed71001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed71001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr18_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr18_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed72001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed72001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed72001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed72001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed72001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed72001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe blind_cumulant_snr18_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe blind_cumulant_snr18_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe learned_classifier_snr18_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe learned_classifier_snr18_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.required_metrics",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed73001 has required metrics",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed73001 metric channel.snr_db is bound to step observation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed73001 metric modulation_recognition.accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed73001 metric modulation_recognition.balanced_accuracy is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed73001 metric modulation_recognition.macro_f1 is bound to step evaluation",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.metric_provenance",
+        "message": "benchmark recipe oracle_likelihood_snr18_seed73001 metric modulation_recognition.frame_count is bound to step data",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.resource_admission",
+        "message": "benchmark result declares no measured resource-admission records",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.protocol.sha256",
+        "message": "result benchmark SHA-256 matches benchmark.json",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.protocol.certification_state",
+        "message": "result preserves the frozen tier/publication-ready state",
+        "status": "pass"
+      },
+      {
+        "details": {
+          "benchmark_tier": "experimental",
+          "publication_ready": false
+        },
+        "id": "benchmark.protocol.publication_scope",
+        "message": "internally valid evidence is not a publication-ready canonical benchmark",
+        "status": "warning"
+      },
+      {
+        "id": "benchmark.protocol.baseline_roster",
+        "message": "declared baseline roster is linked to frozen recipe/method IDs",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.protocol.identity",
+        "message": "benchmark protocol identifiers checked",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.training_lineage",
+        "message": "snapshotted trained-artifact fitting IDs and file hashes are held-out disjoint",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.training_evidence_snapshot",
+        "message": "training-evidence snapshot verifies (1 entries)",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.reports.metrics_csv",
+        "message": "benchmark report metrics_csv bytes and result projection verify",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.reports.recipes_csv",
+        "message": "benchmark report recipes_csv bytes and result projection verify",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.reports.summary_markdown",
+        "message": "benchmark report summary_markdown bytes and result projection verify",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.plots",
+        "message": "benchmark result records no generated plots",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.plot_sidecars",
+        "message": "benchmark result records no post-run plot sidecars",
+        "status": "pass"
+      },
+      {
+        "id": "schema.benchmark_resource_guard_json",
+        "message": "benchmark resource guard.json parses",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.resource_guard_sidecar",
+        "message": "post-run resource-guard evidence is bound to the sealed result",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150345Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150347Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150349Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150350Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150352Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150354Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150355Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150357Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150359Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150400Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150402Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150404Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150406Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150408Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150410Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150412Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150414Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150416Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150418Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150420Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150423Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150425Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150427Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150430Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150432Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150434Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150437Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150439Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150441Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150444Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150446Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150449Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150452Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150454Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150457Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150500Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150502Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150505Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150508Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150510Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150513Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150516Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150519Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150522Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150525Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150528Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150531Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150534Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed71001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150537Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150540Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150543Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed72001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150546Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150549Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed73001",
+        "status": "pass"
+      },
+      {
+        "id": "benchmark.backing_run",
+        "message": "result-local snapshot is authoritative for backing run 20260727T150553Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed73001",
+        "status": "pass"
+      }
+    ],
+    "completed_time": "2026-07-27T15:05:56.399Z",
+    "created_time": "2026-07-27T15:03:44.762Z",
+    "errors": [],
+    "path": ".noema/benchmarks/20260727T150344Z_neural_receiver_ai_phy.learned_modulation_recognition_blind_carrier_post_training_v1",
+    "status": "warning",
+    "target_id": "20260727T150344Z_neural_receiver_ai_phy.learned_modulation_recognition_blind_carrier_post_training_v1",
+    "target_type": "benchmark_result",
+    "warnings": [
+      "internally valid evidence is not a publication-ready canonical benchmark"
+    ]
+  },
+  "excluded_methods": [],
+  "kind": "noema.demo_verification_evidence",
+  "runs": [
+    {
+      "method_id": "blind_cumulant_snrm2_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "274b2e3272dbd7b1241912ce6b5d7a0682eb29e390441fb202a52b954679235c",
+          "source_run_id": "20260727T150345Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150345Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150345Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed71001"
+    },
+    {
+      "method_id": "learned_classifier_snrm2_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "dfd6e7678647396c89126391ba10611a784f9473612e0972227542e1197b1556",
+          "source_run_id": "20260727T150347Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150347Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150347Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed71001"
+    },
+    {
+      "method_id": "oracle_likelihood_snrm2_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "1aa0cf3e4d44adcfd69cd0f787dde4c06fa782d0d65a3e5bd2fb999cc3ba3d77",
+          "source_run_id": "20260727T150349Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150349Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150349Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed71001"
+    },
+    {
+      "method_id": "blind_cumulant_snrm2_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "3447affd80215c7361cd6a1752ef53e18dc705b01f320cfbf4bb520f36a77624",
+          "source_run_id": "20260727T150350Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150350Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150350Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed72001"
+    },
+    {
+      "method_id": "learned_classifier_snrm2_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "ed191201d2809eeb4b39d0a84e8d770976bad00727a0ba63d548d65038a550ea",
+          "source_run_id": "20260727T150352Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150352Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150352Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed72001"
+    },
+    {
+      "method_id": "oracle_likelihood_snrm2_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "cf9e144efc818369afae339cb4cde4be1a9c07ecd3e373d4a6e8694113e2c7fc",
+          "source_run_id": "20260727T150354Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150354Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150354Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed72001"
+    },
+    {
+      "method_id": "blind_cumulant_snrm2_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "cbc076cb9bf3539066ab604d7892d5d98e34ddd8594072aafdbb545fd2c9d81e",
+          "source_run_id": "20260727T150355Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150355Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150355Z_modulation_recognition_blind_carrier__blind_cumulant_snrm2_seed73001"
+    },
+    {
+      "method_id": "learned_classifier_snrm2_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "35608db148c3af869cd9c000e37b635251802e152cce000a35013e9b7b306b8a",
+          "source_run_id": "20260727T150357Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150357Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150357Z_modulation_recognition_blind_carrier__learned_classifier_snrm2_seed73001"
+    },
+    {
+      "method_id": "oracle_likelihood_snrm2_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "27b3b88215013bc9ea88cfe39bac32dcdf00fcddfe452b3cd1532f30741970a9",
+          "source_run_id": "20260727T150359Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150359Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150359Z_modulation_recognition_blind_carrier__oracle_likelihood_snrm2_seed73001"
+    },
+    {
+      "method_id": "blind_cumulant_snr2_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "da1697ee64ae888020a3be4b661614c45c6e0fa6937c7d6d1842cee5e800e75f",
+          "source_run_id": "20260727T150400Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150400Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150400Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed71001"
+    },
+    {
+      "method_id": "learned_classifier_snr2_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "7dd0423afc6244f05cfa5a6a3073f4b6bfbabab17dd54abd6c868ea7a0ad0f26",
+          "source_run_id": "20260727T150402Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150402Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150402Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed71001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr2_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "9791392ddc5e894b27eda5c9585956304b2a2f6dd8313f307a086c5edee4a60f",
+          "source_run_id": "20260727T150404Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150404Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150404Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed71001"
+    },
+    {
+      "method_id": "blind_cumulant_snr2_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "cbbd2ad3b59e5dc2375c61075007f69902d2dd01e40f860aeb541c7d103c743e",
+          "source_run_id": "20260727T150406Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150406Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150406Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed72001"
+    },
+    {
+      "method_id": "learned_classifier_snr2_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "0732fd57b0608ec3f7286ffa4fd5c82f5f35b55d176c7f9ef477974a2172e093",
+          "source_run_id": "20260727T150408Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150408Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150408Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed72001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr2_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "16eeb76183c18211865c28633323fa9c4f561b3b853065aa187e8fce23ef94c0",
+          "source_run_id": "20260727T150410Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150410Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150410Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed72001"
+    },
+    {
+      "method_id": "blind_cumulant_snr2_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "3d91773c13acdb2121b4dc9749cab363c4ab4fbd93cec3741dba1884970b951b",
+          "source_run_id": "20260727T150412Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150412Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150412Z_modulation_recognition_blind_carrier__blind_cumulant_snr2_seed73001"
+    },
+    {
+      "method_id": "learned_classifier_snr2_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "69ac5477a307614f7586fae4e7098644807fbaabf57014d782a777fecddbceb3",
+          "source_run_id": "20260727T150414Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150414Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150414Z_modulation_recognition_blind_carrier__learned_classifier_snr2_seed73001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr2_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "a36ed4ee190ddebc969e93ef3be1308a6e34caa9fd9a663798625c046c3fac94",
+          "source_run_id": "20260727T150416Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150416Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150416Z_modulation_recognition_blind_carrier__oracle_likelihood_snr2_seed73001"
+    },
+    {
+      "method_id": "blind_cumulant_snr6_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "b0f58159c5c2cb830141ed87bbd05241a9ec0da8901df750aa0a42dcdad65c35",
+          "source_run_id": "20260727T150418Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150418Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150418Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed71001"
+    },
+    {
+      "method_id": "learned_classifier_snr6_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "1a12dfa3cad7674230c9dcdca45f31249aaf813f7facce61aa5788dec6fc2905",
+          "source_run_id": "20260727T150420Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150420Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150420Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed71001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr6_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "acee34c6bb977f0e30cc892a2dbd52bfe3f7ab94a2ca2fa8635fa0ee467e2060",
+          "source_run_id": "20260727T150423Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150423Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150423Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed71001"
+    },
+    {
+      "method_id": "blind_cumulant_snr6_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "ba264f855b98273727e7d25a401fabe5443980689d5651d1ce4b6fd4a2cf898b",
+          "source_run_id": "20260727T150425Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150425Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150425Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed72001"
+    },
+    {
+      "method_id": "learned_classifier_snr6_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "2bc0ede24a2286a0f0ab0064d0fb6e312702026b64166f0718d7d1d3ddf8a80c",
+          "source_run_id": "20260727T150427Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150427Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150427Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed72001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr6_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "ad591fbbc28db6a3ebae0f4085c5f0bcd8cc8edd8ee8c347543a1ad517a73976",
+          "source_run_id": "20260727T150430Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150430Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150430Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed72001"
+    },
+    {
+      "method_id": "blind_cumulant_snr6_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "b5817e8f41acb66cf673a48acdf728349200cf665cb1031cc9c3d3ffe01d223e",
+          "source_run_id": "20260727T150432Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150432Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150432Z_modulation_recognition_blind_carrier__blind_cumulant_snr6_seed73001"
+    },
+    {
+      "method_id": "learned_classifier_snr6_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "d73ca64980fec8a7609d70feade6e2113ac7996e3c3f21471433ccd9533ef765",
+          "source_run_id": "20260727T150434Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150434Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150434Z_modulation_recognition_blind_carrier__learned_classifier_snr6_seed73001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr6_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "846f8359fecf0dce59bd60fbade23be099aafed86ba79933c3788a1fc64e3aaa",
+          "source_run_id": "20260727T150437Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150437Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150437Z_modulation_recognition_blind_carrier__oracle_likelihood_snr6_seed73001"
+    },
+    {
+      "method_id": "blind_cumulant_snr10_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "0d8b1962a623bb645413357179d30b758359e16671824c36094c960d3631ab4f",
+          "source_run_id": "20260727T150439Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150439Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150439Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed71001"
+    },
+    {
+      "method_id": "learned_classifier_snr10_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "fc6be632f30c6f14f5f068df39043b1f5e58a126869f273e2906936ff69acfbf",
+          "source_run_id": "20260727T150441Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150441Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150441Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed71001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr10_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "2df31ffc87f84af47e460fef5ce1af81259c02221fc3b0fb705bae98cfb2ed75",
+          "source_run_id": "20260727T150444Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150444Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150444Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed71001"
+    },
+    {
+      "method_id": "blind_cumulant_snr10_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "6883697b2b17664cf2c2e3ffddfaf31607488a4e18e04fa47f5a2917e1b3330b",
+          "source_run_id": "20260727T150446Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150446Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150446Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed72001"
+    },
+    {
+      "method_id": "learned_classifier_snr10_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "fae707bb08bc8cdc62ac216c1b74823cf1e842b80efb054939a78f75f8dd2b0a",
+          "source_run_id": "20260727T150449Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150449Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150449Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed72001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr10_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "3b7501194b9e75a136ec44b2b0f010c7189361c7182eb0575f5d5860aab4aca3",
+          "source_run_id": "20260727T150452Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150452Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150452Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed72001"
+    },
+    {
+      "method_id": "blind_cumulant_snr10_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "280e1f953d7ff4395c980a44750f0425da275aa2acd3cc19f3ac38b22f3d3025",
+          "source_run_id": "20260727T150454Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150454Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150454Z_modulation_recognition_blind_carrier__blind_cumulant_snr10_seed73001"
+    },
+    {
+      "method_id": "learned_classifier_snr10_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "0aadc32873aac89e59fe6c61b6e9d2d4a15ce5f1c05c7897c0520229b8e02825",
+          "source_run_id": "20260727T150457Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150457Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150457Z_modulation_recognition_blind_carrier__learned_classifier_snr10_seed73001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr10_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "c4754a9f9cda6a4683f6acc26b3fe9b9ca3366a540ac9b38c43415c1ddd3238d",
+          "source_run_id": "20260727T150500Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150500Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150500Z_modulation_recognition_blind_carrier__oracle_likelihood_snr10_seed73001"
+    },
+    {
+      "method_id": "blind_cumulant_snr14_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "69c18545611020ce69d178f77da43b4e20c451667c07ce5c333dd3d10a35f9ec",
+          "source_run_id": "20260727T150502Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150502Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150502Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed71001"
+    },
+    {
+      "method_id": "learned_classifier_snr14_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "58aa18cf7fb26f045d918e3d55c1a180fae02eba3ffd64316326dd9836cbe55d",
+          "source_run_id": "20260727T150505Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150505Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150505Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed71001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr14_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "6a9235cf4f237380308e748df4bd4dce67d8c0433c4191a1477d149a73fa245f",
+          "source_run_id": "20260727T150508Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150508Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150508Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed71001"
+    },
+    {
+      "method_id": "blind_cumulant_snr14_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "31c9ee2d850e1fc5f1783310961d01dc798b8e38290eb1481d3fb7657ba3c1db",
+          "source_run_id": "20260727T150510Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150510Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150510Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed72001"
+    },
+    {
+      "method_id": "learned_classifier_snr14_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "2d4bfcf83a7f4965afb7031b5be46f61b5884e5af8f30923b18939e5e74af40f",
+          "source_run_id": "20260727T150513Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150513Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150513Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed72001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr14_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "5f7d06772fc56450273a39cb9c494c0f1f38dad1f33e857e5c992609ba741a19",
+          "source_run_id": "20260727T150516Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150516Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150516Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed72001"
+    },
+    {
+      "method_id": "blind_cumulant_snr14_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "29eba4ffdf00d5fd9282ce3fb3fc844fad3625779722beb4ece6ac053dcabdb9",
+          "source_run_id": "20260727T150519Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150519Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150519Z_modulation_recognition_blind_carrier__blind_cumulant_snr14_seed73001"
+    },
+    {
+      "method_id": "learned_classifier_snr14_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "6fbdc13ce3de979a04664dcfcfb36eb18fbcdbbb667994c97b81c66221053215",
+          "source_run_id": "20260727T150522Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150522Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150522Z_modulation_recognition_blind_carrier__learned_classifier_snr14_seed73001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr14_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "bea6a5d4d5566a9b3de4987c2c3ffec25c423a5a71f057f75be33a70b56f9bec",
+          "source_run_id": "20260727T150525Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150525Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150525Z_modulation_recognition_blind_carrier__oracle_likelihood_snr14_seed73001"
+    },
+    {
+      "method_id": "blind_cumulant_snr18_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "ddc31265bb6ab86802a5276d56526d6334b9f6ddc9a2ce896da37212a0017b18",
+          "source_run_id": "20260727T150528Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150528Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150528Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed71001"
+    },
+    {
+      "method_id": "learned_classifier_snr18_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "1a0948357f82a97fc6c4d1ee0e5b443548d63da01a826b372b0ec2b1005059e7",
+          "source_run_id": "20260727T150531Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150531Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150531Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed71001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr18_seed71001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "b8cfb211af01f7ff6f68a36c133048a8cd92ab4452f2bb6d68796c7e8648f94a",
+          "source_run_id": "20260727T150534Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed71001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150534Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed71001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150534Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed71001"
+    },
+    {
+      "method_id": "blind_cumulant_snr18_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "415078bb51b870a0319a64e153d1d836bd39fecfb701c87062ce8fc855ae0e39",
+          "source_run_id": "20260727T150537Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150537Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150537Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed72001"
+    },
+    {
+      "method_id": "learned_classifier_snr18_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "c246aca1f5abeb00280dff35bc22fa5ceb249830cc2e376c02447f86b14d9396",
+          "source_run_id": "20260727T150540Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150540Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150540Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed72001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr18_seed72001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "4ac02b6bf06689286b9c97041890e9c9110847fc378f2c729f54095fc4c74308",
+          "source_run_id": "20260727T150543Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed72001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150543Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed72001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150543Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed72001"
+    },
+    {
+      "method_id": "blind_cumulant_snr18_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "13cda6bc9088bf3489c6508f4f0093717dfa00e4a5ac67e0edef824fbcb9c4fe",
+          "source_run_id": "20260727T150546Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150546Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150546Z_modulation_recognition_blind_carrier__blind_cumulant_snr18_seed73001"
+    },
+    {
+      "method_id": "learned_classifier_snr18_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "c9fe98b6fdb182f1b4f9f9123861ef42a4d435876eb02b205af48009bef650ac",
+          "source_run_id": "20260727T150549Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150549Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150549Z_modulation_recognition_blind_carrier__learned_classifier_snr18_seed73001"
+    },
+    {
+      "method_id": "oracle_likelihood_snr18_seed73001",
+      "report": {
+        "checks": [
+          {
+            "id": "benchmark.run_evidence_snapshot",
+            "message": "result-local recipes, plan, manifest, summary, and retained metric-report hashes verify",
+            "status": "pass"
+          }
+        ],
+        "errors": [],
+        "metadata": {
+          "files_sha256": "99bf1c191b245bf208a2fcc2107d2c3af511a72f4ec11c321a22f39905d4d9e4",
+          "source_run_id": "20260727T150553Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed73001"
+        },
+        "status": "valid",
+        "target_id": "20260727T150553Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed73001",
+        "target_type": "benchmark_run_snapshot",
+        "warnings": []
+      },
+      "run_id": "20260727T150553Z_modulation_recognition_blind_carrier__oracle_likelihood_snr18_seed73001"
+    }
+  ],
+  "schema_version": 1,
+  "source_result_id": "20260727T150344Z_neural_receiver_ai_phy.learned_modulation_recognition_blind_carrier_post_training_v1"
+}

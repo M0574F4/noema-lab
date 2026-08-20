@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "noema.launch_asset_manifest",
+  "evidence": {
+    "path": "launch_evidence.json",
+    "file_sha256": "5df222011c567653d65d1addf47560162f6d55035134cc0ddcadce869fd4547e",
+    "document_sha256": "52ed68b7adf713179999245dd88fedc64210821c5a6898741bc1e9b66f4d1d07"
+  },
+  "generator": {
+    "path": "tools/generate_launch_assets.py",
+    "sha256": "9f79c92fcf1aa40a1a50061c7e1b4e84b78e78d82404019e920bbb153aa3ebd0"
+  },
+  "schema": {
+    "path": "schemas/launch_asset_manifest.schema.json",
+    "sha256": "03ea409cea57da014f6ed8d86a92d14bd87a2102a1d6deef79143942ed41170e"
+  },
+  "figures": [
+    {
+      "id": "F0",
+      "title": "Make the comparison traceable",
+      "path": "docs/_static/launch/f0-launch-hero.svg",
+      "sha256": "9e8c4ef6a0f19645665438a7d8c376e5ecd8a9ef115c8ea40bb65db97946add9",
+      "size_bytes": 4718
+    },
+    {
+      "id": "F1",
+      "title": "The anatomy of a defensible comparison",
+      "path": "docs/_static/launch/f1-comparison-anatomy.svg",
+      "sha256": "1f0e82b8566254724984c15a489b326586c3beddd38b129dfd4fac30959a05be",
+      "size_bytes": 6841
+    },
+    {
+      "id": "F2",
+      "title": "From experiment contract to retained evidence",
+      "path": "docs/_static/launch/f2-contract-to-evidence.svg",
+      "sha256": "6460c7b119685a1dd8a0e3c1415e4eb205d606ae056a88d66964de2cca2ae576",
+      "size_bytes": 6479
+    },
+    {
+      "id": "F3",
+      "title": "Receiver BER versus SNR",
+      "path": "docs/_static/launch/f3-receiver-ber-vs-snr.svg",
+      "sha256": "90dd5eb713d217e7daaf73dd83086cd5a3813f0a8277f7c26cff3c900bcf9811",
+      "size_bytes": 10890
+    },
+    {
+      "id": "F4",
+      "title": "Four ways to break the comparison",
+      "path": "docs/_static/launch/f4-break-the-comparison.svg",
+      "sha256": "915efd254c4dae7488cf9647c4a1035122ec243f00a347f2fd51918c962e8c67",
+      "size_bytes": 5687
+    },
+    {
+      "id": "F5",
+      "title": "One evidence source, many launch surfaces",
+      "path": "docs/_static/launch/f5-one-source-many-surfaces.svg",
+      "sha256": "529c9f0d9ba223bf75c38041c387233204545f259ac91efd55fc4af6a6524825",
+      "size_bytes": 6731
+    }
+  ],
+  "tables": [
+    {
+      "id": "T0",
+      "title": "Paired BER result summary",
+      "path": "docs/_static/launch/tables/t0-result-summary.csv",
+      "sha256": "f5a7a0108be53a2293fe196914b4201b8f7c6fb93f18d4ae86043ac8dc6b58c7",
+      "size_bytes": 745
+    },
+    {
+      "id": "T0",
+      "title": "Paired BER result summary",
+      "path": "docs/_static/launch/tables/t0-result-summary.md",
+      "sha256": "0e866913567a7b9b38eae304e675796f42d17f2ddc26d166d2a92c9ed00b98f8",
+      "size_bytes": 1232
+    },
+    {
+      "id": "T1",
+      "title": "Experiment contract summary",
+      "path": "docs/_static/launch/tables/t1-experiment-contract.csv",
+      "sha256": "ac1f4abe309c7ab5898fafd308a7a0bc3920beefb44c03345faead6a6b31f6b3",
+      "size_bytes": 1137
+    },
+    {
+      "id": "T1",
+      "title": "Experiment contract summary",
+      "path": "docs/_static/launch/tables/t1-experiment-contract.md",
+      "sha256": "c507d74526348e30995a9bb2e97a04c64c4c03f73a3a9528608a99472a16fa1a",
+      "size_bytes": 1371
+    },
+    {
+      "id": "T2",
+      "title": "Launch claim guardrails",
+      "path": "docs/_static/launch/tables/t2-claim-guardrails.csv",
+      "sha256": "306cbca0ee59e2c6b1d2051fe20b2a0811584736f4cea3e653d017723a550ead",
+      "size_bytes": 925
+    },
+    {
+      "id": "T2",
+      "title": "Launch claim guardrails",
+      "path": "docs/_static/launch/tables/t2-claim-guardrails.md",
+      "sha256": "140ec631063e5b723157b93b439617eb3bb8dac146578c2dcd86d823c5be6b36",
+      "size_bytes": 1136
+    }
+  ],
+  "scientific_disclosure": "Internally valid completed experimental benchmark; not a publication-ready canonical benchmark.",
+  "paper_binding": "not_selected_for_paper_during_review"
+}

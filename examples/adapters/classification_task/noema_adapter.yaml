@@ -1,0 +1,30 @@
+schema_version: 1
+name: example_classification_task
+version: 0.1.0
+description: Example non-codec adapter contributing a classification dataset source and metric.
+operations:
+  - id: source.example_classification_dataset
+    name: Example external classification dataset
+    wraps: source.external_classification_dataset
+    adapter:
+      path: adapter.py
+      callable: load_classification_examples
+      call_style: dict
+    params_schema:
+      type: object
+      properties:
+        dataset:
+          type: string
+          default: example_external_classification
+      additionalProperties: true
+  - id: metrics.example_classification
+    name: Example external classification metric
+    wraps: metrics.external_classification
+    adapter:
+      path: adapter.py
+      callable: score_classification
+      call_style: dict
+    params_schema:
+      type: object
+      properties: {}
+      additionalProperties: true

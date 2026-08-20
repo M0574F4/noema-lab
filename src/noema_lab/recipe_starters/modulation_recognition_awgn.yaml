@@ -1,0 +1,86 @@
+schema_version: 1
+execution_profile:
+  id: task_inference
+  version: 1
+name: modulation_recognition_blind_carrier
+description: BPSK, QPSK, and 16-QAM recognition with unknown per-frame carrier phase, residual frequency offset, AWGN, a blind cumulant baseline, and a portable learned-classifier slot.
+suite:
+  id: neural_receiver
+  name: Neural Receiver / AI-PHY
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: blind_carrier_modulation_recognition
+  channel_enabled: true
+  channel_mode: blind_carrier_awgn
+  wireless_backend: numpy
+  wireless_preset: Blind carrier phase and residual frequency offset over AWGN
+  modulation_classes:
+    - bpsk
+    - qpsk
+    - qam16
+  frame_contract: fixed-length symbol-timed complex baseband I/Q with unknown carrier phase and residual frequency offset
+  seed: 23
+  ui_configured: true
+  matrix:
+    dimensions:
+      channel.snr_db: [-2.0, 2.0, 6.0, 10.0, 14.0, 18.0]
+    step_params:
+      observation:
+        snr_db_min:
+          matrix: channel.snr_db
+        snr_db_max:
+          matrix: channel.snr_db
+  research:
+    dataset:
+      id: synthetic_modulation_iq
+      modality: wireless
+      version: synthetic-modulation-iq-blind-carrier-v1
+      split: fixed_seed
+    task:
+      id: automatic_modulation_recognition
+      kind: signal_classification
+      modality: wireless
+      target: receiver.prediction
+      metrics:
+        - modulation_recognition.accuracy
+        - modulation_recognition.balanced_accuracy
+        - modulation_recognition.macro_f1
+    metrics:
+      - modulation_recognition.accuracy
+      - modulation_recognition.balanced_accuracy
+      - modulation_recognition.macro_f1
+      - channel.snr_db
+steps:
+  - id: data
+    op: source.modulation_frames
+    params:
+      frame_count: 96
+      symbols_per_frame: 128
+
+  - id: observation
+    op: wireless.modulation_awgn_observation
+    inputs:
+      frames: data.frames
+    params:
+      snr_db_min: 8
+      snr_db_max: 8
+      carrier_phase_min_rad: -3.141592653589793
+      carrier_phase_max_rad: 3.141592653589793
+      frequency_offset_min_cycles_per_symbol: -0.006
+      frequency_offset_max_cycles_per_symbol: 0.006
+
+  - id: receiver
+    op: model.modulation_classifier_adapter
+    inputs:
+      observation: observation.observation
+    params:
+      mode: classical_cumulant
+
+  - id: evaluation
+    op: metrics.modulation_classification
+    inputs:
+      truth: data.labels
+      prediction: receiver.prediction
+    params:
+      snr_bin_width_db: 2

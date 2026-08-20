@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use Noema in research, please cite the exact software release and benchmark protocol you ran."
+title: "Noema: Experiment Contracts for Learned-Communication Evidence"
+type: software
+authors:
+  - given-names: "Mostafa"
+    family-names: "Naseri"
+    orcid: "https://orcid.org/0000-0001-9493-1807"
+version: "0.2.0.dev0"
+license: MIT
+repository-code: "https://github.com/M0574F4/noema-lab"
+url: "https://M0574F4.github.io/noema-lab/"
+abstract: >-
+  Noema represents learned-communication comparisons as executable experiment contracts linking
+  validated protocols, concrete execution plans, declared communication-resource accounting,
+  optional returned-model interfaces, and retained result and plot evidence. Its verification is
+  local and profile-scoped.
+keywords:
+  - learned communications
+  - experiment contracts
+  - benchmark evaluation
+  - evidence provenance
+  - semantic communications
+  - learned compression
+preferred-citation:
+  type: article
+  title: "Noema: Experiment Contracts for Learned-Communication Comparisons from Protocol to Plot"
+  authors:
+    - given-names: "Mostafa"
+      family-names: "Naseri"
+      orcid: "https://orcid.org/0000-0001-9493-1807"
+  year: 2026

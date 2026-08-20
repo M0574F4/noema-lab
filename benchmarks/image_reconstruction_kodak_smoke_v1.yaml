@@ -1,0 +1,46 @@
+schema_version: 1
+id: image_reconstruction_kodak_smoke
+version: "2"
+name: Kodak Image Reconstruction Smoke
+description: Fast benchmark pack for validating image reconstruction recipes and result bundles.
+suite:
+  id: semantic_comm
+  name: Semantic Communication
+  status: active
+  version: v1
+dataset:
+  id: kodak
+  modality: image
+  version: kodak-smoke-kodim01
+task:
+  id: image_reconstruction
+  kind: reconstruction
+  modality: image
+metrics:
+  - id: quality.psnr_db
+    family: reconstruction
+    unit: dB
+    direction: higher_is_better
+  - id: quality.mse
+    family: reconstruction
+    unit: pixel^2
+    direction: lower_is_better
+  - id: codec.native_bit_count
+    family: rate
+    unit: bits
+    direction: lower_is_better
+baselines:
+  - jpeg_q75
+recipes:
+  - id: jpeg_q75
+    label: JPEG q75
+    role: baseline
+    path: recipes/jpeg_kodak_smoke.yaml
+  - id: compressai_hyperprior_q3
+    label: CompressAI bmshj2018 hyperprior q3
+    role: candidate
+    path: recipes/compressai_kodak_smoke.yaml
+metadata:
+  benchmark_tier: smoke
+  benchmark_stage: smoke_validation
+  expected_runtime: short
