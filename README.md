@@ -3,17 +3,17 @@
 </p>
 
 <p align="center">
-  <a href="https://M0574F4.github.io/noema-lab/">
-    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-logo.svg" alt="Noema logo" width="96" />
-  </a>
-</p>
-
-<p align="center">
   <a href="https://github.com/M0574F4/noema-lab/actions"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/M0574F4/noema-lab/ci.yml?branch=main&label=ci"></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/M0574F4/noema-lab"></a>
   <a href="CITATION.cff"><img alt="Cite" src="https://img.shields.io/badge/cite-CITATION.cff-53b889"></a>
   <a href="https://M0574F4.github.io/noema-lab/"><img alt="Docs" src="https://img.shields.io/badge/docs-GitHub%20Pages-4eb7c4"></a>
   <img alt="Pre-release" src="https://img.shields.io/badge/status-pre--release-e2a646">
+</p>
+
+<p align="center">
+  <a href="https://M0574F4.github.io/noema-lab/">
+    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-logo-dark.svg" alt="Noema logo" width="96" />
+  </a>
 </p>
 
 # Noema
