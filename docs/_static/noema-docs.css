@@ -109,15 +109,17 @@
   outline-offset: 3px;
 }
 
-.noema-home-action-primary {
-  background: var(--pst-color-primary, #1f7658);
-  border-color: var(--pst-color-primary, #1f7658);
+a.noema-home-action-primary,
+a.noema-home-action-primary:visited {
+  background: #075e54;
+  border-color: #075e54;
   color: #ffffff;
 }
 
-.noema-home-action-primary:hover,
-.noema-home-action-primary:focus-visible {
-  background: color-mix(in srgb, var(--pst-color-primary, #1f7658) 88%, #000000);
+a.noema-home-action-primary:hover,
+a.noema-home-action-primary:focus-visible {
+  background: #05483f;
+  border-color: #05483f;
   color: #ffffff;
 }
 

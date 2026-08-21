@@ -57,9 +57,12 @@ uncompensated and calibrated-oracle baselines.
 
 ## Quickstart
 
-Noema is not yet published on PyPI and currently supports Python 3.11–3.13. From a source checkout:
+Noema is not yet published on PyPI and currently supports Python 3.11–3.13. Install
+[`uv`](https://docs.astral.sh/uv/getting-started/installation/), then run:
 
 ```bash
+git clone https://github.com/M0574F4/noema-lab.git
+cd noema-lab
 uv sync
 uv run noema template instantiate semantic_comm.text_semantic_similarity.default > noema-quickstart.yaml
 uv run noema recipe lint noema-quickstart.yaml
