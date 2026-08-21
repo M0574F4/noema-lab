@@ -24,6 +24,14 @@ class PublicRepositoryTests(unittest.TestCase):
         self.assertIn("https://www.youtube.com/watch?v=bKNXS_vHLHc", readme)
         self.assertIn("docs/_static/noema-logo.svg", readme)
         self.assertIn("docs/_static/noema-training-loop.svg", readme)
+        self.assertLess(
+            readme.index("docs/_static/launch/f0-launch-hero.svg"),
+            readme.index("docs/_static/noema-logo.svg"),
+        )
+        self.assertLess(
+            readme.index("docs/_static/noema-logo.svg"),
+            readme.index("img.shields.io/github/actions/workflow/status"),
+        )
         self.assertEqual(
             readme.count("docs/_static/launch/f2-contract-to-evidence.svg"),
             1,
