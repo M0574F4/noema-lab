@@ -1,4 +1,10 @@
 <p align="center">
+  <a href="https://M0574F4.github.io/noema-lab/">
+    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-logo.svg" alt="Noema logo" width="96" />
+  </a>
+</p>
+
+<p align="center">
   <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f0-launch-hero.svg" alt="Noema: make the comparison traceable, with bounded experimental launch evidence" width="100%" />
 </p>
 
@@ -47,7 +53,7 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">
-    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f2-contract-to-evidence.svg" alt="Watch the learned QPSK I/Q calibration receiver workflow in Noema" width="88%" />
+    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-training-loop.svg" alt="Watch Noema export a training contract, return a model, benchmark it, and verify the result" width="88%" />
   </a>
 </p>
 
