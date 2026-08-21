@@ -65,6 +65,8 @@ class DocumentationEditorialQualityTests(unittest.TestCase):
 
     def test_navigation_separates_overview_from_advanced_evidence(self):
         source = (DOCS / "index.md").read_text(encoding="utf-8")
+        self.assertTrue(source.startswith("# Noema Documentation\n"))
+        self.assertNotRegex(source.splitlines()[0], r"<img\b")
         for caption in (
             "Overview",
             "Suites",
@@ -77,6 +79,7 @@ class DocumentationEditorialQualityTests(unittest.TestCase):
             self.assertIn(f":caption: {caption}", source)
         self.assertNotIn(":caption: Start Here", source)
         self.assertNotIn("## Documentation Sources", source)
+        self.assertEqual(source.count(":hidden:"), source.count("```{toctree}"))
 
 
 if __name__ == "__main__":

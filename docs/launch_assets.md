@@ -66,7 +66,7 @@ held-out seeds—not a confidence interval.
 The static companion to the [interactive flagship demo](break_the_comparison.md).
 ```
 
-### F5 · One source, many surfaces
+### F5 · One source, many public outputs
 
 ```{figure} _static/launch/f5-one-source-many-surfaces.svg
 :alt: Launch evidence JSON at the center supplying the README, documentation, web demo, experiment figure, tables, and recorded launch video
@@ -103,4 +103,4 @@ is hosted externally; no local recording or edit file is committed to the source
 
 The versioned [recording runbook](launch_video.md) preserves the demonstrated steps, while
 `launch_evidence.json` records the stable video identity and URLs alongside the numerical data
-paths used by the launch surfaces.
+paths used by the public README, documentation, figures, tables, and demo.

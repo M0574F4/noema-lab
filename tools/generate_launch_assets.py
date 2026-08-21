@@ -30,7 +30,7 @@ FIGURES = (
     ("F2", "f2-contract-to-evidence.svg", "From experiment contract to retained evidence"),
     ("F3", "f3-receiver-ber-vs-snr.svg", "Receiver BER versus SNR"),
     ("F4", "f4-break-the-comparison.svg", "Four ways to break the comparison"),
-    ("F5", "f5-one-source-many-surfaces.svg", "One evidence source, many launch surfaces"),
+    ("F5", "f5-one-source-many-surfaces.svg", "One evidence source, many public outputs"),
 )
 TABLES = (
     ("T0", "tables/t0-result-summary.csv", "Paired BER result summary"),
@@ -227,13 +227,13 @@ def _figure_f0(evidence: Mapping[str, Any]) -> bytes:
             _rect(1010, 145, 480, 510, fill="#0b201a", stroke=GREEN_DEEP, radius=34, stroke_width=3),
             _text(1065, 210, "COMPLETED EXPERIMENTAL EVIDENCE", size=17, weight=750, fill=GREEN, tracking=1.8),
             _text(1065, 350, percent, size=104, weight=780, fill=INK),
-            _text(1068, 397, f"mean BER reduction at {snr}", size=24, weight=650, fill=MUTED),
+            _text(1068, 397, f"BER reduction vs uncompensated · {snr}", size=20, weight=650, fill=MUTED),
             '<line x1="1065" y1="445" x2="1430" y2="445" stroke="#27443a" stroke-width="2"/>',
             _multiline(
                 1065,
                 500,
                 (
-                    "One selected demonstration.",
+                    "One synthetic QPSK demonstration.",
                     "Observed min–max, not confidence intervals.",
                     "Diagnostic oracle ≠ deployable competitor.",
                 ),
@@ -304,7 +304,7 @@ def _figure_f2(evidence: Mapping[str, Any]) -> bytes:
     body = [
         _text(80, 82, "F2 · CONTRACT → EVIDENCE", size=19, weight=750, fill=GREEN, tracking=2.5),
         _text(80, 155, "One chain from declared question to retained result.", size=48, weight=740),
-        _text(80, 205, "Noema keeps the comparison coordinates attached while the experiment moves across tools.", size=24, fill=MUTED),
+        _text(80, 205, "Noema keeps the declared comparison settings attached while the experiment moves across tools.", size=24, fill=MUTED),
     ]
     x_positions = (70, 380, 690, 1000, 1310)
     for index, ((number, title, detail), x) in enumerate(zip(stages, x_positions)):
@@ -391,10 +391,12 @@ def _figure_f3(evidence: Mapping[str, Any]) -> bytes:
 
     styles = {
         "uncompensated_qpsk": (GRAY, "8 7", "square"),
-        "calibrated_iq_oracle": (ORANGE, "", "triangle"),
+        "calibrated_iq_oracle": (ORANGE, "12 9", "triangle"),
         "learned_receiver": (GREEN, "", "circle"),
     }
-    for method in ("uncompensated_qpsk", "calibrated_iq_oracle", "learned_receiver"):
+    # Draw the dashed oracle last so the nearly coincident learned curve remains
+    # distinguishable instead of covering the diagnostic reference.
+    for method in ("uncompensated_qpsk", "learned_receiver", "calibrated_iq_oracle"):
         color, dash, marker = styles[method]
         points = [
             (
@@ -413,13 +415,13 @@ def _figure_f3(evidence: Mapping[str, Any]) -> bytes:
             if marker == "square":
                 body.append(f'<rect x="{x - 6:g}" y="{y - 6:g}" width="12" height="12" fill="{BACKGROUND}" stroke="{color}" stroke-width="4"/>')
             elif marker == "triangle":
-                body.append(f'<path d="M {x:g} {y - 8:g} L {x + 8:g} {y + 7:g} L {x - 8:g} {y + 7:g} Z" fill="{BACKGROUND}" stroke="{color}" stroke-width="4"/>')
+                body.append(f'<path d="M {x:g} {y - 8:g} L {x + 8:g} {y + 7:g} L {x - 8:g} {y + 7:g} Z" fill="none" stroke="{color}" stroke-width="4"/>')
             else:
                 body.append(f'<circle cx="{x:g}" cy="{y:g}" r="6" fill="{BACKGROUND}" stroke="{color}" stroke-width="4"/>')
 
     legend_items = (
         (GRAY, "Uncompensated QPSK", "dashed"),
-        (ORANGE, "Calibrated I/Q oracle · diagnostic", "solid"),
+        (ORANGE, "Calibrated I/Q oracle · diagnostic", "dashed"),
         (GREEN, "Learned I/Q receiver · observed min–max band", "solid"),
     )
     for index, (color, label, style) in enumerate(legend_items):
@@ -522,7 +524,7 @@ def _figure_f5(evidence: Mapping[str, Any]) -> bytes:
         )
     )
     return _svg(
-        "One evidence source, many launch surfaces",
+        "One evidence source, many public outputs",
         "The canonical launch evidence supplies README, documentation, webpage, experiment figure, result tables, and the recorded launch video.",
         "".join(body),
     )
@@ -637,7 +639,7 @@ def _tables(evidence: Mapping[str, Any]) -> dict[str, bytes]:
         ["Uncertainty language", "Call bands observed minima/maxima; never confidence intervals.", "scientific_status.uncertainty_display"],
         ["Reference role", "Describe the calibrated oracle as a diagnostic reference with privileged calibration knowledge.", "scientific_status.reference_role"],
         ["Scientific tier", "Do not call the selected benchmark publication-ready.", "scientific_status.publication_ready"],
-        ["Release state", "Do not use rights/distribution clearance to upgrade scientific claims.", "distribution_clearance.status"],
+        ["Final release state", "The development repository is public; stable v0.2.0 and the paper bundle remain pending final review.", "distribution_clearance.status"],
         ["Numeric source", "Derive displayed values from series, comparisons, or headline.", "consumer_contract.rules"],
     ]
     guardrail_note = "These guardrails apply to README, documentation, webpage, figures, tables, and video overlays."

@@ -14,7 +14,7 @@
 | Uncertainty display | observed_min_max_not_confidence_interval | scientific_status.uncertainty_display |
 | Evidence tier | completed_experimental_benchmark | scientific_status.evidence_level |
 | Publication ready | false | scientific_status.publication_ready |
-| Distribution clearance | candidate | distribution_clearance.status |
+| Distribution clearance | pending_final_review | distribution_clearance.status |
 | Reference role | The calibrated I/Q oracle is a diagnostic reference with calibration knowledge, not a deployable competitor using the same information. | scientific_status.reference_role |
 
 Distribution clearance and scientific status are independent.

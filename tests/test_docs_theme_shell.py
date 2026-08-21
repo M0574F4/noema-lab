@@ -38,11 +38,8 @@ class DocumentationThemeShellTests(unittest.TestCase):
 
     def test_overview_title_uses_the_tightly_cropped_noema_mark(self):
         overview = (DOCS / "index.md").read_text(encoding="utf-8")
-        self.assertIn(
-            '<img src="_static/noema-logo.svg" alt="" '
-            'class="noema-title-logo"> Noema Documentation',
-            overview,
-        )
+        self.assertTrue(overview.startswith("# Noema Documentation\n"))
+        self.assertNotRegex(overview.splitlines()[0], r"<img\b")
         self.assertNotIn("noema-logo-lockup.svg", overview)
 
         logo = (DOCS / "_static" / "noema-logo.svg").read_text(
@@ -54,7 +51,8 @@ class DocumentationThemeShellTests(unittest.TestCase):
         stylesheet = (DOCS / "_static" / "noema-docs.css").read_text(
             encoding="utf-8"
         )
-        self.assertIn(".noema-title-logo", stylesheet)
+        self.assertIn("section#noema-documentation > h1::before", stylesheet)
+        self.assertIn('background: url("noema-logo.svg")', stylesheet)
         self.assertIn("width: 1.05em;", stylesheet)
 
     def test_overview_page_shows_the_editable_training_loop(self):
@@ -90,6 +88,11 @@ class DocumentationThemeShellTests(unittest.TestCase):
         self.assertIn(".noema-overview-workflow-figure", stylesheet)
         self.assertIn("float: right;", stylesheet)
         self.assertIn("width: 70%;", stylesheet)
+        self.assertIn(
+            ".noema-overview-workflow-figure.noema-home-workflow-figure",
+            stylesheet,
+        )
+        self.assertIn("width: 100%;", stylesheet)
 
     def test_overview_page_is_the_single_website_and_documentation_entry(self):
         overview = (DOCS / "index.md").read_text(encoding="utf-8")
@@ -106,7 +109,7 @@ class DocumentationThemeShellTests(unittest.TestCase):
             "## Browse the documentation",
         ):
             self.assertIn(required, overview)
-        self.assertEqual(overview.count("# <img"), 1)
+        self.assertEqual(overview.count("# <img"), 0)
         self.assertFalse((DOCS / "website.md").exists())
         self.assertFalse((DOCS / "getting_started.md").exists())
 

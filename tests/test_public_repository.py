@@ -66,6 +66,25 @@ class PublicRepositoryTests(unittest.TestCase):
         ):
             self.assertIn(relative, manifest)
 
+    def test_quickstart_and_mobile_demo_leave_a_usable_public_checkout(self) -> None:
+        ignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        script = (ROOT / "docs" / "demo" / "app.js").read_text(encoding="utf-8")
+        styles = (ROOT / "docs" / "demo" / "styles.css").read_text(
+            encoding="utf-8"
+        )
+        workflow = (
+            ROOT / "docs" / "_static" / "noema-training-loop.svg"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("/noema-quickstart.yaml", ignore)
+        self.assertIn("uv sync --frozen", readme)
+        self.assertIn("Ctrl+C", readme)
+        self.assertIn("Math.max(0.15, value)", script)
+        self.assertIn(".hosted-action.primary", styles)
+        self.assertNotIn(".hosted-action:first-of-type", styles)
+        self.assertIn("Segoe UI, Arial, sans-serif", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()

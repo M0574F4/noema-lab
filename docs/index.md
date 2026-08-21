@@ -1,4 +1,4 @@
-# <img src="_static/noema-logo.svg" alt="" class="noema-title-logo"> Noema Documentation
+# Noema Documentation
 
 ```{figure} _static/launch/f0-launch-hero.svg
 :alt: Noema launch hero stating Make the comparison traceable, with the bounded experimental receiver headline and its scientific-status disclosure
@@ -28,9 +28,6 @@ fairness, standards conformance, authenticity, or independent reproduction.
 [Break the comparison](break_the_comparison.md) is the shortest introduction to Noema. Begin with
 a valid paired result, then change the condition, aggregation, metric, or comparator role. The
 arithmetic remains precise while the claim loses the contract that made it interpretable.
-
-The demo reads its observations and warning from the generated
-[launch-evidence projection](launch_evidence.md); it does not carry a second copy of the result.
 
 ## Watch the complete workflow
 
@@ -74,8 +71,10 @@ The demo reads its observations and warning from the generated
 :alt: Six-step Noema workflow from opening a scenario and choosing trainable blocks through contract export, external model training, recipe binding, and verified benchmarking
 :class: noema-overview-workflow
 :figclass: noema-overview-workflow-figure noema-home-workflow-figure
+:target: _static/noema-training-loop.svg
 
-Noema's contract-first model-development loop. [Open the editable draw.io source](_static/diagrams/noema-training-loop.drawio).
+Noema's contract-first model-development loop. Open the diagram for a full-size view or
+[download the editable draw.io source](_static/diagrams/noema-training-loop.drawio).
 ```
 
 An executable experiment contract links a schema-validated protocol to a concrete execution plan,
@@ -89,27 +88,32 @@ the selected traceability profile.
 ```{figure} _static/launch/f3-receiver-ber-vs-snr.svg
 :alt: Log-scale pre-decoder BER versus SNR for uncompensated QPSK, a calibrated diagnostic oracle, and a learned receiver with an observed min-max band over paired seeds
 :class: noema-home-result
+:target: _static/launch/f3-receiver-ber-vs-snr.svg
 
 The selected launch demonstration. The learned band is the observed minimum and maximum over three
 paired held-out seeds—not a confidence interval—and the calibrated oracle is a diagnostic reference.
+Open the chart for a full-size view.
 ```
 
-Open the complete [F0–F5 visual and T0–T2 table set](launch_assets.md), inspect the
+The demo, chart, and tables read their values and warnings from the same generated evidence file,
+so their claims cannot silently drift apart. Open the complete
+[F0–F5 visual and T0–T2 table set](launch_assets.md), inspect the
 [canonical launch evidence](launch_evidence.md), or browse the
 [static result explorer](https://M0574F4.github.io/noema-lab/demo/).
-The demonstration is internally valid completed experimental evidence, not a publication-ready
-canonical benchmark.
+This is completed experimental evidence, not a publication-ready canonical benchmark.
 
 ## Browse the documentation
 
-The navigation below reuses the same maintained pages as the sidebar. For the repository landing
-page and source-checkout quickstart, see the project
+Use the navigation menu for the full documentation tree. New readers can start with the
+[tutorials](tutorials.md), [demonstrations](demos.md), [architecture](architecture.md), or generated
+[reference](reference/index.md). For the source-checkout quickstart, see the project
 [README](https://github.com/M0574F4/noema-lab/blob/main/README.md).
 
 ```{toctree}
 :maxdepth: 2
 :caption: Overview
 :titlesonly:
+:hidden:
 
 architecture/ai_native_positioning
 break_the_comparison
@@ -121,6 +125,7 @@ demos
 :maxdepth: 2
 :caption: Suites
 :titlesonly:
+:hidden:
 
 suites/index
 ```
@@ -129,6 +134,7 @@ suites/index
 :maxdepth: 2
 :caption: Core Architecture
 :titlesonly:
+:hidden:
 
 architecture
 benchmarking
@@ -148,6 +154,7 @@ semantic_artifacts
 :maxdepth: 2
 :caption: Workflows
 :titlesonly:
+:hidden:
 
 tutorials/export_differentiable_training_scenario
 tutorials/external_training_checkpoint_adapter
@@ -162,6 +169,7 @@ static_demo
 :maxdepth: 2
 :caption: Evidence and Submissions
 :titlesonly:
+:hidden:
 
 publication_artifact_readiness
 submissions
@@ -174,6 +182,7 @@ launch_video
 :maxdepth: 2
 :caption: Extending Noema
 :titlesonly:
+:hidden:
 
 external_adapter_sdk
 ```
@@ -182,6 +191,7 @@ external_adapter_sdk
 :maxdepth: 2
 :caption: Reference
 :titlesonly:
+:hidden:
 
 reference/index
 ```

@@ -2,6 +2,8 @@
 
 Noema has one machine-readable source for launch-facing quantitative material:
 [`launch_evidence.json`](https://github.com/M0574F4/noema-lab/blob/main/launch_evidence.json).
+Think of it as the receipt behind the public result: it records the measurements, calculation,
+limits, and source-file hashes used by the README, website, figures, tables, and interactive demo.
 README claims, the documentation landing page, the public webpage, experiment figures, result
 tables, and video overlays must derive their numbers from that projection instead of copying values
 from tutorial prose.
@@ -17,8 +19,9 @@ Scientific status and distribution clearance are deliberately independent:
 
 - `scientific_status` remains `completed_experimental_benchmark`, `warning`, and
   `publication_ready: false`. Completing a rights review cannot upgrade those claims.
-- `distribution_clearance` records the candidate state attached to the frozen evidence in the
-  private authoring repository. It is provenance metadata, not a scientific-quality claim.
+- `distribution_clearance.status` is `pending_final_review` for the future stable `v0.2.0` release
+  and paper bundle. The public repository is a development preview, not a blocked or cleared stable
+  release. This field preserves the private authoring state; it is not a scientific-quality claim.
 - Observed minima and maxima are display ranges across three paired held-out seeds. They are not
   confidence intervals or population guarantees.
 - The calibrated I/Q oracle is a diagnostic reference with calibration knowledge, not a deployable

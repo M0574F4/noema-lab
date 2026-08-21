@@ -10,4 +10,4 @@
 | 8 | 8.453814e-02 | 6.036758e-03 | 6.040891e-03 | 5.994797e-03 | 6.095886e-03 | 92.85% | 0.07% |
 | 10 | 6.670666e-02 | 7.495880e-04 | 7.514954e-04 | 7.333755e-04 | 7.810593e-04 | 98.87% | 0.25% |
 
-Observed minima and maxima span three paired held-out seeds; they are not confidence intervals. The calibrated reference has diagnostic calibration knowledge. Internally valid completed experimental benchmark; not a publication-ready canonical benchmark.
+Observed minima and maxima span three paired held-out seeds; they are not confidence intervals. The calibrated reference has diagnostic calibration knowledge. Completed experimental demonstration—not a publication-ready canonical benchmark.

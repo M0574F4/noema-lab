@@ -40,7 +40,7 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 | I want to… | Start with… |
 | --- | --- |
 | understand the central idea | the interactive [Break the comparison](https://M0574F4.github.io/noema-lab/break_the_comparison.html) evidence lab |
-| watch Noema train and compare a model | the [learned QPSK I/Q calibration walkthrough](https://www.youtube.com/watch?v=bKNXS_vHLHc) |
+| watch an external model train, then compare it with Noema | the [learned QPSK I/Q calibration walkthrough](https://www.youtube.com/watch?v=bKNXS_vHLHc) |
 | run a dependency-light example | the source-checkout quickstart below |
 | bring my own model | the [external adapter SDK](https://M0574F4.github.io/noema-lab/external_adapter_sdk.html) |
 | export a training contract | the [architecture-neutral export workflow](https://M0574F4.github.io/noema-lab/tutorials/export_differentiable_training_scenario.html) |
@@ -57,6 +57,11 @@ not prove scientific fairness, standards conformance, authenticity, or independe
   </a>
 </p>
 
+<p align="center">
+  <strong><a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">▶ Watch the workflow on YouTube</a></strong>
+  · <a href="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-training-loop.svg">Open the full-size diagram</a>
+</p>
+
 The recorded walkthrough starts from a clean environment and shows contract export, dataset
 capture, external model training, returned-model validation, and the UI comparison against the
 uncompensated and calibrated-oracle baselines.
@@ -69,14 +74,15 @@ Noema is not yet published on PyPI and currently supports Python 3.11–3.13. In
 ```bash
 git clone https://github.com/M0574F4/noema-lab.git
 cd noema-lab
-uv sync
+uv sync --frozen
 uv run noema template instantiate semantic_comm.text_semantic_similarity.default > noema-quickstart.yaml
 uv run noema recipe lint noema-quickstart.yaml
 uv run noema recipe run noema-quickstart.yaml
 uv run noema ui serve --port 8766
 ```
 
-Open `http://127.0.0.1:8766`.
+Open `http://127.0.0.1:8766`. Press `Ctrl+C` in the terminal to stop the UI. The generated
+`noema-quickstart.yaml` file is ignored by Git, so the checkout stays clean.
 
 Sionna-backed paths are optional. Install the current no-ray-tracing Sionna 2/PyTorch stack with
 `uv sync --extra wireless`; install the CompressAI examples with `uv sync --extra compressai`.
@@ -86,7 +92,9 @@ large downloads, external datasets, or additional rights review.
 ## See why the contract matters
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f3-receiver-ber-vs-snr.svg" alt="Canonical launch plot of pre-decoder BER versus SNR with bounded experimental disclosure" width="100%" />
+  <a href="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f3-receiver-ber-vs-snr.svg">
+    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f3-receiver-ber-vs-snr.svg" alt="Canonical launch plot of pre-decoder BER versus SNR with bounded experimental disclosure" width="100%" />
+  </a>
 </p>
 
 This is one completed experimental demonstration. The learned band is the observed minimum and
@@ -94,15 +102,26 @@ maximum over three paired held-out seeds—not a confidence interval—and the c
 diagnostic reference with additional calibration knowledge. The result is not presented as a
 publication-ready canonical benchmark.
 
-Every displayed number and warning in the launch surfaces comes from
+The contract records the SNR cells, paired seeds, aggregation, metric and denominator, and the
+roles of all three methods. Changing any of those would invalidate the displayed comparison even
+if the arithmetic still looked correct.
+
+Every displayed number and warning in the README, documentation, figures, tables, and demo comes from
 [`launch_evidence.json`](launch_evidence.json). The generated [F0–F5 figures and T0–T2
 tables](https://M0574F4.github.io/noema-lab/launch_assets.html) are projections of that source.
 
 ## How Noema works
 
+### Direct benchmark path
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f2-contract-to-evidence.svg" alt="Noema chain from typed protocol through execution, accounting, retained evidence, and launch projection" width="100%" />
 </p>
+
+The diagram above shows the direct path from a declared benchmark to retained evidence and a
+public result. When a researcher trains a replacement model, Noema uses the longer handoff below.
+
+### External-training path
 
 ```text
 experiment contract (recipe + benchmark protocol)
@@ -111,7 +130,7 @@ experiment contract (recipe + benchmark protocol)
   -> external training by the researcher
   -> returned model bound to declared artifact slots
   -> selected benchmark evaluation
-  -> locally verified result bundle and evidence-bound plot
+  -> locally verified result bundle and plot linked to its source evidence
 ```
 
 Noema is CLI-first. The dashboard, benchmark runner, capture/export paths, and evidence tools
@@ -126,7 +145,7 @@ models.
   metrics.csv          table-ready metrics
   recipes.csv          exact recipe membership
   summary.md           human-readable report
-  figures/*.png        optional evidence-bound plots
+  figures/*.png        optional plots linked to result evidence
 
 .noema/runs/<run_id>/
   recipe.json          normalized plan that was executed
@@ -190,7 +209,3 @@ Use [`CITATION.cff`](CITATION.cff) for citation metadata. Contribution expectati
 security reporting, and community conduct are documented in [CONTRIBUTING.md](CONTRIBUTING.md),
 [GOVERNANCE.md](GOVERNANCE.md), [SECURITY.md](SECURITY.md), and
 [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/assets/benchmarked-with-noema.svg" alt="Benchmarked with Noema badge" />
-</p>

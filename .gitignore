@@ -93,3 +93,6 @@ Thumbs.db
 *.temp
 tmp/
 temp/
+
+# README Quick Start output
+/noema-quickstart.yaml

@@ -65,7 +65,7 @@
     "status": "warning",
     "integrity_errors": [],
     "warnings": [
-      "The evidence is internally valid, but this experimental suite is not yet designated as a publication-ready canonical benchmark."
+      "This completed experimental demonstration is not yet a publication-ready canonical benchmark."
     ]
   },
   "limitations": [

@@ -49,7 +49,9 @@
   }
 }
 
-.noema-title-logo {
+.bd-article > section#noema-documentation > h1::before {
+  background: url("noema-logo.svg") center / contain no-repeat;
+  content: "";
   display: inline-block;
   height: 1.05em;
   margin-right: 0.22em;
@@ -258,6 +260,13 @@ a.noema-home-action-primary:focus-visible {
   font-size: 0.88rem;
   margin-top: 0.65rem;
   text-align: left;
+}
+
+.noema-overview-workflow-figure.noema-home-workflow-figure {
+  float: none;
+  margin: 1rem 0 1.5rem;
+  max-width: 100%;
+  width: 100%;
 }
 
 @media (max-width: 959px) {
