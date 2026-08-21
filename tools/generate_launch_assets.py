@@ -436,7 +436,7 @@ def _figure_f3(evidence: Mapping[str, Any]) -> bytes:
         (
             f'<line x1="{primary_x - 8:g}" y1="{primary_y - 8:g}" x2="1260" y2="500" stroke="{AMBER}" stroke-width="2"/>',
             _rect(1040, 382, 420, 148, fill="#251f0d", stroke="#705c23", radius=18),
-            _multiline(1066, 422, _wrap(evidence["headline"]["text"], 52), size=16, weight=650, fill=AMBER, line_height=1.35),
+            _multiline(1066, 422, _wrap(evidence["headline"]["text"], 42), size=16, weight=650, fill=AMBER, line_height=1.35),
             _text(1066, 505, "Selected by highest predeclared SNR—not post hoc.", size=15, fill=MUTED),
             _text(800, 884, "Completed experimental benchmark · three paired seeds per cell · bands are observed min/max, not confidence intervals", size=16, fill=AMBER, anchor="middle"),
         )

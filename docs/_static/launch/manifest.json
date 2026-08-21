@@ -8,7 +8,7 @@
   },
   "generator": {
     "path": "tools/generate_launch_assets.py",
-    "sha256": "9f79c92fcf1aa40a1a50061c7e1b4e84b78e78d82404019e920bbb153aa3ebd0"
+    "sha256": "4fa615b91a015e6e7fbc662b6a3a40522d15490c64b197741f6d82331a6265c0"
   },
   "schema": {
     "path": "schemas/launch_asset_manifest.schema.json",
@@ -40,7 +40,7 @@
       "id": "F3",
       "title": "Receiver BER versus SNR",
       "path": "docs/_static/launch/f3-receiver-ber-vs-snr.svg",
-      "sha256": "90dd5eb713d217e7daaf73dd83086cd5a3813f0a8277f7c26cff3c900bcf9811",
+      "sha256": "9de802ef5c9c2caa1b4bc608d24b5bf78f44af1a56d41056b66c54e68e7a0c7a",
       "size_bytes": 10890
     },
     {

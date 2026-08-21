@@ -71,6 +71,18 @@ class LaunchAssetTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("observed min/max, not confidence intervals", figure)
+        self.assertIn(
+            '<tspan x="1066" dy="0">At 10 dB, the learned receiver reduced</tspan>',
+            figure,
+        )
+        self.assertIn(
+            '<tspan x="1066" dy="21.6">mean pre-decoder BER by 98.87% relative to</tspan>',
+            figure,
+        )
+        self.assertIn(
+            '<tspan x="1066" dy="21.6">uncompensated QPSK.</tspan>',
+            figure,
+        )
         table_path = ASSET_ROOT / "tables" / "t0-result-summary.csv"
         with table_path.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle))
