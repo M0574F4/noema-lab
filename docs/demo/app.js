@@ -633,7 +633,7 @@
   }
 
   function clampGraphZoom(value) {
-    return Math.min(1.6, Math.max(0.45, value));
+    return Math.min(1.6, Math.max(0.15, value));
   }
 
   function humanizeId(value) {

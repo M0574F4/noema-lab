@@ -1429,8 +1429,8 @@
         {
           "label": "benchmark manifest.json",
           "path": "data/qpsk_iq_calibration/benchmark_manifest.json",
-          "sha256": "d33498f44877bc32bb31b52c2acd67d8c49df820f8eeb22d34d7368b006b0e9c",
-          "size_bytes": 2362,
+          "sha256": "3961df773f103ea2b126d29edaa8711148939a2181f309ce4c76f8538c28152a",
+          "size_bytes": 2328,
           "type": "json"
         }
       ],
@@ -1597,7 +1597,7 @@
       "snapshot": {
         "kind": "noema.completed_benchmark_projection",
         "manifest_path": "data/qpsk_iq_calibration/benchmark_manifest.json",
-        "manifest_sha256": "d33498f44877bc32bb31b52c2acd67d8c49df820f8eeb22d34d7368b006b0e9c"
+        "manifest_sha256": "3961df773f103ea2b126d29edaa8711148939a2181f309ce4c76f8538c28152a"
       },
       "source_path": "docs/tutorials/learned_qpsk_demapper_demo.md",
       "tables": [

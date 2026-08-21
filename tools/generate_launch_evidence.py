@@ -78,9 +78,9 @@ EXPECTED_PROJECTION_SHA256 = (
 )
 EXPECTED_PROJECTION_SIZE_BYTES = 30_342
 EXPECTED_MANIFEST_SHA256 = (
-    "d33498f44877bc32bb31b52c2acd67d8c49df820f8eeb22d34d7368b006b0e9c"
+    "3961df773f103ea2b126d29edaa8711148939a2181f309ce4c76f8538c28152a"
 )
-EXPECTED_MANIFEST_SIZE_BYTES = 2_362
+EXPECTED_MANIFEST_SIZE_BYTES = 2_328
 EXPECTED_UPSTREAM_GENERATOR_SHA256 = (
     "13210569905a0ad567cdc6b422fe3d0c129ee311e2d3e3ba0638b535587d1f94"
 )
@@ -115,8 +115,8 @@ SOURCE_FIELDS = (
     "semantic_recipe_sha256",
 )
 EXPECTED_WARNING = (
-    "The evidence is internally valid, but this experimental suite is not yet "
-    "designated as a publication-ready canonical benchmark."
+    "This completed experimental demonstration is not yet a publication-ready "
+    "canonical benchmark."
 )
 EXPECTED_LIMITATIONS = (
     "The committed CSV is a deterministic projection of the local completed "
@@ -125,9 +125,11 @@ EXPECTED_LIMITATIONS = (
     "a universal publication-strength sample size.",
 )
 DISCLOSURE = (
-    "Internally valid completed experimental benchmark; not a publication-ready "
-    "canonical benchmark."
+    "Completed experimental demonstration—not a publication-ready canonical "
+    "benchmark."
 )
+FINAL_RELEASE_CLEARANCE_SCOPE = "stable_v0.2.0_and_paper_bundle"
+PUBLIC_REPOSITORY_STATUS = "public_development_preview"
 REFERENCE_ROLE = (
     "The calibrated I/Q oracle is a diagnostic reference with calibration "
     "knowledge, not a deployable competitor using the same information."
@@ -842,6 +844,10 @@ def _release_state(root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         "launch-evidence rights status is unsupported",
     )
     gate = _mapping(handoff.get("release_gate"), "handoff release gate")
+    _require(
+        gate.get("scope") == FINAL_RELEASE_CLEARANCE_SCOPE,
+        "handoff release-gate scope changed",
+    )
     gate_blocked = gate.get("blocked")
     _require(isinstance(gate_blocked, bool), "handoff release gate is malformed")
     paper = _mapping(handoff.get("paper"), "handoff paper")
@@ -880,7 +886,11 @@ def _release_state(root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         and gate_blocked is False
     )
     clearance = {
-        "status": "cleared" if cleared else "candidate",
+        "status": (
+            "cleared_for_stable_release" if cleared else "pending_final_review"
+        ),
+        "clearance_scope": FINAL_RELEASE_CLEARANCE_SCOPE,
+        "public_repository_status": PUBLIC_REPOSITORY_STATUS,
         "handoff_status": handoff_status,
         "paper_review_status": paper_review_status,
         "paper_final_binding_status": paper_binding_status,
@@ -888,7 +898,7 @@ def _release_state(root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         "rights_final_review_status": final_review_status,
         "included_rights_status": included_rights_status,
         "launch_asset_rights_status": launch_rights_status,
-        "release_gate_blocked": gate_blocked,
+        "stable_release_gate_blocked": gate_blocked,
     }
     return software, clearance
 
@@ -1044,17 +1054,19 @@ def verify_projection(
 
     clearance = _mapping(verified["distribution_clearance"], "distribution clearance")
     should_be_cleared = (
-        clearance["handoff_status"] == "ready_for_release"
+        clearance["clearance_scope"] == FINAL_RELEASE_CLEARANCE_SCOPE
+        and clearance["public_repository_status"] == PUBLIC_REPOSITORY_STATUS
+        and clearance["handoff_status"] == "ready_for_release"
         and clearance["paper_review_status"] == "finalized"
         and clearance["paper_final_binding_status"] == "declared"
         and clearance["overall_rights_status"] == "cleared"
         and clearance["rights_final_review_status"] == "approved"
         and clearance["included_rights_status"] == "all_cleared"
         and clearance["launch_asset_rights_status"] == "cleared"
-        and clearance["release_gate_blocked"] is False
+        and clearance["stable_release_gate_blocked"] is False
     )
     _require(
-        (clearance["status"] == "cleared") is should_be_cleared,
+        (clearance["status"] == "cleared_for_stable_release") is should_be_cleared,
         "distribution-clearance state is inconsistent",
     )
 
@@ -1403,7 +1415,8 @@ def main(argv: list[str] | None = None) -> int:
                 write_study_json(output, projection)
         if args.require_cleared:
             _require(
-                projection["distribution_clearance"]["status"] == "cleared",
+                projection["distribution_clearance"]["status"]
+                == "cleared_for_stable_release",
                 "launch evidence is not cleared for final distribution",
             )
     except (LaunchEvidenceError, OSError, UnicodeError, ValueError) as exc:

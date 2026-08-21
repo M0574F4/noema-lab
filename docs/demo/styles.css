@@ -799,7 +799,7 @@ a {
   }
 
   .hosted-brand small,
-  .hosted-action:first-of-type {
+  .hosted-action.primary {
     display: none;
   }
 

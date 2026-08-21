@@ -127,15 +127,17 @@
     "statistical_unit": "paired held-out seed within a predeclared SNR cell"
   },
   "distribution_clearance": {
+    "clearance_scope": "stable_v0.2.0_and_paper_bundle",
     "handoff_status": "review_in_progress",
     "included_rights_status": "pending",
     "launch_asset_rights_status": "review_required",
     "overall_rights_status": "required",
     "paper_final_binding_status": "missing",
     "paper_review_status": "in_progress",
-    "release_gate_blocked": true,
+    "public_repository_status": "public_development_preview",
     "rights_final_review_status": "missing",
-    "status": "candidate"
+    "stable_release_gate_blocked": true,
+    "status": "pending_final_review"
   },
   "headline": {
     "accessible_summary": "Across seven predeclared SNR cells, the observed learned-versus-uncompensated BER change ranged from 16.18% to 98.87%; the largest absolute relative gap between the learned receiver and calibrated diagnostic reference was 0.25%.",
@@ -214,13 +216,13 @@
   "provenance": {
     "generator": {
       "path": "tools/generate_launch_evidence.py",
-      "sha256": "233c4c585ad8a67cb9931f3d5ee88e5a5996f9ec73b57ec7307c5c48e8a76478",
-      "size_bytes": 52622
+      "sha256": "7a87ffe220c0138629e581e57efb341a3aaf453f0e97d13736dfd526aa561146",
+      "size_bytes": 53217
     },
     "schema": {
       "path": "schemas/launch_evidence.schema.json",
-      "sha256": "0214ee348f876af847e912f33dba7c6f91ee7f43c0501484468390ac63aa61ed",
-      "size_bytes": 17109
+      "sha256": "211680624994a32b61eebaf9c35b11bb5192ba04fc8bfd1c419ac5e753e922a5",
+      "size_bytes": 17391
     },
     "upstream_generator": {
       "path": "tools/generate_qpsk_iq_calibration_demo_assets.py",
@@ -235,18 +237,18 @@
       },
       {
         "path": "docs/demo/data/qpsk_iq_calibration/benchmark_manifest.json",
-        "sha256": "d33498f44877bc32bb31b52c2acd67d8c49df820f8eeb22d34d7368b006b0e9c",
-        "size_bytes": 2362
+        "sha256": "3961df773f103ea2b126d29edaa8711148939a2181f309ce4c76f8538c28152a",
+        "size_bytes": 2328
       },
       {
         "path": "publication_handoff.yaml",
-        "sha256": "a7c7fff3954e2fe6296a383f51c05c2861f82f8aa7462c1926d7788d1a7c5864",
-        "size_bytes": 4962
+        "sha256": "4f840ea260a212662c13b663e31390593a9ec49231f31e903e17d83c84dbcb20",
+        "size_bytes": 5065
       },
       {
         "path": "schemas/publication_handoff.schema.json",
-        "sha256": "7686513e53867f88032d1e058c9ddb83353183bb036a4c3376cff743b1fb9f65",
-        "size_bytes": 9487
+        "sha256": "a7cdbccd74e77c445abf204afb0e8151495fc74f32f5070e4919a517d9e09413",
+        "size_bytes": 9715
       },
       {
         "path": "release_identity.yaml",
@@ -260,7 +262,7 @@
   "scientific_status": {
     "aggregation": "arithmetic_mean_across_paired_seeds",
     "benchmark_tier": "experimental",
-    "disclosure": "Internally valid completed experimental benchmark; not a publication-ready canonical benchmark.",
+    "disclosure": "Completed experimental demonstration—not a publication-ready canonical benchmark.",
     "evidence_level": "completed_experimental_benchmark",
     "limitations": [
       "The committed CSV is a deterministic projection of the local completed result, not a replacement for its full run-evidence snapshot.",
@@ -271,7 +273,7 @@
     "uncertainty_display": "observed_min_max_not_confidence_interval",
     "verification_status": "warning",
     "warnings": [
-      "The evidence is internally valid, but this experimental suite is not yet designated as a publication-ready canonical benchmark."
+      "This completed experimental demonstration is not yet a publication-ready canonical benchmark."
     ]
   },
   "series": [
@@ -1326,5 +1328,5 @@
       "role": "candidate"
     }
   ],
-  "sha256": "52ed68b7adf713179999245dd88fedc64210821c5a6898741bc1e9b66f4d1d07"
+  "sha256": "2d554355dbadd4b23d15efbea525a71a7bf8427f32aa1764b18c303a52edff1c"
 }

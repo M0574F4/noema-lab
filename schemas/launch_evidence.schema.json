@@ -106,6 +106,8 @@
       "additionalProperties": false,
       "required": [
         "status",
+        "clearance_scope",
+        "public_repository_status",
         "handoff_status",
         "paper_review_status",
         "paper_final_binding_status",
@@ -113,10 +115,12 @@
         "rights_final_review_status",
         "included_rights_status",
         "launch_asset_rights_status",
-        "release_gate_blocked"
+        "stable_release_gate_blocked"
       ],
       "properties": {
-        "status": {"enum": ["candidate", "cleared"]},
+        "status": {"enum": ["pending_final_review", "cleared_for_stable_release"]},
+        "clearance_scope": {"const": "stable_v0.2.0_and_paper_bundle"},
+        "public_repository_status": {"const": "public_development_preview"},
         "handoff_status": {"enum": ["review_in_progress", "ready_for_release"]},
         "paper_review_status": {"enum": ["in_progress", "finalized"]},
         "paper_final_binding_status": {"enum": ["missing", "declared"]},
@@ -124,12 +128,12 @@
         "rights_final_review_status": {"enum": ["missing", "approved"]},
         "included_rights_status": {"enum": ["pending", "all_cleared"]},
         "launch_asset_rights_status": {"enum": ["review_required", "cleared"]},
-        "release_gate_blocked": {"type": "boolean"}
+        "stable_release_gate_blocked": {"type": "boolean"}
       },
       "allOf": [
         {
           "if": {
-            "properties": {"status": {"const": "cleared"}},
+            "properties": {"status": {"const": "cleared_for_stable_release"}},
             "required": ["status"]
           },
           "then": {
@@ -141,7 +145,7 @@
               "rights_final_review_status": {"const": "approved"},
               "included_rights_status": {"const": "all_cleared"},
               "launch_asset_rights_status": {"const": "cleared"},
-              "release_gate_blocked": {"const": false}
+              "stable_release_gate_blocked": {"const": false}
             }
           }
         }
