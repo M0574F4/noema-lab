@@ -22,21 +22,28 @@ class PublicRepositoryTests(unittest.TestCase):
     def test_flagship_demo_and_video_are_public(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("https://www.youtube.com/watch?v=bKNXS_vHLHc", readme)
-        self.assertIn("docs/_static/noema-logo.svg", readme)
+        self.assertIn("docs/_static/noema-logo-dark.svg", readme)
         self.assertIn("docs/_static/noema-training-loop.svg", readme)
         self.assertLess(
             readme.index("docs/_static/launch/f0-launch-hero.svg"),
-            readme.index("docs/_static/noema-logo.svg"),
+            readme.index("img.shields.io/github/actions/workflow/status"),
         )
         self.assertLess(
-            readme.index("docs/_static/noema-logo.svg"),
             readme.index("img.shields.io/github/actions/workflow/status"),
+            readme.index("docs/_static/noema-logo-dark.svg"),
+        )
+        self.assertLess(
+            readme.index("docs/_static/noema-logo-dark.svg"),
+            readme.index("# Noema"),
         )
         self.assertEqual(
             readme.count("docs/_static/launch/f2-contract-to-evidence.svg"),
             1,
         )
         self.assertTrue((ROOT / "docs" / "_static" / "noema-logo.svg").is_file())
+        self.assertTrue(
+            (ROOT / "docs" / "_static" / "noema-logo-dark.svg").is_file()
+        )
         self.assertTrue(
             (ROOT / "docs" / "_static" / "noema-training-loop.svg").is_file()
         )
