@@ -49,6 +49,7 @@ MUTED = "#a9c1b8"
 GREEN = "#5de2a5"
 GREEN_DEEP = "#22966a"
 TEAL = "#4ec5c1"
+ORANGE = "#f08345"
 AMBER = "#ffc857"
 RED = "#ff6b6b"
 GRAY = "#8fa39b"
@@ -390,7 +391,7 @@ def _figure_f3(evidence: Mapping[str, Any]) -> bytes:
 
     styles = {
         "uncompensated_qpsk": (GRAY, "8 7", "square"),
-        "calibrated_iq_oracle": (TEAL, "", "triangle"),
+        "calibrated_iq_oracle": (ORANGE, "", "triangle"),
         "learned_receiver": (GREEN, "", "circle"),
     }
     for method in ("uncompensated_qpsk", "calibrated_iq_oracle", "learned_receiver"):
@@ -418,7 +419,7 @@ def _figure_f3(evidence: Mapping[str, Any]) -> bytes:
 
     legend_items = (
         (GRAY, "Uncompensated QPSK", "dashed"),
-        (TEAL, "Calibrated I/Q oracle · diagnostic", "solid"),
+        (ORANGE, "Calibrated I/Q oracle · diagnostic", "solid"),
         (GREEN, "Learned I/Q receiver · observed min–max band", "solid"),
     )
     for index, (color, label, style) in enumerate(legend_items):
@@ -430,15 +431,15 @@ def _figure_f3(evidence: Mapping[str, Any]) -> bytes:
                 _text(x + 70, 841, label, size=17, fill=MUTED),
             )
         )
-    primary_x = x_for(float(evidence["headline"]["primary_snr_db"]))
-    primary_y = _plot_y(float(learned_points[-1]["summary"]["mean_ber"]), top, bottom)
-    body.extend(
-        (
-            f'<line x1="{primary_x - 8:g}" y1="{primary_y - 8:g}" x2="1260" y2="500" stroke="{AMBER}" stroke-width="2"/>',
-            _rect(1040, 382, 420, 148, fill="#251f0d", stroke="#705c23", radius=18),
-            _multiline(1066, 422, _wrap(evidence["headline"]["text"], 42), size=16, weight=650, fill=AMBER, line_height=1.35),
-            _text(1066, 505, "Selected by highest predeclared SNR—not post hoc.", size=15, fill=MUTED),
-            _text(800, 884, "Completed experimental benchmark · three paired seeds per cell · bands are observed min/max, not confidence intervals", size=16, fill=AMBER, anchor="middle"),
+    body.append(
+        _text(
+            800,
+            884,
+            "Completed experimental benchmark · three paired seeds per cell · "
+            "bands are observed min/max, not confidence intervals",
+            size=16,
+            fill=AMBER,
+            anchor="middle",
         )
     )
     return _svg(
