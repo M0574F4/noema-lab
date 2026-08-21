@@ -83,7 +83,13 @@ def _select_fault(cdp: CDP, fault: str) -> Mapping[str, Any]:
 def run(url: str, chrome: str, timeout: float, screenshot: Optional[Path]) -> Mapping[str, Any]:
     opener = no_proxy_opener()
     devtools_port = free_loopback_port()
-    with tempfile.TemporaryDirectory(prefix="noema-break-comparison-probe-") as raw:
+    # Chrome helper processes can briefly touch the profile after the browser
+    # process exits. A cleanup race must not turn a successful UI probe into a
+    # failed CI job.
+    with tempfile.TemporaryDirectory(
+        prefix="noema-break-comparison-probe-",
+        ignore_cleanup_errors=True,
+    ) as raw:
         temporary = Path(raw)
         chrome_log = temporary / "chrome.log"
         command = [
@@ -207,6 +213,10 @@ def run(url: str, chrome: str, timeout: float, screenshot: Optional[Path]) -> Ma
             ) from exc
         finally:
             if cdp is not None:
+                try:
+                    cdp.call("Browser.close")
+                except Exception:
+                    pass
                 cdp.close()
             if process.poll() is None:
                 process.terminate()
