@@ -71,16 +71,11 @@ class LaunchAssetTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("observed min/max, not confidence intervals", figure)
+        self.assertNotIn("Selected by highest predeclared SNR", figure)
+        self.assertNotIn('<rect x="1040" y="382"', figure)
+        self.assertGreaterEqual(figure.count(f'stroke="{GENERATOR.ORANGE}"'), 9)
         self.assertIn(
-            '<tspan x="1066" dy="0">At 10 dB, the learned receiver reduced</tspan>',
-            figure,
-        )
-        self.assertIn(
-            '<tspan x="1066" dy="21.6">mean pre-decoder BER by 98.87% relative to</tspan>',
-            figure,
-        )
-        self.assertIn(
-            '<tspan x="1066" dy="21.6">uncompensated QPSK.</tspan>',
+            "Across seven predeclared SNR cells",
             figure,
         )
         table_path = ASSET_ROOT / "tables" / "t0-result-summary.csv"
