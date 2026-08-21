@@ -22,6 +22,16 @@ class PublicRepositoryTests(unittest.TestCase):
     def test_flagship_demo_and_video_are_public(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("https://www.youtube.com/watch?v=bKNXS_vHLHc", readme)
+        self.assertIn("docs/_static/noema-logo.svg", readme)
+        self.assertIn("docs/_static/noema-training-loop.svg", readme)
+        self.assertEqual(
+            readme.count("docs/_static/launch/f2-contract-to-evidence.svg"),
+            1,
+        )
+        self.assertTrue((ROOT / "docs" / "_static" / "noema-logo.svg").is_file())
+        self.assertTrue(
+            (ROOT / "docs" / "_static" / "noema-training-loop.svg").is_file()
+        )
         self.assertTrue((ROOT / "launch_evidence.json").is_file())
         self.assertTrue((ROOT / "docs" / "break_the_comparison.md").is_file())
         self.assertTrue((ROOT / "docs" / "demo" / "index.html").is_file())
