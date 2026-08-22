@@ -146,6 +146,31 @@ where = ["src"]
 "share/noema-lab/schemas" = [
   "schemas/benchmark_pack.schema.json",
 ]
+"share/noema-lab/demo_trainings/_portable_ai_phy_adapter_common" = [
+  "demo_trainings/_portable_ai_phy_adapter_common/datamodule.py",
+  "demo_trainings/_portable_ai_phy_adapter_common/train.py",
+  "demo_trainings/_portable_ai_phy_adapter_common/evaluate.py",
+  "demo_trainings/_portable_ai_phy_adapter_common/build_benchmark.py",
+  "demo_trainings/_portable_ai_phy_adapter_common/requirements.txt",
+]
+"share/noema-lab/demo_trainings/localization_supervised_mlp" = [
+  "demo_trainings/localization_supervised_mlp/README.md",
+  "demo_trainings/localization_supervised_mlp/template.yaml",
+  "demo_trainings/localization_supervised_mlp/training_plan.yaml",
+  "demo_trainings/localization_supervised_mlp/task.py",
+]
+"share/noema-lab/demo_trainings/aoa_estimation_covariance_mlp" = [
+  "demo_trainings/aoa_estimation_covariance_mlp/README.md",
+  "demo_trainings/aoa_estimation_covariance_mlp/template.yaml",
+  "demo_trainings/aoa_estimation_covariance_mlp/training_plan.yaml",
+  "demo_trainings/aoa_estimation_covariance_mlp/task.py",
+]
+"share/noema-lab/demo_trainings/beam_selection_supervised_mlp" = [
+  "demo_trainings/beam_selection_supervised_mlp/README.md",
+  "demo_trainings/beam_selection_supervised_mlp/template.yaml",
+  "demo_trainings/beam_selection_supervised_mlp/training_plan.yaml",
+  "demo_trainings/beam_selection_supervised_mlp/task.py",
+]
 "share/noema-lab/demo_trainings/mimo_ofdm_channel_estimation_cnn" = [
   "demo_trainings/mimo_ofdm_channel_estimation_cnn/README.md",
   "demo_trainings/mimo_ofdm_channel_estimation_cnn/template.yaml",

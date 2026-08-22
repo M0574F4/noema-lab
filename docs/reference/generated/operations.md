@@ -6807,23 +6807,61 @@ None.
 
 | Name | Type | Required | Default / values | Description |
 | --- | --- | --- | --- | --- |
+| `artifact_entrypoint` | `string` | no | default `aoa_estimator` |  |
+| `artifact_manifest_path` | `string` | no | default `` | Registered schema-v2 trained artifact implementing the ULA AoA ABI. |
+| `artifact_package_sha256` | `string` | no | default `` |  |
 | `grid_step_deg` | `number` | no | default `0.25` |  |
-| `mode` | `string` | no | default `bartlett_reference`<br>values `music`, `bartlett_reference` | Runnable AoA method used until a trained estimator artifact is bound to this research slot. |
+| `mode` | `string` | no | default `bartlett_reference`<br>values `music`, `bartlett_reference`, `learned_artifact` | Select MUSIC, Bartlett, or a returned portable AoA estimator. |
 
 **Differentiability (legacy `trainable_params`):** framework=`torch`, gradient=`surrogate`, trainable_params=`True`, exportable=`True`
 
-Surrogate-gradient metadata describes this adapter only when retained as downstream support. Portable replacement is not available until a trained-artifact ABI and runtime binding are implemented.
+The adapter accepts a portable learned ULA estimator while MUSIC and Bartlett remain fixed comparison methods.
 
-**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`False`
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`True`
 
-**Portable trained-artifact ABI:** None.
+**Portable trained-artifact ABI:**
+
+```json
+{
+  "binding_params": {
+    "artifact_entrypoint": "aoa_estimator",
+    "artifact_manifest_path": "trained_artifact.yaml",
+    "mode": "learned_artifact"
+  },
+  "component_id": "aoa_estimator",
+  "component_role": "single_source_ula_aoa_estimator",
+  "entrypoint_id": "aoa_estimator",
+  "inputs": {
+    "snapshots_ri": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "antenna",
+        "snapshot",
+        2
+      ]
+    }
+  },
+  "outputs": {
+    "angles_deg": {
+      "dtype": "float32",
+      "shape": [
+        "batch"
+      ]
+    }
+  },
+  "required_operation_inputs": [
+    "problem"
+  ]
+}
+```
 
 **Backends:**
 
 | Runner | Backends |
 | --- | --- |
-| `benchmark_run` | `numpy` |
-| `dataset_capture` | `numpy` |
+| `benchmark_run` | `numpy`, `onnxruntime` |
+| `dataset_capture` | `numpy`, `onnxruntime` |
 | `differentiable_export` | `torch`, `sionna` |
 
 **Equivalence:**
@@ -6867,6 +6905,15 @@ Surrogate-gradient metadata describes this adapter only when retained as downstr
     "status": "implemented"
   },
   {
+    "backend": "onnxruntime",
+    "implementation": "portable_trained_artifact_runtime",
+    "parameter_bindings": {
+      "mode": "learned_artifact"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
     "backend": "numpy",
     "implementation": "music_spatial_spectrum_reference",
     "parameter_bindings": {
@@ -6880,6 +6927,15 @@ Surrogate-gradient metadata describes this adapter only when retained as downstr
     "implementation": "bartlett_spatial_spectrum_reference",
     "parameter_bindings": {
       "mode": "bartlett_reference"
+    },
+    "runner": "dataset_capture",
+    "status": "implemented"
+  },
+  {
+    "backend": "onnxruntime",
+    "implementation": "portable_trained_artifact_runtime",
+    "parameter_bindings": {
+      "mode": "learned_artifact"
     },
     "runner": "dataset_capture",
     "status": "implemented"
@@ -6925,22 +6981,61 @@ None.
 
 | Name | Type | Required | Default / values | Description |
 | --- | --- | --- | --- | --- |
-| `mode` | `string` | no | default `codebook_sweep_reference`<br>values `mrt`, `codebook_sweep_reference` | Runnable beamforming method used until a trained beam-policy artifact is bound to this research slot. |
+| `artifact_entrypoint` | `string` | no | default `beam_policy` |  |
+| `artifact_manifest_path` | `string` | no | default `` | Registered schema-v2 trained artifact implementing the beam-policy ABI. |
+| `artifact_package_sha256` | `string` | no | default `` |  |
+| `mode` | `string` | no | default `codebook_sweep_reference`<br>values `mrt`, `codebook_sweep_reference`, `learned_artifact` | Select a fixed reference or a returned portable beam-policy artifact. |
 
 **Differentiability (legacy `trainable_params`):** framework=`torch`, gradient=`surrogate`, trainable_params=`True`, exportable=`True`
 
-Surrogate-gradient metadata describes this adapter only when retained as downstream support. Portable replacement is not available until a trained-artifact ABI and runtime binding are implemented.
+The adapter accepts a portable learned beam policy while MRT and exhaustive DFT-codebook selection remain fixed comparison methods.
 
-**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`False`
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`True`
 
-**Portable trained-artifact ABI:** None.
+**Portable trained-artifact ABI:**
+
+```json
+{
+  "binding_params": {
+    "artifact_entrypoint": "beam_policy",
+    "artifact_manifest_path": "trained_artifact.yaml",
+    "mode": "learned_artifact"
+  },
+  "component_id": "beam_policy",
+  "component_role": "single_user_miso_beam_policy",
+  "entrypoint_id": "beam_policy",
+  "inputs": {
+    "channels_ri": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "tx_antenna",
+        2
+      ]
+    }
+  },
+  "outputs": {
+    "weights_ri": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "tx_antenna",
+        2
+      ]
+    }
+  },
+  "required_operation_inputs": [
+    "problem"
+  ]
+}
+```
 
 **Backends:**
 
 | Runner | Backends |
 | --- | --- |
-| `benchmark_run` | `numpy` |
-| `dataset_capture` | `numpy` |
+| `benchmark_run` | `numpy`, `onnxruntime` |
+| `dataset_capture` | `numpy`, `onnxruntime` |
 | `differentiable_export` | `torch`, `sionna` |
 
 **Equivalence:**
@@ -6984,6 +7079,15 @@ Surrogate-gradient metadata describes this adapter only when retained as downstr
     "status": "implemented"
   },
   {
+    "backend": "onnxruntime",
+    "implementation": "portable_trained_artifact_runtime",
+    "parameter_bindings": {
+      "mode": "learned_artifact"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
     "backend": "numpy",
     "implementation": "maximum_ratio_transmission",
     "parameter_bindings": {
@@ -6997,6 +7101,15 @@ Surrogate-gradient metadata describes this adapter only when retained as downstr
     "implementation": "codebook_sweep_reference",
     "parameter_bindings": {
       "mode": "codebook_sweep_reference"
+    },
+    "runner": "dataset_capture",
+    "status": "implemented"
+  },
+  {
+    "backend": "onnxruntime",
+    "implementation": "portable_trained_artifact_runtime",
+    "parameter_bindings": {
+      "mode": "learned_artifact"
     },
     "runner": "dataset_capture",
     "status": "implemented"
@@ -14220,22 +14333,67 @@ None.
 
 | Name | Type | Required | Default / values | Description |
 | --- | --- | --- | --- | --- |
-| `mode` | `string` | no | default `regularized_trilateration`<br>values `trilateration`, `regularized_trilateration` | Runnable localization method used until a trained localization artifact is bound to this research slot. |
+| `artifact_entrypoint` | `string` | no | default `localization_estimator` |  |
+| `artifact_manifest_path` | `string` | no | default `` | Registered schema-v2 trained artifact implementing the range-localization ABI. |
+| `artifact_package_sha256` | `string` | no | default `` |  |
+| `mode` | `string` | no | default `regularized_trilateration`<br>values `trilateration`, `regularized_trilateration`, `learned_artifact` | Select a fixed trilateration method or a returned portable localizer. |
 
 **Differentiability (legacy `trainable_params`):** framework=`torch`, gradient=`surrogate`, trainable_params=`True`, exportable=`True`
 
-Surrogate-gradient metadata describes this adapter only when retained as downstream support. Portable replacement is not available until a trained-artifact ABI and runtime binding are implemented.
+The adapter accepts a portable learned range localizer while linear and centroid-regularized trilateration remain fixed baselines.
 
-**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`False`
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`True`
 
-**Portable trained-artifact ABI:** None.
+**Portable trained-artifact ABI:**
+
+```json
+{
+  "binding_params": {
+    "artifact_entrypoint": "localization_estimator",
+    "artifact_manifest_path": "trained_artifact.yaml",
+    "mode": "learned_artifact"
+  },
+  "component_id": "localizer",
+  "component_role": "two_dimensional_range_localizer",
+  "entrypoint_id": "localization_estimator",
+  "inputs": {
+    "anchors": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "anchor",
+        2
+      ]
+    },
+    "ranges": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "anchor"
+      ]
+    }
+  },
+  "outputs": {
+    "positions": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        2
+      ]
+    }
+  },
+  "required_operation_inputs": [
+    "problem"
+  ]
+}
+```
 
 **Backends:**
 
 | Runner | Backends |
 | --- | --- |
-| `benchmark_run` | `numpy` |
-| `dataset_capture` | `numpy` |
+| `benchmark_run` | `numpy`, `onnxruntime` |
+| `dataset_capture` | `numpy`, `onnxruntime` |
 | `differentiable_export` | `torch`, `sionna` |
 
 **Equivalence:**
@@ -14279,6 +14437,15 @@ Surrogate-gradient metadata describes this adapter only when retained as downstr
     "status": "implemented"
   },
   {
+    "backend": "onnxruntime",
+    "implementation": "portable_trained_artifact_runtime",
+    "parameter_bindings": {
+      "mode": "learned_artifact"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
     "backend": "numpy",
     "implementation": "linear_trilateration",
     "parameter_bindings": {
@@ -14292,6 +14459,15 @@ Surrogate-gradient metadata describes this adapter only when retained as downstr
     "implementation": "centroid_regularized_trilateration",
     "parameter_bindings": {
       "mode": "regularized_trilateration"
+    },
+    "runner": "dataset_capture",
+    "status": "implemented"
+  },
+  {
+    "backend": "onnxruntime",
+    "implementation": "portable_trained_artifact_runtime",
+    "parameter_bindings": {
+      "mode": "learned_artifact"
     },
     "runner": "dataset_capture",
     "status": "implemented"

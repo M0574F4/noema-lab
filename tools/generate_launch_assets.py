@@ -262,7 +262,7 @@ def _figure_f1(evidence: Mapping[str, Any]) -> bytes:
         ("05", "Role", "Baseline · reference · candidate", GREEN),
     )
     body = [
-        _text(80, 82, "F1 · COMPARISON ANATOMY", size=19, weight=750, fill=GREEN, tracking=2.5),
+        _text(80, 82, "COMPARISON ANATOMY", size=19, weight=750, fill=GREEN, tracking=2.5),
         _text(80, 155, "A percentage is the end of the contract—not the start.", size=46, weight=740),
         _text(80, 205, "A defensible claim survives only while every comparison boundary remains aligned.", size=24, fill=MUTED),
     ]
@@ -302,7 +302,7 @@ def _figure_f2(evidence: Mapping[str, Any]) -> bytes:
         ("05", "Projection", "launch_evidence.json"),
     )
     body = [
-        _text(80, 82, "F2 · CONTRACT → EVIDENCE", size=19, weight=750, fill=GREEN, tracking=2.5),
+        _text(80, 82, "CONTRACT → EVIDENCE", size=19, weight=750, fill=GREEN, tracking=2.5),
         _text(80, 155, "One chain from declared question to retained result.", size=48, weight=740),
         _text(80, 205, "Noema keeps the declared comparison settings attached while the experiment moves across tools.", size=24, fill=MUTED),
     ]
@@ -348,7 +348,7 @@ def _figure_f3(evidence: Mapping[str, Any]) -> bytes:
         return left + (snr - snrs[0]) / (snrs[-1] - snrs[0]) * (right - left)
 
     body = [
-        _text(70, 66, "F3 · CANONICAL EXPERIMENT FIGURE", size=18, weight=750, fill=GREEN, tracking=2.2),
+        _text(70, 66, "CANONICAL EXPERIMENT FIGURE", size=18, weight=750, fill=GREEN, tracking=2.2),
         _text(70, 124, "Learned receiver tracks the calibrated diagnostic reference", size=42, weight=740),
     ]
     ticks = (0.3, 0.1, 0.03, 0.01, 0.003, 0.001)
@@ -459,7 +459,7 @@ def _figure_f4(evidence: Mapping[str, Any]) -> bytes:
         (1130, 610, "Hidden information", "Diagnostic oracle presented as a peer", GREEN),
     )
     body = [
-        _text(80, 82, "F4 · BREAK THE COMPARISON", size=19, weight=750, fill=GREEN, tracking=2.5),
+        _text(80, 82, "BREAK THE COMPARISON", size=19, weight=750, fill=GREEN, tracking=2.5),
         _text(80, 155, "The arithmetic can be exact while the comparison is wrong.", size=48, weight=740),
         _rect(585, 310, 430, 270, fill="#241417", stroke=RED, radius=32, stroke_width=3),
         _text(800, 372, "CLAIM", size=18, weight=750, fill=RED, anchor="middle", tracking=2),
@@ -496,7 +496,7 @@ def _figure_f5(evidence: Mapping[str, Any]) -> bytes:
         (1160, 710, "Launch video", "Recorded external walkthrough"),
     )
     body = [
-        _text(80, 82, "F5 · ONE SOURCE, MANY SURFACES", size=19, weight=750, fill=GREEN, tracking=2.5),
+        _text(80, 82, "ONE SOURCE, MANY SURFACES", size=19, weight=750, fill=GREEN, tracking=2.5),
         _text(80, 155, "Every launch number has one place to change.", size=48, weight=740),
         _rect(565, 315, 470, 300, fill="#102a23", stroke=GREEN, radius=36, stroke_width=3),
         _text(800, 380, "CANONICAL GENERATED SOURCE", size=17, weight=750, fill=GREEN, anchor="middle", tracking=1.8),

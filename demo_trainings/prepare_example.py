@@ -58,6 +58,8 @@ from noema_lab.training.standalone_input import (
 
 
 DEMO_LOSSES = {
+    "aoa-estimation": "angle.mse",
+    "beam-selection": "beam.codebook_cross_entropy",
     "csi-feedback": CSI_FEEDBACK_EXAMPLE_LOSS,
     "delayed-csi-resource-allocation": DELAYED_CSI_RESOURCE_ALLOCATION_LOSS,
     "deepjscc-image": "image.mse",
@@ -65,6 +67,7 @@ DEMO_LOSSES = {
     "mimo-ofdm-channel-estimation": CHANNEL_ESTIMATION_LOSS,
     "neural-receiver": "bit.bce",
     "phase-tracking-receiver": "bit.bce",
+    "range-localization": "position.mse",
     "resource-allocation": RESOURCE_ALLOCATION_LOSS,
 }
 
@@ -983,6 +986,10 @@ def _require_demo_signals(bundle_result: Mapping[str, Any], plan: Any, demo: str
         ]
     elif demo in {"neural-receiver", "modulation-recognition"}:
         expected = [str(plan.feature_reference), str(plan.target_reference)]
+    elif demo in {"range-localization", "aoa-estimation"}:
+        expected = [str(plan.feature_reference), str(plan.target_reference)]
+    elif demo == "beam-selection":
+        expected = [str(plan.feature_reference)]
     if not expected:
         return
     signals = list((bundle_result.get("data_contract") or {}).get("signals") or [])

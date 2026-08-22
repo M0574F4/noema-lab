@@ -23,9 +23,25 @@ class PublicRepositoryTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("https://www.youtube.com/watch?v=bKNXS_vHLHc", readme)
         self.assertIn(
-            "https://img.youtube.com/vi/bKNXS_vHLHc/maxresdefault.jpg",
+            "docs/_static/noema-workflow-video-card.svg",
             readme,
         )
+        self.assertIn("launch_video.html", readme)
+        self.assertLess(
+            readme.index("## Watch the complete workflow"),
+            readme.index("## Start here"),
+        )
+        self.assertIn(
+            "| **choose a system to train** | **the [ready-to-train matrix]",
+            readme,
+        )
+        for removed_heading in (
+            "## See why the contract matters",
+            "## Suites and maturity",
+            "## Documentation map",
+            "## Release status",
+        ):
+            self.assertNotIn(removed_heading, readme)
         self.assertIn("docs/_static/noema-logo-dark.svg", readme)
         self.assertNotIn("docs/_static/noema-training-loop.svg", readme)
         self.assertLess(
@@ -65,8 +81,8 @@ class PublicRepositoryTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
         self.assertIn("## Ready-to-train systems", readme)
-        self.assertEqual(readme.count("✅ [Train + compare]"), 9)
-        self.assertEqual(readme.count("🟡 [Benchmark now]"), 3)
+        self.assertEqual(readme.count("✅ [Train + compare]"), 12)
+        self.assertNotIn("🟡 [Benchmark now]", readme)
         for relative in (
             "tutorials/learned_qpsk_demapper_demo.html",
             "tutorials/learned_qpsk_phase_tracking_demo.html",
@@ -77,19 +93,14 @@ class PublicRepositoryTests(unittest.TestCase):
             "tutorials/reliability_aware_ofdm_allocation_demo.html",
             "tutorials/digital_vs_deepjscc_sionna.html",
             "tutorials/deepjscc_slow_rayleigh.html",
-            "suites/localization_sensing.html",
-            "suites/beamforming_precoding.html",
+            "tutorials/learned_range_localization_demo.html",
+            "tutorials/learned_aoa_estimation_demo.html",
+            "tutorials/learned_beam_selection_demo.html",
         ):
             self.assertIn(
                 f"https://M0574F4.github.io/noema-lab/{relative}",
                 readme,
             )
-
-        self.assertIn(
-            "The yellow rows are runnable protocol and baseline packs, "
-            "not promises of a trained model.",
-            readme,
-        )
 
     def test_package_manifest_contains_public_demo_builders(self) -> None:
         manifest = (ROOT / "MANIFEST.in").read_text(encoding="utf-8")

@@ -6,7 +6,8 @@
   <a href="https://github.com/M0574F4/noema-lab/actions"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/M0574F4/noema-lab/ci.yml?branch=main&label=ci"></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/M0574F4/noema-lab"></a>
   <a href="CITATION.cff"><img alt="Cite" src="https://img.shields.io/badge/cite-CITATION.cff-53b889"></a>
-  <a href="https://M0574F4.github.io/noema-lab/"><img alt="Docs" src="https://img.shields.io/badge/docs-GitHub%20Pages-4eb7c4"></a>
+  <a href="https://M0574F4.github.io/noema-lab/"><img alt="Documentation" src="https://img.shields.io/badge/docs-GitHub%20Pages-4eb7c4?logo=githubpages&logoColor=white"></a>
+  <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc"><img alt="YouTube video" src="https://img.shields.io/badge/video-YouTube-FF0000?logo=youtube&logoColor=white"></a>
   <img alt="Pre-release" src="https://img.shields.io/badge/status-pre--release-e2a646">
 </p>
 
@@ -35,13 +36,30 @@ not prove scientific fairness, standards conformance, authenticity, or independe
   · <a href="https://M0574F4.github.io/noema-lab/launch_assets.html">Inspect launch evidence</a>
 </p>
 
+## Watch the complete workflow
+
+<p align="center">
+  <a href="https://M0574F4.github.io/noema-lab/launch_video.html">
+    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-workflow-video-card.svg" alt="Play the complete Noema workflow: export a contract, train a model, and compare it with baselines" width="88%" />
+  </a>
+</p>
+
+<p align="center">
+  <strong><a href="https://M0574F4.github.io/noema-lab/launch_video.html">▶ Watch in the embedded documentation player</a></strong>
+  · <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">Open on YouTube</a>
+</p>
+
+The recorded walkthrough starts from a clean environment and shows contract export, dataset
+capture, external model training, returned-model validation, and the UI comparison against the
+uncompensated and calibrated-oracle baselines.
+
 ## Start here
 
 | I want to… | Start with… |
 | --- | --- |
 | understand the central idea | the interactive [Break the comparison](https://M0574F4.github.io/noema-lab/break_the_comparison.html) evidence lab |
-| watch an external model train, then compare it with Noema | the [learned QPSK I/Q calibration walkthrough](https://www.youtube.com/watch?v=bKNXS_vHLHc) |
-| choose a system to train | the [ready-to-train matrix](#ready-to-train-systems) below |
+| watch an external model train, then compare it with Noema | the [learned QPSK I/Q calibration walkthrough](https://M0574F4.github.io/noema-lab/launch_video.html) |
+| **choose a system to train** | **the [ready-to-train matrix](#ready-to-train-systems) below** |
 | run a dependency-light example | the source-checkout quickstart below |
 | bring my own model | the [external adapter SDK](https://M0574F4.github.io/noema-lab/external_adapter_sdk.html) |
 | export a training contract | the [architecture-neutral export workflow](https://M0574F4.github.io/noema-lab/tutorials/export_differentiable_training_scenario.html) |
@@ -49,22 +67,6 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 | inspect retained evidence | [result verification](https://M0574F4.github.io/noema-lab/result_verification.html) |
 | build a paper figure | the [physical-layer demo workflow](https://M0574F4.github.io/noema-lab/tutorials/physical_layer_demo_workflow.html) |
 | browse implementation contracts | the generated [reference](https://M0574F4.github.io/noema-lab/reference/index.html) |
-
-## Watch the complete workflow
-
-<p align="center">
-  <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">
-    <img src="https://img.youtube.com/vi/bKNXS_vHLHc/maxresdefault.jpg" alt="Play the complete Noema workflow: export a contract, train a model, and compare it with baselines" width="88%" />
-  </a>
-</p>
-
-<p align="center">
-  <strong><a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">▶ Play the complete workflow (YouTube)</a></strong>
-</p>
-
-The recorded walkthrough starts from a clean environment and shows contract export, dataset
-capture, external model training, returned-model validation, and the UI comparison against the
-uncompensated and calibrated-oracle baselines.
 
 ## Ready-to-train systems
 
@@ -84,12 +86,9 @@ and experiment protocol fixed.
 | Delayed-CSI OFDM allocation | reliability-aware causal allocator | equal power; delayed-CSI and uncertainty-aware water filling | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/reliability_aware_ofdm_allocation_demo.html) |
 | Image delivery over AWGN | DeepJSCC image encoder/decoder | capacity-matched JPEG | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/digital_vs_deepjscc_sionna.html) |
 | Image delivery over slow fading | blind, nested-rate DeepJSCC pair | outage-aware capacity-matched JPEG | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/deepjscc_slow_rayleigh.html) |
-| 2D range localization | learned localizer | trilateration; typed adapter reference | 🟡 [Benchmark now](https://M0574F4.github.io/noema-lab/suites/localization_sensing.html) · train/replace adapter not yet available |
-| Narrowband AoA estimation | learned array estimator | MUSIC; Bartlett reference | 🟡 [Benchmark now](https://M0574F4.github.io/noema-lab/suites/localization_sensing.html) · train/replace adapter not yet available |
-| MISO beam selection | learned beam-selection policy | perfect-CSIT MRT; exhaustive DFT codebook | 🟡 [Benchmark now](https://M0574F4.github.io/noema-lab/suites/beamforming_precoding.html) · train/replace adapter not yet available |
-
-The yellow rows are runnable protocol and baseline packs, not promises of a trained model. Their
-typed benchmark boundaries exist; portable trained-artifact interfaces are the remaining step.
+| [2D range localization](https://M0574F4.github.io/noema-lab/suites/localization_sensing.html) | geometry-aware residual localizer | linear and regularized trilateration | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_range_localization_demo.html) |
+| Narrowband AoA estimation | covariance-domain array estimator | MUSIC; Bartlett | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_aoa_estimation_demo.html) |
+| MISO beam selection | finite-codebook beam policy | perfect-CSIT MRT; exhaustive DFT-codebook oracle | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_beam_selection_demo.html) |
 
 ## Quickstart
 
@@ -113,27 +112,6 @@ Sionna-backed paths are optional. Install the current no-ray-tracing Sionna 2/Py
 `uv sync --extra wireless`; install the CompressAI examples with `uv sync --extra compressai`.
 The [tutorials](https://M0574F4.github.io/noema-lab/tutorials.html) identify which workflows need
 large downloads, external datasets, or additional rights review.
-
-## See why the contract matters
-
-<p align="center">
-  <a href="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f3-receiver-ber-vs-snr.svg">
-    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f3-receiver-ber-vs-snr.svg" alt="Canonical launch plot of pre-decoder BER versus SNR with bounded experimental disclosure" width="100%" />
-  </a>
-</p>
-
-This is one completed experimental demonstration. The learned band is the observed minimum and
-maximum over three paired held-out seeds—not a confidence interval—and the calibrated oracle is a
-diagnostic reference with additional calibration knowledge. The result is not presented as a
-publication-ready canonical benchmark.
-
-The contract records the SNR cells, paired seeds, aggregation, metric and denominator, and the
-roles of all three methods. Changing any of those would invalidate the displayed comparison even
-if the arithmetic still looked correct.
-
-Every displayed number and warning in the README, documentation, figures, tables, and demo comes from
-[`launch_evidence.json`](launch_evidence.json). The generated [F0–F5 figures and T0–T2
-tables](https://M0574F4.github.io/noema-lab/launch_assets.html) are projections of that source.
 
 ## How Noema works
 
@@ -194,39 +172,6 @@ reviewers still assess whether the scientific comparison itself is appropriate.
 Noema does not replace those projects. It is an experiment-contract runner, resource-accounting
 layer, capture/export bridge, and local evidence verifier. It is not a full model trainer,
 standards-conformance validator, private leaderboard, or guarantee of fairness or reproducibility.
-
-## Suites and maturity
-
-| Status | Suite | Examples |
-| --- | --- | --- |
-| Active development | Semantic Communication | image reconstruction, text, VQA, retrieval, generative receiver |
-| Experimental | Neural Receiver / AI-PHY | learned QPSK demapping, carrier tracking, modulation recognition |
-| Experimental | Channel Estimation and MIMO-OFDM | pilot estimation, CSI feedback, learned channel estimators |
-| Experimental | Resource Allocation | equal-power baselines, delayed-CSI learned allocation |
-| Experimental | Beamforming, Localization, and Sensing | codebooks, learned policies, range and AoA tasks |
-
-The documentation labels smoke, experimental, completed evidence, and release-candidate surfaces
-separately. A configured platform or workflow becomes supported only after its exact release archive
-passes the frozen release checks.
-
-## Documentation map
-
-| Section | Use it for |
-| --- | --- |
-| [Overview](https://M0574F4.github.io/noema-lab/) | product thesis, routes, workflow, and evidence boundary |
-| [Tutorials](https://M0574F4.github.io/noema-lab/tutorials.html) | source checkout, training export, returned models, and publication workflows |
-| [Demonstrations](https://M0574F4.github.io/noema-lab/demos.html) | physical-layer and end-to-end examples |
-| [Core architecture](https://M0574F4.github.io/noema-lab/architecture.html) | typed operations, execution, accounting, and artifacts |
-| [Result verification](https://M0574F4.github.io/noema-lab/result_verification.html) | manifests, identities, profiles, and verifier limits |
-| [Evidence and submissions](https://M0574F4.github.io/noema-lab/publication_artifact_readiness.html) | artifact readiness, result submissions, and launch evidence |
-| [Reference](https://M0574F4.github.io/noema-lab/reference/index.html) | generated CLI, operations, API, and schemas |
-
-## Release status
-
-Noema is pre-release software. Source builds currently report `0.2.0.dev0`; the first stable release
-will use a separately qualified version and tag. The repository contains the public software,
-documentation, runnable demonstrations, and curated demonstration evidence—not the private paper,
-research notes, raw experiment workspace, or model checkpoints.
 
 ## Cite and contribute
 

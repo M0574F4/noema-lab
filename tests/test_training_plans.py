@@ -50,6 +50,18 @@ class TrainingPlanTests(unittest.TestCase):
                 "recipes/deepjscc_kodak_awgn_train.yaml",
                 "demo_trainings/deepjscc_image_reconstruction/training_plan.yaml",
             ),
+            (
+                "recipes/localization_adapter_baseline.yaml",
+                "demo_trainings/localization_supervised_mlp/training_plan.yaml",
+            ),
+            (
+                "recipes/aoa_adapter_ula_baseline.yaml",
+                "demo_trainings/aoa_estimation_covariance_mlp/training_plan.yaml",
+            ),
+            (
+                "recipes/beamforming_adapter_baseline.yaml",
+                "demo_trainings/beam_selection_supervised_mlp/training_plan.yaml",
+            ),
         )
         for recipe_name, plan_name in cases:
             with self.subTest(recipe=recipe_name):

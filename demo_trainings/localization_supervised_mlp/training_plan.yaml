@@ -1,0 +1,20 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps:
+  - localizer
+dataset_capture:
+  taps:
+    - id: range_features
+      from: range_observation.observation
+    - id: positions
+      from: range_observation.truth
+  sweep:
+    range_observation.snr_db: [0, 5, 10, 15, 20]
+  split_plan:
+    total_samples: 3072
+    percentages:
+      train: 66.6666666667
+      validation: 16.66666666665
+      test: 16.66666666665
+objective: position.mse
+framework: torch

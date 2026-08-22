@@ -33,6 +33,9 @@ bundle path, trainer details, fair benchmark methods, result views, and publicat
 - [Learned QPSK receiver calibration](tutorials/learned_qpsk_demapper_demo.md)
 - [Learned QPSK carrier tracking](tutorials/learned_qpsk_phase_tracking_demo.md)
 - [Automatic modulation recognition](tutorials/automatic_modulation_recognition_demo.md)
+- [Learned two-dimensional range localization](tutorials/learned_range_localization_demo.md)
+- [Learned narrowband AoA estimation](tutorials/learned_aoa_estimation_demo.md)
+- [Learned MISO beam selection](tutorials/learned_beam_selection_demo.md)
 
 ## Run the Kodak Development Benchmark
 

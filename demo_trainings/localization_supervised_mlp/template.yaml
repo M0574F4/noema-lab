@@ -1,0 +1,31 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: localization.supervised_geometry_mlp
+name: Range localization · geometry-aware residual MLP
+status: reference_only
+operation: model.localization_adapter
+framework: torch
+data:
+  owner: noema_capture_contract
+  feature: anchor coordinates and noisy ranges
+  target: separately captured two-dimensional target positions
+model:
+  owner: external_researcher
+  reference_architecture: differentiable trilateration plus bounded learned residual
+loss:
+  owner: external_researcher
+  reference_objective: position mean squared error with validation-loss early stopping
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: single_binding
+  entrypoint: localization_estimator
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison:
+    - trilateration
+    - regularized_trilateration
+    - learned_localizer
+  sweep: channel.snr_db
+  pairing: common held-out geometries and range-noise seeds across methods

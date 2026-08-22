@@ -40,14 +40,20 @@ estimator, and angular-error stages independently of whether MUSIC or an adapter
 
 ## Adapter Point
 
-`model.localization_adapter` defines the intended learned-localizer shape:
-`ai_phy.localization_problem.numpy` in and `ai_phy.localization_estimate.numpy` out. It does not yet
-declare a trained-artifact ABI, so the current template is capture/reference ready but not selectable
-under **Train/replace**.
+Both replacement points now implement the full capture, training, artifact-return, and paired-
+benchmark loop:
 
-The AoA reference endpoint consumes `ai_phy.aoa_problem.numpy` and returns
-`ai_phy.aoa_estimate.numpy`, matching `model.aoa_estimator_adapter`. It currently provides
-Bartlett/MUSIC reference behavior rather than a portable trained-artifact ABI.
+- `model.localization_adapter` passes `[batch, anchor, 2]` anchor coordinates and
+  `[batch, anchor]` noisy ranges to a returned `localization_estimator` ONNX entrypoint. The
+  checked-in trainer uses true positions only as offline supervision and compares the result with
+  linear and regularized trilateration. See [Learned range localization](../tutorials/learned_range_localization_demo.md).
+- `model.aoa_estimator_adapter` passes complex snapshots as
+  `[batch, antenna, snapshot, 2]` real/imaginary tensors to a returned `aoa_estimator` ONNX
+  entrypoint. The checked-in covariance-domain trainer compares the returned model with Bartlett
+  and MUSIC. See [Learned AoA estimation](../tutorials/learned_aoa_estimation_demo.md).
+
+Each artifact is hash-pinned, validated against the operation-owned ABI, and evaluated on a sealed
+test capture before its post-training benchmark is built.
 
 ## Metrics and Plots
 

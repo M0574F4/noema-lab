@@ -1,0 +1,20 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps:
+  - estimator
+dataset_capture:
+  taps:
+    - id: snapshots
+      from: array_observation.observation
+    - id: angles_deg
+      from: array_observation.truth
+  sweep:
+    array_observation.snr_db: [0, 5, 10, 15, 20]
+  split_plan:
+    total_samples: 4096
+    percentages:
+      train: 66.6666666667
+      validation: 16.66666666665
+      test: 16.66666666665
+objective: angle.mse
+framework: torch

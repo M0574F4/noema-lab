@@ -72,6 +72,12 @@ from noema_lab.training.neural_receiver_export import (
 from noema_lab.training.phase_tracking_receiver_export import (
     write_phase_tracking_receiver_starter,
 )
+from noema_lab.training.portable_ai_phy_adapter_export import (
+    SPECS as PORTABLE_AI_PHY_ADAPTER_SPECS,
+    PortableAiPhyAdapterExportError,
+    build_portable_ai_phy_adapter_plan,
+    write_portable_ai_phy_adapter_starter,
+)
 from noema_lab.training.modulation_recognition_export import (
     MODULATION_CLASSIFICATION_LOSS,
     MODULATION_CLASSIFIER_OP,
@@ -190,6 +196,47 @@ class DatasetCaptureOnlyExporter(DifferentiableExporter):
     def write_export(self, plan, out_dir: Path, *, force: bool = False) -> JsonDict:
         raise DifferentiableExportError("dataset-capture exporter is represented by `noema dataset-capture run`; no training harness is generated yet.")
 
+
+class PortableAiPhyAdapterExporter(DifferentiableExporter):
+    """Checked-in PyTorch/ONNX starter for the sensing and beam-policy adapters."""
+
+    def __init__(self, exporter_id: str) -> None:
+        spec = PORTABLE_AI_PHY_ADAPTER_SPECS[str(exporter_id)]
+        self.id = spec.exporter_id
+        self.name = spec.name
+        self._spec = spec
+
+    def supports(self, recipe: Recipe, registry: OperationRegistry) -> bool:
+        return sum(step.op == self._spec.operation_id for step in recipe.steps) == 1
+
+    def build_plan(
+        self,
+        recipe: Recipe,
+        registry: OperationRegistry,
+        options: ExportOptions,
+    ):
+        try:
+            plan = build_portable_ai_phy_adapter_plan(
+                recipe,
+                registry,
+                exporter_id=self.id,
+                optimizable_steps=options.optimizable_steps,
+                loss=options.loss,
+                framework=options.framework,
+            )
+        except PortableAiPhyAdapterExportError as exc:
+            raise DifferentiableExportError(str(exc)) from exc
+        return replace(plan, project_root=options.project_root)
+
+    def write_export(self, plan, out_dir: Path, *, force: bool = False) -> JsonDict:
+        try:
+            return write_portable_ai_phy_adapter_starter(
+                plan,
+                out_dir,
+                force=force,
+            )
+        except PortableAiPhyAdapterExportError as exc:
+            raise DifferentiableExportError(str(exc)) from exc
 
 class TextSemanticJSCCExporter(DifferentiableExporter):
     id = "text-semantic-jscc"
@@ -629,6 +676,9 @@ class ResourceAllocationExporter(DifferentiableExporter):
 
 def available_exporters() -> List[DifferentiableExporter]:
     return [
+        PortableAiPhyAdapterExporter("range-localization"),
+        PortableAiPhyAdapterExporter("aoa-estimation"),
+        PortableAiPhyAdapterExporter("beam-selection"),
         CsiFeedbackExporter(),
         MimoOfdmChannelEstimationExporter(),
         DeepJSCCImageExporter(),
