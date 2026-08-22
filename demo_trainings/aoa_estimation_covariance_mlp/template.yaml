@@ -1,0 +1,31 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: aoa_estimation.covariance_mlp
+name: ULA AoA estimation · covariance-domain MLP
+status: reference_only
+operation: model.aoa_estimator_adapter
+framework: torch
+data:
+  owner: noema_capture_contract
+  feature: noisy complex narrowband ULA snapshots
+  target: separately captured source angle in degrees
+model:
+  owner: external_researcher
+  reference_architecture: normalized complex sample covariance plus bounded MLP regressor
+loss:
+  owner: external_researcher
+  reference_objective: angle mean squared error with validation-loss early stopping
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: single_binding
+  entrypoint: aoa_estimator
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison:
+    - bartlett
+    - music
+    - learned_estimator
+  sweep: channel.snr_db
+  pairing: common held-out source angles, snapshots, and AWGN seeds across methods

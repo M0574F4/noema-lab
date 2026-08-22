@@ -8,7 +8,7 @@
   },
   "generator": {
     "path": "tools/generate_launch_assets.py",
-    "sha256": "0840b8c288a55fb5f7ce2005e6a3098befc0812c9eca2c4b94a7a7884108aae3"
+    "sha256": "66415e50fd4b53615bb6ddd02d9908f941f530769c4cd7f5d6c5348c3b4470f6"
   },
   "schema": {
     "path": "schemas/launch_asset_manifest.schema.json",
@@ -26,36 +26,36 @@
       "id": "F1",
       "title": "The anatomy of a defensible comparison",
       "path": "docs/_static/launch/f1-comparison-anatomy.svg",
-      "sha256": "3e1f1b6b1f350af0b43d0f8ed51c597d6ef1c79fa3c4ad0b1798abd1da296ea0",
-      "size_bytes": 6829
+      "sha256": "64aaa647fbe848675fce7ce94ad13db714f4f251b5ffaa6df80b67ad461a3476",
+      "size_bytes": 6823
     },
     {
       "id": "F2",
       "title": "From experiment contract to retained evidence",
       "path": "docs/_static/launch/f2-contract-to-evidence.svg",
-      "sha256": "52d086c4ea1e59bf5da5bbd2608265948b6c777226d3d4df93398cae0b179eda",
-      "size_bytes": 6485
+      "sha256": "fb88b5f6179ecbf48d43246de8a5a052bc9fc005e892a1e3c8a506ac32981379",
+      "size_bytes": 6479
     },
     {
       "id": "F3",
       "title": "Receiver BER versus SNR",
       "path": "docs/_static/launch/f3-receiver-ber-vs-snr.svg",
-      "sha256": "9800c6daf24f259b61ff8ccd511dfa3162a1c65a12deb5dcdd50c688f84ba319",
-      "size_bytes": 10190
+      "sha256": "5ce961fb369aabcfbe5815c51f314ef46d498d59fc65b28976b753f0b268bd8b",
+      "size_bytes": 10184
     },
     {
       "id": "F4",
       "title": "Four ways to break the comparison",
       "path": "docs/_static/launch/f4-break-the-comparison.svg",
-      "sha256": "2c77872e412e627e6bcb8ee826050bead0ae5a0a288d227c930ec05d9a4f8b20",
-      "size_bytes": 5675
+      "sha256": "e9cef6b54ce0436d817b7f932c159ded65176aa142dc3dd2c074fe8658475966",
+      "size_bytes": 5669
     },
     {
       "id": "F5",
       "title": "One evidence source, many public outputs",
       "path": "docs/_static/launch/f5-one-source-many-surfaces.svg",
-      "sha256": "ceb76cd06af5a3f3e26cbcd2fb2cf78ff9167d2a8562de8b93c695cf3399a2b0",
-      "size_bytes": 6718
+      "sha256": "fb866e735fc60c612a6f92d58a54ec83d742f9f478360d30481d7dc6fc027f2b",
+      "size_bytes": 6712
     }
   ],
   "tables": [

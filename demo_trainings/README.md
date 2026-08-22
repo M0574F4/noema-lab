@@ -29,6 +29,16 @@ Available projects:
   frequency-offset, and AWGN impairments with captured labels used only for supervision.
 - `mimo_ofdm_channel_estimation_cnn`: supervised residual frequency-domain refinement of
   operation-owned LS estimates for a portable 2×2 MIMO-OFDM channel-estimator artifact.
+- `localization_supervised_mlp`: geometry-aware residual range localization from captured anchors
+  and noisy ranges, with positions used only as offline supervision.
+- `aoa_estimation_covariance_mlp`: covariance-domain single-source ULA angle estimation from
+  complex snapshots, compared with Bartlett and MUSIC.
+- `beam_selection_supervised_mlp`: finite-DFT-codebook beam classification from captured MISO
+  channels, with exhaustive-search labels derived inside the trainer.
+
+The last three projects share the small capture, train, evaluate, and post-training benchmark
+harness in `_portable_ai_phy_adapter_common`; each task still owns its model, ABI, objective, and
+comparison roles explicitly.
 
 These are demonstration implementations, not template types or product-level training choices.
 Researchers may ignore them and use any model, loss, optimizer, and trainer that satisfy the same

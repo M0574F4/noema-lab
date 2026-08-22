@@ -21,8 +21,13 @@ policy.
 ## Adapter Point
 
 `model.beamforming_adapter` consumes `ai_phy.beamforming_problem.numpy` and emits
-`ai_phy.beamforming_decision.numpy`. It currently has no trained-artifact ABI, so it is not
-selectable under **Train/replace**; its present role is a runnable finite-codebook reference.
+`ai_phy.beamforming_decision.numpy`. Its portable `beam_policy` ABI passes the realized channel as
+`[batch, tx_antenna, 2]` real/imaginary values and requires a unit-norm beam with the same shape.
+
+The checked-in [learned beam-selection workflow](../tutorials/learned_beam_selection_demo.md)
+captures channel vectors, derives the exhaustive DFT-codebook choice inside the trainer, exports a
+hash-pinned ONNX policy, evaluates it on a sealed test split, and builds a paired comparison with
+the exhaustive codebook oracle and perfect-CSIT MRT upper bound.
 
 ## Metrics and Plots
 

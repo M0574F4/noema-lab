@@ -19,6 +19,47 @@ RESULT_PREVIEW_LIMIT = 16
 _SIONNA_RNG_LOCK = threading.RLock()
 
 
+def _run_portable_ai_phy_artifact(
+    ctx: OperationContext,
+    *,
+    default_entrypoint: str,
+    inputs: Mapping[str, np.ndarray],
+    label: str,
+) -> tuple[Mapping[str, np.ndarray], str]:
+    manifest_value = str(ctx.params.get("artifact_manifest_path") or "").strip()
+    entrypoint = str(
+        ctx.params.get("artifact_entrypoint") or default_entrypoint
+    ).strip()
+    if not manifest_value:
+        raise OperationError(
+            "%s requires params.artifact_manifest_path" % label
+        )
+    manifest_path = Path(manifest_value).expanduser()
+    if not manifest_path.is_file():
+        raise OperationError(
+            "%s trained-artifact manifest does not exist: %s"
+            % (label, manifest_path)
+        )
+    try:
+        from noema_lab.core.trained_artifact_runtime import (
+            run_trained_artifact_entrypoint,
+        )
+
+        outputs = run_trained_artifact_entrypoint(
+            manifest_path,
+            entrypoint,
+            dict(inputs),
+            expected_package_sha256=str(
+                ctx.params.get("artifact_package_sha256") or ""
+            ),
+        )
+    except Exception as exc:
+        raise OperationError(
+            "%s trained-artifact inference failed: %s" % (label, exc)
+        ) from exc
+    return outputs, file_sha256(manifest_path)
+
+
 def _wireless_backend_schema() -> JsonDict:
     return {
         "type": "string",
@@ -1108,7 +1149,7 @@ class BeamformingScenarioSourceOperation(Operation):
         rng = np.random.RandomState(seed)
         channels = _complex_normal(rng, (n, tx))
         codebook = _dft_codebook(tx).astype(np.complex64)
-        metadata = {"dataset": "synthetic_beamforming", "split": "fixed_seed", "example_count": n, "tx_antennas": tx, "snr_db": snr_db, "seed": int(seed)}
+        metadata = {"dataset": "synthetic_beamforming", "split": "fixed_seed", "example_count": n, "tx_antennas": tx, "snr_db": snr_db, "seed": int(seed), "array": "channels"}
         path = ctx.output_path("problem", ".npz")
         np.savez_compressed(path, channels=channels.astype(np.complex64), codebook=codebook, metadata_json=json.dumps(metadata, sort_keys=True))
         return OperationResult(outputs={"problem": artifact("ai_phy.beamforming_problem.numpy", path, metadata)}, metrics={"channel.snr_db": snr_db, "ai_phy.example_count": n}, metadata=metadata)
@@ -1134,13 +1175,38 @@ class BeamformingAdapterOperation(Operation):
     name = "Beamforming/precoding adapter"
     input_kinds = {"problem": ["ai_phy.beamforming_problem.numpy"]}
     output_kinds = {"decision": "ai_phy.beamforming_decision.numpy"}
-    differentiability = {"framework": "torch", "gradient": "surrogate", "trainable_params": True, "exportable": True, "reason": "Surrogate-gradient metadata describes this adapter only when retained as downstream support. Portable replacement is not available until a trained-artifact ABI and runtime binding are implemented."}
-    backends = {"benchmark_run": ["numpy"], "dataset_capture": ["numpy"], "differentiable_export": ["torch", "sionna"]}
+    differentiability = {"framework": "torch", "gradient": "surrogate", "trainable_params": True, "exportable": True, "reason": "The adapter accepts a portable learned beam policy while MRT and exhaustive DFT-codebook selection remain fixed comparison methods."}
+    backends = {"benchmark_run": ["numpy", "onnxruntime"], "dataset_capture": ["numpy", "onnxruntime"], "differentiable_export": ["torch", "sionna"]}
+    trained_artifact_abi = {
+        "component_id": "beam_policy",
+        "component_role": "single_user_miso_beam_policy",
+        "entrypoint_id": "beam_policy",
+        "required_operation_inputs": ["problem"],
+        "inputs": {
+            "channels_ri": {
+                "dtype": "float32",
+                "shape": ["batch", "tx_antenna", 2],
+            },
+        },
+        "outputs": {
+            "weights_ri": {
+                "dtype": "float32",
+                "shape": ["batch", "tx_antenna", 2],
+            },
+        },
+        "binding_params": {
+            "mode": "learned_artifact",
+            "artifact_manifest_path": "trained_artifact.yaml",
+            "artifact_entrypoint": "beam_policy",
+        },
+    }
     materializations = [
         {"runner": "benchmark_run", "backend": "numpy", "implementation": "maximum_ratio_transmission", "status": "implemented", "parameter_bindings": {"mode": "mrt"}},
         {"runner": "benchmark_run", "backend": "numpy", "implementation": "codebook_sweep_reference", "status": "implemented", "parameter_bindings": {"mode": "codebook_sweep_reference"}},
+        {"runner": "benchmark_run", "backend": "onnxruntime", "implementation": "portable_trained_artifact_runtime", "status": "implemented", "parameter_bindings": {"mode": "learned_artifact"}},
         {"runner": "dataset_capture", "backend": "numpy", "implementation": "maximum_ratio_transmission", "status": "implemented", "parameter_bindings": {"mode": "mrt"}},
         {"runner": "dataset_capture", "backend": "numpy", "implementation": "codebook_sweep_reference", "status": "implemented", "parameter_bindings": {"mode": "codebook_sweep_reference"}},
+        {"runner": "dataset_capture", "backend": "onnxruntime", "implementation": "portable_trained_artifact_runtime", "status": "implemented", "parameter_bindings": {"mode": "learned_artifact"}},
         {"runner": "differentiable_export", "backend": "torch", "implementation": "trainable_beam_policy_endpoint", "status": "implemented"},
         {"runner": "differentiable_export", "backend": "sionna", "implementation": "sionna_precoder_training_endpoint", "status": "planned"},
     ]
@@ -1149,10 +1215,24 @@ class BeamformingAdapterOperation(Operation):
             "mode": {
                 "type": "string",
                 "default": "codebook_sweep_reference",
-                "enum": ["mrt", "codebook_sweep_reference"],
+                "enum": ["mrt", "codebook_sweep_reference", "learned_artifact"],
                 "title": "Reference method",
-                "description": "Runnable beamforming method used until a trained beam-policy artifact is bound to this research slot.",
-            }
+                "description": "Select a fixed reference or a returned portable beam-policy artifact.",
+            },
+            "artifact_manifest_path": {
+                "type": "string",
+                "default": "",
+                "description": "Registered schema-v2 trained artifact implementing the beam-policy ABI.",
+                "x-noema-ui": {
+                    "control": "trained_artifact",
+                    "label": "Trained artifact",
+                    "accept": ".zip,.noema-artifact,.yaml,.yml,.json,application/octet-stream",
+                    "visible_when": {"mode": "learned_artifact"},
+                    "derived_params": ["mode", "artifact_manifest_path", "artifact_entrypoint", "artifact_package_sha256"],
+                },
+            },
+            "artifact_entrypoint": {"type": "string", "default": "beam_policy", "x-noema-ui": {"hidden": True}},
+            "artifact_package_sha256": {"type": "string", "default": "", "x-noema-ui": {"hidden": True}},
         }
     )
 
@@ -1169,6 +1249,48 @@ class BeamformingAdapterOperation(Operation):
             indices = np.argmax(gains, axis=1)
             weights = codebook[indices]
             label = "DFT-codebook sweep reference"
+        elif mode == "learned_artifact":
+            channels_ri = np.stack(
+                [channels.real, channels.imag], axis=-1
+            ).astype(np.float32)
+            outputs, checkpoint_sha = _run_portable_ai_phy_artifact(
+                ctx,
+                default_entrypoint="beam_policy",
+                inputs={"channels_ri": channels_ri},
+                label="learned_artifact beam policy",
+            )
+            if "weights_ri" not in outputs:
+                raise OperationError(
+                    "Beam-policy trained artifact did not return `weights_ri`"
+                )
+            weights_ri = np.asarray(outputs["weights_ri"], dtype=np.float32)
+            if tuple(weights_ri.shape) != tuple(channels_ri.shape):
+                raise OperationError(
+                    "Beam-policy artifact weights_ri must have shape %s, got %s"
+                    % (tuple(channels_ri.shape), tuple(weights_ri.shape))
+                )
+            if not np.all(np.isfinite(weights_ri)):
+                raise OperationError(
+                    "Beam-policy artifact returned non-finite values"
+                )
+            weights = (
+                weights_ri[..., 0] + 1j * weights_ri[..., 1]
+            ).astype(np.complex64)
+            norms = np.linalg.norm(weights, axis=1, keepdims=True)
+            if np.any(norms <= 1e-12):
+                raise OperationError(
+                    "Beam-policy artifact returned a zero-norm beam"
+                )
+            weights = (weights / norms).astype(np.complex64)
+            metadata = dict(metadata)
+            metadata.update(
+                {
+                    "checkpoint_sha256": checkpoint_sha,
+                    "artifact_manifest_sha256": checkpoint_sha,
+                    "data_plane_backend": "onnxruntime",
+                }
+            )
+            label = "Portable learned beam policy"
         else:
             raise OperationError("Unsupported beamforming adapter mode `%s`" % mode)
         return _write_beam_decision(ctx, weights, metadata, mode, label)
@@ -1402,25 +1524,53 @@ class RangeObservationOperation(Operation):
             metadata_json=json.dumps(metadata, sort_keys=True),
         )
         observation_path = ctx.output_path("observation", ".npz")
+        observation_features = np.concatenate(
+            [
+                np.broadcast_to(
+                    anchors[None, :, :],
+                    (int(positions.shape[0]), int(anchors.shape[0]), 2),
+                ),
+                ranges[:, :, None],
+            ],
+            axis=2,
+        ).astype(np.float32)
+        observation_metadata = dict(metadata)
+        observation_metadata.update(
+            {
+                "array": "features",
+                "capture_record_count": int(positions.shape[0]),
+                "capture_record_shape": [int(anchors.shape[0]), 3],
+                "feature_layout": ["anchor_x_m", "anchor_y_m", "range_m"],
+            }
+        )
         np.savez_compressed(
             observation_path,
+            features=observation_features,
             anchors=anchors,
             ranges=ranges,
             nlos_mask=nlos_mask.astype(np.uint8),
-            metadata_json=json.dumps(metadata, sort_keys=True),
+            metadata_json=json.dumps(observation_metadata, sort_keys=True),
         )
         truth_path = ctx.output_path("truth", ".npz")
+        truth_metadata = dict(metadata)
+        truth_metadata.update(
+            {
+                "array": "positions",
+                "capture_record_count": int(positions.shape[0]),
+                "capture_record_shape": [2],
+            }
+        )
         np.savez_compressed(
             truth_path,
             anchors=anchors,
             positions=positions,
-            metadata_json=json.dumps(metadata, sort_keys=True),
+            metadata_json=json.dumps(truth_metadata, sort_keys=True),
         )
         return OperationResult(
             outputs={
                 "problem": artifact("ai_phy.localization_problem.numpy", path, metadata),
-                "observation": artifact("ai_phy.localization_observation.numpy", observation_path, metadata),
-                "truth": artifact("ai_phy.localization_truth.numpy", truth_path, metadata),
+                "observation": artifact("ai_phy.localization_observation.numpy", observation_path, observation_metadata),
+                "truth": artifact("ai_phy.localization_truth.numpy", truth_path, truth_metadata),
             },
             metrics={
                 "channel.snr_db": snr_db,
@@ -1486,13 +1636,33 @@ class LocalizationAdapterOperation(Operation):
         "problem": ["ai_phy.localization_problem.numpy", "ai_phy.localization_observation.numpy"]
     }
     output_kinds = {"estimate": "ai_phy.localization_estimate.numpy"}
-    differentiability = {"framework": "torch", "gradient": "surrogate", "trainable_params": True, "exportable": True, "reason": "Surrogate-gradient metadata describes this adapter only when retained as downstream support. Portable replacement is not available until a trained-artifact ABI and runtime binding are implemented."}
-    backends = {"benchmark_run": ["numpy"], "dataset_capture": ["numpy"], "differentiable_export": ["torch", "sionna"]}
+    differentiability = {"framework": "torch", "gradient": "surrogate", "trainable_params": True, "exportable": True, "reason": "The adapter accepts a portable learned range localizer while linear and centroid-regularized trilateration remain fixed baselines."}
+    backends = {"benchmark_run": ["numpy", "onnxruntime"], "dataset_capture": ["numpy", "onnxruntime"], "differentiable_export": ["torch", "sionna"]}
+    trained_artifact_abi = {
+        "component_id": "localizer",
+        "component_role": "two_dimensional_range_localizer",
+        "entrypoint_id": "localization_estimator",
+        "required_operation_inputs": ["problem"],
+        "inputs": {
+            "anchors": {"dtype": "float32", "shape": ["batch", "anchor", 2]},
+            "ranges": {"dtype": "float32", "shape": ["batch", "anchor"]},
+        },
+        "outputs": {
+            "positions": {"dtype": "float32", "shape": ["batch", 2]},
+        },
+        "binding_params": {
+            "mode": "learned_artifact",
+            "artifact_manifest_path": "trained_artifact.yaml",
+            "artifact_entrypoint": "localization_estimator",
+        },
+    }
     materializations = [
         {"runner": "benchmark_run", "backend": "numpy", "implementation": "linear_trilateration", "status": "implemented", "parameter_bindings": {"mode": "trilateration"}},
         {"runner": "benchmark_run", "backend": "numpy", "implementation": "centroid_regularized_trilateration", "status": "implemented", "parameter_bindings": {"mode": "regularized_trilateration"}},
+        {"runner": "benchmark_run", "backend": "onnxruntime", "implementation": "portable_trained_artifact_runtime", "status": "implemented", "parameter_bindings": {"mode": "learned_artifact"}},
         {"runner": "dataset_capture", "backend": "numpy", "implementation": "linear_trilateration", "status": "implemented", "parameter_bindings": {"mode": "trilateration"}},
         {"runner": "dataset_capture", "backend": "numpy", "implementation": "centroid_regularized_trilateration", "status": "implemented", "parameter_bindings": {"mode": "regularized_trilateration"}},
+        {"runner": "dataset_capture", "backend": "onnxruntime", "implementation": "portable_trained_artifact_runtime", "status": "implemented", "parameter_bindings": {"mode": "learned_artifact"}},
         {"runner": "differentiable_export", "backend": "torch", "implementation": "trainable_localization_endpoint", "status": "implemented"},
         {"runner": "differentiable_export", "backend": "sionna", "implementation": "sionna_rt_localization_endpoint", "status": "planned"},
     ]
@@ -1501,10 +1671,24 @@ class LocalizationAdapterOperation(Operation):
             "mode": {
                 "type": "string",
                 "default": "regularized_trilateration",
-                "enum": ["trilateration", "regularized_trilateration"],
+                "enum": ["trilateration", "regularized_trilateration", "learned_artifact"],
                 "title": "Reference method",
-                "description": "Runnable localization method used until a trained localization artifact is bound to this research slot.",
-            }
+                "description": "Select a fixed trilateration method or a returned portable localizer.",
+            },
+            "artifact_manifest_path": {
+                "type": "string",
+                "default": "",
+                "description": "Registered schema-v2 trained artifact implementing the range-localization ABI.",
+                "x-noema-ui": {
+                    "control": "trained_artifact",
+                    "label": "Trained artifact",
+                    "accept": ".zip,.noema-artifact,.yaml,.yml,.json,application/octet-stream",
+                    "visible_when": {"mode": "learned_artifact"},
+                    "derived_params": ["mode", "artifact_manifest_path", "artifact_entrypoint", "artifact_package_sha256"],
+                },
+            },
+            "artifact_entrypoint": {"type": "string", "default": "localization_estimator", "x-noema-ui": {"hidden": True}},
+            "artifact_package_sha256": {"type": "string", "default": "", "x-noema-ui": {"hidden": True}},
         }
     )
 
@@ -1515,6 +1699,42 @@ class LocalizationAdapterOperation(Operation):
         if mode == "regularized_trilateration":
             centroid = np.mean(data["anchors"], axis=0, keepdims=True)
             positions = 0.95 * positions + 0.05 * centroid
+        elif mode == "learned_artifact":
+            ranges = np.asarray(data["ranges"], dtype=np.float32)
+            anchors = np.asarray(data["anchors"], dtype=np.float32)
+            batch_anchors = np.broadcast_to(
+                anchors[None, :, :],
+                (int(ranges.shape[0]), int(anchors.shape[0]), 2),
+            ).copy()
+            outputs, checkpoint_sha = _run_portable_ai_phy_artifact(
+                ctx,
+                default_entrypoint="localization_estimator",
+                inputs={"anchors": batch_anchors, "ranges": ranges},
+                label="learned_artifact range localizer",
+            )
+            if "positions" not in outputs:
+                raise OperationError(
+                    "Localization trained artifact did not return `positions`"
+                )
+            positions = np.asarray(outputs["positions"], dtype=np.float32)
+            expected_shape = (int(ranges.shape[0]), 2)
+            if tuple(positions.shape) != expected_shape:
+                raise OperationError(
+                    "Localization artifact positions must have shape %s, got %s"
+                    % (expected_shape, tuple(positions.shape))
+                )
+            if not np.all(np.isfinite(positions)):
+                raise OperationError(
+                    "Localization artifact returned non-finite values"
+                )
+            metadata = dict(metadata)
+            metadata.update(
+                {
+                    "checkpoint_sha256": checkpoint_sha,
+                    "artifact_manifest_sha256": checkpoint_sha,
+                    "data_plane_backend": "onnxruntime",
+                }
+            )
         elif mode != "trilateration":
             raise OperationError("Unsupported localization adapter mode `%s`" % mode)
         return _write_position_estimate(ctx, positions, metadata, mode, data)
@@ -1728,22 +1948,37 @@ class UlaArrayObservationOperation(Operation):
             metadata_json=json.dumps(metadata, sort_keys=True),
         )
         observation_path = ctx.output_path("observation", ".npz")
+        observation_metadata = dict(metadata)
+        observation_metadata.update(
+            {
+                "array": "snapshots",
+                "capture_record_count": int(angles_deg.size),
+                "capture_record_shape": [antenna_count, snapshot_count],
+            }
+        )
         np.savez_compressed(
             observation_path,
             snapshots=snapshots,
-            metadata_json=json.dumps(metadata, sort_keys=True),
+            metadata_json=json.dumps(observation_metadata, sort_keys=True),
         )
         truth_path = ctx.output_path("truth", ".npz")
+        truth_metadata = dict(metadata)
+        truth_metadata.update(
+            {
+                "array": "angles_deg",
+                "capture_record_axis": 0,
+            }
+        )
         np.savez_compressed(
             truth_path,
             angles_deg=angles_deg,
-            metadata_json=json.dumps(metadata, sort_keys=True),
+            metadata_json=json.dumps(truth_metadata, sort_keys=True),
         )
         return OperationResult(
             outputs={
                 "problem": artifact("ai_phy.aoa_problem.numpy", path, metadata),
-                "observation": artifact("ai_phy.aoa_observation.numpy", observation_path, metadata),
-                "truth": artifact("ai_phy.aoa_truth.numpy", truth_path, metadata),
+                "observation": artifact("ai_phy.aoa_observation.numpy", observation_path, observation_metadata),
+                "truth": artifact("ai_phy.aoa_truth.numpy", truth_path, truth_metadata),
             },
             metrics={"channel.snr_db": snr_db, "channel.noise_variance": noise_var, "aoa.snapshot_count": snapshot_count},
             metadata=metadata,
@@ -1801,14 +2036,36 @@ class AoaEstimatorAdapterOperation(Operation):
         "gradient": "surrogate",
         "trainable_params": True,
         "exportable": True,
-        "reason": "Surrogate-gradient metadata describes this adapter only when retained as downstream support. Portable replacement is not available until a trained-artifact ABI and runtime binding are implemented.",
+        "reason": "The adapter accepts a portable learned ULA estimator while MUSIC and Bartlett remain fixed comparison methods.",
     }
-    backends = {"benchmark_run": ["numpy"], "dataset_capture": ["numpy"], "differentiable_export": ["torch", "sionna"]}
+    backends = {"benchmark_run": ["numpy", "onnxruntime"], "dataset_capture": ["numpy", "onnxruntime"], "differentiable_export": ["torch", "sionna"]}
+    trained_artifact_abi = {
+        "component_id": "aoa_estimator",
+        "component_role": "single_source_ula_aoa_estimator",
+        "entrypoint_id": "aoa_estimator",
+        "required_operation_inputs": ["problem"],
+        "inputs": {
+            "snapshots_ri": {
+                "dtype": "float32",
+                "shape": ["batch", "antenna", "snapshot", 2],
+            },
+        },
+        "outputs": {
+            "angles_deg": {"dtype": "float32", "shape": ["batch"]},
+        },
+        "binding_params": {
+            "mode": "learned_artifact",
+            "artifact_manifest_path": "trained_artifact.yaml",
+            "artifact_entrypoint": "aoa_estimator",
+        },
+    }
     materializations = [
         {"runner": "benchmark_run", "backend": "numpy", "implementation": "music_spatial_spectrum_reference", "status": "implemented", "parameter_bindings": {"mode": "music"}},
         {"runner": "benchmark_run", "backend": "numpy", "implementation": "bartlett_spatial_spectrum_reference", "status": "implemented", "parameter_bindings": {"mode": "bartlett_reference"}},
+        {"runner": "benchmark_run", "backend": "onnxruntime", "implementation": "portable_trained_artifact_runtime", "status": "implemented", "parameter_bindings": {"mode": "learned_artifact"}},
         {"runner": "dataset_capture", "backend": "numpy", "implementation": "music_spatial_spectrum_reference", "status": "implemented", "parameter_bindings": {"mode": "music"}},
         {"runner": "dataset_capture", "backend": "numpy", "implementation": "bartlett_spatial_spectrum_reference", "status": "implemented", "parameter_bindings": {"mode": "bartlett_reference"}},
+        {"runner": "dataset_capture", "backend": "onnxruntime", "implementation": "portable_trained_artifact_runtime", "status": "implemented", "parameter_bindings": {"mode": "learned_artifact"}},
         {"runner": "differentiable_export", "backend": "torch", "implementation": "trainable_aoa_estimator_endpoint", "status": "implemented"},
         {"runner": "differentiable_export", "backend": "sionna", "implementation": "sionna_rt_aoa_training_endpoint", "status": "planned"},
     ]
@@ -1818,11 +2075,25 @@ class AoaEstimatorAdapterOperation(Operation):
             "mode": {
                 "type": "string",
                 "default": "bartlett_reference",
-                "enum": ["music", "bartlett_reference"],
+                "enum": ["music", "bartlett_reference", "learned_artifact"],
                 "title": "Reference method",
-                "description": "Runnable AoA method used until a trained estimator artifact is bound to this research slot.",
+                "description": "Select MUSIC, Bartlett, or a returned portable AoA estimator.",
             },
             "grid_step_deg": {"type": "number", "default": 0.25, "minimum": 0.05, "maximum": 5.0},
+            "artifact_manifest_path": {
+                "type": "string",
+                "default": "",
+                "description": "Registered schema-v2 trained artifact implementing the ULA AoA ABI.",
+                "x-noema-ui": {
+                    "control": "trained_artifact",
+                    "label": "Trained artifact",
+                    "accept": ".zip,.noema-artifact,.yaml,.yml,.json,application/octet-stream",
+                    "visible_when": {"mode": "learned_artifact"},
+                    "derived_params": ["mode", "artifact_manifest_path", "artifact_entrypoint", "artifact_package_sha256"],
+                },
+            },
+            "artifact_entrypoint": {"type": "string", "default": "aoa_estimator", "x-noema-ui": {"hidden": True}},
+            "artifact_package_sha256": {"type": "string", "default": "", "x-noema-ui": {"hidden": True}},
         }
     )
 
@@ -1830,10 +2101,54 @@ class AoaEstimatorAdapterOperation(Operation):
         problem, metadata = _load_all_npz(ctx.require_input("problem").path)
         grid_step = float(_param(ctx.params, "grid_step_deg", 0.25))
         mode = str(ctx.params.get("mode") or "bartlett_reference")
+        checkpoint_sha = None
         if mode == "music":
             method = "music"
         elif mode == "bartlett_reference":
             method = "bartlett"
+        elif mode == "learned_artifact":
+            snapshots = np.asarray(problem["snapshots"], dtype=np.complex64)
+            snapshots_ri = np.stack(
+                [snapshots.real, snapshots.imag], axis=-1
+            ).astype(np.float32)
+            outputs, checkpoint_sha = _run_portable_ai_phy_artifact(
+                ctx,
+                default_entrypoint="aoa_estimator",
+                inputs={"snapshots_ri": snapshots_ri},
+                label="learned_artifact AoA estimator",
+            )
+            if "angles_deg" not in outputs:
+                raise OperationError(
+                    "AoA trained artifact did not return `angles_deg`"
+                )
+            estimates = np.asarray(
+                outputs["angles_deg"], dtype=np.float32
+            ).reshape(-1)
+            expected_shape = (int(snapshots.shape[0]),)
+            if tuple(estimates.shape) != expected_shape:
+                raise OperationError(
+                    "AoA artifact angles_deg must have shape %s, got %s"
+                    % (expected_shape, tuple(estimates.shape))
+                )
+            if not np.all(np.isfinite(estimates)):
+                raise OperationError("AoA artifact returned non-finite values")
+            out_metadata = dict(metadata)
+            out_metadata.update(
+                {
+                    "checkpoint_sha256": checkpoint_sha,
+                    "artifact_manifest_sha256": checkpoint_sha,
+                    "data_plane_backend": "onnxruntime",
+                }
+            )
+            return _write_aoa_estimate(
+                ctx,
+                estimates,
+                np.asarray([], dtype=np.float32),
+                np.empty((estimates.size, 0), dtype=np.float32),
+                out_metadata,
+                mode,
+                problem.get("angles_deg"),
+            )
         else:
             raise OperationError("Unsupported AoA-estimator adapter mode `%s`" % mode)
         estimates, grid, spectra = _estimate_aoa_grid(problem["snapshots"], metadata, grid_step, method=method)

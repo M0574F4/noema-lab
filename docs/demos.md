@@ -34,6 +34,15 @@ for the clean installation, contract export, external training, returned model, 
 - [Learned QPSK carrier tracking](tutorials/learned_qpsk_phase_tracking_demo.md)
 - [Automatic modulation recognition](tutorials/automatic_modulation_recognition_demo.md)
 
+## Localization and Sensing
+
+- [Learned two-dimensional range localization](tutorials/learned_range_localization_demo.md)
+- [Learned narrowband AoA estimation](tutorials/learned_aoa_estimation_demo.md)
+
+## Beamforming
+
+- [Learned MISO beam selection](tutorials/learned_beam_selection_demo.md)
+
 ## End-to-End Communication
 
 - [DeepJSCC vs. capacity-matched JPEG over AWGN](tutorials/digital_vs_deepjscc_sionna.md)
@@ -50,6 +59,9 @@ tutorials/learned_csi_feedback
 tutorials/learned_qpsk_demapper_demo
 tutorials/learned_qpsk_phase_tracking_demo
 tutorials/automatic_modulation_recognition_demo
+tutorials/learned_range_localization_demo
+tutorials/learned_aoa_estimation_demo
+tutorials/learned_beam_selection_demo
 tutorials/digital_vs_deepjscc_sionna
 tutorials/deepjscc_slow_rayleigh
 ```
