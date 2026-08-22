@@ -41,6 +41,7 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 | --- | --- |
 | understand the central idea | the interactive [Break the comparison](https://M0574F4.github.io/noema-lab/break_the_comparison.html) evidence lab |
 | watch an external model train, then compare it with Noema | the [learned QPSK I/Q calibration walkthrough](https://www.youtube.com/watch?v=bKNXS_vHLHc) |
+| choose a system to train | the [ready-to-train matrix](#ready-to-train-systems) below |
 | run a dependency-light example | the source-checkout quickstart below |
 | bring my own model | the [external adapter SDK](https://M0574F4.github.io/noema-lab/external_adapter_sdk.html) |
 | export a training contract | the [architecture-neutral export workflow](https://M0574F4.github.io/noema-lab/tutorials/export_differentiable_training_scenario.html) |
@@ -53,18 +54,42 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">
-    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-training-loop.svg" alt="Watch Noema export a training contract, return a model, benchmark it, and verify the result" width="88%" />
+    <img src="https://img.youtube.com/vi/bKNXS_vHLHc/maxresdefault.jpg" alt="Play the complete Noema workflow: export a contract, train a model, and compare it with baselines" width="88%" />
   </a>
 </p>
 
 <p align="center">
-  <strong><a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">▶ Watch the workflow on YouTube</a></strong>
-  · <a href="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-training-loop.svg">Open the full-size diagram</a>
+  <strong><a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">▶ Play the complete workflow (YouTube)</a></strong>
 </p>
 
 The recorded walkthrough starts from a clean environment and shows contract export, dataset
 capture, external model training, returned-model validation, and the UI comparison against the
 uncompensated and calibrated-oracle baselines.
+
+## Ready-to-train systems
+
+Every **Train + compare** page starts with one copyable CLI block that exports the contract,
+prepares the data, trains the included starter model, returns its artifact, and builds or runs the
+baseline comparison. Replace the starter with your own model while keeping the exported interface
+and experiment protocol fixed.
+
+| Problem | What you can train | Included comparisons | Availability |
+| --- | --- | --- | --- |
+| Receiver I/Q calibration | affine QPSK receiver | uncompensated QPSK; calibrated I/Q oracle | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_qpsk_demapper_demo.html) |
+| Carrier tracking | packet-context QPSK phase tracker | interpolation; smoothing; decision-directed PLL; true-phase reference | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_qpsk_phase_tracking_demo.html) |
+| Automatic modulation recognition | blind I/Q classifier | differential cumulants; synchronized-likelihood reference | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/automatic_modulation_recognition_demo.html) |
+| MIMO-OFDM channel estimation | 2×2 sparse-pilot estimator | LS interpolation; fixed-prior LMMSE; exact-channel diagnostic | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_mimo_ofdm_channel_estimation_demo.html) |
+| CSI compression and feedback | 128-bit encoder/decoder pair | matched KLT/PCA codec | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_csi_feedback.html) |
+| OFDM subcarrier allocation | power-allocation policy | equal power; water filling | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/ofdm_resource_allocation_demo.html) |
+| Delayed-CSI OFDM allocation | reliability-aware causal allocator | equal power; delayed-CSI and uncertainty-aware water filling | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/reliability_aware_ofdm_allocation_demo.html) |
+| Image delivery over AWGN | DeepJSCC image encoder/decoder | capacity-matched JPEG | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/digital_vs_deepjscc_sionna.html) |
+| Image delivery over slow fading | blind, nested-rate DeepJSCC pair | outage-aware capacity-matched JPEG | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/deepjscc_slow_rayleigh.html) |
+| 2D range localization | learned localizer | trilateration; typed adapter reference | 🟡 [Benchmark now](https://M0574F4.github.io/noema-lab/suites/localization_sensing.html) · train/replace adapter not yet available |
+| Narrowband AoA estimation | learned array estimator | MUSIC; Bartlett reference | 🟡 [Benchmark now](https://M0574F4.github.io/noema-lab/suites/localization_sensing.html) · train/replace adapter not yet available |
+| MISO beam selection | learned beam-selection policy | perfect-CSIT MRT; exhaustive DFT codebook | 🟡 [Benchmark now](https://M0574F4.github.io/noema-lab/suites/beamforming_precoding.html) · train/replace adapter not yet available |
+
+The yellow rows are runnable protocol and baseline packs, not promises of a trained model. Their
+typed benchmark boundaries exist; portable trained-artifact interfaces are the remaining step.
 
 ## Quickstart
 

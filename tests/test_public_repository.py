@@ -22,8 +22,12 @@ class PublicRepositoryTests(unittest.TestCase):
     def test_flagship_demo_and_video_are_public(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("https://www.youtube.com/watch?v=bKNXS_vHLHc", readme)
+        self.assertIn(
+            "https://img.youtube.com/vi/bKNXS_vHLHc/maxresdefault.jpg",
+            readme,
+        )
         self.assertIn("docs/_static/noema-logo-dark.svg", readme)
-        self.assertIn("docs/_static/noema-training-loop.svg", readme)
+        self.assertNotIn("docs/_static/noema-training-loop.svg", readme)
         self.assertLess(
             readme.index("docs/_static/launch/f0-launch-hero.svg"),
             readme.index("img.shields.io/github/actions/workflow/status"),
@@ -53,6 +57,38 @@ class PublicRepositoryTests(unittest.TestCase):
         self.assertTrue(
             (ROOT / "docs" / "demo" / "data" / "qpsk_iq_calibration"
              / "benchmark_projection.csv").is_file()
+        )
+
+    def test_readiness_matrix_distinguishes_trainable_and_benchmark_only_systems(
+        self,
+    ) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("## Ready-to-train systems", readme)
+        self.assertEqual(readme.count("✅ [Train + compare]"), 9)
+        self.assertEqual(readme.count("🟡 [Benchmark now]"), 3)
+        for relative in (
+            "tutorials/learned_qpsk_demapper_demo.html",
+            "tutorials/learned_qpsk_phase_tracking_demo.html",
+            "tutorials/automatic_modulation_recognition_demo.html",
+            "tutorials/learned_mimo_ofdm_channel_estimation_demo.html",
+            "tutorials/learned_csi_feedback.html",
+            "tutorials/ofdm_resource_allocation_demo.html",
+            "tutorials/reliability_aware_ofdm_allocation_demo.html",
+            "tutorials/digital_vs_deepjscc_sionna.html",
+            "tutorials/deepjscc_slow_rayleigh.html",
+            "suites/localization_sensing.html",
+            "suites/beamforming_precoding.html",
+        ):
+            self.assertIn(
+                f"https://M0574F4.github.io/noema-lab/{relative}",
+                readme,
+            )
+
+        self.assertIn(
+            "The yellow rows are runnable protocol and baseline packs, "
+            "not promises of a trained model.",
+            readme,
         )
 
     def test_package_manifest_contains_public_demo_builders(self) -> None:
