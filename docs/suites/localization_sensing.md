@@ -1,7 +1,8 @@
 # Localization / Sensing Suite
 
 This experimental suite covers two explicit, runnable sensing protocols: four-anchor 2D range localization and
-single-source narrowband angle-of-arrival estimation with a uniform linear array.
+single-source narrowband angle-of-arrival estimation with a uniform linear array, plus a separate
+near-field spherical-wave range-angle focusing protocol.
 
 ## Benchmark Pack
 
@@ -55,6 +56,12 @@ benchmark loop:
 Each artifact is hash-pinned, validated against the operation-owned ABI, and evaluated on a sealed
 test capture before its post-training benchmark is built.
 
+The [near-field XL-MIMO workflow](../tutorials/learned_near_field_xl_mimo_demo.md) uses a
+32-element 28 GHz coherent-pilot observation, a portable `near_field_estimator` ABI, and paired
+far-field, polar-codebook, learned, and simulation-truth focusing methods. It is kept separate from
+the far-field narrowband AoA contract because range curvature changes the observation model and
+scientific question.
+
 ## Metrics and Plots
 
 Core metrics:
@@ -82,6 +89,6 @@ uv run noema benchmark run benchmarks/localization_sensing/aoa_estimation_v1.yam
 
 ## Boundary
 
-The range protocol is not a synchronized UWB waveform, and the AoA protocol does not model multiple
+The range protocol is not a synchronized UWB waveform, and the far-field AoA protocol does not model multiple
 sources, coherent multipath, array calibration error, or near-field propagation. AoA/ToA fusion,
 NLOS protocols, Sionna RT scenes, and radio maps are outside these baselines.

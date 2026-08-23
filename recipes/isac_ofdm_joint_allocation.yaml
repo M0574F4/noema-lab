@@ -1,0 +1,60 @@
+schema_version: 1
+execution_profile:
+  id: isac_ofdm_allocation
+  version: 1
+name: isac_ofdm_joint_allocation
+description: Synthetic frequency-selective OFDM allocation under a fixed power budget with explicit communication-rate and sensing-information objectives.
+suite:
+  id: resource_allocation
+  name: Resource Allocation
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: synthetic_training_demonstration
+  channel_enabled: true
+  channel_mode: synthetic_isac_frequency_response
+  seed: 23
+  ui_configured: true
+  research:
+    dataset:
+      id: synthetic_isac_frequency_response
+      modality: wireless
+      version: synthetic-isac-frequency-response-v1
+      split: fixed_seed
+    task:
+      id: joint_isac_resource_allocation
+      kind: link_and_sensing_optimization
+      modality: wireless
+      metrics:
+        - isac.scalarized_utility
+        - isac.communication_rate_bps_hz
+        - isac.sensing_snr_db
+        - task.score
+    metrics:
+      - isac.scalarized_utility
+      - isac.communication_rate_bps_hz
+      - isac.sensing_snr_db
+      - task.score
+steps:
+  - id: data
+    op: source.isac_ofdm_scenario
+    params:
+      example_count: 64
+      subcarriers: 12
+      snr_db: 10
+      sensing_weight: 0.4
+      total_power: 1.0
+      seed: 23001
+
+  - id: allocator
+    op: model.isac_ofdm_allocator_adapter
+    inputs:
+      problem: data.problem
+    params:
+      mode: equal_power
+
+  - id: evaluation
+    op: metrics.isac_ofdm
+    inputs:
+      problem: data.problem
+      decision: allocator.decision

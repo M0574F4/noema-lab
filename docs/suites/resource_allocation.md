@@ -1,5 +1,11 @@
 # Resource Allocation Suite
 
+The suite also includes a separate [joint ISAC OFDM allocation demonstration](../tutorials/learned_isac_ofdm_allocation_demo.md).
+That synthetic protocol exposes communication and sensing gains together, enforces one exact
+sum-power budget, and compares equal power, communication-only water filling, a scalarized
+per-scene optimizer, and a portable learned policy. It does not reuse the communication-only pack
+or present the scalarized objective as a waveform-level sensing metric.
+
 This experimental suite compares subcarrier power-allocation policies by configuring the canonical communication
 pipeline rather than constructing a separate resource-allocation graph. Both recipes use the same
 seeded random-bit source, canonical payload and TX bit boundaries, channel-code stage, QPSK

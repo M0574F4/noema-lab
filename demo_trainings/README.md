@@ -35,8 +35,14 @@ Available projects:
   complex snapshots, compared with Bartlett and MUSIC.
 - `beam_selection_supervised_mlp`: finite-DFT-codebook beam classification from captured MISO
   channels, with exhaustive-search labels derived inside the trainer.
+- `isac_joint_allocation_deepsets`: label-free joint communication/sensing OFDM allocation under an
+  exact sum-power constraint and an explicit scalarized utility.
+- `near_field_range_angle_mlp`: bounded range-angle regression from coherent spherical-wave array
+  observations, evaluated by both estimation error and focusing gain.
+- `leo_ntn_tracking_mlp`: causal future-Doppler regression and next-beam classification from a
+  fixed noisy observation history.
 
-The last three projects share the small capture, train, evaluate, and post-training benchmark
+These six compact adapter projects share the small capture, train, evaluate, and post-training benchmark
 harness in `_portable_ai_phy_adapter_common`; each task still owns its model, ABI, objective, and
 comparison roles explicitly.
 

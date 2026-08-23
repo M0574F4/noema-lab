@@ -1,0 +1,28 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: ntn.leo_doppler_beam_tracking_mlp
+name: LEO-NTN tracking · causal Doppler/beam MLP
+status: reference_only
+operation: model.leo_ntn_tracking_adapter
+framework: torch
+data:
+  owner: noema_capture_contract
+  feature: causal history of time, noisy Doppler, and noisy azimuth observations
+  target: separately captured future Doppler, future angle, and next-beam index
+model:
+  owner: external_researcher
+  reference_architecture: compact causal history MLP with Doppler regression and beam classification heads
+loss:
+  owner: external_researcher
+  reference_objective: normalized future-Doppler MSE plus beam cross entropy
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: single_binding
+  entrypoint: ntn_tracker
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison: [hold_last, linear_extrapolation, oracle_future, learned_ntn_tracker]
+  sweep: channel.snr_db
+  pairing: common held-out kinematic tracks and observation-noise seeds

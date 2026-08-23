@@ -1,0 +1,16 @@
+kind: noema.training_plan
+schema_version: 1
+selected_steps: [estimator]
+dataset_capture:
+  taps:
+    - id: array_observation
+      from: data.problem
+    - id: range_angle
+      from: data.truth
+  sweep:
+    data.snr_db: [0, 5, 10, 15, 20]
+  split_plan:
+    total_samples: 4096
+    percentages: {train: 68.75, validation: 15.625, test: 15.625}
+objective: near_field.normalized_range_angle_mse
+framework: torch

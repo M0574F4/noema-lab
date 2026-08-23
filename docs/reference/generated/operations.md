@@ -5894,6 +5894,162 @@ None.
 ]
 ```
 
+### `metrics.isac_ofdm`
+
+**Name:** ISAC communication/sensing allocation metrics
+
+**Status:** `implemented`
+
+**Inputs:**
+
+| Name | Kind |
+| --- | --- |
+| `decision` | `isac.ofdm_power_allocation.numpy` |
+| `problem` | `isac.ofdm_allocation_problem.numpy` |
+
+**Optional inputs:**
+
+None.
+
+**Outputs:**
+
+| Name | Kind |
+| --- | --- |
+| `report` | `metrics.report` |
+
+**Parameters:**
+
+None.
+
+**Differentiability (legacy `trainable_params`):** framework=`numpy`, gradient=`none`, trainable_params=`False`, exportable=`False`
+
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`False`
+
+**Portable trained-artifact ABI:** None.
+
+**Backends:**
+
+| Runner | Backends |
+| --- | --- |
+| `benchmark_run` | `python` |
+| `dataset_capture` | `python` |
+| `differentiable_export` | None |
+
+**Equivalence:**
+
+```json
+{
+  "reason": "No cross-backend equivalence claim declared.",
+  "type": "behavioral"
+}
+```
+
+**Formats:**
+
+```json
+{
+  "artifact": "operation-defined",
+  "tensor": "none"
+}
+```
+
+**Materializations:**
+
+```json
+[
+  {
+    "backend": "python",
+    "implementation": "default",
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "python",
+    "implementation": "default",
+    "runner": "dataset_capture",
+    "status": "implemented"
+  }
+]
+```
+
+### `metrics.leo_ntn_tracking`
+
+**Name:** LEO-NTN Doppler and handover metrics
+
+**Status:** `implemented`
+
+**Inputs:**
+
+| Name | Kind |
+| --- | --- |
+| `decision` | `ntn.future_state_decision.numpy` |
+| `truth` | `ntn.future_state_truth.numpy` |
+
+**Optional inputs:**
+
+None.
+
+**Outputs:**
+
+| Name | Kind |
+| --- | --- |
+| `report` | `metrics.report` |
+
+**Parameters:**
+
+None.
+
+**Differentiability (legacy `trainable_params`):** framework=`numpy`, gradient=`none`, trainable_params=`False`, exportable=`False`
+
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`False`
+
+**Portable trained-artifact ABI:** None.
+
+**Backends:**
+
+| Runner | Backends |
+| --- | --- |
+| `benchmark_run` | `python` |
+| `dataset_capture` | `python` |
+| `differentiable_export` | None |
+
+**Equivalence:**
+
+```json
+{
+  "reason": "No cross-backend equivalence claim declared.",
+  "type": "behavioral"
+}
+```
+
+**Formats:**
+
+```json
+{
+  "artifact": "operation-defined",
+  "tensor": "none"
+}
+```
+
+**Materializations:**
+
+```json
+[
+  {
+    "backend": "python",
+    "implementation": "default",
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "python",
+    "implementation": "default",
+    "runner": "dataset_capture",
+    "status": "implemented"
+  }
+]
+```
+
 ### `metrics.localization`
 
 **Name:** Localization metrics
@@ -6048,6 +6204,85 @@ Discrete evaluation metrics are terminal evidence.
   },
   {
     "backend": "numpy",
+    "implementation": "default",
+    "runner": "dataset_capture",
+    "status": "implemented"
+  }
+]
+```
+
+### `metrics.near_field_focusing`
+
+**Name:** Near-field range-angle and focusing metrics
+
+**Status:** `implemented`
+
+**Inputs:**
+
+| Name | Kind |
+| --- | --- |
+| `estimate` | `near_field.range_angle_estimate.numpy` |
+| `problem` | `near_field.array_observation.numpy` |
+| `truth` | `near_field.range_angle_truth.numpy` |
+
+**Optional inputs:**
+
+None.
+
+**Outputs:**
+
+| Name | Kind |
+| --- | --- |
+| `report` | `metrics.report` |
+
+**Parameters:**
+
+None.
+
+**Differentiability (legacy `trainable_params`):** framework=`numpy`, gradient=`none`, trainable_params=`False`, exportable=`False`
+
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`False`
+
+**Portable trained-artifact ABI:** None.
+
+**Backends:**
+
+| Runner | Backends |
+| --- | --- |
+| `benchmark_run` | `python` |
+| `dataset_capture` | `python` |
+| `differentiable_export` | None |
+
+**Equivalence:**
+
+```json
+{
+  "reason": "No cross-backend equivalence claim declared.",
+  "type": "behavioral"
+}
+```
+
+**Formats:**
+
+```json
+{
+  "artifact": "operation-defined",
+  "tensor": "none"
+}
+```
+
+**Materializations:**
+
+```json
+[
+  {
+    "backend": "python",
+    "implementation": "default",
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "python",
     "implementation": "default",
     "runner": "dataset_capture",
     "status": "implemented"
@@ -14115,6 +14350,161 @@ None.
 }
 ```
 
+### `model.isac_ofdm_allocator_adapter`
+
+**Name:** ISAC OFDM allocation adapter
+
+**Status:** `implemented`
+
+**Inputs:**
+
+| Name | Kind |
+| --- | --- |
+| `problem` | `isac.ofdm_allocation_problem.numpy` |
+
+**Optional inputs:**
+
+None.
+
+**Outputs:**
+
+| Name | Kind |
+| --- | --- |
+| `decision` | `isac.ofdm_power_allocation.numpy` |
+
+**Parameters:**
+
+| Name | Type | Required | Default / values | Description |
+| --- | --- | --- | --- | --- |
+| `artifact_entrypoint` | `string` | no | default `isac_allocator` |  |
+| `artifact_manifest_path` | `string` | no | default `` |  |
+| `artifact_package_sha256` | `string` | no | default `` |  |
+| `mode` | `string` | no | default `equal_power`<br>values `equal_power`, `communications_water_filling`, `scalarized_reference`, `learned_artifact` |  |
+
+**Differentiability (legacy `trainable_params`):** framework=`torch`, gradient=`full`, trainable_params=`True`, exportable=`True`
+
+The allocation boundary supports a portable power-simplex policy artifact.
+
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`True`
+
+**Portable trained-artifact ABI:**
+
+```json
+{
+  "binding_params": {
+    "artifact_entrypoint": "isac_allocator",
+    "artifact_manifest_path": "trained_artifact.yaml",
+    "mode": "learned_artifact"
+  },
+  "component_id": "allocator",
+  "component_role": "joint_isac_ofdm_power_allocator",
+  "entrypoint_id": "isac_allocator",
+  "inputs": {
+    "features": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "subcarrier",
+        4
+      ]
+    }
+  },
+  "outputs": {
+    "power": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "subcarrier"
+      ]
+    }
+  },
+  "required_operation_inputs": [
+    "problem"
+  ]
+}
+```
+
+**Backends:**
+
+| Runner | Backends |
+| --- | --- |
+| `benchmark_run` | `numpy`, `onnxruntime` |
+| `dataset_capture` | `numpy`, `onnxruntime` |
+| `differentiable_export` | `torch` |
+
+**Equivalence:**
+
+```json
+{
+  "reason": "No cross-backend equivalence claim declared.",
+  "type": "behavioral"
+}
+```
+
+**Formats:**
+
+```json
+{
+  "artifact": "operation-defined",
+  "tensor": "none"
+}
+```
+
+**Materializations:**
+
+```json
+[
+  {
+    "backend": "numpy",
+    "implementation": "equal_power",
+    "parameter_bindings": {
+      "mode": "equal_power"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "communication_water_filling",
+    "parameter_bindings": {
+      "mode": "communications_water_filling"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "scalarized_projected_gradient_oracle",
+    "parameter_bindings": {
+      "mode": "scalarized_reference"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "onnxruntime",
+    "implementation": "portable_trained_artifact_runtime",
+    "parameter_bindings": {
+      "mode": "learned_artifact"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "reference_allocators",
+    "runner": "dataset_capture",
+    "status": "implemented"
+  },
+  {
+    "backend": "torch",
+    "implementation": "label_free_scalarized_utility",
+    "runner": "differentiable_export",
+    "status": "implemented"
+  }
+]
+```
+
 ### `model.jpeg_decode`
 
 **Name:** JPEG payload bits decoder to image batch
@@ -14305,6 +14695,163 @@ Classical JPEG quantization and entropy coding are non-differentiable in Noema b
   "language": "C/Python",
   "note": "Baseline JPEG comparisons normally use non-progressive JPEG without optimized Huffman-table search."
 }
+```
+
+### `model.leo_ntn_tracking_adapter`
+
+**Name:** LEO-NTN Doppler and beam-handover adapter
+
+**Status:** `implemented`
+
+**Inputs:**
+
+| Name | Kind |
+| --- | --- |
+| `problem` | `ntn.tracking_history.numpy` |
+
+**Optional inputs:**
+
+| Name | Kind |
+| --- | --- |
+| `truth` | `ntn.future_state_truth.numpy` |
+
+**Outputs:**
+
+| Name | Kind |
+| --- | --- |
+| `decision` | `ntn.future_state_decision.numpy` |
+
+**Parameters:**
+
+| Name | Type | Required | Default / values | Description |
+| --- | --- | --- | --- | --- |
+| `artifact_entrypoint` | `string` | no | default `ntn_tracker` |  |
+| `artifact_manifest_path` | `string` | no | default `` |  |
+| `artifact_package_sha256` | `string` | no | default `` |  |
+| `mode` | `string` | no | default `linear_extrapolation`<br>values `hold_last`, `linear_extrapolation`, `oracle_future`, `learned_artifact` |  |
+
+**Differentiability (legacy `trainable_params`):** framework=`torch`, gradient=`full`, trainable_params=`True`, exportable=`True`
+
+A bounded history tensor feeds a portable joint Doppler/beam predictor.
+
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`True`
+
+**Portable trained-artifact ABI:**
+
+```json
+{
+  "binding_params": {
+    "artifact_entrypoint": "ntn_tracker",
+    "artifact_manifest_path": "trained_artifact.yaml",
+    "mode": "learned_artifact"
+  },
+  "component_id": "tracker",
+  "component_role": "leo_ntn_doppler_beam_tracker",
+  "entrypoint_id": "ntn_tracker",
+  "inputs": {
+    "track_features": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "history",
+        3
+      ]
+    }
+  },
+  "outputs": {
+    "decision": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "decision"
+      ]
+    }
+  },
+  "required_operation_inputs": [
+    "problem"
+  ]
+}
+```
+
+**Backends:**
+
+| Runner | Backends |
+| --- | --- |
+| `benchmark_run` | `numpy`, `onnxruntime` |
+| `dataset_capture` | `numpy`, `onnxruntime` |
+| `differentiable_export` | `torch` |
+
+**Equivalence:**
+
+```json
+{
+  "reason": "No cross-backend equivalence claim declared.",
+  "type": "behavioral"
+}
+```
+
+**Formats:**
+
+```json
+{
+  "artifact": "operation-defined",
+  "tensor": "none"
+}
+```
+
+**Materializations:**
+
+```json
+[
+  {
+    "backend": "numpy",
+    "implementation": "hold_last_observation",
+    "parameter_bindings": {
+      "mode": "hold_last"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "linear_extrapolation",
+    "parameter_bindings": {
+      "mode": "linear_extrapolation"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "simulation_future_state",
+    "parameter_bindings": {
+      "mode": "oracle_future"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "onnxruntime",
+    "implementation": "portable_trained_artifact_runtime",
+    "parameter_bindings": {
+      "mode": "learned_artifact"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "reference_trackers",
+    "runner": "dataset_capture",
+    "status": "implemented"
+  },
+  {
+    "backend": "torch",
+    "implementation": "supervised_future_state_prediction",
+    "runner": "differentiable_export",
+    "status": "implemented"
+  }
+]
 ```
 
 ### `model.localization_adapter`
@@ -14900,6 +15447,163 @@ Classical sample-covariance eigendecomposition and grid search benchmark.
     "backend": "numpy",
     "implementation": "default",
     "runner": "dataset_capture",
+    "status": "implemented"
+  }
+]
+```
+
+### `model.near_field_estimator_adapter`
+
+**Name:** Near-field range-angle estimator adapter
+
+**Status:** `implemented`
+
+**Inputs:**
+
+| Name | Kind |
+| --- | --- |
+| `problem` | `near_field.array_observation.numpy` |
+
+**Optional inputs:**
+
+| Name | Kind |
+| --- | --- |
+| `truth` | `near_field.range_angle_truth.numpy` |
+
+**Outputs:**
+
+| Name | Kind |
+| --- | --- |
+| `estimate` | `near_field.range_angle_estimate.numpy` |
+
+**Parameters:**
+
+| Name | Type | Required | Default / values | Description |
+| --- | --- | --- | --- | --- |
+| `artifact_entrypoint` | `string` | no | default `near_field_estimator` |  |
+| `artifact_manifest_path` | `string` | no | default `` |  |
+| `artifact_package_sha256` | `string` | no | default `` |  |
+| `mode` | `string` | no | default `polar_codebook`<br>values `far_field_steering`, `polar_codebook`, `oracle_focus`, `learned_artifact` |  |
+
+**Differentiability (legacy `trainable_params`):** framework=`torch`, gradient=`surrogate`, trainable_params=`True`, exportable=`True`
+
+The coherent array observation is exposed through a portable range-angle estimator ABI.
+
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`True`
+
+**Portable trained-artifact ABI:**
+
+```json
+{
+  "binding_params": {
+    "artifact_entrypoint": "near_field_estimator",
+    "artifact_manifest_path": "trained_artifact.yaml",
+    "mode": "learned_artifact"
+  },
+  "component_id": "estimator",
+  "component_role": "near_field_range_angle_estimator",
+  "entrypoint_id": "near_field_estimator",
+  "inputs": {
+    "array_ri": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        "antenna",
+        2
+      ]
+    }
+  },
+  "outputs": {
+    "range_angle": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        2
+      ]
+    }
+  },
+  "required_operation_inputs": [
+    "problem"
+  ]
+}
+```
+
+**Backends:**
+
+| Runner | Backends |
+| --- | --- |
+| `benchmark_run` | `numpy`, `onnxruntime` |
+| `dataset_capture` | `numpy`, `onnxruntime` |
+| `differentiable_export` | `torch` |
+
+**Equivalence:**
+
+```json
+{
+  "reason": "No cross-backend equivalence claim declared.",
+  "type": "behavioral"
+}
+```
+
+**Formats:**
+
+```json
+{
+  "artifact": "operation-defined",
+  "tensor": "none"
+}
+```
+
+**Materializations:**
+
+```json
+[
+  {
+    "backend": "numpy",
+    "implementation": "far_field_angle_grid",
+    "parameter_bindings": {
+      "mode": "far_field_steering"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "polar_range_angle_codebook",
+    "parameter_bindings": {
+      "mode": "polar_codebook"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "simulation_truth",
+    "parameter_bindings": {
+      "mode": "oracle_focus"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "onnxruntime",
+    "implementation": "portable_trained_artifact_runtime",
+    "parameter_bindings": {
+      "mode": "learned_artifact"
+    },
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "reference_estimators",
+    "runner": "dataset_capture",
+    "status": "implemented"
+  },
+  {
+    "backend": "torch",
+    "implementation": "supervised_range_angle_estimation",
+    "runner": "differentiable_export",
     "status": "implemented"
   }
 ]
@@ -17710,6 +18414,94 @@ None.
 ]
 ```
 
+### `source.isac_ofdm_scenario`
+
+**Name:** Synthetic ISAC OFDM allocation scenario
+
+**Status:** `implemented`
+
+**Inputs:**
+
+None.
+
+**Optional inputs:**
+
+None.
+
+**Outputs:**
+
+| Name | Kind |
+| --- | --- |
+| `problem` | `isac.ofdm_allocation_problem.numpy` |
+
+**Parameters:**
+
+| Name | Type | Required | Default / values | Description |
+| --- | --- | --- | --- | --- |
+| `example_count` | `integer` | no | default `64` |  |
+| `seed` | `integer` | no | default `0` |  |
+| `sensing_weight` | `number` | no | default `0.4` |  |
+| `snr_db` | `number` | no | default `10.0` |  |
+| `subcarriers` | `integer` | no | default `12` |  |
+| `total_power` | `number` | no | default `1.0` |  |
+
+**Differentiability (legacy `trainable_params`):** framework=`numpy`, gradient=`none`, trainable_params=`False`, exportable=`False`
+
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`False`
+
+**Portable trained-artifact ABI:** None.
+
+**Backends:**
+
+| Runner | Backends |
+| --- | --- |
+| `benchmark_run` | `numpy` |
+| `dataset_capture` | `numpy` |
+| `differentiable_export` | `torch` |
+
+**Equivalence:**
+
+```json
+{
+  "reason": "No cross-backend equivalence claim declared.",
+  "type": "behavioral"
+}
+```
+
+**Formats:**
+
+```json
+{
+  "artifact": "operation-defined",
+  "tensor": "none"
+}
+```
+
+**Materializations:**
+
+```json
+[
+  {
+    "backend": "numpy",
+    "implementation": "synthetic_frequency_selective_isac",
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "synthetic_frequency_selective_isac",
+    "runner": "dataset_capture",
+    "status": "implemented"
+  },
+  {
+    "backend": "torch",
+    "implementation": "captured_isac_allocation_contract",
+    "runner": "differentiable_export",
+    "status": "implemented"
+  }
+]
+```
+
 ### `source.kodak_files`
 
 **Name:** Kodak image file manifest
@@ -17783,6 +18575,97 @@ None.
     "backend": "python",
     "implementation": "default",
     "runner": "dataset_capture",
+    "status": "implemented"
+  }
+]
+```
+
+### `source.leo_ntn_tracking_scenario`
+
+**Name:** Synthetic LEO-NTN Doppler and beam-handover scenario
+
+**Status:** `implemented`
+
+**Inputs:**
+
+None.
+
+**Optional inputs:**
+
+None.
+
+**Outputs:**
+
+| Name | Kind |
+| --- | --- |
+| `problem` | `ntn.tracking_history.numpy` |
+| `truth` | `ntn.future_state_truth.numpy` |
+
+**Parameters:**
+
+| Name | Type | Required | Default / values | Description |
+| --- | --- | --- | --- | --- |
+| `beam_count` | `integer` | no | default `9` |  |
+| `example_count` | `integer` | no | default `64` |  |
+| `history_length` | `integer` | no | default `6` |  |
+| `history_step_s` | `number` | no | default `0.5` |  |
+| `max_doppler_hz` | `number` | no | default `48000.0` |  |
+| `prediction_horizon_s` | `number` | no | default `1.0` |  |
+| `seed` | `integer` | no | default `0` |  |
+| `snr_db` | `number` | no | default `15.0` |  |
+
+**Differentiability (legacy `trainable_params`):** framework=`numpy`, gradient=`none`, trainable_params=`False`, exportable=`False`
+
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`False`
+
+**Portable trained-artifact ABI:** None.
+
+**Backends:**
+
+| Runner | Backends |
+| --- | --- |
+| `benchmark_run` | `numpy` |
+| `dataset_capture` | `numpy` |
+| `differentiable_export` | `torch` |
+
+**Equivalence:**
+
+```json
+{
+  "reason": "No cross-backend equivalence claim declared.",
+  "type": "behavioral"
+}
+```
+
+**Formats:**
+
+```json
+{
+  "artifact": "operation-defined",
+  "tensor": "none"
+}
+```
+
+**Materializations:**
+
+```json
+[
+  {
+    "backend": "numpy",
+    "implementation": "bounded_kinematic_leo_pass",
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "bounded_kinematic_leo_pass",
+    "runner": "dataset_capture",
+    "status": "implemented"
+  },
+  {
+    "backend": "torch",
+    "implementation": "captured_future_state_supervision",
+    "runner": "differentiable_export",
     "status": "implemented"
   }
 ]
@@ -18133,6 +19016,98 @@ The seeded symbol and label generator is benchmark data, not a learned component
     "backend": "numpy",
     "implementation": "default",
     "runner": "dataset_capture",
+    "status": "implemented"
+  }
+]
+```
+
+### `source.near_field_xl_mimo_scenario`
+
+**Name:** Synthetic near-field XL-MIMO pilot scenario
+
+**Status:** `implemented`
+
+**Inputs:**
+
+None.
+
+**Optional inputs:**
+
+None.
+
+**Outputs:**
+
+| Name | Kind |
+| --- | --- |
+| `problem` | `near_field.array_observation.numpy` |
+| `truth` | `near_field.range_angle_truth.numpy` |
+
+**Parameters:**
+
+| Name | Type | Required | Default / values | Description |
+| --- | --- | --- | --- | --- |
+| `angle_max_deg` | `number` | no | default `55.0` |  |
+| `angle_min_deg` | `number` | no | default `-55.0` |  |
+| `antennas` | `integer` | no | default `32` |  |
+| `carrier_frequency_ghz` | `number` | no | default `28.0` |  |
+| `example_count` | `integer` | no | default `64` |  |
+| `range_max_m` | `number` | no | default `5.0` |  |
+| `range_min_m` | `number` | no | default `0.5` |  |
+| `seed` | `integer` | no | default `0` |  |
+| `snr_db` | `number` | no | default `15.0` |  |
+
+**Differentiability (legacy `trainable_params`):** framework=`numpy`, gradient=`none`, trainable_params=`False`, exportable=`False`
+
+**Training capabilities:** built_in_fine_tuning=`False`, portable_replacement=`False`
+
+**Portable trained-artifact ABI:** None.
+
+**Backends:**
+
+| Runner | Backends |
+| --- | --- |
+| `benchmark_run` | `numpy` |
+| `dataset_capture` | `numpy` |
+| `differentiable_export` | `torch` |
+
+**Equivalence:**
+
+```json
+{
+  "reason": "No cross-backend equivalence claim declared.",
+  "type": "behavioral"
+}
+```
+
+**Formats:**
+
+```json
+{
+  "artifact": "operation-defined",
+  "tensor": "none"
+}
+```
+
+**Materializations:**
+
+```json
+[
+  {
+    "backend": "numpy",
+    "implementation": "spherical_wave_coherent_pilot",
+    "runner": "benchmark_run",
+    "status": "implemented"
+  },
+  {
+    "backend": "numpy",
+    "implementation": "spherical_wave_coherent_pilot",
+    "runner": "dataset_capture",
+    "status": "implemented"
+  },
+  {
+    "backend": "torch",
+    "implementation": "captured_range_angle_supervision",
+    "runner": "differentiable_export",
     "status": "implemented"
   }
 ]

@@ -676,6 +676,9 @@ class ResourceAllocationExporter(DifferentiableExporter):
 
 def available_exporters() -> List[DifferentiableExporter]:
     return [
+        PortableAiPhyAdapterExporter("isac-joint-allocation"),
+        PortableAiPhyAdapterExporter("near-field-range-angle"),
+        PortableAiPhyAdapterExporter("leo-ntn-tracking"),
         PortableAiPhyAdapterExporter("range-localization"),
         PortableAiPhyAdapterExporter("aoa-estimation"),
         PortableAiPhyAdapterExporter("beam-selection"),

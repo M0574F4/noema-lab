@@ -15,6 +15,9 @@ MIMO_OFDM_CHANNEL_ESTIMATION_PROFILE_ID = "mimo_ofdm_channel_estimation"
 BEAMFORMING_LINK_EVALUATION_PROFILE_ID = "beamforming_link_evaluation"
 RANGE_LOCALIZATION_PROFILE_ID = "range_localization"
 AOA_ARRAY_ESTIMATION_PROFILE_ID = "aoa_array_estimation"
+ISAC_OFDM_ALLOCATION_PROFILE_ID = "isac_ofdm_allocation"
+NEAR_FIELD_RANGE_ANGLE_PROFILE_ID = "near_field_range_angle_focusing"
+LEO_NTN_TRACKING_PROFILE_ID = "leo_ntn_tracking"
 TASK_INFERENCE_PROFILE_ID = "task_inference"
 TASK_EVALUATION_PROFILE_ID = "task_evaluation"
 CUSTOM_EXECUTION_PROFILE_ID = "custom"
@@ -630,6 +633,63 @@ _AOA_ARRAY_ESTIMATION = ExecutionProfileDefinition(
 )
 
 
+_ISAC_OFDM_ALLOCATION = ExecutionProfileDefinition(
+    id=ISAC_OFDM_ALLOCATION_PROFILE_ID,
+    version=EXECUTION_PROFILE_VERSION,
+    label="Joint ISAC OFDM allocation",
+    summary="One frequency-selective scene is allocated under a fixed power budget and scored for communication and sensing utility.",
+    stages=(
+        ExecutionStageDefinition(
+            "scenario", "Communication and sensing gains", "required", ("data",),
+            ("source.isac_ofdm_scenario",),
+        ),
+        ExecutionStageDefinition("allocator", "Power allocator", "required", ("allocator",)),
+        ExecutionStageDefinition(
+            "evaluation", "Joint utility evaluation", "required", ("evaluation",),
+            ("metrics.isac_ofdm",),
+        ),
+    ),
+)
+
+
+_NEAR_FIELD_RANGE_ANGLE = ExecutionProfileDefinition(
+    id=NEAR_FIELD_RANGE_ANGLE_PROFILE_ID,
+    version=EXECUTION_PROFILE_VERSION,
+    label="Near-field range-angle focusing",
+    summary="A spherical-wave coherent pilot observation is mapped to range and angle, then evaluated for estimation and focusing gain.",
+    stages=(
+        ExecutionStageDefinition(
+            "scenario", "Near-field array observation", "required", ("data",),
+            ("source.near_field_xl_mimo_scenario",),
+        ),
+        ExecutionStageDefinition("estimator", "Range-angle estimator", "required", ("estimator",)),
+        ExecutionStageDefinition(
+            "evaluation", "Range-angle and focusing evaluation", "required", ("evaluation",),
+            ("metrics.near_field_focusing",),
+        ),
+    ),
+)
+
+
+_LEO_NTN_TRACKING = ExecutionProfileDefinition(
+    id=LEO_NTN_TRACKING_PROFILE_ID,
+    version=EXECUTION_PROFILE_VERSION,
+    label="LEO-NTN Doppler and beam tracking",
+    summary="A bounded observation history drives a causal future-Doppler and next-beam decision at a fixed horizon.",
+    stages=(
+        ExecutionStageDefinition(
+            "scenario", "LEO observation history", "required", ("data",),
+            ("source.leo_ntn_tracking_scenario",),
+        ),
+        ExecutionStageDefinition("tracker", "Doppler and beam tracker", "required", ("tracker",)),
+        ExecutionStageDefinition(
+            "evaluation", "Prediction and handover evaluation", "required", ("evaluation",),
+            ("metrics.leo_ntn_tracking",),
+        ),
+    ),
+)
+
+
 _TASK_INFERENCE = ExecutionProfileDefinition(
     id=TASK_INFERENCE_PROFILE_ID,
     version=EXECUTION_PROFILE_VERSION,
@@ -690,6 +750,9 @@ _CATALOG = ExecutionProfileCatalog(
         _BEAMFORMING_LINK_EVALUATION,
         _RANGE_LOCALIZATION,
         _AOA_ARRAY_ESTIMATION,
+        _ISAC_OFDM_ALLOCATION,
+        _NEAR_FIELD_RANGE_ANGLE,
+        _LEO_NTN_TRACKING,
         _TASK_INFERENCE,
         _TASK_EVALUATION,
     )
