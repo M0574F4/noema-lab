@@ -1,9 +1,9 @@
 # Beamforming / Precoding Suite
 
 This experimental suite benchmarks AI-native beam selection and precoding under fixed channel and SNR protocols.
-The current v1-draft pack uses synthetic flat-fading MISO channels and explicitly labels both
-policies by the information they receive: perfect-CSIT MRT is an upper bound, while exhaustive DFT
-codebook selection is an oracle within a finite beam codebook.
+The current v1-draft pack uses synthetic clustered-ULA MISO channels and explicitly labels methods
+by the information and beam budget they receive: perfect-CSIT MRT is an upper bound, while the
+fixed DFT method exhaustively searches eight reusable beams.
 
 ## Benchmark Pack
 
@@ -12,7 +12,7 @@ codebook selection is an oracle within a finite beam codebook.
 The pack compares:
 
 - `recipes/beamforming_mrt_baseline.yaml` using `model.mrt_beamformer` as the perfect-CSIT upper bound;
-- `recipes/beamforming_adapter_baseline.yaml` using `model.beamforming_adapter` as the finite-codebook oracle and typed adapter boundary.
+- `recipes/beamforming_adapter_baseline.yaml` using `model.beamforming_adapter` as the fixed eight-beam DFT baseline and typed adapter boundary.
 
 Both declare `beamforming_link_evaluation`: a realized link must feed a beamformer and the selected
 weights must be scored on that link. The profile does not choose MRT, a codebook, or a learned
@@ -25,9 +25,9 @@ policy.
 `[batch, tx_antenna, 2]` real/imaginary values and requires a unit-norm beam with the same shape.
 
 The checked-in [learned beam-selection workflow](../tutorials/learned_beam_selection_demo.md)
-captures channel vectors, derives the exhaustive DFT-codebook choice inside the trainer, exports a
-hash-pinned ONNX policy, evaluates it on a sealed test split, and builds a paired comparison with
-the exhaustive codebook oracle and perfect-CSIT MRT upper bound.
+captures channel vectors, learns eight constant-modulus beam directions by normalized gain,
+exports a hash-pinned ONNX policy, evaluates it on a sealed test split, and builds a paired
+comparison with an equal-size fixed DFT codebook and the perfect-CSIT MRT upper bound.
 
 ## Metrics and Plots
 

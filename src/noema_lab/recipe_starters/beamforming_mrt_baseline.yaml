@@ -3,7 +3,7 @@ execution_profile:
   id: beamforming_link_evaluation
   version: 1
 name: beamforming_mrt_baseline
-description: Perfect-CSIT single-user MRT upper bound on seeded flat-fading MISO channels.
+description: Perfect-CSIT single-user MRT upper bound on seeded clustered ULA MISO channels.
 suite:
   id: beamforming_precoding
   name: Beamforming / Precoding
@@ -20,7 +20,7 @@ metadata:
     dataset:
       id: synthetic_beamforming
       modality: wireless
-      version: synthetic-beamforming-v1
+      version: synthetic-beamforming-clustered-ula-v1
       split: fixed_seed
     task:
       id: beamforming_precoding
@@ -42,6 +42,7 @@ steps:
       tx_antennas: 8
       snr_db: 10
       seed: 23
+      channel_model: clustered_ula
 
   - id: beamformer
     op: model.mrt_beamformer

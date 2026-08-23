@@ -1,7 +1,7 @@
 schema_version: 1
 kind: noema.demo_training_template
 id: aoa_estimation.covariance_mlp
-name: ULA AoA estimation · covariance-domain MLP
+name: ULA AoA estimation · Bartlett-initialized covariance residual
 status: reference_only
 operation: model.aoa_estimator_adapter
 framework: torch
@@ -11,7 +11,7 @@ data:
   target: separately captured source angle in degrees
 model:
   owner: external_researcher
-  reference_architecture: normalized complex sample covariance plus bounded MLP regressor
+  reference_architecture: fixed Bartlett spectrum plus a bounded learned covariance-domain correction
 loss:
   owner: external_researcher
   reference_objective: angle mean squared error with validation-loss early stopping

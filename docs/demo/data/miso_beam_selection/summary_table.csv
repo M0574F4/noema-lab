@@ -1,0 +1,7 @@
+SNR (dB),Method,Role,Mean Spectral efficiency (bit/s/Hz),Primary 95% CI low,Primary 95% CI high
+0,Perfect-CSIT MRT upper bound,oracle,2.92241501808,2.61877045196,3.22605958421
+0,Fixed eight-beam DFT sweep,baseline,2.59640598297,2.36806169407,2.82475027187
+0,Learned eight-beam codebook,candidate,2.76100325584,2.49138212164,3.03062439005
+15,Perfect-CSIT MRT upper bound,oracle,7.60068384806,7.24217531847,7.95919237765
+15,Fixed eight-beam DFT sweep,baseline,7.17924324671,6.90483598026,7.45365051317
+15,Learned eight-beam codebook,candidate,7.36476341883,7.08097380282,7.64855303484

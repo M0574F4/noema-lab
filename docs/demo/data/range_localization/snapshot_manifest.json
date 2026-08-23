@@ -1,0 +1,254 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "97adf16b77b271adda662c917fec1fcf03e938e931caf745e1a0113b832ed2f5",
+      "size_bytes": 6569
+    },
+    "chart_data.json": {
+      "sha256": "30ce0aeb511d5184d1aa69519e47ff13d82d31f73f5dc20f22ec54958a3553cf",
+      "size_bytes": 2388
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-range-localization-chart-data.js",
+      "sha256": "e8673b1be4dd9356c9441f61fa347e63d3b44a7d13ca420c4b17267998476b52",
+      "size_bytes": 2550
+    },
+    "rows": 18,
+    "summary_table.csv": {
+      "sha256": "29b94b701892d85be13921e02f28318e8c6f4b1b0961c6545a3d04d13b720167",
+      "size_bytes": 549
+    }
+  },
+  "runs": [
+    {
+      "recipe_id": "trilateration_snr0_seed81001",
+      "recipe_sha256": "7a806762932de358619a9d92ddf4d0fa84b229acc0a7c652412a9c7cd1bd7713",
+      "role": "baseline",
+      "run_id": "20260823T124144Z_range_based_wireless_localization__trilateration_snr0_seed81001",
+      "semantic_recipe_sha256": "16c18ce3d344f13850335b7681c3161412475457e9acff3338645d9a81effcd1"
+    },
+    {
+      "recipe_id": "regularized_trilateration_snr0_seed81001",
+      "recipe_sha256": "95d337dd984d6db50a1287bb09ff582d641a8c9be4e5f7e1a950654173a29896",
+      "role": "baseline",
+      "run_id": "20260823T124144Z_range_based_wireless_localization__regularized_trilateration_snr0_seed81001",
+      "semantic_recipe_sha256": "94193101b419aefe4112715d0ec3b0c90f80daacd5d1798047876cd6e50fb17d"
+    },
+    {
+      "recipe_id": "learned_localizer_snr0_seed81001",
+      "recipe_sha256": "468b17d881955b73505e8b911cb883164139184601bcb594fdbf4e84321d3ba5",
+      "role": "candidate",
+      "run_id": "20260823T124144Z_range_based_wireless_localization__learned_localizer_snr0_seed81001",
+      "semantic_recipe_sha256": "7d21f3d46409d23332f54cb4ce261dd1edb0cdcd7b8824ef6953d95896bd9a59"
+    },
+    {
+      "recipe_id": "trilateration_snr0_seed82001",
+      "recipe_sha256": "a080511bebc4304ed615d140569c32f981ce7353041eff78f226066e53b7248a",
+      "role": "baseline",
+      "run_id": "20260823T124144Z_range_based_wireless_localization__trilateration_snr0_seed82001",
+      "semantic_recipe_sha256": "f87472266f9df47526eced4874236f17ad73fcd61dbabafdddec406f1e35f8a4"
+    },
+    {
+      "recipe_id": "regularized_trilateration_snr0_seed82001",
+      "recipe_sha256": "9afe15ba6e64b13bb51aaa92be7323f2708dd3efb4245e7da4707c189e38e928",
+      "role": "baseline",
+      "run_id": "20260823T124145Z_range_based_wireless_localization__regularized_trilateration_snr0_seed82001",
+      "semantic_recipe_sha256": "f76a71d34f80dd0696ac009f3f4dccfe31b8e8de459dee06370520b7548a338f"
+    },
+    {
+      "recipe_id": "learned_localizer_snr0_seed82001",
+      "recipe_sha256": "418a53911de23280d2a61f8d16c6df2eea19d5b1b725d59e4c9d44ed41479968",
+      "role": "candidate",
+      "run_id": "20260823T124145Z_range_based_wireless_localization__learned_localizer_snr0_seed82001",
+      "semantic_recipe_sha256": "155af1e8d351a141088be42a36a6312bc2cf3fe218aba3ad7f40896e93d72aad"
+    },
+    {
+      "recipe_id": "trilateration_snr0_seed83001",
+      "recipe_sha256": "c2169b17370fc65fa8d170f48fe5f26cc0d79110d3d40c78ea6d2c3e891ab5a5",
+      "role": "baseline",
+      "run_id": "20260823T124145Z_range_based_wireless_localization__trilateration_snr0_seed83001",
+      "semantic_recipe_sha256": "e40f24537ca1f5c4f5bbed52cbf01a03134d93c7c29e8b4102dff1acad897ea1"
+    },
+    {
+      "recipe_id": "regularized_trilateration_snr0_seed83001",
+      "recipe_sha256": "05ea8c8199341d8340379706f0816b3ca838175c68f3a08b1069922ac6cd2412",
+      "role": "baseline",
+      "run_id": "20260823T124145Z_range_based_wireless_localization__regularized_trilateration_snr0_seed83001",
+      "semantic_recipe_sha256": "a00874bc5c80d0cdd9b10231975a40f75091fa6b711514e59ab667a90bb11ac6"
+    },
+    {
+      "recipe_id": "learned_localizer_snr0_seed83001",
+      "recipe_sha256": "ccc0361f46793619fe844d2f5b16999cd9dfc542ac1adcde338c80078cc2301c",
+      "role": "candidate",
+      "run_id": "20260823T124146Z_range_based_wireless_localization__learned_localizer_snr0_seed83001",
+      "semantic_recipe_sha256": "08ba87132d2e39524d65d25d8b7dc0f5d525c44929ed9c5378f752e7bcf1180e"
+    },
+    {
+      "recipe_id": "trilateration_snr15_seed81001",
+      "recipe_sha256": "5587ec92071dd6a7af893e71cf5466a3c431c72160c6e71c309b0f028246d859",
+      "role": "baseline",
+      "run_id": "20260823T124146Z_range_based_wireless_localization__trilateration_snr15_seed81001",
+      "semantic_recipe_sha256": "705c890ca41e40814b0e98a14b3255b0da38c285d4a65decf9879ef09012a99a"
+    },
+    {
+      "recipe_id": "regularized_trilateration_snr15_seed81001",
+      "recipe_sha256": "f60dab6fc81c9dd4b11843612bc72f61c4fdc46134dd5af05498698d00cb5c69",
+      "role": "baseline",
+      "run_id": "20260823T124146Z_range_based_wireless_localization__regularized_trilateration_snr15_seed81001",
+      "semantic_recipe_sha256": "48cafac485a61fcbecd8e1b93758e7c2f26e0f987398e71bc3c056ab562aa96c"
+    },
+    {
+      "recipe_id": "learned_localizer_snr15_seed81001",
+      "recipe_sha256": "db598aafde6cc4d6854db0e0b3302bf4a55beb446f4ac9efbea5c6671d4265c1",
+      "role": "candidate",
+      "run_id": "20260823T124146Z_range_based_wireless_localization__learned_localizer_snr15_seed81001",
+      "semantic_recipe_sha256": "036fe8dba208286db0f1d7dda57f55cad1883d760ab9227732008ee6551c8b17"
+    },
+    {
+      "recipe_id": "trilateration_snr15_seed82001",
+      "recipe_sha256": "96b0ad0c405b7a57dfb3b88b57b986d8818f8e6fb32f14e09cc4aa18498951a7",
+      "role": "baseline",
+      "run_id": "20260823T124147Z_range_based_wireless_localization__trilateration_snr15_seed82001",
+      "semantic_recipe_sha256": "81b80bf3f1e5417f0702ceddd956b5a638c64932f248748c213b01497e13e83d"
+    },
+    {
+      "recipe_id": "regularized_trilateration_snr15_seed82001",
+      "recipe_sha256": "d017dbfe72deb665221a74f737b3c14d3fbaa45b02b35ed2589e1667f6b806e3",
+      "role": "baseline",
+      "run_id": "20260823T124147Z_range_based_wireless_localization__regularized_trilateration_snr15_seed82001",
+      "semantic_recipe_sha256": "b641571e9fbf1124b6a60457116380d88edb6bcb9d794923265067f3d5ec595b"
+    },
+    {
+      "recipe_id": "learned_localizer_snr15_seed82001",
+      "recipe_sha256": "03610a1aa7a1247d568df2ff87db8f676ed2a3c70ff2e67886b0c3b5934c13e6",
+      "role": "candidate",
+      "run_id": "20260823T124147Z_range_based_wireless_localization__learned_localizer_snr15_seed82001",
+      "semantic_recipe_sha256": "0498fe409728f27c56d2eaf011b5c1e906b5f0612cad6882126d452f0e2b716b"
+    },
+    {
+      "recipe_id": "trilateration_snr15_seed83001",
+      "recipe_sha256": "3404f9450d141150685889ba409d9a17c3600e6cd5ccbd4c96c9a046ecce0c9d",
+      "role": "baseline",
+      "run_id": "20260823T124148Z_range_based_wireless_localization__trilateration_snr15_seed83001",
+      "semantic_recipe_sha256": "bd72a153bcd9edf09c4e4e0add8123f408f61b240f5cbb73fdcd6270ec7b3edb"
+    },
+    {
+      "recipe_id": "regularized_trilateration_snr15_seed83001",
+      "recipe_sha256": "6834a3ee4ac72071f13490cb809add0efcc225643c950093470b70987eed54fa",
+      "role": "baseline",
+      "run_id": "20260823T124148Z_range_based_wireless_localization__regularized_trilateration_snr15_seed83001",
+      "semantic_recipe_sha256": "9048e61113c93f58e895ef6ed9d03daef26170d277a76b3478f62fdbcb412eb6"
+    },
+    {
+      "recipe_id": "learned_localizer_snr15_seed83001",
+      "recipe_sha256": "ee1f8553ab8a870efb303a312e37bb07b21c0eb86cfc503dd1c5a993b80d588b",
+      "role": "candidate",
+      "run_id": "20260823T124148Z_range_based_wireless_localization__learned_localizer_snr15_seed83001",
+      "semantic_recipe_sha256": "b2801438011a0b3dbc83b064e32d8c5b7cbc1743f0ce0775d7a525e83cbdcdc0"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "range_localization",
+  "source": {
+    "benchmark_id": "localization_sensing.learned_range_localizer_v1",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "1.0.0",
+    "completed_at_utc": "2026-08-23T12:41:48.722Z",
+    "created_at_utc": "2026-08-23T12:41:43.832Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "88592e01bc8a70b9d5dabb7a462461f133128ed1ee519c7c7eb0555937fd60cf",
+        "size_bytes": 144916
+      },
+      "recipes.csv": {
+        "sha256": "2c750ab987641bcb8743ff2b65d28c2758b52c7adc8df5ea792653d5d62541f5",
+        "size_bytes": 6029
+      },
+      "result.json": {
+        "sha256": "944c036ce26404946bed54a4859d186747364f28295506a77945c5eec6129071",
+        "size_bytes": 189811
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "99351acd8a44f6c9c64f607c39c8c9692e13b5dffd90126dfeba6abd0361e28f",
+        "size_bytes": 1663
+      },
+      "training_evidence/projection.json": {
+        "sha256": "8c1f8d39c633f030343438648c79ef6af175d18bf793006e1be5e9d0440563e2",
+        "size_bytes": 2677
+      }
+    },
+    "result_id": "20260823T124143Z_localization_sensing.learned_range_localizer_v1",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "channel SNR",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out seeds",
+    "paired_seeds": [
+      81001,
+      82001,
+      83001
+    ],
+    "sample_count_per_method_and_snr": 3,
+    "statistical_unit": "paired held-out scenario and noise seed",
+    "warning": "Three paired held-out seeds support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": [
+    {
+      "artifact_references": [
+        {
+          "id": "localizer",
+          "kind": "component",
+          "path": "training_evidence/entries/000-learned_localizer/artifact/artifacts/localization_estimator.onnx",
+          "sha256": "964b2ad653f8d1a09f9ee4b750e1c016c6d8b076af084fcedd21ba1a52d103d4",
+          "size_bytes": 30002
+        },
+        {
+          "id": "range_based_wireless_localization.211584839bbe",
+          "kind": "contract",
+          "path": "training_evidence/entries/000-learned_localizer/artifact/training_contract.yaml",
+          "sha256": "cc1434ecbf0ecb871a1a8bf471fc39b2db48654756c21de6aeacafc14132196e",
+          "size_bytes": 5079
+        }
+      ],
+      "evidence": {
+        "evaluation_metrics": {
+          "path": "training_evidence/entries/000-learned_localizer/evidence/evaluation_metrics.json",
+          "sha256": "9facbdf16055585bbf50905677738063b7b86bd8cc0cb0784068aa1aa874c69e",
+          "size_bytes": 641
+        },
+        "trained_artifact_manifest": {
+          "path": "training_evidence/entries/000-learned_localizer/artifact/trained_artifact_manifest.yaml",
+          "sha256": "4165050321058f8d64be8c9c657ff57b33cb9d4da842a52d126c44d2d992c2e9",
+          "size_bytes": 3447
+        },
+        "training_history": {
+          "path": "training_evidence/entries/000-learned_localizer/evidence/training_history.json",
+          "sha256": "863c954ac064c9067dc6e1c8daf426c03415089fd503ea4c54a24d3c32f98998",
+          "size_bytes": 11382
+        }
+      },
+      "index": 0,
+      "series": "learned_localizer",
+      "source_declarations": {
+        "evaluation_metrics": {
+          "declared_sha256": "9facbdf16055585bbf50905677738063b7b86bd8cc0cb0784068aa1aa874c69e",
+          "path": "evaluation_metrics.json",
+          "snapshotted_sha256": "9facbdf16055585bbf50905677738063b7b86bd8cc0cb0784068aa1aa874c69e"
+        },
+        "trained_artifact_manifest": {
+          "declared_sha256": "4165050321058f8d64be8c9c657ff57b33cb9d4da842a52d126c44d2d992c2e9",
+          "path": "../trained_artifact.yaml",
+          "snapshotted_sha256": "4165050321058f8d64be8c9c657ff57b33cb9d4da842a52d126c44d2d992c2e9"
+        },
+        "training_history": {
+          "declared_sha256": "863c954ac064c9067dc6e1c8daf426c03415089fd503ea4c54a24d3c32f98998",
+          "path": "training_history.json",
+          "snapshotted_sha256": "863c954ac064c9067dc6e1c8daf426c03415089fd503ea4c54a24d3c32f98998"
+        }
+      }
+    }
+  ]
+}

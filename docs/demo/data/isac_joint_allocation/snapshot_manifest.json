@@ -1,0 +1,296 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "7f24cc76a242d2129536fa2fef5a3a06b7b66a3bd1edf93700ab3f00c9a43038",
+      "size_bytes": 9078
+    },
+    "chart_data.json": {
+      "sha256": "a35426ee59b4442c70c518b2de5eff395e84d667eb96b1e26e3a5d90bbfb0832",
+      "size_bytes": 3101
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-isac-joint-allocation-chart-data.js",
+      "sha256": "4bee39f7e8b72402fae711394427ef12248e753a17722ec736147df8a4d7587f",
+      "size_bytes": 3263
+    },
+    "rows": 24,
+    "summary_table.csv": {
+      "sha256": "26dd11f9af2c6b836d90b904c2d2f49c8f3224309f56cdfbf7aa84f0c4484415",
+      "size_bytes": 1012
+    }
+  },
+  "runs": [
+    {
+      "recipe_id": "equal_power_snr0_seed81001",
+      "recipe_sha256": "25e18e28cca12fe3014c1acb5c929baf497aa4ee85c65dbd1e3a0818097e8d48",
+      "role": "baseline",
+      "run_id": "20260823T045328Z_isac_ofdm_joint_allocation__equal_power_snr0_seed81001",
+      "semantic_recipe_sha256": "158fdc5cdb7fc661287141a171850eb0c4bcb7588698ad4a897dd3596e21ba45"
+    },
+    {
+      "recipe_id": "communications_water_filling_snr0_seed81001",
+      "recipe_sha256": "878c358645652f06226747968bbcafe22b511b84545ecb8059dbce83de827936",
+      "role": "baseline",
+      "run_id": "20260823T045329Z_isac_ofdm_joint_allocation__communications_water_filling_snr0_seed81001",
+      "semantic_recipe_sha256": "3eb59aa8f3d741e1de6d187ab6d957f77679ed638bd52e27027f2f9062250c95"
+    },
+    {
+      "recipe_id": "scalarized_reference_snr0_seed81001",
+      "recipe_sha256": "8985aa20796fc104046191f3fbbf46b9ae5c09106ee6d2bab639b16b69ce2670",
+      "role": "oracle",
+      "run_id": "20260823T045329Z_isac_ofdm_joint_allocation__scalarized_reference_snr0_seed81001",
+      "semantic_recipe_sha256": "d0a4f70ae8c191e6b816829e35ec428f45dc44aaf48a1bebe49f0bdd9be6129a"
+    },
+    {
+      "recipe_id": "learned_isac_allocator_snr0_seed81001",
+      "recipe_sha256": "f24620940447f29ea90405b0d319fd462e2ef20755d7cd1bf4fb97ef288fc4be",
+      "role": "candidate",
+      "run_id": "20260823T045329Z_isac_ofdm_joint_allocation__learned_isac_allocator_snr0_seed81001",
+      "semantic_recipe_sha256": "44ec1d057706ec027c5717110b8b2b76f6b0e7696466ba74171678a17b2188bc"
+    },
+    {
+      "recipe_id": "equal_power_snr0_seed82001",
+      "recipe_sha256": "4d92f29283d5c0f66c2d99cdbc82a0560f12a633784c727485a26cc406f113bb",
+      "role": "baseline",
+      "run_id": "20260823T045330Z_isac_ofdm_joint_allocation__equal_power_snr0_seed82001",
+      "semantic_recipe_sha256": "1ab908a9265638c51796ae7060d3cd4b237b16d0a6f98219470c8ee5e37fe592"
+    },
+    {
+      "recipe_id": "communications_water_filling_snr0_seed82001",
+      "recipe_sha256": "470e3b388f31ef453f87b08307dd0224e0f76ed10c18a22109d3ab498ba804a5",
+      "role": "baseline",
+      "run_id": "20260823T045330Z_isac_ofdm_joint_allocation__communications_water_filling_snr0_seed82001",
+      "semantic_recipe_sha256": "7d32134560f05efef6c9946b1e8f097853f8a617f947596c4e1e884c1189a6e6"
+    },
+    {
+      "recipe_id": "scalarized_reference_snr0_seed82001",
+      "recipe_sha256": "9756b3bb6f0cd93761db9609aade2cda93f34003fcf099cc474da061e508ee87",
+      "role": "oracle",
+      "run_id": "20260823T045331Z_isac_ofdm_joint_allocation__scalarized_reference_snr0_seed82001",
+      "semantic_recipe_sha256": "ec35727585b53ad07e73f692a6ce3c22e54c95a6083193d0c88a520196fb66cc"
+    },
+    {
+      "recipe_id": "learned_isac_allocator_snr0_seed82001",
+      "recipe_sha256": "309e6a38dc553570caf9515259a1afd9068caf6d4560710aacd53d2309cb1dfa",
+      "role": "candidate",
+      "run_id": "20260823T045331Z_isac_ofdm_joint_allocation__learned_isac_allocator_snr0_seed82001",
+      "semantic_recipe_sha256": "1fae520ef9e81ee522a53598404f054a5f5e8e4f20fb87e7b43cf332bc34876d"
+    },
+    {
+      "recipe_id": "equal_power_snr0_seed83001",
+      "recipe_sha256": "ebb90aae9a5acd0f4b40c0bf57cb1378eae19257ae88839093cd55391748bcad",
+      "role": "baseline",
+      "run_id": "20260823T045331Z_isac_ofdm_joint_allocation__equal_power_snr0_seed83001",
+      "semantic_recipe_sha256": "9d74c51fb8464aa52f265a30002c9f5392e32e4f3a8b3670ff7a77941f43ec4a"
+    },
+    {
+      "recipe_id": "communications_water_filling_snr0_seed83001",
+      "recipe_sha256": "d68c16363738d85db1ac593fb186fe02c8222fdf90a40d21ab5e522d2905cd2b",
+      "role": "baseline",
+      "run_id": "20260823T045332Z_isac_ofdm_joint_allocation__communications_water_filling_snr0_seed83001",
+      "semantic_recipe_sha256": "abe670c0436d101c25bd31f5dc45f78b03aecd15fcab50879c6f0b18ab026f87"
+    },
+    {
+      "recipe_id": "scalarized_reference_snr0_seed83001",
+      "recipe_sha256": "726f53551e88fbbf3f95d56632d4c84b0c72c401ebd332d850fedbe4d567ab9b",
+      "role": "oracle",
+      "run_id": "20260823T045332Z_isac_ofdm_joint_allocation__scalarized_reference_snr0_seed83001",
+      "semantic_recipe_sha256": "d9524000c849dcefe1f8d0ae268120be86dcd143bfc497df883178645f26170a"
+    },
+    {
+      "recipe_id": "learned_isac_allocator_snr0_seed83001",
+      "recipe_sha256": "064b542902c6069c88e5f785e1d13563391a16a5de240861827457b8df06c613",
+      "role": "candidate",
+      "run_id": "20260823T045332Z_isac_ofdm_joint_allocation__learned_isac_allocator_snr0_seed83001",
+      "semantic_recipe_sha256": "7eb3efbdc329ca98f3fd8e710721d2398e4e4e10306351367f8d4cc5a930953a"
+    },
+    {
+      "recipe_id": "equal_power_snr15_seed81001",
+      "recipe_sha256": "d7ea975c3436f3d3b86893bd89d080ddaf08998d2741357072b127459ea9909d",
+      "role": "baseline",
+      "run_id": "20260823T045333Z_isac_ofdm_joint_allocation__equal_power_snr15_seed81001",
+      "semantic_recipe_sha256": "fdc74ab9b5c7a970e26cb586469fdae0ba1bb095caa67805207e8e54d7c3ea73"
+    },
+    {
+      "recipe_id": "communications_water_filling_snr15_seed81001",
+      "recipe_sha256": "b9693784d828c59c6436232da5379deee6f19051d45b77e933a91745fe4804f5",
+      "role": "baseline",
+      "run_id": "20260823T045333Z_isac_ofdm_joint_allocation__communications_water_filling_snr15_seed81001",
+      "semantic_recipe_sha256": "27dffaa521d844fe086e17b21297c156ee047361dcd011e11f236e10be7a1aca"
+    },
+    {
+      "recipe_id": "scalarized_reference_snr15_seed81001",
+      "recipe_sha256": "d5437028cbbc53e56405b37c80e60682373244ec6cac14013ef06dfdd9b325e6",
+      "role": "oracle",
+      "run_id": "20260823T045333Z_isac_ofdm_joint_allocation__scalarized_reference_snr15_seed81001",
+      "semantic_recipe_sha256": "604f7f218325adda3451eef575a6796428b1607e1294acc907ff5f93b4198ce8"
+    },
+    {
+      "recipe_id": "learned_isac_allocator_snr15_seed81001",
+      "recipe_sha256": "fd6083cd8ffb55afc25e34e1dba6d1c6d138135b393e8324bffae5e808793511",
+      "role": "candidate",
+      "run_id": "20260823T045334Z_isac_ofdm_joint_allocation__learned_isac_allocator_snr15_seed81001",
+      "semantic_recipe_sha256": "c35e4efa6f9cd19e3d105516e5fdc52bdcdf30afb1a0efa0aca88e961325774f"
+    },
+    {
+      "recipe_id": "equal_power_snr15_seed82001",
+      "recipe_sha256": "c1a636697c0825b3452767fd30de4e399c93414d91e0b9b77fd6fedc999ab477",
+      "role": "baseline",
+      "run_id": "20260823T045334Z_isac_ofdm_joint_allocation__equal_power_snr15_seed82001",
+      "semantic_recipe_sha256": "43aa7326b9baae43d6a4c1216fc59355a22a4f49f07230823240096fa547d3c5"
+    },
+    {
+      "recipe_id": "communications_water_filling_snr15_seed82001",
+      "recipe_sha256": "f4822dd104707bc6be88448cf68ed5e16829437595408ef0da6f4fd82317acfb",
+      "role": "baseline",
+      "run_id": "20260823T045334Z_isac_ofdm_joint_allocation__communications_water_filling_snr15_seed82001",
+      "semantic_recipe_sha256": "09ffd8362ac988cf63bc92bc6b6b872bb382d011f70cf92b422d202ba60f59eb"
+    },
+    {
+      "recipe_id": "scalarized_reference_snr15_seed82001",
+      "recipe_sha256": "e8516dfaa5cb3400fa543aa3327ee9e1f8cd5227a98315b6d15b1d756cb13ba1",
+      "role": "oracle",
+      "run_id": "20260823T045335Z_isac_ofdm_joint_allocation__scalarized_reference_snr15_seed82001",
+      "semantic_recipe_sha256": "7e0e49dbcf0d1b78f7d88a94761a6382c663705490288479e48759496edea6b5"
+    },
+    {
+      "recipe_id": "learned_isac_allocator_snr15_seed82001",
+      "recipe_sha256": "9b1d7a04e23818cddc670a81a8089eaa9064a5a156b66e78427dd943f2f6a7c4",
+      "role": "candidate",
+      "run_id": "20260823T045335Z_isac_ofdm_joint_allocation__learned_isac_allocator_snr15_seed82001",
+      "semantic_recipe_sha256": "15821f1d416fa6c4d8ba0ad281e15fdbda530ae0e01dce4f64ba618e220c0177"
+    },
+    {
+      "recipe_id": "equal_power_snr15_seed83001",
+      "recipe_sha256": "8f7590b6ae33bef4f49d6107ef6d7528b7138c2c4c34c61e119a5b16d8ffb621",
+      "role": "baseline",
+      "run_id": "20260823T045336Z_isac_ofdm_joint_allocation__equal_power_snr15_seed83001",
+      "semantic_recipe_sha256": "15cdad26643d2bc881558a794180a9884274cb9f0180766fe091cdb3e311a379"
+    },
+    {
+      "recipe_id": "communications_water_filling_snr15_seed83001",
+      "recipe_sha256": "3d8f7457f1674514002e5b65b29fa2aba1b6bb95f0968e8c907e9739b6208f7e",
+      "role": "baseline",
+      "run_id": "20260823T045336Z_isac_ofdm_joint_allocation__communications_water_filling_snr15_seed83001",
+      "semantic_recipe_sha256": "d171d4d9ec63b7a58b4d1da97a267170dec3d0b965aa27559a9ffc647c381187"
+    },
+    {
+      "recipe_id": "scalarized_reference_snr15_seed83001",
+      "recipe_sha256": "f4e17ca6d6835fbf22bcf8d4840e92633148a127f2ceec2fa4822bb8b1e28651",
+      "role": "oracle",
+      "run_id": "20260823T045336Z_isac_ofdm_joint_allocation__scalarized_reference_snr15_seed83001",
+      "semantic_recipe_sha256": "d50f59edd5187a71ff848dec4e3a5ceae0c5a8dc0762953e94b0d091a42cb8d7"
+    },
+    {
+      "recipe_id": "learned_isac_allocator_snr15_seed83001",
+      "recipe_sha256": "3498a43e97f6d05162642ae0a5cc6b6d517b999c3fc2162d79b0635877b33e69",
+      "role": "candidate",
+      "run_id": "20260823T045337Z_isac_ofdm_joint_allocation__learned_isac_allocator_snr15_seed83001",
+      "semantic_recipe_sha256": "bf8694482f3d78dc9ce4b64889b13a6dc48d33686f434bbc278f0c28de16caf0"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "isac_joint_allocation",
+  "source": {
+    "benchmark_id": "resource_allocation.learned_isac_joint_allocation_v1",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "1.0.0",
+    "completed_at_utc": "2026-08-23T04:53:37.486Z",
+    "created_at_utc": "2026-08-23T04:53:28.595Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "52ebc78c215172d177d375080e74b4fd32c00783ff3911ed5da454d97ab1b765",
+        "size_bytes": 146079
+      },
+      "recipes.csv": {
+        "sha256": "b861998089c2dacfbf9fe328aacf2baaa6495b8ad5dbe6361f1c2394f3c08e4b",
+        "size_bytes": 7928
+      },
+      "result.json": {
+        "sha256": "3ba1b27c82ce2b02ec71c43caefacfa727719bf444489cb7ee75725b816111a1",
+        "size_bytes": 302520
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "db642e2d6243b03b03d0c2eccebc4c8e99e5f9ab9400bb05bdfde0c7735d4a92",
+        "size_bytes": 1680
+      },
+      "training_evidence/projection.json": {
+        "sha256": "94e73e9ccae9bdfefb769ab4af2527bbbb605e4e0edecc6e8d252c1ebf4af891",
+        "size_bytes": 2692
+      }
+    },
+    "result_id": "20260823T045328Z_resource_allocation.learned_isac_joint_allocation_v1",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "channel SNR",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out seeds",
+    "paired_seeds": [
+      81001,
+      82001,
+      83001
+    ],
+    "sample_count_per_method_and_snr": 3,
+    "statistical_unit": "paired held-out scenario and noise seed",
+    "warning": "Three paired held-out seeds support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": [
+    {
+      "artifact_references": [
+        {
+          "id": "allocator",
+          "kind": "component",
+          "path": "training_evidence/entries/000-learned_isac_allocator/artifact/artifacts/isac_allocator.onnx",
+          "sha256": "dabcce9df61e98e0b05f2d0b654d5fc20b2caa0eed84ecc05098295dec4239ca",
+          "size_bytes": 11364
+        },
+        {
+          "id": "isac_ofdm_joint_allocation.dadd093ea113",
+          "kind": "contract",
+          "path": "training_evidence/entries/000-learned_isac_allocator/artifact/training_contract.yaml",
+          "sha256": "611b825c9d657b10a8edb301ca80b11e629bf04fa64e188656d5a1339fd0f46e",
+          "size_bytes": 4884
+        }
+      ],
+      "evidence": {
+        "evaluation_metrics": {
+          "path": "training_evidence/entries/000-learned_isac_allocator/evidence/evaluation_metrics.json",
+          "sha256": "6e8caa2c2969d0d4094e8e0d682a8ead7ad0bf0cd42ea74d32d935337000751e",
+          "size_bytes": 738
+        },
+        "trained_artifact_manifest": {
+          "path": "training_evidence/entries/000-learned_isac_allocator/artifact/trained_artifact_manifest.yaml",
+          "sha256": "9d88dc41fc22db26261ea6a887e1d850b0ba50787096584c02cad521c26ca347",
+          "size_bytes": 3350
+        },
+        "training_history": {
+          "path": "training_evidence/entries/000-learned_isac_allocator/evidence/training_history.json",
+          "sha256": "7b857405def191a0208f303a57148741dd07c84099d9c09b17bce097275bac7e",
+          "size_bytes": 15474
+        }
+      },
+      "index": 0,
+      "series": "learned_isac_allocator",
+      "source_declarations": {
+        "evaluation_metrics": {
+          "declared_sha256": "6e8caa2c2969d0d4094e8e0d682a8ead7ad0bf0cd42ea74d32d935337000751e",
+          "path": "evaluation_metrics.json",
+          "snapshotted_sha256": "6e8caa2c2969d0d4094e8e0d682a8ead7ad0bf0cd42ea74d32d935337000751e"
+        },
+        "trained_artifact_manifest": {
+          "declared_sha256": "9d88dc41fc22db26261ea6a887e1d850b0ba50787096584c02cad521c26ca347",
+          "path": "../trained_artifact.yaml",
+          "snapshotted_sha256": "9d88dc41fc22db26261ea6a887e1d850b0ba50787096584c02cad521c26ca347"
+        },
+        "training_history": {
+          "declared_sha256": "7b857405def191a0208f303a57148741dd07c84099d9c09b17bce097275bac7e",
+          "path": "training_history.json",
+          "snapshotted_sha256": "7b857405def191a0208f303a57148741dd07c84099d9c09b17bce097275bac7e"
+        }
+      }
+    }
+  ]
+}

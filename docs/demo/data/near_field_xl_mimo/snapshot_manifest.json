@@ -1,0 +1,296 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "563fd73c244b81fe744b147027c142864d06ea75027d3e8a26e5ac78eaf67707",
+      "size_bytes": 9008
+    },
+    "chart_data.json": {
+      "sha256": "a71e28758f856ee7feb2bdae697c8839ef015acd64e74865aaaa121468b58b16",
+      "size_bytes": 3022
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-near-field-xl-mimo-chart-data.js",
+      "sha256": "ff602c1d7e26533370db13e8df4315266ddc61ad9b1c6550363e66ebd97b2210",
+      "size_bytes": 3184
+    },
+    "rows": 24,
+    "summary_table.csv": {
+      "sha256": "2d2f5153103798c82be567447c1714baca02283e573f34c57afbbee9add2eb9e",
+      "size_bytes": 910
+    }
+  },
+  "runs": [
+    {
+      "recipe_id": "far_field_steering_snr0_seed81001",
+      "recipe_sha256": "36f204712b72ac589c5413d6d076b362eb44f713f5ed070ee8d7deff9a25e377",
+      "role": "baseline",
+      "run_id": "20260823T133443Z_near_field_xl_mimo_range_angle_focusing__far_field_steering_snr0_seed81001",
+      "semantic_recipe_sha256": "6b36405969268bbed2143b314aded516fa066e5eae74dcf313079fb4214faa3e"
+    },
+    {
+      "recipe_id": "polar_codebook_snr0_seed81001",
+      "recipe_sha256": "4e1e7a16bebbfb0661c354f3ae22f2072da50901284a6ea5a2d5db30c7596cfe",
+      "role": "baseline",
+      "run_id": "20260823T133444Z_near_field_xl_mimo_range_angle_focusing__polar_codebook_snr0_seed81001",
+      "semantic_recipe_sha256": "f7ee9ee73eeafddc8496c2e0464ea3c9bfcba5645cd6084d56f5c58ed88ba85b"
+    },
+    {
+      "recipe_id": "oracle_focus_snr0_seed81001",
+      "recipe_sha256": "2add0ee17b64b655b1dbe6ada538289c79f0617e9f9e5b5aa47b33b2e6908621",
+      "role": "oracle",
+      "run_id": "20260823T133444Z_near_field_xl_mimo_range_angle_focusing__oracle_focus_snr0_seed81001",
+      "semantic_recipe_sha256": "416099724c70b5e86cfba4c8d5a03400992f57bd11d6b1dbf3b7caecd0b827e7"
+    },
+    {
+      "recipe_id": "learned_near_field_estimator_snr0_seed81001",
+      "recipe_sha256": "6c8693f430a1dfbcc7819f7479b0235731461678560cf7b9aec94199c9279cf9",
+      "role": "candidate",
+      "run_id": "20260823T133444Z_near_field_xl_mimo_range_angle_focusing__learned_near_field_estimator_snr0_seed81001",
+      "semantic_recipe_sha256": "908c2e24b995e87b5a2ab53bcd6632f9e1fb235b9a4d0cfccccd7326d0726cb7"
+    },
+    {
+      "recipe_id": "far_field_steering_snr0_seed82001",
+      "recipe_sha256": "e879d549b93a74f1ff64a49d760bebff83e0d37344e3a2f3859c93050a4c0651",
+      "role": "baseline",
+      "run_id": "20260823T133445Z_near_field_xl_mimo_range_angle_focusing__far_field_steering_snr0_seed82001",
+      "semantic_recipe_sha256": "8fbe2bce5e540a5a638044b99abed6b696094f2510288d29ceef41da77eb9699"
+    },
+    {
+      "recipe_id": "polar_codebook_snr0_seed82001",
+      "recipe_sha256": "866ebde035037655351d008e84b6bae33fc0c69a12c4be1ce1d60b2961c980f3",
+      "role": "baseline",
+      "run_id": "20260823T133445Z_near_field_xl_mimo_range_angle_focusing__polar_codebook_snr0_seed82001",
+      "semantic_recipe_sha256": "2a8f8fa65df512f3057134539121cfa6d532cf05a21067e2246868b08604929c"
+    },
+    {
+      "recipe_id": "oracle_focus_snr0_seed82001",
+      "recipe_sha256": "3f95c56495e83a64e45ae23ebcb78eec4e0fbd3cc70d8ea3992b0c2d3fc6d22f",
+      "role": "oracle",
+      "run_id": "20260823T133445Z_near_field_xl_mimo_range_angle_focusing__oracle_focus_snr0_seed82001",
+      "semantic_recipe_sha256": "bae1e3d3838247608cfc19b58a90498c9bdf48cb840696719f2cd9650c8988c3"
+    },
+    {
+      "recipe_id": "learned_near_field_estimator_snr0_seed82001",
+      "recipe_sha256": "abe0e52e271501689bea8d5090fc90973b3a8da6939ec4ec17dc299c678cec88",
+      "role": "candidate",
+      "run_id": "20260823T133445Z_near_field_xl_mimo_range_angle_focusing__learned_near_field_estimator_snr0_seed82001",
+      "semantic_recipe_sha256": "703bad6b505c2fccb72e71046fd3a5d6b64b6433fc79f07459351380026a5536"
+    },
+    {
+      "recipe_id": "far_field_steering_snr0_seed83001",
+      "recipe_sha256": "82827299825f8e46dae8edb06f12ee529861a0a208406184d8830695141d5078",
+      "role": "baseline",
+      "run_id": "20260823T133446Z_near_field_xl_mimo_range_angle_focusing__far_field_steering_snr0_seed83001",
+      "semantic_recipe_sha256": "56c7a438af7079be43385f3b5f519e4ee53b0201ea2f932112735cea07f881d8"
+    },
+    {
+      "recipe_id": "polar_codebook_snr0_seed83001",
+      "recipe_sha256": "2a535a5de3714af9c772f59220f2d5b18100abf6684e34e32878f93d09246e2b",
+      "role": "baseline",
+      "run_id": "20260823T133446Z_near_field_xl_mimo_range_angle_focusing__polar_codebook_snr0_seed83001",
+      "semantic_recipe_sha256": "1c4550cc3f175bc8d32965fb8704ea51ac1be71d355247abaef064885be2f920"
+    },
+    {
+      "recipe_id": "oracle_focus_snr0_seed83001",
+      "recipe_sha256": "01079faedad9fffff33e624e36a3031bcbc2410cf7551260c0b75dc8b4077563",
+      "role": "oracle",
+      "run_id": "20260823T133446Z_near_field_xl_mimo_range_angle_focusing__oracle_focus_snr0_seed83001",
+      "semantic_recipe_sha256": "8c62205818fb12c718bbf7be26fc2b1f8bd29ed87cbcdb6e75e1920b5fccf05a"
+    },
+    {
+      "recipe_id": "learned_near_field_estimator_snr0_seed83001",
+      "recipe_sha256": "15296fc256f63320c08d5e207dcc0b7f264deac26857d45d39ca512c9f71f511",
+      "role": "candidate",
+      "run_id": "20260823T133447Z_near_field_xl_mimo_range_angle_focusing__learned_near_field_estimator_snr0_seed83001",
+      "semantic_recipe_sha256": "4b86eff34080f1aefec55acb7e4da0592b548f2aeddb7f4942319b5bde6ed973"
+    },
+    {
+      "recipe_id": "far_field_steering_snr15_seed81001",
+      "recipe_sha256": "4bb7718b99d9df58a0f1b7ec493a001f0c48227393e645870b68f54ce45cd512",
+      "role": "baseline",
+      "run_id": "20260823T133447Z_near_field_xl_mimo_range_angle_focusing__far_field_steering_snr15_seed81001",
+      "semantic_recipe_sha256": "688235b3b523b006d3a3d39ec2f9667275f04d3233c0c109662aa8a77a6c88c9"
+    },
+    {
+      "recipe_id": "polar_codebook_snr15_seed81001",
+      "recipe_sha256": "25645345c377e10b73bdfb31a8e31778b648d5ccef35f15410e3133bb68fdbe5",
+      "role": "baseline",
+      "run_id": "20260823T133447Z_near_field_xl_mimo_range_angle_focusing__polar_codebook_snr15_seed81001",
+      "semantic_recipe_sha256": "60ef2ebdaa753dddae9c2dbe3fb1e8383d0486017f3fb594a5637bc34e203b76"
+    },
+    {
+      "recipe_id": "oracle_focus_snr15_seed81001",
+      "recipe_sha256": "25d49607d743fbc344e7bfed520ffade080d5be38cdc5a318e3690afb0d2f7b3",
+      "role": "oracle",
+      "run_id": "20260823T133448Z_near_field_xl_mimo_range_angle_focusing__oracle_focus_snr15_seed81001",
+      "semantic_recipe_sha256": "0aa3db135dd7c74f6b47766816eb23be7ed66f10f31036a78a6105fc44714491"
+    },
+    {
+      "recipe_id": "learned_near_field_estimator_snr15_seed81001",
+      "recipe_sha256": "db648c2b016416eb21418a6fa2fa3d9512c90dfe776a1327f970d2f4cd2c6583",
+      "role": "candidate",
+      "run_id": "20260823T133448Z_near_field_xl_mimo_range_angle_focusing__learned_near_field_estimator_snr15_seed81001",
+      "semantic_recipe_sha256": "e05a8dfb24dae99fdb60cce8124aa2ad2c8b5a58fec59ccf3d42c8175cdba54e"
+    },
+    {
+      "recipe_id": "far_field_steering_snr15_seed82001",
+      "recipe_sha256": "4efc71d523ef05eaab51686abe4cbcbe20f20d06bcb6787d3b0888e17c420599",
+      "role": "baseline",
+      "run_id": "20260823T133448Z_near_field_xl_mimo_range_angle_focusing__far_field_steering_snr15_seed82001",
+      "semantic_recipe_sha256": "860b415531e8937466d081c60be791944720f7e160a75f68c1a4fa2dacb4fd0f"
+    },
+    {
+      "recipe_id": "polar_codebook_snr15_seed82001",
+      "recipe_sha256": "84a604b882fc981687be0b6d86516dc485cb635e8ef02f45e2daccc4e09bdb90",
+      "role": "baseline",
+      "run_id": "20260823T133449Z_near_field_xl_mimo_range_angle_focusing__polar_codebook_snr15_seed82001",
+      "semantic_recipe_sha256": "dc9c9de770dd9fbb9439114bfcd9d71470f33a27877eb26da816dcd5d2666aa5"
+    },
+    {
+      "recipe_id": "oracle_focus_snr15_seed82001",
+      "recipe_sha256": "766de24884e01578bb43ad036fc0a4e0b0fdc91c3c46c5c8b68660e36f833b76",
+      "role": "oracle",
+      "run_id": "20260823T133449Z_near_field_xl_mimo_range_angle_focusing__oracle_focus_snr15_seed82001",
+      "semantic_recipe_sha256": "29c92f801e0f29f50e5b46089a25243d00583d89fa35c7cbeb75f0d37a91c8b9"
+    },
+    {
+      "recipe_id": "learned_near_field_estimator_snr15_seed82001",
+      "recipe_sha256": "760b7dddef4b6f8794829ae98474b4ba5239ff948aefa4afeab196a1f45b39f3",
+      "role": "candidate",
+      "run_id": "20260823T133449Z_near_field_xl_mimo_range_angle_focusing__learned_near_field_estimator_snr15_seed82001",
+      "semantic_recipe_sha256": "06977c07427d2a8cc857da980032f72527510f99ec1a74086ed19a7e2d277bdb"
+    },
+    {
+      "recipe_id": "far_field_steering_snr15_seed83001",
+      "recipe_sha256": "b1c341d5cbb005b258c2f90d3d4ee0741beac3bfad1358b8d4c531971c912e31",
+      "role": "baseline",
+      "run_id": "20260823T133450Z_near_field_xl_mimo_range_angle_focusing__far_field_steering_snr15_seed83001",
+      "semantic_recipe_sha256": "f4a89b81934f9d4a07f9a3523a4dfd7bcdf32637493224254d658efe3eb8358b"
+    },
+    {
+      "recipe_id": "polar_codebook_snr15_seed83001",
+      "recipe_sha256": "7099391f3aeaa001576f562762beb85ec224bb862728f894e22d73dca307119a",
+      "role": "baseline",
+      "run_id": "20260823T133450Z_near_field_xl_mimo_range_angle_focusing__polar_codebook_snr15_seed83001",
+      "semantic_recipe_sha256": "19a88305a41b64a4c2b1d37cbe2dcd74f36fc93eaf8db28d42ae0563c81c32ca"
+    },
+    {
+      "recipe_id": "oracle_focus_snr15_seed83001",
+      "recipe_sha256": "a5d988d29e4b65e69e6468ee6e0d18fde7426a251610fad65da7918f14fc636e",
+      "role": "oracle",
+      "run_id": "20260823T133450Z_near_field_xl_mimo_range_angle_focusing__oracle_focus_snr15_seed83001",
+      "semantic_recipe_sha256": "b643ea4af8c578bcbd9a09f021d293d7f4880a7a6450605d5e5bd5c64d998d95"
+    },
+    {
+      "recipe_id": "learned_near_field_estimator_snr15_seed83001",
+      "recipe_sha256": "82711bf5d7462488d33114203e564aaccbcf2f078b99e7dd44e0c7e8cd69cfcc",
+      "role": "candidate",
+      "run_id": "20260823T133451Z_near_field_xl_mimo_range_angle_focusing__learned_near_field_estimator_snr15_seed83001",
+      "semantic_recipe_sha256": "64bbd0ca4718bd82e132f884cc00f3ef622297545de8ffda20a4a84bb0b50bda"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "near_field_xl_mimo",
+  "source": {
+    "benchmark_id": "localization_sensing.learned_near_field_focusing_v1",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "1.0.0",
+    "completed_at_utc": "2026-08-23T13:34:51.332Z",
+    "created_at_utc": "2026-08-23T13:34:43.488Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "c7e337d01c3c16a74c75676396b65f677fa3294391b1b04451e78c9658f4490b",
+        "size_bytes": 136273
+      },
+      "recipes.csv": {
+        "sha256": "c2542e5d5748ac2829147c003362fb1325b0510091b20ce92449fc6cb6ecddc3",
+        "size_bytes": 8414
+      },
+      "result.json": {
+        "sha256": "5d3d5652562e9f7b435e6c46967e8ea46b275bdd83d9e6334c199befcfce3062",
+        "size_bytes": 302526
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "85638b0b92c4e5fa07305d086c0e8779a433b0e48389e0f558d0c04c388c3542",
+        "size_bytes": 1717
+      },
+      "training_evidence/projection.json": {
+        "sha256": "5021d1307bbba544da6d366026d04030ab10db85511168d5f12d50eb9a5ee99b",
+        "size_bytes": 2748
+      }
+    },
+    "result_id": "20260823T133443Z_localization_sensing.learned_near_field_focusing_v1",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "channel SNR",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out seeds",
+    "paired_seeds": [
+      81001,
+      82001,
+      83001
+    ],
+    "sample_count_per_method_and_snr": 3,
+    "statistical_unit": "paired held-out scenario and noise seed",
+    "warning": "Three paired held-out seeds support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": [
+    {
+      "artifact_references": [
+        {
+          "id": "estimator",
+          "kind": "component",
+          "path": "training_evidence/entries/000-learned_near_field_estimator/artifact/artifacts/near_field_estimator.onnx",
+          "sha256": "c907d2176dc85750a4dd4a843d4bad81152f5372a9169eef267f3d0f8fcc2c95",
+          "size_bytes": 1529693
+        },
+        {
+          "id": "near_field_xl_mimo_range_angle_focusing.92629764bf66",
+          "kind": "contract",
+          "path": "training_evidence/entries/000-learned_near_field_estimator/artifact/training_contract.yaml",
+          "sha256": "e3da932050ad808e70ea57ef998680c373a7f9ecfbdbb2ec9af938ff6423e09a",
+          "size_bytes": 5353
+        }
+      ],
+      "evidence": {
+        "evaluation_metrics": {
+          "path": "training_evidence/entries/000-learned_near_field_estimator/evidence/evaluation_metrics.json",
+          "sha256": "bfb5a3e2a2d4863a76ecc047279bbdca0073c75d213db763c060baabc98e0d85",
+          "size_bytes": 711
+        },
+        "trained_artifact_manifest": {
+          "path": "training_evidence/entries/000-learned_near_field_estimator/artifact/trained_artifact_manifest.yaml",
+          "sha256": "6fe04ed9c8660dbdccfd330ef3106c49a91fc12934b3a4868a984d904d2aa96d",
+          "size_bytes": 3348
+        },
+        "training_history": {
+          "path": "training_evidence/entries/000-learned_near_field_estimator/evidence/training_history.json",
+          "sha256": "2ec1371724d7ce7f3fa48e60b765490536fdfc15f4549307baa8c87acf8965d5",
+          "size_bytes": 9046
+        }
+      },
+      "index": 0,
+      "series": "learned_near_field_estimator",
+      "source_declarations": {
+        "evaluation_metrics": {
+          "declared_sha256": "bfb5a3e2a2d4863a76ecc047279bbdca0073c75d213db763c060baabc98e0d85",
+          "path": "evaluation_metrics.json",
+          "snapshotted_sha256": "bfb5a3e2a2d4863a76ecc047279bbdca0073c75d213db763c060baabc98e0d85"
+        },
+        "trained_artifact_manifest": {
+          "declared_sha256": "6fe04ed9c8660dbdccfd330ef3106c49a91fc12934b3a4868a984d904d2aa96d",
+          "path": "../trained_artifact.yaml",
+          "snapshotted_sha256": "6fe04ed9c8660dbdccfd330ef3106c49a91fc12934b3a4868a984d904d2aa96d"
+        },
+        "training_history": {
+          "declared_sha256": "2ec1371724d7ce7f3fa48e60b765490536fdfc15f4549307baa8c87acf8965d5",
+          "path": "training_history.json",
+          "snapshotted_sha256": "2ec1371724d7ce7f3fa48e60b765490536fdfc15f4549307baa8c87acf8965d5"
+        }
+      }
+    }
+  ]
+}

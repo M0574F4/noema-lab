@@ -1,5 +1,5 @@
 {
-  "experiment_count": 9,
+  "experiment_count": 15,
   "experiments": [
     {
       "chart_ids": [
@@ -2005,6 +2005,758 @@
         }
       ],
       "title": "Learned Automatic Modulation Recognition"
+    },
+    {
+      "chart_ids": [
+        "range-localization-rmse"
+      ],
+      "chart_scripts": [
+        "../_static/noema-range-localization-chart-data.js"
+      ],
+      "data_directories": [
+        "data/range_localization"
+      ],
+      "description": "Train a portable localizer for the controlled four-anchor scenario. The runtime model receives only anchor coordinates and noisy ranges. True positions are separate offline targets; they never enter the returned block. The paired comparison contains linear trilateration, centroid-regularized trilateration, and the returned geometry-aware residual model. Geometry, SNR, range-noise floor, target positions, and random seeds are held fixed within each paired unit.",
+      "documentation_path": "../tutorials/learned_range_localization_demo.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/range_localization/summary_table.csv",
+          "sha256": "29b94b701892d85be13921e02f28318e8c6f4b1b0961c6545a3d04d13b720167",
+          "size_bytes": 549,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/range_localization/benchmark_projection.csv",
+          "sha256": "97adf16b77b271adda662c917fec1fcf03e938e931caf745e1a0113b832ed2f5",
+          "size_bytes": 6569,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/range_localization/chart_data.json",
+          "sha256": "30ce0aeb511d5184d1aa69519e47ff13d82d31f73f5dc20f22ec54958a3553cf",
+          "size_bytes": 2388,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/range_localization/snapshot_manifest.json",
+          "sha256": "91082aad0e896c6c58e51ade2211c31137d072a5e57378c2780b2d5d3fa21ded",
+          "size_bytes": 12049,
+          "type": "json"
+        }
+      ],
+      "id": "learned_range_localization_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "Four-anchor 2D range localization with SNR-derived measurement noise and selectable trilateration methods.",
+        "execution_profile": {
+          "id": "range_localization",
+          "version": 1
+        },
+        "name": "range_based_wireless_localization",
+        "sha256": "f9e98a4084e147914c8b536b7f2ba3b4d402e44863f34fdaea8f929261ece1b5",
+        "source_path": "recipes/localization_adapter_baseline.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.localization_geometry",
+            "params": {
+              "anchor_count": 4,
+              "area_m": 20,
+              "example_count": 24,
+              "seed": 23001
+            }
+          },
+          {
+            "id": "range_observation",
+            "inputs": {
+              "scene": "data.scene"
+            },
+            "op": "wireless.range_observation",
+            "params": {
+              "nlos_bias_m": 0,
+              "nlos_probability": 0,
+              "range_noise_floor_m": 0.05,
+              "seed": 23,
+              "snr_db": 15
+            }
+          },
+          {
+            "id": "localizer",
+            "inputs": {
+              "problem": "range_observation.observation"
+            },
+            "op": "model.localization_adapter",
+            "params": {
+              "mode": "regularized_trilateration"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "estimate": "localizer.estimate",
+              "problem": "range_observation.truth"
+            },
+            "op": "metrics.localization",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "localization_sensing",
+          "name": "Localization / Sensing",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/range_localization/snapshot_manifest.json",
+        "manifest_sha256": "91082aad0e896c6c58e51ade2211c31137d072a5e57378c2780b2d5d3fa21ded",
+        "projection_rows": 18,
+        "run_count": 18
+      },
+      "source_path": "docs/tutorials/learned_range_localization_demo.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/range_localization/summary_table.csv",
+          "sha256": "29b94b701892d85be13921e02f28318e8c6f4b1b0961c6545a3d04d13b720167",
+          "size_bytes": 549,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/range_localization/benchmark_projection.csv",
+          "sha256": "97adf16b77b271adda662c917fec1fcf03e938e931caf745e1a0113b832ed2f5",
+          "size_bytes": 6569,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned Two-Dimensional Range Localization"
+    },
+    {
+      "chart_ids": [
+        "aoa-estimation-rmse"
+      ],
+      "chart_scripts": [
+        "../_static/noema-aoa-estimation-chart-data.js"
+      ],
+      "data_directories": [
+        "data/aoa_estimation"
+      ],
+      "description": "Train a portable single-source AoA estimator for an eight-element half-wavelength uniform linear array. The returned model receives noisy complex snapshots only. Source angles are offline labels and are unavailable at runtime. The paired comparison holds angles, array snapshots, and AWGN seeds fixed across Bartlett, MUSIC, and the returned learned estimator.",
+      "documentation_path": "../tutorials/learned_aoa_estimation_demo.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/aoa_estimation/summary_table.csv",
+          "sha256": "c625d567367a6938b96343421fe0822ef0e36215d246ae5a53dde48d538362f6",
+          "size_bytes": 546,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/aoa_estimation/benchmark_projection.csv",
+          "sha256": "3a4b6644c0eeac150afb4e254de58bb95ac42eb6d79ea027237e1e9e89c6db30",
+          "size_bytes": 6040,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/aoa_estimation/chart_data.json",
+          "sha256": "4b9fdbfb461d66e05a16a997a09842fdcb4cd018c34df3846c8f8e75d81088a2",
+          "size_bytes": 2379,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/aoa_estimation/snapshot_manifest.json",
+          "sha256": "3087e1ce73eedcb367ae5ffa14a084912fe6d020f3d5f1ac8f16118944af7f22",
+          "size_bytes": 11694,
+          "type": "json"
+        }
+      ],
+      "id": "learned_aoa_estimation_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "Single-source narrowband ULA angle estimation with noisy array snapshots and selectable Bartlett or MUSIC methods.",
+        "execution_profile": {
+          "id": "aoa_array_estimation",
+          "version": 1
+        },
+        "name": "ula_angle_of_arrival_estimation",
+        "sha256": "97536d69c13fe7b555ce8fb8b70e2b0d3dc719d910c6062f149d27ca28117886",
+        "source_path": "recipes/aoa_adapter_ula_baseline.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.aoa_scene",
+            "params": {
+              "angle_max_deg": 60,
+              "angle_min_deg": -60,
+              "example_count": 24,
+              "seed": 23001
+            }
+          },
+          {
+            "id": "array_observation",
+            "inputs": {
+              "scene": "data.scene"
+            },
+            "op": "wireless.ula_array_observation",
+            "params": {
+              "antenna_count": 8,
+              "element_spacing_wavelengths": 0.5,
+              "seed": 23,
+              "snapshot_count": 64,
+              "snr_db": 10
+            }
+          },
+          {
+            "id": "estimator",
+            "inputs": {
+              "problem": "array_observation.observation"
+            },
+            "op": "model.aoa_estimator_adapter",
+            "params": {
+              "grid_step_deg": 0.25,
+              "mode": "bartlett_reference"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "estimate": "estimator.estimate",
+              "problem": "array_observation.truth"
+            },
+            "op": "metrics.aoa_estimation",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "localization_sensing",
+          "name": "Localization / Sensing",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/aoa_estimation/snapshot_manifest.json",
+        "manifest_sha256": "3087e1ce73eedcb367ae5ffa14a084912fe6d020f3d5f1ac8f16118944af7f22",
+        "projection_rows": 18,
+        "run_count": 18
+      },
+      "source_path": "docs/tutorials/learned_aoa_estimation_demo.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/aoa_estimation/summary_table.csv",
+          "sha256": "c625d567367a6938b96343421fe0822ef0e36215d246ae5a53dde48d538362f6",
+          "size_bytes": 546,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/aoa_estimation/benchmark_projection.csv",
+          "sha256": "3a4b6644c0eeac150afb4e254de58bb95ac42eb6d79ea027237e1e9e89c6db30",
+          "size_bytes": 6040,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned Narrowband Angle-of-Arrival Estimation"
+    },
+    {
+      "chart_ids": [
+        "miso-beam-selection-rate"
+      ],
+      "chart_scripts": [
+        "../_static/noema-miso-beam-selection-chart-data.js"
+      ],
+      "data_directories": [
+        "data/miso_beam_selection"
+      ],
+      "description": "Train a portable eight-beam, constant-modulus codebook for a clustered ULA channel distribution. The returned policy receives an eight-antenna complex MISO channel vector and selects the strongest learned beam. The loss optimizes normalized channel gain directly; no label or oracle score enters the deployed block. The paired comparison holds the beam count and channel realizations fixed across the learned codebook and an equal-size DFT codebook. Perfect-CSIT maximum-ratio transmission (MRT) remains an upper bound.",
+      "documentation_path": "../tutorials/learned_beam_selection_demo.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/miso_beam_selection/summary_table.csv",
+          "sha256": "418186dc1b367a467527886be5a9459e8c9ae492a195a36222375d4aa0ab597a",
+          "size_bytes": 583,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/miso_beam_selection/benchmark_projection.csv",
+          "sha256": "38d1676a98343e55d7838484ff90cfba75e104a94fb338fc0ad62b34644889e5",
+          "size_bytes": 5977,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/miso_beam_selection/chart_data.json",
+          "sha256": "5cbeb5444bba9d3fce56e93dd314251efc828cd670aefad89718bcc48670c5bc",
+          "size_bytes": 2448,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/miso_beam_selection/snapshot_manifest.json",
+          "sha256": "ef6e816ecd4288ac1c2fcc9a2815abf0b4f08f27e5cf105064f54c22fba651c2",
+          "size_bytes": 11766,
+          "type": "json"
+        }
+      ],
+      "id": "learned_beam_selection_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "Single-user MISO beamforming with learned and fixed eight-beam codebooks on seeded clustered ULA channels, plus an MRT upper bound.",
+        "execution_profile": {
+          "id": "beamforming_link_evaluation",
+          "version": 1
+        },
+        "name": "single_user_miso_beamforming",
+        "sha256": "87a564fc74471f2a9df6ac1db1cd84a5aca4c2802e243e6bb10abee72b9942cc",
+        "source_path": "recipes/beamforming_adapter_baseline.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.beamforming_scenario",
+            "params": {
+              "channel_model": "clustered_ula",
+              "example_count": 32,
+              "seed": 23,
+              "snr_db": 10,
+              "tx_antennas": 8
+            }
+          },
+          {
+            "id": "beamformer",
+            "inputs": {
+              "problem": "data.problem"
+            },
+            "op": "model.beamforming_adapter",
+            "params": {
+              "mode": "codebook_sweep_reference"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "decision": "beamformer.decision",
+              "problem": "data.problem"
+            },
+            "op": "metrics.beamforming",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "beamforming_precoding",
+          "name": "Beamforming / Precoding",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/miso_beam_selection/snapshot_manifest.json",
+        "manifest_sha256": "ef6e816ecd4288ac1c2fcc9a2815abf0b4f08f27e5cf105064f54c22fba651c2",
+        "projection_rows": 18,
+        "run_count": 18
+      },
+      "source_path": "docs/tutorials/learned_beam_selection_demo.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/miso_beam_selection/summary_table.csv",
+          "sha256": "418186dc1b367a467527886be5a9459e8c9ae492a195a36222375d4aa0ab597a",
+          "size_bytes": 583,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/miso_beam_selection/benchmark_projection.csv",
+          "sha256": "38d1676a98343e55d7838484ff90cfba75e104a94fb338fc0ad62b34644889e5",
+          "size_bytes": 5977,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned Single-User MISO Beam Selection"
+    },
+    {
+      "chart_ids": [
+        "isac-joint-allocation-utility"
+      ],
+      "chart_scripts": [
+        "../_static/noema-isac-joint-allocation-chart-data.js"
+      ],
+      "data_directories": [
+        "data/isac_joint_allocation"
+      ],
+      "description": "Train a portable power-allocation policy for one controlled frequency-selective OFDM protocol. Each record exposes per-subcarrier communication gain, sensing gain, noise level, and the declared sensing weight. The policy must return a non-negative unit-sum power vector. The paired comparison contains equal power, communication-only water filling, a per-scene projected-gradient reference for the declared scalarized objective, and the returned learned policy. Channel gains, noise, tradeoff weight, power budget, and random seeds remain fixed within each paired unit.",
+      "documentation_path": "../tutorials/learned_isac_ofdm_allocation_demo.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/isac_joint_allocation/summary_table.csv",
+          "sha256": "26dd11f9af2c6b836d90b904c2d2f49c8f3224309f56cdfbf7aa84f0c4484415",
+          "size_bytes": 1012,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/isac_joint_allocation/benchmark_projection.csv",
+          "sha256": "7f24cc76a242d2129536fa2fef5a3a06b7b66a3bd1edf93700ab3f00c9a43038",
+          "size_bytes": 9078,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/isac_joint_allocation/chart_data.json",
+          "sha256": "a35426ee59b4442c70c518b2de5eff395e84d667eb96b1e26e3a5d90bbfb0832",
+          "size_bytes": 3101,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/isac_joint_allocation/snapshot_manifest.json",
+          "sha256": "f219bd36c1b318c5efe75a547d1df5b1a15153c076162a82dd1c45e3a18a7479",
+          "size_bytes": 14343,
+          "type": "json"
+        }
+      ],
+      "id": "learned_isac_ofdm_allocation_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "Synthetic frequency-selective OFDM allocation under a fixed power budget with explicit communication-rate and sensing-information objectives.",
+        "execution_profile": {
+          "id": "isac_ofdm_allocation",
+          "version": 1
+        },
+        "name": "isac_ofdm_joint_allocation",
+        "sha256": "ef157a24b12de1a74a7c5132443fc35c6c82e13aa9fe47057853672927b72fb4",
+        "source_path": "recipes/isac_ofdm_joint_allocation.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.isac_ofdm_scenario",
+            "params": {
+              "example_count": 64,
+              "seed": 23001,
+              "sensing_weight": 0.4,
+              "snr_db": 10,
+              "subcarriers": 12,
+              "total_power": 1.0
+            }
+          },
+          {
+            "id": "allocator",
+            "inputs": {
+              "problem": "data.problem"
+            },
+            "op": "model.isac_ofdm_allocator_adapter",
+            "params": {
+              "mode": "equal_power"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "decision": "allocator.decision",
+              "problem": "data.problem"
+            },
+            "op": "metrics.isac_ofdm",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "resource_allocation",
+          "name": "Resource Allocation",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/isac_joint_allocation/snapshot_manifest.json",
+        "manifest_sha256": "f219bd36c1b318c5efe75a547d1df5b1a15153c076162a82dd1c45e3a18a7479",
+        "projection_rows": 24,
+        "run_count": 24
+      },
+      "source_path": "docs/tutorials/learned_isac_ofdm_allocation_demo.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/isac_joint_allocation/summary_table.csv",
+          "sha256": "26dd11f9af2c6b836d90b904c2d2f49c8f3224309f56cdfbf7aa84f0c4484415",
+          "size_bytes": 1012,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/isac_joint_allocation/benchmark_projection.csv",
+          "sha256": "7f24cc76a242d2129536fa2fef5a3a06b7b66a3bd1edf93700ab3f00c9a43038",
+          "size_bytes": 9078,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned Joint ISAC OFDM Allocation"
+    },
+    {
+      "chart_ids": [
+        "near-field-focusing-gain"
+      ],
+      "chart_scripts": [
+        "../_static/noema-near-field-xl-mimo-chart-data.js"
+      ],
+      "data_directories": [
+        "data/near_field_xl_mimo"
+      ],
+      "description": "Train a portable range-angle estimator for a controlled 28 GHz spherical-wave scenario. The runtime model receives one noisy phase-referenced coherent-pilot observation from a 32-element half-wavelength array. The declared 0.5\u20135 m interval lies approximately within this aperture's radiative near-field region; true range and angle remain separate offline targets. The paired comparison contains far-field steering search, polar range-angle codebook search, the returned learned estimator, and true-position focusing as an explicitly labeled simulation oracle.",
+      "documentation_path": "../tutorials/learned_near_field_xl_mimo_demo.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/near_field_xl_mimo/summary_table.csv",
+          "sha256": "2d2f5153103798c82be567447c1714baca02283e573f34c57afbbee9add2eb9e",
+          "size_bytes": 910,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/near_field_xl_mimo/benchmark_projection.csv",
+          "sha256": "563fd73c244b81fe744b147027c142864d06ea75027d3e8a26e5ac78eaf67707",
+          "size_bytes": 9008,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/near_field_xl_mimo/chart_data.json",
+          "sha256": "a71e28758f856ee7feb2bdae697c8839ef015acd64e74865aaaa121468b58b16",
+          "size_bytes": 3022,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/near_field_xl_mimo/snapshot_manifest.json",
+          "sha256": "ef48cdd5e28be52cabc384f2bd4ff1ccf9ece67bac4d5c8dda6926c3c6cd8add",
+          "size_bytes": 14594,
+          "type": "json"
+        }
+      ],
+      "id": "learned_near_field_xl_mimo_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "Synthetic 28 GHz spherical-wave coherent-pilot estimation with paired range-angle and beam-focusing evaluation.",
+        "execution_profile": {
+          "id": "near_field_range_angle_focusing",
+          "version": 1
+        },
+        "name": "near_field_xl_mimo_range_angle_focusing",
+        "sha256": "ca1a7dbfd5f1664b16060f6dc13d7b3968c1b1440fa4e1c250f96a7bd66fe10f",
+        "source_path": "recipes/near_field_xl_mimo_focusing.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.near_field_xl_mimo_scenario",
+            "params": {
+              "angle_max_deg": 55,
+              "angle_min_deg": -55,
+              "antennas": 32,
+              "carrier_frequency_ghz": 28,
+              "example_count": 64,
+              "range_max_m": 5,
+              "range_min_m": 0.5,
+              "seed": 23001,
+              "snr_db": 15
+            }
+          },
+          {
+            "id": "estimator",
+            "inputs": {
+              "problem": "data.problem",
+              "truth": "data.truth"
+            },
+            "op": "model.near_field_estimator_adapter",
+            "params": {
+              "mode": "polar_codebook"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "estimate": "estimator.estimate",
+              "problem": "data.problem",
+              "truth": "data.truth"
+            },
+            "op": "metrics.near_field_focusing",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "localization_sensing",
+          "name": "Localization / Sensing",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/near_field_xl_mimo/snapshot_manifest.json",
+        "manifest_sha256": "ef48cdd5e28be52cabc384f2bd4ff1ccf9ece67bac4d5c8dda6926c3c6cd8add",
+        "projection_rows": 24,
+        "run_count": 24
+      },
+      "source_path": "docs/tutorials/learned_near_field_xl_mimo_demo.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/near_field_xl_mimo/summary_table.csv",
+          "sha256": "2d2f5153103798c82be567447c1714baca02283e573f34c57afbbee9add2eb9e",
+          "size_bytes": 910,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/near_field_xl_mimo/benchmark_projection.csv",
+          "sha256": "563fd73c244b81fe744b147027c142864d06ea75027d3e8a26e5ac78eaf67707",
+          "size_bytes": 9008,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned Near-Field XL-MIMO Range-Angle Focusing"
+    },
+    {
+      "chart_ids": [
+        "leo-ntn-handover-accuracy"
+      ],
+      "chart_scripts": [
+        "../_static/noema-leo-ntn-tracking-chart-data.js"
+      ],
+      "data_directories": [
+        "data/leo_ntn_tracking"
+      ],
+      "description": "Train a causal portable tracker from six noisy Doppler/azimuth observations. At a fixed one-second horizon, the model predicts future Doppler and scores one of nine fixed beam sectors. Future state and the correct next beam are captured separately and never enter runtime inference. The paired comparison contains hold-last, linear extrapolation, the learned tracker, and a simulation-future-state oracle.",
+      "documentation_path": "../tutorials/learned_leo_ntn_tracking_demo.html",
+      "evidence": [
+        {
+          "label": "summary table.csv",
+          "path": "data/leo_ntn_tracking/summary_table.csv",
+          "sha256": "586277f8b8940aa7e8efe805885aae7e241b145db49643c8e147dd93c635c1bc",
+          "size_bytes": 742,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/leo_ntn_tracking/benchmark_projection.csv",
+          "sha256": "4788fd6906aab8189face4375aa700db50c278b7088c7eed47be56a300e9d221",
+          "size_bytes": 8515,
+          "type": "csv"
+        },
+        {
+          "label": "chart data.json",
+          "path": "data/leo_ntn_tracking/chart_data.json",
+          "sha256": "4de5b65036ee61faf23bff3498007fe4a87011f1433d8125ce5443f00a5bb03e",
+          "size_bytes": 2986,
+          "type": "json"
+        },
+        {
+          "label": "snapshot manifest.json",
+          "path": "data/leo_ntn_tracking/snapshot_manifest.json",
+          "sha256": "6b47ee8ce61708ed3bdc1854525e100250b6f73f14a9e6deea47c7dc79284b7d",
+          "size_bytes": 14138,
+          "type": "json"
+        }
+      ],
+      "id": "learned_leo_ntn_tracking_demo",
+      "published_results": [],
+      "recipe": {
+        "description": "Synthetic bounded-kinematic LEO pass with causal Doppler prediction and next-beam handover at a fixed horizon.",
+        "execution_profile": {
+          "id": "leo_ntn_tracking",
+          "version": 1
+        },
+        "name": "leo_ntn_doppler_beam_tracking",
+        "sha256": "5fd793807a9744744f05a97c676046de4408b36c632e4c9e8fd0e2d37417363f",
+        "source_path": "recipes/leo_ntn_doppler_beam_tracking.yaml",
+        "steps": [
+          {
+            "id": "data",
+            "inputs": {},
+            "op": "source.leo_ntn_tracking_scenario",
+            "params": {
+              "beam_count": 9,
+              "example_count": 64,
+              "history_length": 6,
+              "history_step_s": 0.5,
+              "max_doppler_hz": 48000,
+              "prediction_horizon_s": 1.0,
+              "seed": 23001,
+              "snr_db": 15
+            }
+          },
+          {
+            "id": "tracker",
+            "inputs": {
+              "problem": "data.problem",
+              "truth": "data.truth"
+            },
+            "op": "model.leo_ntn_tracking_adapter",
+            "params": {
+              "mode": "linear_extrapolation"
+            }
+          },
+          {
+            "id": "evaluation",
+            "inputs": {
+              "decision": "tracker.decision",
+              "truth": "data.truth"
+            },
+            "op": "metrics.leo_ntn_tracking",
+            "params": {}
+          }
+        ],
+        "suite": {
+          "id": "beamforming_precoding",
+          "name": "Beamforming / Precoding",
+          "status": "experimental",
+          "version": "v1-draft"
+        }
+      },
+      "snapshot": {
+        "kind": "noema.docs_demo_snapshot",
+        "manifest_path": "data/leo_ntn_tracking/snapshot_manifest.json",
+        "manifest_sha256": "6b47ee8ce61708ed3bdc1854525e100250b6f73f14a9e6deea47c7dc79284b7d",
+        "projection_rows": 24,
+        "run_count": 24
+      },
+      "source_path": "docs/tutorials/learned_leo_ntn_tracking_demo.md",
+      "tables": [
+        {
+          "label": "summary table.csv",
+          "path": "data/leo_ntn_tracking/summary_table.csv",
+          "sha256": "586277f8b8940aa7e8efe805885aae7e241b145db49643c8e147dd93c635c1bc",
+          "size_bytes": 742,
+          "type": "csv"
+        },
+        {
+          "label": "benchmark projection.csv",
+          "path": "data/leo_ntn_tracking/benchmark_projection.csv",
+          "sha256": "4788fd6906aab8189face4375aa700db50c278b7088c7eed47be56a300e9d221",
+          "size_bytes": 8515,
+          "type": "csv"
+        }
+      ],
+      "title": "Learned LEO-NTN Doppler Prediction and Beam Handover"
     }
   ],
   "kind": "noema.hosted_demo_catalog",

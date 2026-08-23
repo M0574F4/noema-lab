@@ -1,0 +1,7 @@
+SNR (dB),Method,Role,Mean RMSE (m),Primary 95% CI low,Primary 95% CI high
+0,Linear trilateration,baseline,5.29447221756,4.28020962234,6.30873481278
+0,Regularized trilateration,baseline,5.08143758774,4.04386863304,6.11900654244
+0,Learned residual localizer,candidate,4.53462282817,3.19775124431,5.87149441203
+15,Linear trilateration,baseline,0.94544059038,0.777609934069,1.11327124669
+15,Regularized trilateration,baseline,0.977987428508,0.726352444794,1.22962241222
+15,Learned residual localizer,candidate,1.37482090791,0.856431958962,1.89320985686

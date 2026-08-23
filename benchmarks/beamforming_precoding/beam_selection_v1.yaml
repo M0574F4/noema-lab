@@ -2,7 +2,7 @@ schema_version: 1
 id: beamforming_precoding.beam_selection_v1
 version: "0.1.0"
 name: Beam Selection / Precoding
-description: Single-user flat-fading MISO upper-bound benchmark comparing perfect-CSIT MRT with a finite DFT-codebook selection oracle.
+description: Single-user clustered-ULA MISO benchmark comparing perfect-CSIT MRT with an eight-beam fixed DFT-codebook sweep.
 suite:
   id: beamforming_precoding
   name: Beamforming / Precoding
@@ -11,7 +11,7 @@ suite:
 dataset:
   id: synthetic_beamforming
   modality: wireless
-  version: synthetic-beamforming-v1
+  version: synthetic-beamforming-clustered-ula-v1
   split: fixed_seed
 task:
   id: beamforming_precoding
@@ -87,4 +87,4 @@ metadata:
     plot: graceful-degradation
     x: channel.snr_db
     y: task.score
-  notes: Both policies observe the realized channel; MRT is an upper bound and exhaustive DFT-codebook selection is an oracle within the finite codebook. The adapter block is the replacement point for learned or feedback-constrained policies.
+  notes: Both methods observe the realized clustered-ULA channel; MRT is an upper bound and exhaustive DFT-codebook selection is optimal only within the fixed eight-beam codebook. The adapter block is the replacement point for learned or feedback-constrained policies.

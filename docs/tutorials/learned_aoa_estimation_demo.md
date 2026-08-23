@@ -62,10 +62,11 @@ exporter presents it to ONNX as a final real/imaginary axis.
 
 ## 2. Train and return the estimator
 
-The starter converts each frame to a normalized complex sample covariance and uses a bounded MLP
-regressor. This removes arbitrary snapshot ordering and follows the same second-order structure
-used by the classical array processors. Validation angle MSE selects the checkpoint; held-out
-angles remain sealed until `evaluate_demo.py`.
+The starter converts each frame to a normalized complex sample covariance, obtains a 0.25°-grid
+Bartlett estimate, and trains a bounded residual head for sub-grid and noise corrections. The last
+layer starts at zero, so training starts from the physical estimator rather than an arbitrary MLP.
+Validation angle MSE selects the checkpoint; held-out angles remain sealed until
+`evaluate_demo.py`.
 
 The returned `aoa_estimator.onnx` implements:
 
@@ -80,6 +81,34 @@ The schema-v2 artifact records the exact trained antenna and snapshot sizes and 
 The post-training pack compares Bartlett, MUSIC, and the learned estimator at 0 and 15 dB over
 three fresh paired seeds. Use `aoa.rmse_deg` as the primary metric and inspect `aoa.mae_deg` as a
 companion measure.
+
+## Completed benchmark result
+
+The completed paired campaign contains 18 runs: Bartlett, MUSIC, and the learned estimator at two
+held-out SNRs over three fresh seeds. Points are means over the three seeds; bands are two-sided
+Student-t 95% confidence intervals.
+
+```{note}
+Three paired seeds make this a compact workflow result, not a publication-strength population
+claim.
+```
+
+<div data-noema-chart="aoa-estimation-rmse"></div>
+
+The physics-informed learned estimator reaches 0.345° mean RMSE at 0 dB, compared with 0.356°
+for Bartlett and 0.364° for MUSIC. At 15 dB all three are effectively tied near 0.093°. This is a
+small low-SNR point-estimate improvement, and the three-seed confidence intervals overlap. It is
+not a claim that learning generally dominates classical single-source array processing.
+
+```{csv-table} Paired benchmark summary
+:file: ../demo/data/aoa_estimation/summary_table.csv
+:header-rows: 1
+:align: center
+```
+
+Download the [run-level projection](../demo/data/aoa_estimation/benchmark_projection.csv),
+[chart data](../demo/data/aoa_estimation/chart_data.json), or
+[provenance manifest](../demo/data/aoa_estimation/snapshot_manifest.json).
 
 This is deliberately a far-field, single-source, narrowband, calibrated-array protocol. Multiple
 sources, coherent multipath, calibration error, near-field propagation, and wideband beam squint

@@ -17849,6 +17849,7 @@ None.
 
 | Name | Type | Required | Default / values | Description |
 | --- | --- | --- | --- | --- |
+| `channel_model` | `string` | no | default `iid_complex_gaussian`<br>values `iid_complex_gaussian`, `clustered_ula` | Use unstructured Rayleigh fading or a three-hotspot clustered ULA distribution suitable for finite-codebook design. |
 | `example_count` | `integer` | no | default `32` |  |
 | `seed` | `integer` | no | default `0` |  |
 | `snr_db` | `number` | no | default `10.0` |  |

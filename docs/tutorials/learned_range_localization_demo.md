@@ -88,5 +88,32 @@ is available during inference.
 method receives the same target positions, anchors, and noisy ranges. Compare
 `localization.rmse_m`; `task.score` is a companion presentation metric.
 
+## Completed benchmark result
+
+The completed paired campaign contains 18 runs: three localizers, two held-out SNRs, and three
+fresh seeds. Points are means over the three seeds; bands are two-sided Student-t 95% confidence
+intervals.
+
+```{note}
+Three paired seeds make this a compact workflow result, not a publication-strength population
+claim.
+```
+
+<div data-noema-chart="range-localization-rmse"></div>
+
+The learned residual has the lowest mean at 0 dB (4.53 m RMSE versus 5.08 m for regularized
+trilateration), but its interval overlaps the classical methods and its mean is worse than both at
+15 dB. This is a useful mixed result, not a claim that the starter dominates across SNR.
+
+```{csv-table} Paired benchmark summary
+:file: ../demo/data/range_localization/summary_table.csv
+:header-rows: 1
+:align: center
+```
+
+Download the [run-level projection](../demo/data/range_localization/benchmark_projection.csv),
+[chart data](../demo/data/range_localization/chart_data.json), or
+[provenance manifest](../demo/data/range_localization/snapshot_manifest.json).
+
 This protocol is synthetic range localization, not synchronized UWB ranging. It does not support
 clock bias, waveform-level ToA extraction, learned NLOS identification, or radio-map claims.

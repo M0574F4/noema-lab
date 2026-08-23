@@ -1,0 +1,9 @@
+SNR (dB),Method,Role,Mean Normalized focusing gain,Mean Range RMSE (m),Mean Angle RMSE (degree),Primary 95% CI low,Primary 95% CI high
+0,Far-field steering search,baseline,0.887805938721,1.24112034822,0.480918891229,0.857989143473,0.917622733968
+0,Polar range-angle codebook,baseline,0.884192347527,1.32858076437,0.788399283452,0.863331780025,0.905052915028
+0,True-position focusing,oracle,1,0,0,1,1
+0,Physics-informed learned estimator,candidate,0.958070596059,1.2103106285,0.42828154379,0.948619006755,0.967522185363
+15,Far-field steering search,baseline,0.902786771457,1.24112034822,0.185407599994,0.88512045795,0.920453084963
+15,Polar range-angle codebook,baseline,0.904617687066,0.542011835582,0.731084762374,0.886757977583,0.922477396549
+15,True-position focusing,oracle,1,0,0,1,1
+15,Physics-informed learned estimator,candidate,0.979071935018,0.450755043676,0.287153639773,0.973025898867,0.985117971169

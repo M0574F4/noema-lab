@@ -33,7 +33,7 @@ Available projects:
   and noisy ranges, with positions used only as offline supervision.
 - `aoa_estimation_covariance_mlp`: covariance-domain single-source ULA angle estimation from
   complex snapshots, compared with Bartlett and MUSIC.
-- `beam_selection_supervised_mlp`: finite-DFT-codebook beam classification from captured MISO
+- `beam_selection_supervised_mlp`: distribution-aware eight-beam codebook learning from captured MISO
   channels, with exhaustive-search labels derived inside the trainer.
 - `isac_joint_allocation_deepsets`: label-free joint communication/sensing OFDM allocation under an
   exact sum-power constraint and an explicit scalarized utility.
