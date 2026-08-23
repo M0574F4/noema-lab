@@ -26,7 +26,12 @@ class PublicRepositoryTests(unittest.TestCase):
             "docs/_static/noema-workflow-video-card.svg",
             readme,
         )
-        self.assertIn("launch_video.html", readme)
+        self.assertIn(
+            "https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow",
+            readme,
+        )
+        self.assertNotIn("launch_video.html", readme)
+        self.assertFalse((ROOT / "docs" / "launch_video.md").exists())
         self.assertLess(
             readme.index("## Watch the complete workflow"),
             readme.index("## Start here"),
@@ -83,6 +88,7 @@ class PublicRepositoryTests(unittest.TestCase):
         self.assertIn("## Ready-to-train systems", readme)
         self.assertEqual(readme.count("✅ [Train + compare]"), 15)
         self.assertNotIn("🟡 [Benchmark now]", readme)
+        self.assertNotIn("| [2D range localization](", readme)
         for relative in (
             "tutorials/learned_qpsk_demapper_demo.html",
             "tutorials/learned_qpsk_phase_tracking_demo.html",

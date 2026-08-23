@@ -101,6 +101,5 @@ shows the clean installation, training-contract export, dataset capture, externa
 returned-model validation, and UI comparison against both declared baselines. The reviewed video
 is hosted externally; no local recording or edit file is committed to the source repository.
 
-The versioned [recording runbook](launch_video.md) preserves the demonstrated steps, while
-`launch_evidence.json` records the stable video identity and URLs alongside the numerical data
-paths used by the public README, documentation, figures, tables, and demo.
+`launch_evidence.json` records the stable video identity and viewer-facing URLs alongside the
+numerical data paths used by the public README, documentation, figures, tables, and demo.

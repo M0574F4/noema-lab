@@ -41,6 +41,7 @@ recursive-include docs *.md *.txt *.py *.svg *.png *.drawio *.css *.js *.html *.
 prune docs/_build
 prune docs/demo/data/digital_vs_deepjscc/reconstructions
 prune docs/demo/data/deepjscc_slow_rayleigh/reconstructions
+exclude docs/launch_video.md
 recursive-include benchmarks *.yaml
 recursive-include recipes *.yaml
 recursive-include examples *.py *.yaml

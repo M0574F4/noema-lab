@@ -13,7 +13,7 @@ retained evidence attached to the same verifiable object.
 ```{raw} html
 <nav class="noema-home-actions" aria-label="Primary Noema destinations">
   <a class="noema-home-action noema-home-action-primary" href="break_the_comparison.html">Try the flagship demo</a>
-  <a class="noema-home-action" href="https://www.youtube.com/watch?v=bKNXS_vHLHc">Watch the complete workflow</a>
+  <a class="noema-home-action" href="#watch-the-complete-workflow">Watch the complete workflow</a>
   <a class="noema-home-action" href="tutorials.html">Start a workflow</a>
   <a class="noema-home-action" href="demos.html">Explore demonstrations</a>
   <a class="noema-home-action" href="reference/index.html">Open the reference</a>
@@ -175,7 +175,6 @@ publication_artifact_readiness
 submissions
 launch_evidence
 launch_assets
-launch_video
 ```
 
 ```{toctree}
