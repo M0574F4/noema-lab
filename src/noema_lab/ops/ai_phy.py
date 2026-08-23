@@ -1139,17 +1139,68 @@ class BeamformingScenarioSourceOperation(Operation):
     ]
     equivalence = {"type": "statistical"}
     formats = {"artifact": "npz", "tensor": "torch.Tensor"}
-    params_schema = object_schema({"example_count": {"type": "integer", "default": 32, "minimum": 1}, "tx_antennas": {"type": "integer", "default": 8, "minimum": 2}, "snr_db": {"type": "number", "default": 10.0}, "seed": {"type": "integer", "default": 0, "minimum": 0}})
+    params_schema = object_schema(
+        {
+            "example_count": {"type": "integer", "default": 32, "minimum": 1},
+            "tx_antennas": {"type": "integer", "default": 8, "minimum": 2},
+            "snr_db": {"type": "number", "default": 10.0},
+            "seed": {"type": "integer", "default": 0, "minimum": 0},
+            "channel_model": {
+                "type": "string",
+                "default": "iid_complex_gaussian",
+                "enum": ["iid_complex_gaussian", "clustered_ula"],
+                "description": (
+                    "Use unstructured Rayleigh fading or a three-hotspot clustered ULA "
+                    "distribution suitable for finite-codebook design."
+                ),
+            },
+        }
+    )
 
     def run(self, ctx: OperationContext) -> OperationResult:
         n = int(_param(ctx.params, "example_count", 32))
         tx = int(_param(ctx.params, "tx_antennas", 8))
         snr_db = float(_param(ctx.params, "snr_db", 10.0))
+        channel_model = str(
+            _param(ctx.params, "channel_model", "iid_complex_gaussian")
+        )
         seed = ctx.seed("beamforming_scenario")
         rng = np.random.RandomState(seed)
-        channels = _complex_normal(rng, (n, tx))
+        if channel_model == "iid_complex_gaussian":
+            channels = _complex_normal(rng, (n, tx))
+        elif channel_model == "clustered_ula":
+            # A sectorized access point rarely sees uniformly distributed spatial
+            # frequencies. These three repeatable user hotspots create a declared
+            # structured channel on which equal-size codebook design is meaningful.
+            hotspot = rng.choice(3, size=n, p=[0.45, 0.35, 0.20])
+            centers = np.asarray([-0.48, 0.06, 0.57], dtype=np.float32)
+            spatial_frequency = np.clip(
+                centers[hotspot] + rng.normal(0.0, 0.075, size=n), -0.95, 0.95
+            )
+            reflected_frequency = np.clip(
+                spatial_frequency + rng.normal(0.0, 0.16, size=n), -0.98, 0.98
+            )
+            antenna = np.arange(tx, dtype=np.float32)[None, :]
+            dominant = np.exp(
+                1j * np.pi * spatial_frequency[:, None] * antenna
+            )
+            reflected = np.exp(
+                1j * np.pi * reflected_frequency[:, None] * antenna
+            )
+            dominant_gain = _complex_normal(rng, (n, 1))
+            reflected_gain = _complex_normal(rng, (n, 1))
+            diffuse = _complex_normal(rng, (n, tx))
+            channels = (
+                dominant_gain * dominant
+                + 0.32 * reflected_gain * reflected
+                + 0.08 * diffuse
+            ).astype(np.complex64)
+        else:
+            raise OperationError(
+                "Unsupported beamforming channel model `%s`" % channel_model
+            )
         codebook = _dft_codebook(tx).astype(np.complex64)
-        metadata = {"dataset": "synthetic_beamforming", "split": "fixed_seed", "example_count": n, "tx_antennas": tx, "snr_db": snr_db, "seed": int(seed), "array": "channels"}
+        metadata = {"dataset": "synthetic_beamforming", "split": "fixed_seed", "example_count": n, "tx_antennas": tx, "snr_db": snr_db, "seed": int(seed), "array": "channels", "channel_model": channel_model}
         path = ctx.output_path("problem", ".npz")
         np.savez_compressed(path, channels=channels.astype(np.complex64), codebook=codebook, metadata_json=json.dumps(metadata, sort_keys=True))
         return OperationResult(outputs={"problem": artifact("ai_phy.beamforming_problem.numpy", path, metadata)}, metrics={"channel.snr_db": snr_db, "ai_phy.example_count": n}, metadata=metadata)

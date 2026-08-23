@@ -1,0 +1,114 @@
+(function () {
+  "use strict";
+  const charts = {
+  "aoa-estimation-rmse": {
+    "accessibleSummary": "Each point is the mean of three paired held-out runs. Shaded bands show Student-t 95% confidence intervals; exact values and run identifiers are downloadable below.",
+    "allowLog": false,
+    "description": "Mean angle RMSE over three paired held-out source-angle, snapshot, and AWGN seeds. Bands are two-sided Student-t 95% intervals.",
+    "series": [
+      {
+        "color": "#2563eb",
+        "dash": [
+          7,
+          4
+        ],
+        "id": "bartlett",
+        "label": "Bartlett reference",
+        "marker": "square",
+        "range": [
+          [
+            0.0,
+            0.11294008919275503,
+            0.5982789067225783
+          ],
+          [
+            15.0,
+            0.08595380608603163,
+            0.10083526804443503
+          ]
+        ],
+        "values": [
+          [
+            0.0,
+            0.35560949795766666
+          ],
+          [
+            15.0,
+            0.09339453706523333
+          ]
+        ]
+      },
+      {
+        "color": "#7c3aed",
+        "dash": [
+          10,
+          3
+        ],
+        "id": "music",
+        "label": "MUSIC",
+        "marker": "triangle",
+        "range": [
+          [
+            0.0,
+            0.1321079107090767,
+            0.59579689254759
+          ],
+          [
+            15.0,
+            0.08595380608603163,
+            0.10083526804443503
+          ]
+        ],
+        "values": [
+          [
+            0.0,
+            0.36395240162833337
+          ],
+          [
+            15.0,
+            0.09339453706523333
+          ]
+        ]
+      },
+      {
+        "color": "#16a34a",
+        "dash": [],
+        "id": "learned_estimator",
+        "label": "Learned Bartlett-residual estimator",
+        "marker": "circle",
+        "range": [
+          [
+            0.0,
+            0.07440815498806974,
+            0.6156056360172636
+          ],
+          [
+            15.0,
+            0.07880525591058313,
+            0.10809148926041687
+          ]
+        ],
+        "values": [
+          [
+            0.0,
+            0.34500689550266667
+          ],
+          [
+            15.0,
+            0.0934483725855
+          ]
+        ]
+      }
+    ],
+    "title": "Narrowband AoA error",
+    "type": "line",
+    "xLabel": "SNR (dB)",
+    "yIncludeZero": true,
+    "yLabel": "Angle RMSE (degree)"
+  }
+};
+  window.NOEMA_DEMO_CHARTS = Object.freeze({
+    ...(window.NOEMA_DEMO_CHARTS || {}),
+    ...charts,
+  });
+})();

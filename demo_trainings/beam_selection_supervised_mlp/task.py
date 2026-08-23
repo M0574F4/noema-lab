@@ -14,9 +14,9 @@ COMPONENT_ROLE = "single_user_miso_beam_policy"
 ENTRYPOINT_ID = "beam_policy"
 OPERATION_ID = "model.beamforming_adapter"
 REQUIRED_INPUTS = ["problem"]
-PRIMARY_METRIC = "codebook_accuracy"
+PRIMARY_METRIC = "normalized_channel_gain"
 DESCRIPTION = (
-    "Supervised finite-codebook MISO beam policy trained from captured channel "
+    "Distribution-aware eight-beam MISO codebook learned from captured channel "
     "vectors and returned through Noema's portable beam-policy ABI."
 )
 RUNTIME_INPUTS = [
@@ -39,37 +39,39 @@ class BeamPolicy(nn.Module):
     def __init__(self, antenna_count: int) -> None:
         super().__init__()
         self.antenna_count = int(antenna_count)
-        self.classifier = nn.Sequential(
-            nn.Linear(2 * self.antenna_count, 64),
-            nn.SiLU(),
-            nn.Linear(64, 64),
-            nn.SiLU(),
-            nn.Linear(64, self.antenna_count),
+        initial_frequency = torch.arange(
+            -self.antenna_count // 2,
+            self.antenna_count - self.antenna_count // 2,
+            dtype=torch.float32,
+        ) * (2.0 / float(self.antenna_count))
+        self.spatial_frequency_raw = nn.Parameter(
+            torch.atanh(initial_frequency / 1.05)
         )
-        antenna = torch.arange(self.antenna_count, dtype=torch.float32)[:, None]
-        beam = torch.arange(self.antenna_count, dtype=torch.float32)[None, :]
-        phase = 2.0 * math.pi * antenna * beam / float(self.antenna_count)
-        codebook = torch.stack(
-            [torch.cos(phase), torch.sin(phase)], dim=-1
-        ).permute(1, 0, 2) / math.sqrt(float(self.antenna_count))
-        self.register_buffer("codebook_ri", codebook)
+        self.register_buffer(
+            "antenna_index", torch.arange(self.antenna_count, dtype=torch.float32)
+        )
 
-    def logits(self, channels_ri: torch.Tensor) -> torch.Tensor:
-        scale = torch.sqrt(torch.mean(channels_ri**2, dim=(1, 2), keepdim=True)).clamp_min(1e-6)
-        return self.classifier((channels_ri / scale).flatten(1))
+    def codebook(self) -> torch.Tensor:
+        spatial_frequency = 1.05 * torch.tanh(self.spatial_frequency_raw)
+        phase = math.pi * spatial_frequency[:, None] * self.antenna_index[None, :]
+        return torch.stack([torch.cos(phase), torch.sin(phase)], dim=-1) / math.sqrt(
+            float(self.antenna_count)
+        )
 
-    def forward(self, channels_ri: torch.Tensor) -> torch.Tensor:
-        indices = torch.argmax(self.logits(channels_ri), dim=1)
-        return self.codebook_ri[indices]
-
-    def oracle_labels(self, channels_ri: torch.Tensor) -> torch.Tensor:
+    def normalized_gains(self, channels_ri: torch.Tensor) -> torch.Tensor:
+        codebook = self.codebook()
         channel_real = channels_ri[..., 0]
         channel_imag = channels_ri[..., 1]
-        beam_real = self.codebook_ri[..., 0]
-        beam_imag = self.codebook_ri[..., 1]
+        beam_real = codebook[..., 0]
+        beam_imag = codebook[..., 1]
         gain_real = channel_real @ beam_real.T + channel_imag @ beam_imag.T
         gain_imag = channel_imag @ beam_real.T - channel_real @ beam_imag.T
-        return torch.argmax(gain_real**2 + gain_imag**2, dim=1)
+        channel_power = torch.sum(channels_ri.square(), dim=(1, 2)).clamp_min(1e-8)
+        return (gain_real.square() + gain_imag.square()) / channel_power[:, None]
+
+    def forward(self, channels_ri: torch.Tensor) -> torch.Tensor:
+        indices = torch.argmax(self.normalized_gains(channels_ri), dim=1)
+        return self.codebook()[indices]
 
 
 def build_model(features: np.ndarray) -> nn.Module:
@@ -80,8 +82,9 @@ def build_model(features: np.ndarray) -> nn.Module:
 
 def training_loss(model: BeamPolicy, features: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
     del targets
-    labels = model.oracle_labels(features)
-    return nn.functional.cross_entropy(model.logits(features), labels)
+    # Hard best-beam assignment gives a compact Lloyd-style codebook update:
+    # each channel trains the currently selected beam directly for array gain.
+    return -torch.mean(torch.max(model.normalized_gains(features), dim=1).values)
 
 
 def metrics(model: BeamPolicy, features: torch.Tensor, targets: torch.Tensor) -> dict[str, float]:
@@ -106,17 +109,20 @@ def metrics_from_predictions(
     beam_real, beam_imag = codebook[..., 0], codebook[..., 1]
     oracle_real = channel_real @ beam_real.T + channel_imag @ beam_imag.T
     oracle_imag = channel_imag @ beam_real.T - channel_real @ beam_imag.T
-    labels = torch.argmax(oracle_real**2 + oracle_imag**2, dim=1)
-    similarity = torch.sum(
-        weights[:, None, :, :] * codebook[None, :, :, :], dim=(2, 3)
-    )
-    prediction = torch.argmax(similarity, dim=1)
+    dft_gain = torch.max(oracle_real**2 + oracle_imag**2, dim=1).values
     weight_real, weight_imag = weights[..., 0], weights[..., 1]
     gain_real = torch.sum(channel_real * weight_real + channel_imag * weight_imag, dim=1)
     gain_imag = torch.sum(channel_imag * weight_real - channel_real * weight_imag, dim=1)
     gain = gain_real**2 + gain_imag**2
+    channel_power = torch.sum(features.square(), dim=(1, 2)).clamp_min(1e-8)
+    normalized_gain = gain / channel_power
+    dft_normalized_gain = dft_gain / channel_power
     return {
-        "codebook_accuracy": float(torch.mean((prediction == labels).float()).cpu()),
+        "normalized_channel_gain": float(torch.mean(normalized_gain).cpu()),
+        "dft_normalized_gain": float(torch.mean(dft_normalized_gain).cpu()),
+        "learned_to_dft_gain": float(
+            (torch.mean(normalized_gain) / torch.mean(dft_normalized_gain)).cpu()
+        ),
         "mean_channel_gain": float(torch.mean(gain).cpu()),
     }
 
@@ -151,13 +157,13 @@ def benchmark_methods(artifact_path: str, package_sha256: str):
         ("mrt", "Perfect-CSIT MRT upper bound", "oracle", {"mode": "mrt"}),
         (
             "dft_codebook_sweep",
-            "Exhaustive DFT-codebook oracle",
+            "Fixed eight-beam DFT sweep",
             "baseline",
             {"mode": "codebook_sweep_reference"},
         ),
         (
             "learned_beam_policy",
-            "Learned beam policy",
+            "Learned eight-beam codebook",
             "candidate",
             {
                 "mode": "learned_artifact",

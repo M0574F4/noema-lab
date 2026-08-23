@@ -1,0 +1,296 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "4788fd6906aab8189face4375aa700db50c278b7088c7eed47be56a300e9d221",
+      "size_bytes": 8515
+    },
+    "chart_data.json": {
+      "sha256": "4de5b65036ee61faf23bff3498007fe4a87011f1433d8125ce5443f00a5bb03e",
+      "size_bytes": 2986
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-leo-ntn-tracking-chart-data.js",
+      "sha256": "385cb2e65afc7abc27ee17d33a3afce0090ed830d7629d03c1e996916005d972",
+      "size_bytes": 3148
+    },
+    "rows": 24,
+    "summary_table.csv": {
+      "sha256": "586277f8b8940aa7e8efe805885aae7e241b145db49643c8e147dd93c635c1bc",
+      "size_bytes": 742
+    }
+  },
+  "runs": [
+    {
+      "recipe_id": "hold_last_snr0_seed81001",
+      "recipe_sha256": "d8606360c164d906aad29a6e7f2dc0529dc9df8f6d3db758561baf9eb3b87d8f",
+      "role": "baseline",
+      "run_id": "20260823T045259Z_leo_ntn_doppler_beam_tracking__hold_last_snr0_seed81001",
+      "semantic_recipe_sha256": "2710bf384ed9d7ebb5ca79ecf6f2e132d455a78d62a8e477741d15fc57ee7674"
+    },
+    {
+      "recipe_id": "linear_extrapolation_snr0_seed81001",
+      "recipe_sha256": "2c6678d601771c41bef12dbf8d2b58476da8e652db69189a969199fcc7fb3e8a",
+      "role": "baseline",
+      "run_id": "20260823T045259Z_leo_ntn_doppler_beam_tracking__linear_extrapolation_snr0_seed81001",
+      "semantic_recipe_sha256": "3e66e08d22fb6f2869777d7ee989cc9dfa771c2e1f715bdfd061c7d7dd22ee45"
+    },
+    {
+      "recipe_id": "oracle_future_snr0_seed81001",
+      "recipe_sha256": "318eb543afb6571877632e1184a7bf584231ae42df5e9c011284b0b670659035",
+      "role": "oracle",
+      "run_id": "20260823T045300Z_leo_ntn_doppler_beam_tracking__oracle_future_snr0_seed81001",
+      "semantic_recipe_sha256": "8ef7ed0c0dbc06d674fb47a043e76caa7b5b860b51cf1ccb64372641d1fbaca0"
+    },
+    {
+      "recipe_id": "learned_ntn_tracker_snr0_seed81001",
+      "recipe_sha256": "a3983189837aedbd3cbebc34dfdc17345020598f4f9f2e83ab107640c4426d03",
+      "role": "candidate",
+      "run_id": "20260823T045300Z_leo_ntn_doppler_beam_tracking__learned_ntn_tracker_snr0_seed81001",
+      "semantic_recipe_sha256": "42052fe704c8026cb92974a93bf8116a3e8dfe8b8fb0a3a7dd1ca51551d49919"
+    },
+    {
+      "recipe_id": "hold_last_snr0_seed82001",
+      "recipe_sha256": "f5405c57ca89dcbf71ae65f9dc10ea5ba9601a5800f196ac4dc508eb3f2aca6d",
+      "role": "baseline",
+      "run_id": "20260823T045301Z_leo_ntn_doppler_beam_tracking__hold_last_snr0_seed82001",
+      "semantic_recipe_sha256": "94c6898d8ab95d80715cb1ed0441823c9a952968dc82988de1219a5e6ae6d779"
+    },
+    {
+      "recipe_id": "linear_extrapolation_snr0_seed82001",
+      "recipe_sha256": "7d40563f708ca6793c14ba3c730a44b1e95043d1e2c1f9042fec97687b948486",
+      "role": "baseline",
+      "run_id": "20260823T045301Z_leo_ntn_doppler_beam_tracking__linear_extrapolation_snr0_seed82001",
+      "semantic_recipe_sha256": "80013aa0d7fb559b4609cccf4fbfd197f3120b419ed856d315401fdd7e9bf316"
+    },
+    {
+      "recipe_id": "oracle_future_snr0_seed82001",
+      "recipe_sha256": "abed95e218ff1553c411b5a0cf8f3f9f2b8a76691684712065e810728117509a",
+      "role": "oracle",
+      "run_id": "20260823T045301Z_leo_ntn_doppler_beam_tracking__oracle_future_snr0_seed82001",
+      "semantic_recipe_sha256": "0c883c41489ccba6ad69715092959c7a23fbd21913ef84fec965c3b91f0b1b4a"
+    },
+    {
+      "recipe_id": "learned_ntn_tracker_snr0_seed82001",
+      "recipe_sha256": "00d02afd61332fe36e52178ca2d7bc21130fbe87689be7e9571240ae3cbf2727",
+      "role": "candidate",
+      "run_id": "20260823T045302Z_leo_ntn_doppler_beam_tracking__learned_ntn_tracker_snr0_seed82001",
+      "semantic_recipe_sha256": "e9cfb3cb763b04133d513aa0a611035cb7136f7b9d8fc0b8194634a9775b1ed4"
+    },
+    {
+      "recipe_id": "hold_last_snr0_seed83001",
+      "recipe_sha256": "924c8c6c1dd96ea676efbcf6db4135c1010bf53a6b8e0fe3500d92a7a00e5586",
+      "role": "baseline",
+      "run_id": "20260823T045302Z_leo_ntn_doppler_beam_tracking__hold_last_snr0_seed83001",
+      "semantic_recipe_sha256": "6a6fe0edce9636f040976bf8dbe403c7f890fa4c2e2438bc37312804a9bec0ad"
+    },
+    {
+      "recipe_id": "linear_extrapolation_snr0_seed83001",
+      "recipe_sha256": "f587b1bcc9c30c5d6ec287a7db86d9f6b67f6153a1e54aad5aad5f58a7192fad",
+      "role": "baseline",
+      "run_id": "20260823T045303Z_leo_ntn_doppler_beam_tracking__linear_extrapolation_snr0_seed83001",
+      "semantic_recipe_sha256": "28ff2945f1e8fc9629dc2604900027ea5eb78be4da58076610bb71e2386ba04f"
+    },
+    {
+      "recipe_id": "oracle_future_snr0_seed83001",
+      "recipe_sha256": "1af3cbfa3d1608941ee70bcb1af961323ee59842d6fe61286dd2e0fc77e52a81",
+      "role": "oracle",
+      "run_id": "20260823T045303Z_leo_ntn_doppler_beam_tracking__oracle_future_snr0_seed83001",
+      "semantic_recipe_sha256": "e6359cb50b7fff63341f9844688dfe6c883ba760f1901e0b025de06d3d82f741"
+    },
+    {
+      "recipe_id": "learned_ntn_tracker_snr0_seed83001",
+      "recipe_sha256": "15b3def8472608353183d108558a8dc87b4733f03b601e15e0a052dcd5fb373b",
+      "role": "candidate",
+      "run_id": "20260823T045303Z_leo_ntn_doppler_beam_tracking__learned_ntn_tracker_snr0_seed83001",
+      "semantic_recipe_sha256": "be4264172f5edf3171f4a0a60883ae09f4438b963ed811592ca16e3cd6900021"
+    },
+    {
+      "recipe_id": "hold_last_snr15_seed81001",
+      "recipe_sha256": "6f6734cc3946bc63a0ecaf2c5bd4a22076255231aa9c173f4dd4abec8c70ccfc",
+      "role": "baseline",
+      "run_id": "20260823T045304Z_leo_ntn_doppler_beam_tracking__hold_last_snr15_seed81001",
+      "semantic_recipe_sha256": "0135d507044311a9b9dc4bd2e75d6d9a89268d63f131fa3c73c96de844fbf3d4"
+    },
+    {
+      "recipe_id": "linear_extrapolation_snr15_seed81001",
+      "recipe_sha256": "cf0e6e78a2621f58ae83a6cff08c83f3fa9da8a2dd8987af2e9809dee05e82aa",
+      "role": "baseline",
+      "run_id": "20260823T045304Z_leo_ntn_doppler_beam_tracking__linear_extrapolation_snr15_seed81001",
+      "semantic_recipe_sha256": "adeb181e139157d1bcb7199abd141e5cbec10d713f9abfcfe1d04edae85d6a97"
+    },
+    {
+      "recipe_id": "oracle_future_snr15_seed81001",
+      "recipe_sha256": "8d06210aac4ff9648daa34ae71e3e82cec938d124597bb421633b9c861c578f0",
+      "role": "oracle",
+      "run_id": "20260823T045304Z_leo_ntn_doppler_beam_tracking__oracle_future_snr15_seed81001",
+      "semantic_recipe_sha256": "57b4d7fe1a0f17a05235fc0de47bb6b781f7235b8e4a51a59577bc938339dfa9"
+    },
+    {
+      "recipe_id": "learned_ntn_tracker_snr15_seed81001",
+      "recipe_sha256": "039859a7a6b6d985e162acec5ee3c6b088b1b5dbf697b1a17fd931bef21e63ef",
+      "role": "candidate",
+      "run_id": "20260823T045305Z_leo_ntn_doppler_beam_tracking__learned_ntn_tracker_snr15_seed81001",
+      "semantic_recipe_sha256": "ad8a5be9705a3ca39e3a45a6e93299cc0bd880962057be2182e46f0c7293891f"
+    },
+    {
+      "recipe_id": "hold_last_snr15_seed82001",
+      "recipe_sha256": "59a9d951192b2a892ac155aee3d851d735dea30591c21b908362fee2bc70db59",
+      "role": "baseline",
+      "run_id": "20260823T045305Z_leo_ntn_doppler_beam_tracking__hold_last_snr15_seed82001",
+      "semantic_recipe_sha256": "6b341f7023a2dabd8c01b5acf813370eeaab82f8c4d40cc9420aea1730c4c0b0"
+    },
+    {
+      "recipe_id": "linear_extrapolation_snr15_seed82001",
+      "recipe_sha256": "1ac9c80c439dafc95f3bf180446d5ac95579b44a60caf1dda2437dee4213c005",
+      "role": "baseline",
+      "run_id": "20260823T045305Z_leo_ntn_doppler_beam_tracking__linear_extrapolation_snr15_seed82001",
+      "semantic_recipe_sha256": "81d0acec6358da2bb47606c8e2c36acbfe865561aa57e271561f8f8fb1a87991"
+    },
+    {
+      "recipe_id": "oracle_future_snr15_seed82001",
+      "recipe_sha256": "f0f2294fa9f36dabcd390bc7c31043d24926b3cb56cc3b14c85a36b3943b5e0c",
+      "role": "oracle",
+      "run_id": "20260823T045306Z_leo_ntn_doppler_beam_tracking__oracle_future_snr15_seed82001",
+      "semantic_recipe_sha256": "c88848cde652713f4451d495ebfc73c5c9e7e1bbf4bcf592057c9278ad3f073f"
+    },
+    {
+      "recipe_id": "learned_ntn_tracker_snr15_seed82001",
+      "recipe_sha256": "24b6dc57ea22c9d31d908b7c97aff19f338292bee652b3e4ed3e6e6b89fa7ff3",
+      "role": "candidate",
+      "run_id": "20260823T045306Z_leo_ntn_doppler_beam_tracking__learned_ntn_tracker_snr15_seed82001",
+      "semantic_recipe_sha256": "e720d568d2da6fa94ea8b3da21a276b641e7e13870e1afed7b4a1c49e86ffd0d"
+    },
+    {
+      "recipe_id": "hold_last_snr15_seed83001",
+      "recipe_sha256": "8f2005144eb1830e1281fda932423edbf1ec8d02b367379c918fe7d67538559f",
+      "role": "baseline",
+      "run_id": "20260823T045306Z_leo_ntn_doppler_beam_tracking__hold_last_snr15_seed83001",
+      "semantic_recipe_sha256": "9625be125680934b7d7300f3e857ff1860f788bf7187961f5bb0111a5a3ffbde"
+    },
+    {
+      "recipe_id": "linear_extrapolation_snr15_seed83001",
+      "recipe_sha256": "7f87bcdf188471c6ec1f4cee6b4f648254cb4598ac83370c933c76b9b457efbf",
+      "role": "baseline",
+      "run_id": "20260823T045307Z_leo_ntn_doppler_beam_tracking__linear_extrapolation_snr15_seed83001",
+      "semantic_recipe_sha256": "e659b22423babf42c790cf13b825702f84ba00edc2f0a5f8663be025c3ca9455"
+    },
+    {
+      "recipe_id": "oracle_future_snr15_seed83001",
+      "recipe_sha256": "6d156c392bdd003225da15bb169ede6fb86f98ebf63e77e53a4f4693e3d2761e",
+      "role": "oracle",
+      "run_id": "20260823T045307Z_leo_ntn_doppler_beam_tracking__oracle_future_snr15_seed83001",
+      "semantic_recipe_sha256": "ccdfc300005a23b90fcda13eec2e23c64febd86dbdeb84d74b4fa3ed1e2fc419"
+    },
+    {
+      "recipe_id": "learned_ntn_tracker_snr15_seed83001",
+      "recipe_sha256": "079b1d99f5df89e304a7542b3ab21dca8fcb95f1b0d749910a409ded8f3b7aba",
+      "role": "candidate",
+      "run_id": "20260823T045307Z_leo_ntn_doppler_beam_tracking__learned_ntn_tracker_snr15_seed83001",
+      "semantic_recipe_sha256": "ae211b33ba8f5cbb5696b424602e96b2b4856fdaf6276246dfcaba51ebb8ffed"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "leo_ntn_tracking",
+  "source": {
+    "benchmark_id": "beamforming_precoding.learned_leo_ntn_tracking_v1",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "1.0.0",
+    "completed_at_utc": "2026-08-23T04:53:08.171Z",
+    "created_at_utc": "2026-08-23T04:52:59.283Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "476b878c159190fc1c310e775b13ded05c743716a256183935e3709fcd618f89",
+        "size_bytes": 151784
+      },
+      "recipes.csv": {
+        "sha256": "a224b55f1bb48e5144be70dd0a202d1ca08c73c0734c8d1e107a3c3ccccd2dc6",
+        "size_bytes": 7610
+      },
+      "result.json": {
+        "sha256": "ac36eced6fb32f5dd7f2553bf0b82ba173a7df2304b8bda7922ca650c908ddc1",
+        "size_bytes": 301913
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "275262e7361d7df25a1e150b8d9b45d7f17055fa8b3812ac133b6cc58e2503af",
+        "size_bytes": 1662
+      },
+      "training_evidence/projection.json": {
+        "sha256": "a77edf1dbc8fc23acb5140988e38b4d1a66a0ef57d8a8159278af5ffaa5817f2",
+        "size_bytes": 2672
+      }
+    },
+    "result_id": "20260823T045259Z_beamforming_precoding.learned_leo_ntn_tracking_v1",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "channel SNR",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out seeds",
+    "paired_seeds": [
+      81001,
+      82001,
+      83001
+    ],
+    "sample_count_per_method_and_snr": 3,
+    "statistical_unit": "paired held-out scenario and noise seed",
+    "warning": "Three paired held-out seeds support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": [
+    {
+      "artifact_references": [
+        {
+          "id": "tracker",
+          "kind": "component",
+          "path": "training_evidence/entries/000-learned_ntn_tracker/artifact/artifacts/ntn_tracker.onnx",
+          "sha256": "0d57a66782bc2db770a8a2ef7a24b5474f6da3a50c7410fdfaa70b30a85d971a",
+          "size_bytes": 37843
+        },
+        {
+          "id": "leo_ntn_doppler_beam_tracking.18984e01897a",
+          "kind": "contract",
+          "path": "training_evidence/entries/000-learned_ntn_tracker/artifact/training_contract.yaml",
+          "sha256": "e4a549f6d208cbe3e95393235bf867686f0261d1835fe8fe96484a848cb02814",
+          "size_bytes": 4819
+        }
+      ],
+      "evidence": {
+        "evaluation_metrics": {
+          "path": "training_evidence/entries/000-learned_ntn_tracker/evidence/evaluation_metrics.json",
+          "sha256": "81f6d05b3118137aa66c42ac6b667e02e7e088b0f870e96a41869bd81a55221c",
+          "size_bytes": 632
+        },
+        "trained_artifact_manifest": {
+          "path": "training_evidence/entries/000-learned_ntn_tracker/artifact/trained_artifact_manifest.yaml",
+          "sha256": "d928a85ad94557325c86ad97dc4b1bbaab7c8a3e7170d2656eacc7e6c66cd913",
+          "size_bytes": 3240
+        },
+        "training_history": {
+          "path": "training_evidence/entries/000-learned_ntn_tracker/evidence/training_history.json",
+          "sha256": "f40e1c81afd39f8a944f2b305dd1896b3fcd3be1b5cf9f3b361cdff77875a1fa",
+          "size_bytes": 11056
+        }
+      },
+      "index": 0,
+      "series": "learned_ntn_tracker",
+      "source_declarations": {
+        "evaluation_metrics": {
+          "declared_sha256": "81f6d05b3118137aa66c42ac6b667e02e7e088b0f870e96a41869bd81a55221c",
+          "path": "evaluation_metrics.json",
+          "snapshotted_sha256": "81f6d05b3118137aa66c42ac6b667e02e7e088b0f870e96a41869bd81a55221c"
+        },
+        "trained_artifact_manifest": {
+          "declared_sha256": "d928a85ad94557325c86ad97dc4b1bbaab7c8a3e7170d2656eacc7e6c66cd913",
+          "path": "../trained_artifact.yaml",
+          "snapshotted_sha256": "d928a85ad94557325c86ad97dc4b1bbaab7c8a3e7170d2656eacc7e6c66cd913"
+        },
+        "training_history": {
+          "declared_sha256": "f40e1c81afd39f8a944f2b305dd1896b3fcd3be1b5cf9f3b361cdff77875a1fa",
+          "path": "training_history.json",
+          "snapshotted_sha256": "f40e1c81afd39f8a944f2b305dd1896b3fcd3be1b5cf9f3b361cdff77875a1fa"
+        }
+      }
+    }
+  ]
+}

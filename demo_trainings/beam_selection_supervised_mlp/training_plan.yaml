@@ -12,5 +12,5 @@ dataset_capture:
       train: 66.6666666667
       validation: 16.66666666665
       test: 16.66666666665
-objective: beam.codebook_cross_entropy
+objective: beam.negative_normalized_gain
 framework: torch

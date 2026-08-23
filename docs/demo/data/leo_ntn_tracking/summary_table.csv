@@ -1,0 +1,9 @@
+SNR (dB),Method,Role,Mean Beam accuracy,Mean Doppler MAE (Hz),Primary 95% CI low,Primary 95% CI high
+0,Hold last observation,baseline,0.635416666667,39884.9576071,0.478549119222,0.792284214111
+0,Linear Doppler/angle extrapolation,baseline,0.203125,141720.374735,0.10043108425,0.30581891575
+0,True future state,oracle,1,0,1,1
+0,Learned causal tracker,candidate,0.71875,3345.04196172,0.651521051095,0.785978948905
+15,Hold last observation,baseline,0.911458333333,7148.88633108,0.889048683698,0.933867982968
+15,Linear Doppler/angle extrapolation,baseline,0.739583333333,25198.6066006,0.627535085159,0.851631581508
+15,True future state,oracle,1,0,1,1
+15,Learned causal tracker,candidate,0.895833333333,1359.41611798,0.851014034063,0.940652632603

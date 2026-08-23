@@ -302,7 +302,7 @@ def _settings() -> dict[str, Any]:
         return {
             "benchmark_id": "localization_sensing.learned_aoa_estimator_v1",
             "name": "Learned ULA AoA Estimation",
-            "description": "Bartlett, MUSIC, and a learned covariance estimator on paired narrowband ULA snapshots.",
+            "description": "Bartlett, MUSIC, and a learned Bartlett-residual estimator on paired narrowband ULA snapshots.",
             "suite": {"id": "localization_sensing", "name": "Localization / Sensing", "status": "experimental", "version": "v1-draft"},
             "dataset": {"id": "synthetic_ula_aoa", "modality": "wireless", "version": "synthetic-ula-aoa-v1", "split": "held_out_seeded"},
             "task": {"id": "aoa_estimation", "kind": "estimation", "modality": "wireless"},
@@ -311,7 +311,7 @@ def _settings() -> dict[str, Any]:
             "snr_step": "array_observation",
             "seed_steps": {"data": 0, "array_observation": 100000},
             "notes": "All methods receive the same single-source half-wavelength ULA snapshots for every held-out seed; only the estimator changes.",
-            "question": "Can a covariance-domain learned estimator improve held-out angle error under the same narrowband snapshots used by Bartlett and MUSIC?",
+            "question": "Can a Bartlett-initialized learned residual improve held-out angle error under the same narrowband snapshots used by Bartlett and MUSIC?",
             "tutorial": "../../../tutorials/learned_aoa_estimation_demo.html",
             "held_constant": ["single-source half-wavelength ULA protocol", "paired source angles", "paired snapshot and AWGN seeds"],
         }
@@ -321,18 +321,18 @@ def _settings() -> dict[str, Any]:
     return {
         "benchmark_id": "beamforming_precoding.learned_beam_selection_v1",
         "name": "Learned MISO Beam Selection",
-        "description": "A learned finite-codebook policy compared with exhaustive codebook selection and perfect-CSIT MRT on paired channels.",
+        "description": "An eight-beam learned codebook compared with an equal-size fixed DFT codebook and perfect-CSIT MRT on paired clustered-ULA channels.",
         "suite": {"id": "beamforming_precoding", "name": "Beamforming / Precoding", "status": "experimental", "version": "v1-draft"},
-        "dataset": {"id": "synthetic_beamforming", "modality": "wireless", "version": "synthetic-beamforming-v1", "split": "held_out_seeded"},
+        "dataset": {"id": "synthetic_beamforming", "modality": "wireless", "version": "synthetic-beamforming-clustered-ula-v1", "split": "held_out_seeded"},
         "task": {"id": "beamforming_precoding", "kind": "link_optimization", "modality": "wireless"},
         "metrics": [channel_metric, {"id": "beamforming.spectral_efficiency_bps_hz", "family": "link", "unit": "bit/s/Hz", "direction": "higher_is_better"}, {"id": "task.score", "family": "task", "unit": "score", "direction": "higher_is_better"}],
         "primary_metric": "beamforming.spectral_efficiency_bps_hz",
         "snr_step": "data",
         "seed_steps": {"data": 0},
-        "notes": "All three methods receive the same held-out flat-fading channels; MRT and exhaustive codebook search are explicitly labeled oracles.",
-        "question": "Can a learned policy recover the exhaustive finite-codebook beam choice on unseen channels?",
+        "notes": "All three methods receive the same held-out clustered-ULA channels. Both finite codebooks contain eight constant-modulus beams; MRT is explicitly labeled as an upper bound.",
+        "question": "Can distribution-aware codebook learning improve held-out rate over an equal-size fixed DFT codebook?",
         "tutorial": "../../../tutorials/learned_beam_selection_demo.html",
-        "held_constant": ["single-user eight-antenna MISO protocol", "common DFT codebook", "paired held-out channel vectors"],
+        "held_constant": ["single-user eight-antenna clustered-ULA protocol", "eight constant-modulus beams", "paired held-out channel vectors"],
     }
 
 

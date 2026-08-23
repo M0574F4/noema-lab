@@ -1,7 +1,7 @@
 schema_version: 1
 kind: noema.demo_training_template
 id: near_field.range_angle_mlp
-name: Near-field XL-MIMO · coherent-array range/angle MLP
+name: Near-field XL-MIMO · spectrum-initialized range/angle residual
 status: reference_only
 operation: model.near_field_estimator_adapter
 framework: torch
@@ -11,7 +11,7 @@ data:
   target: separately captured range and angle
 model:
   owner: external_researcher
-  reference_architecture: normalized-array multilayer perceptron with bounded physical outputs
+  reference_architecture: dense spherical-wave matched-filter bank plus a bounded learned residual head
 loss:
   owner: external_researcher
   reference_objective: normalized range and angle mean squared error

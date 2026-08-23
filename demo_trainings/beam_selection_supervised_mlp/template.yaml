@@ -1,20 +1,20 @@
 schema_version: 1
 kind: noema.demo_training_template
 id: beam_selection.codebook_classifier_mlp
-name: MISO beam selection · finite-codebook classifier
+name: MISO beam selection · distribution-aware codebook
 status: reference_only
 operation: model.beamforming_adapter
 framework: torch
 data:
   owner: noema_capture_contract
   feature: realized complex single-user MISO channel vector
-  target: exhaustive DFT-codebook maximizer derived inside the trainer
+  target: none; normalized channel gain is optimized directly
 model:
   owner: external_researcher
-  reference_architecture: channel-normalized MLP codebook classifier
+  reference_architecture: learned eight-beam constant-modulus ULA codebook with exhaustive selection
 loss:
   owner: external_researcher
-  reference_objective: codebook cross entropy with validation-loss early stopping
+  reference_objective: negative normalized gain with validation-loss early stopping
 artifact_return:
   schema: noema.trained_block_artifact/v2
   runtime: onnxruntime

@@ -79,6 +79,12 @@ html_js_files = [
     "noema-modulation-recognition-chart-data.js",
     "noema-deepjscc-chart-data.js",
     "noema-deepjscc-slow-rayleigh-chart-data-v2.js",
+    "noema-range-localization-chart-data.js",
+    "noema-aoa-estimation-chart-data.js",
+    "noema-miso-beam-selection-chart-data.js",
+    "noema-isac-joint-allocation-chart-data.js",
+    "noema-near-field-xl-mimo-chart-data.js",
+    "noema-leo-ntn-tracking-chart-data.js",
     "noema-demo-charts-v2.js",
     "noema-break-the-comparison.js",
 ]

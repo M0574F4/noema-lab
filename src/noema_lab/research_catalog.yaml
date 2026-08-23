@@ -68,7 +68,8 @@ datasets:
       - source.beamforming_scenario
     versions:
       - synthetic-beamforming-v1
-    description: Seeded multi-antenna channel vectors and codebooks for beam selection and precoding benchmarks.
+      - synthetic-beamforming-clustered-ula-v1
+    description: Seeded unstructured or clustered-ULA multi-antenna channel vectors and codebooks for beam selection and precoding benchmarks.
   - id: synthetic_localization_geometry
     name: Synthetic localization geometry
     modality: wireless

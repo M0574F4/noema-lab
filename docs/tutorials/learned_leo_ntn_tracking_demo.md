@@ -66,5 +66,33 @@ The generated campaign reports both Doppler MAE and beam-handover accuracy at th
 horizon. Hold-last and linear extrapolation see exactly the same history as the learned model. The
 oracle consumes future simulator state and is only an upper bound.
 
+## Completed benchmark result
+
+The completed paired campaign contains 24 runs: four causal handover rules, two held-out SNRs, and
+three fresh track/noise seeds. Points are means over the three seeds; bands are two-sided Student-t
+95% confidence intervals.
+
+```{note}
+Three paired seeds make this a compact workflow result, not a publication-strength population
+claim.
+```
+
+<div data-noema-chart="leo-ntn-handover-accuracy"></div>
+
+The learned tracker has higher mean next-beam accuracy than hold-last at 0 dB (0.719 versus 0.635),
+while hold-last is slightly better at 15 dB (0.911 versus 0.896). Linear extrapolation is weaker at
+both points; the future-state oracle is 1.0 by construction. This is a mixed result, not a universal
+learned-tracker win.
+
+```{csv-table} Paired benchmark summary
+:file: ../demo/data/leo_ntn_tracking/summary_table.csv
+:header-rows: 1
+:align: center
+```
+
+Download the [run-level projection](../demo/data/leo_ntn_tracking/benchmark_projection.csv),
+[chart data](../demo/data/leo_ntn_tracking/chart_data.json), or
+[provenance manifest](../demo/data/leo_ntn_tracking/snapshot_manifest.json).
+
 This bounded kinematic generator is not an orbital propagator, ephemeris product, 3GPP NTN channel
 model, link budget, beam-management protocol, or conformance test.

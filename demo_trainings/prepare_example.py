@@ -59,7 +59,7 @@ from noema_lab.training.standalone_input import (
 
 DEMO_LOSSES = {
     "aoa-estimation": "angle.mse",
-    "beam-selection": "beam.codebook_cross_entropy",
+    "beam-selection": "beam.negative_normalized_gain",
     "csi-feedback": CSI_FEEDBACK_EXAMPLE_LOSS,
     "delayed-csi-resource-allocation": DELAYED_CSI_RESOURCE_ALLOCATION_LOSS,
     "deepjscc-image": "image.mse",

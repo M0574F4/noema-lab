@@ -72,6 +72,34 @@ The generated campaign sweeps held-out SNRs and three fresh paired seeds. Read
 `isac.scalarized_utility` together with communication rate and sensing SNR: the scalarized number is
 meaningful only for the fixed weight declared by this contract.
 
+## Completed benchmark result
+
+The completed paired campaign contains 24 runs: four allocation rules, two held-out SNRs, and three
+fresh seeds. Points are means over the three seeds; bands are two-sided Student-t 95% confidence
+intervals.
+
+```{note}
+Three paired seeds make this a compact workflow result, not a publication-strength population
+claim.
+```
+
+<div data-noema-chart="isac-joint-allocation-utility"></div>
+
+The learned allocator has a higher mean than equal power and communication-only water filling at
+both tested SNRs and closely follows the per-scene projected-gradient reference. At 0 dB it is
+0.02% above that finite-iteration reference; this tiny reversal is solver tolerance, not evidence
+that it exceeds the declared objective's exact optimum.
+
+```{csv-table} Paired benchmark summary
+:file: ../demo/data/isac_joint_allocation/summary_table.csv
+:header-rows: 1
+:align: center
+```
+
+Download the [run-level projection](../demo/data/isac_joint_allocation/benchmark_projection.csv),
+[chart data](../demo/data/isac_joint_allocation/chart_data.json), or
+[provenance manifest](../demo/data/isac_joint_allocation/snapshot_manifest.json).
+
 This is a synthetic resource-allocation demonstration. It has no waveform-level target detector,
 range/Doppler ambiguity function, clutter model, multi-user interference, or standards-conformance
 claim.

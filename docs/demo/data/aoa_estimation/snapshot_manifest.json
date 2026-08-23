@@ -1,0 +1,254 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "3a4b6644c0eeac150afb4e254de58bb95ac42eb6d79ea027237e1e9e89c6db30",
+      "size_bytes": 6040
+    },
+    "chart_data.json": {
+      "sha256": "4b9fdbfb461d66e05a16a997a09842fdcb4cd018c34df3846c8f8e75d81088a2",
+      "size_bytes": 2379
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-aoa-estimation-chart-data.js",
+      "sha256": "ee86b5ad0c7c64165a2b6bf79ce7ee843ee69283a9e77bbcb6d1c1187bcd0cd9",
+      "size_bytes": 2541
+    },
+    "rows": 18,
+    "summary_table.csv": {
+      "sha256": "c625d567367a6938b96343421fe0822ef0e36215d246ae5a53dde48d538362f6",
+      "size_bytes": 546
+    }
+  },
+  "runs": [
+    {
+      "recipe_id": "bartlett_snr0_seed81001",
+      "recipe_sha256": "7d4fefe93570e1c5e8236f565e15f6832ad2ee37e413e4079eb6ca90677c5979",
+      "role": "baseline",
+      "run_id": "20260823T133322Z_ula_angle_of_arrival_estimation__bartlett_snr0_seed81001",
+      "semantic_recipe_sha256": "511b52f6247dc2a950c889bf59834929ad7429d97d0d3735b705f92e8fdfe135"
+    },
+    {
+      "recipe_id": "music_snr0_seed81001",
+      "recipe_sha256": "22e75eed0a040638256520009bd48eed8d60626c7611f0f94527fbf6b5d7eb62",
+      "role": "baseline",
+      "run_id": "20260823T133323Z_ula_angle_of_arrival_estimation__music_snr0_seed81001",
+      "semantic_recipe_sha256": "d102766976eb1752fba2b8ce8171cdc9fef7096fdd240c52d76589bcd9bc3168"
+    },
+    {
+      "recipe_id": "learned_estimator_snr0_seed81001",
+      "recipe_sha256": "58ebb7c9e81fc62ef73424314aea150ddb98aeebde37883e7a067759bb349357",
+      "role": "candidate",
+      "run_id": "20260823T133323Z_ula_angle_of_arrival_estimation__learned_estimator_snr0_seed81001",
+      "semantic_recipe_sha256": "445f881a2a83ada56a65b60b3b517dfd037a50441f4df87966b6ffcc713a0d9c"
+    },
+    {
+      "recipe_id": "bartlett_snr0_seed82001",
+      "recipe_sha256": "5f9a53702d44ef3fac6de4f9a0140e49bb7e18d0e7baf171aa5d2b6c6b219028",
+      "role": "baseline",
+      "run_id": "20260823T133323Z_ula_angle_of_arrival_estimation__bartlett_snr0_seed82001",
+      "semantic_recipe_sha256": "907d390a72f7753855085f90e6ea62d8f782ca7f41ee682e9c2d314e04f1b122"
+    },
+    {
+      "recipe_id": "music_snr0_seed82001",
+      "recipe_sha256": "5a888e8ccb503f09909ad963b10143c1966623cff87e1e844a7c8c6f2e947a03",
+      "role": "baseline",
+      "run_id": "20260823T133324Z_ula_angle_of_arrival_estimation__music_snr0_seed82001",
+      "semantic_recipe_sha256": "186b1be6ed66e7d6e733840636b4c25d15188b3710f467a804edff4bcc6fee8f"
+    },
+    {
+      "recipe_id": "learned_estimator_snr0_seed82001",
+      "recipe_sha256": "c73d19aaea3704142ab56ff1e8dd27955b1dfc7557565fcd2436cd5eb1ab9f48",
+      "role": "candidate",
+      "run_id": "20260823T133324Z_ula_angle_of_arrival_estimation__learned_estimator_snr0_seed82001",
+      "semantic_recipe_sha256": "534ddf6b5ba47f8be086f56af1ba094b4c7d56b833b9d39be0b8cb5b8d65b567"
+    },
+    {
+      "recipe_id": "bartlett_snr0_seed83001",
+      "recipe_sha256": "a266d7efbba6252bbed53167c5182da8ab67f846224505c142f92b976c1c82bf",
+      "role": "baseline",
+      "run_id": "20260823T133324Z_ula_angle_of_arrival_estimation__bartlett_snr0_seed83001",
+      "semantic_recipe_sha256": "fa3d07f560051494526c0c9425e3a32a2034aee39ae68564675294046458edf7"
+    },
+    {
+      "recipe_id": "music_snr0_seed83001",
+      "recipe_sha256": "d19a7fc9c9ac262907da589a2e95b8bc15b97b40f7d8c4d6af57f926f4cd53b9",
+      "role": "baseline",
+      "run_id": "20260823T133325Z_ula_angle_of_arrival_estimation__music_snr0_seed83001",
+      "semantic_recipe_sha256": "f7824244e2931a20eb88aef760d5670c48a2352fd8d67f3ee34a9bd2c2418516"
+    },
+    {
+      "recipe_id": "learned_estimator_snr0_seed83001",
+      "recipe_sha256": "3222625fab1a6fbb57b7ca11599dabc4700c75d184dbd51603a4a28c8b42b43a",
+      "role": "candidate",
+      "run_id": "20260823T133325Z_ula_angle_of_arrival_estimation__learned_estimator_snr0_seed83001",
+      "semantic_recipe_sha256": "becd47a8e89c86c93b90666b5b2cd4f9a99dc3f275aad3c72d80e950238cbb14"
+    },
+    {
+      "recipe_id": "bartlett_snr15_seed81001",
+      "recipe_sha256": "4bf834f177282676edcfc6e9398dc0405a46530327b837711bd356c08699590e",
+      "role": "baseline",
+      "run_id": "20260823T133325Z_ula_angle_of_arrival_estimation__bartlett_snr15_seed81001",
+      "semantic_recipe_sha256": "a10650d3ea8584828f374571d933c7fdf6b7b0e0ae08d5b01bbab13b4b96a078"
+    },
+    {
+      "recipe_id": "music_snr15_seed81001",
+      "recipe_sha256": "fab18ee9b7000cd1a0efb2ee081b62bdbc2075f05b115dff915c06b62d2f94ec",
+      "role": "baseline",
+      "run_id": "20260823T133326Z_ula_angle_of_arrival_estimation__music_snr15_seed81001",
+      "semantic_recipe_sha256": "d1be0c9bb9ee8d9b0bc058870ca2fa29b8c9510dfacc05ebc993c549b6fa186b"
+    },
+    {
+      "recipe_id": "learned_estimator_snr15_seed81001",
+      "recipe_sha256": "e56d68e7c4251cdf1d53049b5f5ec7ea900af508f5e1b3e64687cf4e64716e32",
+      "role": "candidate",
+      "run_id": "20260823T133326Z_ula_angle_of_arrival_estimation__learned_estimator_snr15_seed81001",
+      "semantic_recipe_sha256": "4b3a5ee1893925744a5b934d797b92b04875ea670de9534ff59a6c466cc66baf"
+    },
+    {
+      "recipe_id": "bartlett_snr15_seed82001",
+      "recipe_sha256": "372155863c717fcfa9877ffbf0f320e0d3cae0f6c7fb629b1121a847d704f8d4",
+      "role": "baseline",
+      "run_id": "20260823T133326Z_ula_angle_of_arrival_estimation__bartlett_snr15_seed82001",
+      "semantic_recipe_sha256": "9149464e142327ce273a49f8a17b8843eceefa242779e05514d342c367b3aabf"
+    },
+    {
+      "recipe_id": "music_snr15_seed82001",
+      "recipe_sha256": "686ce0802021ae05685273a20074f1d099065ee57f0304bd190a0af86a763f20",
+      "role": "baseline",
+      "run_id": "20260823T133327Z_ula_angle_of_arrival_estimation__music_snr15_seed82001",
+      "semantic_recipe_sha256": "12abf7d8ff2100be3b6e666bd25eb420b53da47489789fd3b564ce3d50bb9be5"
+    },
+    {
+      "recipe_id": "learned_estimator_snr15_seed82001",
+      "recipe_sha256": "cd14bd29207a896f4a1120e4a14adb0ee573b7464eedf4afd06258817ebeb0f8",
+      "role": "candidate",
+      "run_id": "20260823T133327Z_ula_angle_of_arrival_estimation__learned_estimator_snr15_seed82001",
+      "semantic_recipe_sha256": "d46b7d4ec7dfaebdff1f35caa0e097c5a7b224d289d043aa205a10f09b3e3288"
+    },
+    {
+      "recipe_id": "bartlett_snr15_seed83001",
+      "recipe_sha256": "a0695d371a01a3e75bf316bf082c59b8d59e0fb67cdc2b750b833602bfe5d77c",
+      "role": "baseline",
+      "run_id": "20260823T133327Z_ula_angle_of_arrival_estimation__bartlett_snr15_seed83001",
+      "semantic_recipe_sha256": "7e04bb6b01a04e8a644e84ab61d6cc6759cf180efa58479b416133d488eabb52"
+    },
+    {
+      "recipe_id": "music_snr15_seed83001",
+      "recipe_sha256": "9db7e2153bcb41c86ca42517e583f32b024be833ddc74c117b5a29de3a2a92dd",
+      "role": "baseline",
+      "run_id": "20260823T133327Z_ula_angle_of_arrival_estimation__music_snr15_seed83001",
+      "semantic_recipe_sha256": "2b4e55fe94f226fc43876296510f1aac2bd7f6cf0bc6f838127ff1336dcd973b"
+    },
+    {
+      "recipe_id": "learned_estimator_snr15_seed83001",
+      "recipe_sha256": "71770901322226af8058e967f53039da885f6671597c28dbf7ec8217874a0bf5",
+      "role": "candidate",
+      "run_id": "20260823T133328Z_ula_angle_of_arrival_estimation__learned_estimator_snr15_seed83001",
+      "semantic_recipe_sha256": "4bb4f103af8cfc87ba32670ebc57a03bd062f6fab017127f4c8d17a7a98f886c"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "aoa_estimation",
+  "source": {
+    "benchmark_id": "localization_sensing.learned_aoa_estimator_v1",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "1.0.0",
+    "completed_at_utc": "2026-08-23T13:33:28.562Z",
+    "created_at_utc": "2026-08-23T13:33:22.588Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "788764c0c5cb48e831036251ae5075a59a92c0d796e4b047faf07f6f8127552d",
+        "size_bytes": 140998
+      },
+      "recipes.csv": {
+        "sha256": "f4e8d116f680da3bf7fa5d523b154848f876dc09fdd09e4e01e570a3a4141569",
+        "size_bytes": 5393
+      },
+      "result.json": {
+        "sha256": "80e0949023e60f6852ca068dcbbff25acbe3aefc04d1a7103940e0561ffea36d",
+        "size_bytes": 214661
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "5e088293f6271923340c6e45fc123f0150a9c818992fe3f56d32b5d63f6a27c7",
+        "size_bytes": 1654
+      },
+      "training_evidence/projection.json": {
+        "sha256": "bf52e83205ded9eb2734c9a5d7d36b94b52dd836cb41447fcd49ec5f1da0d225",
+        "size_bytes": 2670
+      }
+    },
+    "result_id": "20260823T133322Z_localization_sensing.learned_aoa_estimator_v1",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "channel SNR",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out seeds",
+    "paired_seeds": [
+      81001,
+      82001,
+      83001
+    ],
+    "sample_count_per_method_and_snr": 3,
+    "statistical_unit": "paired held-out scenario and noise seed",
+    "warning": "Three paired held-out seeds support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": [
+    {
+      "artifact_references": [
+        {
+          "id": "aoa_estimator",
+          "kind": "component",
+          "path": "training_evidence/entries/000-learned_estimator/artifact/artifacts/aoa_estimator.onnx",
+          "sha256": "47936453d6cfc1f7ca440b72768eed001e89e4a950c2d5b35f9d117f865fcb24",
+          "size_bytes": 117338
+        },
+        {
+          "id": "ula_angle_of_arrival_estimation.cc666e52905a",
+          "kind": "contract",
+          "path": "training_evidence/entries/000-learned_estimator/artifact/training_contract.yaml",
+          "sha256": "ccf60f3300d5d861899ff982b66707bd7df6d6d0f22982bee76cee8a987c3813",
+          "size_bytes": 4920
+        }
+      ],
+      "evidence": {
+        "evaluation_metrics": {
+          "path": "training_evidence/entries/000-learned_estimator/evidence/evaluation_metrics.json",
+          "sha256": "5a7d1003c95e750fe4131c2e4bcc8a090ac2a3c63916461fe331adf8fb920532",
+          "size_bytes": 650
+        },
+        "trained_artifact_manifest": {
+          "path": "training_evidence/entries/000-learned_estimator/artifact/trained_artifact_manifest.yaml",
+          "sha256": "adcf0f50f7ac245ec0b917f041aa2efad465fa8172d4db2475f90dc2bbecc496",
+          "size_bytes": 3320
+        },
+        "training_history": {
+          "path": "training_evidence/entries/000-learned_estimator/evidence/training_history.json",
+          "sha256": "616f751c92c613032da00f06bc63fe1aead95f221647fcc09739836458bbe472",
+          "size_bytes": 3423
+        }
+      },
+      "index": 0,
+      "series": "learned_estimator",
+      "source_declarations": {
+        "evaluation_metrics": {
+          "declared_sha256": "5a7d1003c95e750fe4131c2e4bcc8a090ac2a3c63916461fe331adf8fb920532",
+          "path": "evaluation_metrics.json",
+          "snapshotted_sha256": "5a7d1003c95e750fe4131c2e4bcc8a090ac2a3c63916461fe331adf8fb920532"
+        },
+        "trained_artifact_manifest": {
+          "declared_sha256": "adcf0f50f7ac245ec0b917f041aa2efad465fa8172d4db2475f90dc2bbecc496",
+          "path": "../trained_artifact.yaml",
+          "snapshotted_sha256": "adcf0f50f7ac245ec0b917f041aa2efad465fa8172d4db2475f90dc2bbecc496"
+        },
+        "training_history": {
+          "declared_sha256": "616f751c92c613032da00f06bc63fe1aead95f221647fcc09739836458bbe472",
+          "path": "training_history.json",
+          "snapshotted_sha256": "616f751c92c613032da00f06bc63fe1aead95f221647fcc09739836458bbe472"
+        }
+      }
+    }
+  ]
+}

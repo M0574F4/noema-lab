@@ -1,0 +1,107 @@
+{
+  "miso-beam-selection-rate": {
+    "accessibleSummary": "Each point is the mean of three paired held-out runs. Shaded bands show Student-t 95% confidence intervals; exact values and run identifiers are downloadable below.",
+    "allowLog": false,
+    "description": "Mean spectral efficiency over three paired held-out clustered-ULA channel seeds. The learned and fixed DFT codebooks each contain eight beams; perfect-CSIT MRT is an upper bound.",
+    "series": [
+      {
+        "color": "#d97706",
+        "dash": [
+          3,
+          3
+        ],
+        "id": "mrt",
+        "label": "Perfect-CSIT MRT upper bound",
+        "marker": "diamond",
+        "range": [
+          [
+            0.0,
+            2.618770451957733,
+            3.226059584208933
+          ],
+          [
+            15.0,
+            7.24217531846645,
+            7.95919237765355
+          ]
+        ],
+        "values": [
+          [
+            0.0,
+            2.922415018083333
+          ],
+          [
+            15.0,
+            7.60068384806
+          ]
+        ]
+      },
+      {
+        "color": "#2563eb",
+        "dash": [
+          7,
+          4
+        ],
+        "id": "dft_codebook_sweep",
+        "label": "Fixed eight-beam DFT sweep",
+        "marker": "square",
+        "range": [
+          [
+            0.0,
+            2.3680616940703443,
+            2.8247502718696555
+          ],
+          [
+            15.0,
+            6.904835980259845,
+            7.453650513166821
+          ]
+        ],
+        "values": [
+          [
+            0.0,
+            2.59640598297
+          ],
+          [
+            15.0,
+            7.179243246713333
+          ]
+        ]
+      },
+      {
+        "color": "#16a34a",
+        "dash": [],
+        "id": "learned_beam_policy",
+        "label": "Learned eight-beam codebook",
+        "marker": "circle",
+        "range": [
+          [
+            0.0,
+            2.49138212163871,
+            3.0306243900479566
+          ],
+          [
+            15.0,
+            7.080973802822155,
+            7.648553034844512
+          ]
+        ],
+        "values": [
+          [
+            0.0,
+            2.7610032558433333
+          ],
+          [
+            15.0,
+            7.364763418833333
+          ]
+        ]
+      }
+    ],
+    "title": "MISO beam-selection rate",
+    "type": "line",
+    "xLabel": "SNR (dB)",
+    "yIncludeZero": true,
+    "yLabel": "Spectral efficiency (bit/s/Hz)"
+  }
+}

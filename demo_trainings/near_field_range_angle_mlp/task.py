@@ -23,19 +23,44 @@ ANGLE_LIMIT_DEG = 55.0
 class NearFieldEstimator(nn.Module):
     def __init__(self, antennas: int) -> None:
         super().__init__()
-        # Absolute pilot phase is arbitrary.  Adjacent-element correlations retain
-        # the linear phase slope (angle), while correlations between adjacent
-        # slopes retain the spherical-wave curvature (range).  Supplying both
-        # invariants makes the starter genuinely useful without baking a search
-        # grid or the simulator's labels into the learned component.
-        feature_count = antennas * 3 + (antennas - 1) * 2 + (antennas - 2) * 2
-        self.network = nn.Sequential(
+        self.antennas = int(antennas)
+        feature_count = self.antennas * 3 + 2
+        self.residual = nn.Sequential(
             nn.Linear(feature_count, 192),
             nn.SiLU(),
             nn.Linear(192, 128),
             nn.SiLU(),
-            nn.Linear(128, 1),
+            nn.Linear(128, 2),
         )
+        # A dense spherical-wave bank uses the declared physical aperture and
+        # range/angle bounds. The trainable head performs bounded sub-grid and
+        # low-SNR corrections from the full coherent observation.
+        ranges = torch.linspace(RANGE_MIN_M, RANGE_MAX_M, 46)
+        angles = torch.linspace(-ANGLE_LIMIT_DEG, ANGLE_LIMIT_DEG, 111)
+        candidate_range = ranges[:, None].expand(-1, angles.numel()).reshape(-1)
+        candidate_angle = angles[None, :].expand(ranges.numel(), -1).reshape(-1)
+        speed_of_light = 299_792_458.0
+        wavelength = speed_of_light / 28.0e9
+        aperture = (
+            torch.arange(self.antennas, dtype=torch.float32)
+            - (self.antennas - 1) / 2.0
+        ) * (wavelength / 2.0)
+        theta = torch.deg2rad(candidate_angle)[:, None]
+        radius = candidate_range[:, None]
+        target_x = radius * torch.sin(theta)
+        target_y = radius * torch.cos(theta)
+        distance = torch.sqrt((target_x - aperture[None, :]).square() + target_y.square())
+        relative = distance - radius
+        amplitude = radius / distance.clamp_min(1e-9)
+        phase = -2.0 * torch.pi * relative / wavelength
+        steering_real = amplitude * torch.cos(phase) / self.antennas**0.5
+        steering_imag = amplitude * torch.sin(phase) / self.antennas**0.5
+        self.register_buffer("candidate_range", candidate_range)
+        self.register_buffer("candidate_angle", candidate_angle)
+        self.register_buffer("steering_real", steering_real)
+        self.register_buffer("steering_imag", steering_imag)
+        nn.init.zeros_(self.residual[-1].weight)
+        nn.init.zeros_(self.residual[-1].bias)
 
     @staticmethod
     def _unit_pair(real: torch.Tensor, imag: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
@@ -47,25 +72,40 @@ class NearFieldEstimator(nn.Module):
         imag = array_ri[:, :, 1]
         unit_real, unit_imag = self._unit_pair(real, imag)
 
-        slope_real = unit_real[:, 1:] * unit_real[:, :-1] + unit_imag[:, 1:] * unit_imag[:, :-1]
-        slope_imag = unit_imag[:, 1:] * unit_real[:, :-1] - unit_real[:, 1:] * unit_imag[:, :-1]
-        slope_real, slope_imag = self._unit_pair(slope_real, slope_imag)
-
-        curve_real = slope_real[:, 1:] * slope_real[:, :-1] + slope_imag[:, 1:] * slope_imag[:, :-1]
-        curve_imag = slope_imag[:, 1:] * slope_real[:, :-1] - slope_real[:, 1:] * slope_imag[:, :-1]
-        curve_real, curve_imag = self._unit_pair(curve_real, curve_imag)
-
         log_magnitude = torch.log1p(torch.sqrt(real.square() + imag.square()))
+        projection_real = (
+            torch.matmul(real, self.steering_real.T)
+            + torch.matmul(imag, self.steering_imag.T)
+        )
+        projection_imag = (
+            torch.matmul(imag, self.steering_real.T)
+            - torch.matmul(real, self.steering_imag.T)
+        )
+        scores = projection_real.square() + projection_imag.square()
+        indices = torch.argmax(scores, dim=1)
+        base_range = self.candidate_range[indices]
+        base_angle = self.candidate_angle[indices]
         features = torch.cat(
-            [unit_real, unit_imag, log_magnitude, slope_real, slope_imag, curve_real, curve_imag],
+            [
+                unit_real,
+                unit_imag,
+                log_magnitude,
+                ((base_range - RANGE_MIN_M) / (RANGE_MAX_M - RANGE_MIN_M))[:, None],
+                (base_angle / ANGLE_LIMIT_DEG)[:, None],
+            ],
             dim=1,
         )
-        raw = self.network(features)
-        range_m = RANGE_MIN_M + (RANGE_MAX_M - RANGE_MIN_M) * torch.sigmoid(raw[:, 0])
-        mean_slope_real = torch.mean(slope_real, dim=1)
-        mean_slope_imag = torch.mean(slope_imag, dim=1)
-        spatial_phase = torch.atan2(mean_slope_imag, mean_slope_real)
-        angle_deg = torch.asin(torch.clamp(spatial_phase / torch.pi, -0.999, 0.999)) * (180.0 / torch.pi)
+        correction = self.residual(features)
+        range_m = torch.clamp(
+            base_range + 0.25 * torch.tanh(correction[:, 0]),
+            RANGE_MIN_M,
+            RANGE_MAX_M,
+        )
+        angle_deg = torch.clamp(
+            base_angle + torch.tanh(correction[:, 1]),
+            -ANGLE_LIMIT_DEG,
+            ANGLE_LIMIT_DEG,
+        )
         return torch.stack([range_m, angle_deg], dim=1)
 
 

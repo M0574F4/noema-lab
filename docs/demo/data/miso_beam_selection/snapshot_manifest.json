@@ -1,0 +1,254 @@
+{
+  "kind": "noema.docs_demo_snapshot",
+  "projection": {
+    "benchmark_projection.csv": {
+      "sha256": "38d1676a98343e55d7838484ff90cfba75e104a94fb338fc0ad62b34644889e5",
+      "size_bytes": 5977
+    },
+    "chart_data.json": {
+      "sha256": "5cbeb5444bba9d3fce56e93dd314251efc828cd670aefad89718bcc48670c5bc",
+      "size_bytes": 2448
+    },
+    "chart_javascript": {
+      "path": "docs/_static/noema-miso-beam-selection-chart-data.js",
+      "sha256": "2842e27ab7c5357a4f17704da03742c5d01203d711d7252604fea07df3844a4d",
+      "size_bytes": 2610
+    },
+    "rows": 18,
+    "summary_table.csv": {
+      "sha256": "418186dc1b367a467527886be5a9459e8c9ae492a195a36222375d4aa0ab597a",
+      "size_bytes": 583
+    }
+  },
+  "runs": [
+    {
+      "recipe_id": "mrt_snr0_seed81001",
+      "recipe_sha256": "fd49dacde419af53310edc03db46037e04d03323aa28e525b05b7a7db4a9e2c5",
+      "role": "oracle",
+      "run_id": "20260823T134317Z_single_user_miso_beamforming__mrt_snr0_seed81001",
+      "semantic_recipe_sha256": "08780f00e771f1a271ca0e6625db56b2626c852fed16db010b7a0e9bf473d598"
+    },
+    {
+      "recipe_id": "dft_codebook_sweep_snr0_seed81001",
+      "recipe_sha256": "b9336d6f004243f3a06e0d63c1cb021c39482c18e8bc23a179a1df33e0026834",
+      "role": "baseline",
+      "run_id": "20260823T134317Z_single_user_miso_beamforming__dft_codebook_sweep_snr0_seed81001",
+      "semantic_recipe_sha256": "75c4599ddb45305bf16059b8f88e40a98cd094865db291df7b96345fb3975be8"
+    },
+    {
+      "recipe_id": "learned_beam_policy_snr0_seed81001",
+      "recipe_sha256": "352cf7310b84b6690eeeec14804e4cc4968fa09b8f927961f65591bc0c7bcaed",
+      "role": "candidate",
+      "run_id": "20260823T134317Z_single_user_miso_beamforming__learned_beam_policy_snr0_seed81001",
+      "semantic_recipe_sha256": "ae0c7aacf5b28c794d8dec40e92070c9f80ab08e4ab2ae8eab1783970199d383"
+    },
+    {
+      "recipe_id": "mrt_snr0_seed82001",
+      "recipe_sha256": "fec4922297fbc2c94ef02b581ca8f898dc170fd0bf0e19213c815655a291272e",
+      "role": "oracle",
+      "run_id": "20260823T134318Z_single_user_miso_beamforming__mrt_snr0_seed82001",
+      "semantic_recipe_sha256": "6738e48be25e0b8626ca0dc63f66349ba5b90946f8cb00c837f8906478a2378a"
+    },
+    {
+      "recipe_id": "dft_codebook_sweep_snr0_seed82001",
+      "recipe_sha256": "15d3c1f84a47883e73dbe8b057516acaaa5ec395e66a5d3db0aaa1ffafa715d3",
+      "role": "baseline",
+      "run_id": "20260823T134318Z_single_user_miso_beamforming__dft_codebook_sweep_snr0_seed82001",
+      "semantic_recipe_sha256": "7ef95f4981ec989090c0b130f8354c1573446734856eded8717a30fd6b7b76ad"
+    },
+    {
+      "recipe_id": "learned_beam_policy_snr0_seed82001",
+      "recipe_sha256": "f66ef79149d5e106c4d815700544dca480c29322c5c4c091ae28b02838407546",
+      "role": "candidate",
+      "run_id": "20260823T134318Z_single_user_miso_beamforming__learned_beam_policy_snr0_seed82001",
+      "semantic_recipe_sha256": "6c8bdc39d34ae3070861764bc3d6e2ce88dc62d2a4ba6cda5a461a85a594f6cd"
+    },
+    {
+      "recipe_id": "mrt_snr0_seed83001",
+      "recipe_sha256": "c16bf52c2ed83a9c0360d59b012a13591027564d0109df4399223f58c6479781",
+      "role": "oracle",
+      "run_id": "20260823T134319Z_single_user_miso_beamforming__mrt_snr0_seed83001",
+      "semantic_recipe_sha256": "0a680f58bd45cbf05d6b77b58fffe7fc7dc38ba97edbc64792ab7fee93faa392"
+    },
+    {
+      "recipe_id": "dft_codebook_sweep_snr0_seed83001",
+      "recipe_sha256": "5f410cad3b1a82d002d561dd600f00fbc438c3a462c17e8ef827e43a8ee4652c",
+      "role": "baseline",
+      "run_id": "20260823T134319Z_single_user_miso_beamforming__dft_codebook_sweep_snr0_seed83001",
+      "semantic_recipe_sha256": "efbf5cc29289a6f1531fc8115273fd0d143e112449cf312661f64f826f17cd42"
+    },
+    {
+      "recipe_id": "learned_beam_policy_snr0_seed83001",
+      "recipe_sha256": "ac31578874d1091619267c02d270a61b03302e76f7c7cea45066753c833707fa",
+      "role": "candidate",
+      "run_id": "20260823T134319Z_single_user_miso_beamforming__learned_beam_policy_snr0_seed83001",
+      "semantic_recipe_sha256": "45f1ca3d478c0c7c0430c5f8f493c408674581a237006007251a5fd65640f9a1"
+    },
+    {
+      "recipe_id": "mrt_snr15_seed81001",
+      "recipe_sha256": "52909a06617b89fe5ca543fbaa85858732f3d15d2026f06454556a465bbd17c4",
+      "role": "oracle",
+      "run_id": "20260823T134320Z_single_user_miso_beamforming__mrt_snr15_seed81001",
+      "semantic_recipe_sha256": "28cba7c76fee7d90f003b9925566a1ef9ff8b1c118e105387c670f95b9c68f88"
+    },
+    {
+      "recipe_id": "dft_codebook_sweep_snr15_seed81001",
+      "recipe_sha256": "77aba161259f69c81b374320c2286efdd0765f58825ae5359d3b15e0624469d7",
+      "role": "baseline",
+      "run_id": "20260823T134320Z_single_user_miso_beamforming__dft_codebook_sweep_snr15_seed81001",
+      "semantic_recipe_sha256": "f72f6ddb23e74f6e500fec935dd7716be6b216245784b4460af0cd68cae24144"
+    },
+    {
+      "recipe_id": "learned_beam_policy_snr15_seed81001",
+      "recipe_sha256": "40f98e54bbe27a31373880985509cc1c823a6c2e55d72effc36671742b436ce4",
+      "role": "candidate",
+      "run_id": "20260823T134320Z_single_user_miso_beamforming__learned_beam_policy_snr15_seed81001",
+      "semantic_recipe_sha256": "3c7c59c59441e3d2e3cf9d5d1c880b57d842c36d504b7569b80a6ff583414799"
+    },
+    {
+      "recipe_id": "mrt_snr15_seed82001",
+      "recipe_sha256": "d622b244f22772755fbe4e069741cf0a8931cc6db3abf64455e979cd1e8bea63",
+      "role": "oracle",
+      "run_id": "20260823T134321Z_single_user_miso_beamforming__mrt_snr15_seed82001",
+      "semantic_recipe_sha256": "169000dcc6d9b15cd2c6e02e25a288dba4b4727a4ecc7ad3133acfa5e8270f04"
+    },
+    {
+      "recipe_id": "dft_codebook_sweep_snr15_seed82001",
+      "recipe_sha256": "18e3d8160a52b970fb06a22aa1a5562afc33aa4882e1f4616ce49b213e5ab4c2",
+      "role": "baseline",
+      "run_id": "20260823T134321Z_single_user_miso_beamforming__dft_codebook_sweep_snr15_seed82001",
+      "semantic_recipe_sha256": "b35adaffce241d791c57a04c66c09b29717927353733bd5bf6edfca4d9d9a852"
+    },
+    {
+      "recipe_id": "learned_beam_policy_snr15_seed82001",
+      "recipe_sha256": "0b3a532712311d22abbd135db8040d9a1637fcb0ba650d445a2b01220472e35e",
+      "role": "candidate",
+      "run_id": "20260823T134321Z_single_user_miso_beamforming__learned_beam_policy_snr15_seed82001",
+      "semantic_recipe_sha256": "24242f97eaeef98cfb93f8e724bdfa4574c387d4a67950eda35d8add4c811939"
+    },
+    {
+      "recipe_id": "mrt_snr15_seed83001",
+      "recipe_sha256": "e80b22fa0d19ef6dcfbec2257513ab0d68bd99ab2bda45f7c42370259a81f3ce",
+      "role": "oracle",
+      "run_id": "20260823T134321Z_single_user_miso_beamforming__mrt_snr15_seed83001",
+      "semantic_recipe_sha256": "6a271a82bba661490052d9f6b23a236137c6d76b553260f562e0a6663452477b"
+    },
+    {
+      "recipe_id": "dft_codebook_sweep_snr15_seed83001",
+      "recipe_sha256": "92bcf8d0657d9b3c8833c8b88f0726f7611a0112308e5194325c1a297c9f8970",
+      "role": "baseline",
+      "run_id": "20260823T134322Z_single_user_miso_beamforming__dft_codebook_sweep_snr15_seed83001",
+      "semantic_recipe_sha256": "ca6f8c1c8c8ec11eae7939054223433300a95955098da9d6c72c64987a4ec32a"
+    },
+    {
+      "recipe_id": "learned_beam_policy_snr15_seed83001",
+      "recipe_sha256": "50cfe0f96713e2cdb45e5a5150068de9dfddf4fa859dc98c1f624d9d04b0f60e",
+      "role": "candidate",
+      "run_id": "20260823T134322Z_single_user_miso_beamforming__learned_beam_policy_snr15_seed83001",
+      "semantic_recipe_sha256": "8ee15a9b5704b051fbd774101c7e549c2e3722fa8785ec1d9d5ee651b8251e0f"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "miso_beam_selection",
+  "source": {
+    "benchmark_id": "beamforming_precoding.learned_beam_selection_v1",
+    "benchmark_tier": "experimental",
+    "benchmark_version": "1.0.0",
+    "completed_at_utc": "2026-08-23T13:43:22.687Z",
+    "created_at_utc": "2026-08-23T13:43:17.215Z",
+    "files": {
+      "metrics.csv": {
+        "sha256": "943946d9cbe4f1a2c936964bd91d6ea12e11ce66dd640f58027bd2759c0c4749",
+        "size_bytes": 114335
+      },
+      "recipes.csv": {
+        "sha256": "d3efde4031576fd58852a7d150b84011ada553c498e0c8f14792ec9d6689af0e",
+        "size_bytes": 5627
+      },
+      "result.json": {
+        "sha256": "318f33e0cd17a05a8693a7444baeb09ae73004a94928048ec889a2f5ed3d568d",
+        "size_bytes": 185807
+      },
+      "training_evidence/manifest.json": {
+        "sha256": "428e9be3b7a2f4c723785149ae3dfa891fe00e42361dd0a2d26d18eccc4034c5",
+        "size_bytes": 1661
+      },
+      "training_evidence/projection.json": {
+        "sha256": "c8b0c7e21e110f314e1b4afd8a67e43990d6c21f9102a49561fceb9e6bc5a12f",
+        "size_bytes": 2674
+      }
+    },
+    "result_id": "20260823T134317Z_beamforming_precoding.learned_beam_selection_v1",
+    "status": "completed"
+  },
+  "statistical_design": {
+    "aggregation_cell": "channel SNR",
+    "critical_value": 4.302652729911275,
+    "degrees_of_freedom": 2,
+    "interval": "two-sided Student-t 95% confidence interval over paired held-out seeds",
+    "paired_seeds": [
+      81001,
+      82001,
+      83001
+    ],
+    "sample_count_per_method_and_snr": 3,
+    "statistical_unit": "paired held-out scenario and noise seed",
+    "warning": "Three paired held-out seeds support an experimental tutorial result, not a paper-grade population claim."
+  },
+  "training_evidence": [
+    {
+      "artifact_references": [
+        {
+          "id": "beam_policy",
+          "kind": "component",
+          "path": "training_evidence/entries/000-learned_beam_policy/artifact/artifacts/beam_policy.onnx",
+          "sha256": "15e5cc52eaf056058894719d7539e7db12a409d9ed4c0de0eb85eaab23674674",
+          "size_bytes": 3564
+        },
+        {
+          "id": "single_user_miso_beamforming.74172b671aa1",
+          "kind": "contract",
+          "path": "training_evidence/entries/000-learned_beam_policy/artifact/training_contract.yaml",
+          "sha256": "0ce903ba79b53ac76c7024d0c746b9512d38161d7145d8a18f3a25392f5c12cd",
+          "size_bytes": 4899
+        }
+      ],
+      "evidence": {
+        "evaluation_metrics": {
+          "path": "training_evidence/entries/000-learned_beam_policy/evidence/evaluation_metrics.json",
+          "sha256": "7de66ab21da74fbaa79ab8766a142a346058203a536816b75138797c399f1f3a",
+          "size_bytes": 738
+        },
+        "trained_artifact_manifest": {
+          "path": "training_evidence/entries/000-learned_beam_policy/artifact/trained_artifact_manifest.yaml",
+          "sha256": "4e1d4c14db7bd06948b0b4f51335647cd7c348d378433000ad84e0d0ab6f59a5",
+          "size_bytes": 3309
+        },
+        "training_history": {
+          "path": "training_evidence/entries/000-learned_beam_policy/evidence/training_history.json",
+          "sha256": "ec33b945666a67656a181436f44d60ed3f31cfe552f1cbaab5310555dddcb7f4",
+          "size_bytes": 12534
+        }
+      },
+      "index": 0,
+      "series": "learned_beam_policy",
+      "source_declarations": {
+        "evaluation_metrics": {
+          "declared_sha256": "7de66ab21da74fbaa79ab8766a142a346058203a536816b75138797c399f1f3a",
+          "path": "evaluation_metrics.json",
+          "snapshotted_sha256": "7de66ab21da74fbaa79ab8766a142a346058203a536816b75138797c399f1f3a"
+        },
+        "trained_artifact_manifest": {
+          "declared_sha256": "4e1d4c14db7bd06948b0b4f51335647cd7c348d378433000ad84e0d0ab6f59a5",
+          "path": "../trained_artifact.yaml",
+          "snapshotted_sha256": "4e1d4c14db7bd06948b0b4f51335647cd7c348d378433000ad84e0d0ab6f59a5"
+        },
+        "training_history": {
+          "declared_sha256": "ec33b945666a67656a181436f44d60ed3f31cfe552f1cbaab5310555dddcb7f4",
+          "path": "training_history.json",
+          "snapshotted_sha256": "ec33b945666a67656a181436f44d60ed3f31cfe552f1cbaab5310555dddcb7f4"
+        }
+      }
+    }
+  ]
+}

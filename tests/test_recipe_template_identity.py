@@ -81,7 +81,7 @@ EXPECTED_TEMPLATE_IDENTITIES = {
     ),
     "ai_phy.beamforming_precoding.adapter": (
         "single_user_miso_beamforming",
-        "Single-user MISO beamforming with selectable MRT and DFT-codebook reference methods on seeded flat-fading channels.",
+        "Single-user MISO beamforming with learned and fixed eight-beam codebooks on seeded clustered ULA channels, plus an MRT upper bound.",
     ),
     "ai_phy.wireless_localization.adapter": (
         "range_based_wireless_localization",

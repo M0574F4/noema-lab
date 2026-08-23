@@ -15,8 +15,8 @@ OPERATION_ID = "model.aoa_estimator_adapter"
 REQUIRED_INPUTS = ["problem"]
 PRIMARY_METRIC = "rmse_deg"
 DESCRIPTION = (
-    "Covariance-domain neural estimator for one narrowband source on a "
-    "half-wavelength ULA, returned through Noema's portable AoA ABI."
+    "Bartlett-initialized covariance-residual estimator for one narrowband "
+    "source on a half-wavelength ULA, returned through Noema's portable AoA ABI."
 )
 RUNTIME_INPUTS = [
     {
@@ -48,21 +48,33 @@ def runtime_outputs(features: np.ndarray):
 class CovarianceAoaEstimator(nn.Module):
     def __init__(self, antenna_count: int) -> None:
         super().__init__()
+        self.antenna_count = int(antenna_count)
         dimension = 2 * int(antenna_count) * int(antenna_count)
-        self.network = nn.Sequential(
-            nn.Linear(dimension, 128),
+        self.residual = nn.Sequential(
+            nn.Linear(dimension, 96),
             nn.SiLU(),
-            nn.Linear(128, 64),
+            nn.Linear(96, 64),
             nn.SiLU(),
             nn.Linear(64, 1),
         )
+        # The fixed physical bank supplies a strong continuous-data baseline.
+        # Training learns only the bounded correction from the full covariance,
+        # so a weak checkpoint cannot destroy the array-processing solution.
+        grid = torch.linspace(-60.0, 60.0, 481, dtype=torch.float32)
+        antenna = torch.arange(self.antenna_count, dtype=torch.float32)[None, :]
+        phase = torch.pi * torch.sin(torch.deg2rad(grid))[:, None] * antenna
+        self.register_buffer("angle_grid_deg", grid)
+        self.register_buffer("steering_real", torch.cos(phase))
+        self.register_buffer("steering_imag", torch.sin(phase))
+        nn.init.zeros_(self.residual[-1].weight)
+        nn.init.zeros_(self.residual[-1].bias)
 
     def forward(self, snapshots_ri: torch.Tensor) -> torch.Tensor:
         real = snapshots_ri[..., 0]
         imag = snapshots_ri[..., 1]
         real = real - torch.mean(real, dim=2, keepdim=True)
         imag = imag - torch.mean(imag, dim=2, keepdim=True)
-        count = float(snapshots_ri.shape[2])
+        count = snapshots_ri.shape[2]
         covariance_real = (
             torch.matmul(real, real.transpose(1, 2))
             + torch.matmul(imag, imag.transpose(1, 2))
@@ -74,7 +86,24 @@ class CovarianceAoaEstimator(nn.Module):
         scale = torch.mean(torch.diagonal(covariance_real, dim1=1, dim2=2), dim=1)
         features = torch.cat([covariance_real, covariance_imag], dim=2)
         features = features / scale[:, None, None].clamp_min(1e-6)
-        return 60.0 * torch.tanh(self.network(features.flatten(1)).squeeze(1))
+        sample_real = real.transpose(1, 2)
+        sample_imag = imag.transpose(1, 2)
+        projection_real = (
+            torch.matmul(sample_real, self.steering_real.T)
+            + torch.matmul(sample_imag, self.steering_imag.T)
+        )
+        projection_imag = (
+            torch.matmul(sample_imag, self.steering_real.T)
+            - torch.matmul(sample_real, self.steering_imag.T)
+        )
+        spectrum = torch.mean(
+            projection_real.square() + projection_imag.square(), dim=1
+        )
+        base_angle = self.angle_grid_deg[torch.argmax(spectrum, dim=1)]
+        correction = 2.0 * torch.tanh(
+            self.residual(features.flatten(1)).squeeze(1)
+        )
+        return torch.clamp(base_angle + correction, -60.0, 60.0)
 
 
 def build_model(features: np.ndarray) -> nn.Module:
@@ -139,7 +168,7 @@ def benchmark_methods(artifact_path: str, package_sha256: str):
         ("music", "MUSIC", "baseline", {"mode": "music"}),
         (
             "learned_estimator",
-            "Learned covariance estimator",
+            "Learned Bartlett-residual estimator",
             "candidate",
             {
                 "mode": "learned_artifact",

@@ -75,7 +75,7 @@ CASES = (
         "recipes/beamforming_adapter_baseline.yaml",
         "demo_trainings/beam_selection_supervised_mlp/training_plan.yaml",
         "beamformer",
-        "beam.codebook_cross_entropy",
+        "beam.negative_normalized_gain",
         "data.problem",
         "",
         "beam_policy",

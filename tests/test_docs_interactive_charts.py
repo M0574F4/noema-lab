@@ -56,6 +56,24 @@ class DocumentationInteractiveChartTests(unittest.TestCase):
                 "deepjscc-slow-ms-ssim-snr",
                 "deepjscc-slow-rate-psnr",
             },
+            "tutorials/learned_range_localization_demo.md": {
+                "range-localization-rmse",
+            },
+            "tutorials/learned_aoa_estimation_demo.md": {
+                "aoa-estimation-rmse",
+            },
+            "tutorials/learned_beam_selection_demo.md": {
+                "miso-beam-selection-rate",
+            },
+            "tutorials/learned_isac_ofdm_allocation_demo.md": {
+                "isac-joint-allocation-utility",
+            },
+            "tutorials/learned_near_field_xl_mimo_demo.md": {
+                "near-field-focusing-gain",
+            },
+            "tutorials/learned_leo_ntn_tracking_demo.md": {
+                "leo-ntn-handover-accuracy",
+            },
         }
         for relative_path, expected_ids in pages.items():
             source = (DOCS / relative_path).read_text(encoding="utf-8")
@@ -94,6 +112,15 @@ class DocumentationInteractiveChartTests(unittest.TestCase):
             '"noema-deepjscc-slow-rayleigh-chart-data-v2.js"',
             configuration,
         )
+        for filename in (
+            "noema-range-localization-chart-data.js",
+            "noema-aoa-estimation-chart-data.js",
+            "noema-miso-beam-selection-chart-data.js",
+            "noema-isac-joint-allocation-chart-data.js",
+            "noema-near-field-xl-mimo-chart-data.js",
+            "noema-leo-ntn-tracking-chart-data.js",
+        ):
+            self.assertIn(f'"{filename}"', configuration)
         self.assertIn('"noema-demo-charts-v2.js"', configuration)
         runtime = RUNTIME_JS.read_text(encoding="utf-8")
         self.assertIn("Array.isArray(this.spec.yDomain)", runtime)
