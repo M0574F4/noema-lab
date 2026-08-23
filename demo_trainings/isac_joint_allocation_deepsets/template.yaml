@@ -1,0 +1,28 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: isac.joint_allocation_deepsets
+name: ISAC OFDM allocation · label-free Deep Sets policy
+status: reference_only
+operation: model.isac_ofdm_allocator_adapter
+framework: torch
+data:
+  owner: noema_capture_contract
+  feature: per-subcarrier communication gain, sensing gain, noise level, and declared tradeoff weight
+  target: none; the starter optimizes the declared utility directly
+model:
+  owner: external_researcher
+  reference_architecture: permutation-equivariant subcarrier scorer with exact simplex projection
+loss:
+  owner: external_researcher
+  reference_objective: negative scalarized communication/sensing utility
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: single_binding
+  entrypoint: isac_allocator
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison: [equal_power, communications_water_filling, scalarized_reference, learned_isac_allocator]
+  sweep: channel.snr_db
+  pairing: common held-out communication and sensing gains across methods

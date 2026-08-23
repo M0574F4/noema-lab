@@ -277,6 +277,33 @@ datasets:
     versions:
       - flickr8k-validation-v1
     description: Real Flickr8k image-caption pairs for compact CLIP-style image-text retrieval experiments.
+  - id: synthetic_isac_frequency_response
+    name: Synthetic joint communication/sensing OFDM response
+    modality: wireless
+    status: experimental
+    source_ops:
+      - source.isac_ofdm_scenario
+    versions:
+      - synthetic-isac-frequency-response-v1
+    description: Seeded per-subcarrier communication and sensing gains with an explicit noise level, tradeoff weight, and fixed total-power budget.
+  - id: synthetic_near_field_array
+    name: Synthetic near-field coherent array observations
+    modality: wireless
+    status: experimental
+    source_ops:
+      - source.near_field_xl_mimo_scenario
+    versions:
+      - synthetic-near-field-array-v1
+    description: Seeded 28 GHz spherical-wave coherent-pilot observations with separately retained range and angle truth.
+  - id: synthetic_leo_ntn_track
+    name: Synthetic LEO-NTN observation histories
+    modality: wireless
+    status: experimental
+    source_ops:
+      - source.leo_ntn_tracking_scenario
+    versions:
+      - synthetic-leo-ntn-track-v1
+    description: Seeded bounded-kinematic histories of noisy Doppler and azimuth observations with separately retained future state and next-beam labels.
 tasks:
   - id: csi_compression_feedback
     name: CSI compression and feedback
@@ -776,7 +803,130 @@ tasks:
       - timing.step.wall_time_s
       - memory.run.peak_rss_bytes
     description: Evaluate text/semantic-state conditioned generative image receivers using CLIP-space alignment to prompts and optional source images.
+  - id: joint_isac_resource_allocation
+    name: Joint ISAC resource allocation
+    area_id: physical_layer_resource_optimization
+    kind: link_and_sensing_optimization
+    modality: wireless
+    status: supported
+    target: decision.power
+    metrics:
+      - isac.scalarized_utility
+      - isac.communication_rate_bps_hz
+      - isac.sensing_snr_db
+      - task.score
+    optional_metrics:
+      - isac.sensing_weight
+      - channel.snr_db
+      - memory.run.peak_rss_bytes
+    description: Allocate a fixed OFDM power budget against an explicit scalarized communication and sensing objective.
+  - id: near_field_range_angle_focusing
+    name: Near-field range-angle estimation and focusing
+    area_id: antennas_positioning_sensing
+    kind: estimation_and_beamforming
+    modality: wireless
+    status: supported
+    target: estimate.range_angle
+    metrics:
+      - near_field.range_rmse_m
+      - near_field.angle_rmse_deg
+      - near_field.normalized_focusing_gain
+      - task.score
+    optional_metrics:
+      - channel.snr_db
+      - memory.run.peak_rss_bytes
+    description: Estimate spherical-wave range and angle from a coherent array observation and evaluate the implied focusing vector.
+  - id: leo_ntn_doppler_beam_tracking
+    name: LEO-NTN Doppler and beam tracking
+    area_id: antennas_positioning_sensing
+    kind: causal_prediction_and_handover
+    modality: wireless
+    status: supported
+    target: decision.future_state
+    metrics:
+      - ntn.doppler_mae_hz
+      - ntn.beam_handover_accuracy
+      - ntn.beam_outage_rate
+      - task.score
+    optional_metrics:
+      - ntn.pointing_mae_deg
+      - ntn.prediction_horizon_s
+      - channel.snr_db
+      - memory.run.peak_rss_bytes
+    description: Predict future Doppler and the next fixed beam from a bounded causal observation history at a declared horizon.
 metrics:
+  - id: isac.communication_rate_bps_hz
+    name: ISAC communication spectral efficiency
+    family: isac
+    unit: bit/s/Hz
+    direction: higher_is_better
+    reduction: mean
+  - id: isac.sensing_snr_db
+    name: ISAC allocated sensing SNR
+    family: isac
+    unit: dB
+    direction: higher_is_better
+    reduction: mean
+  - id: isac.scalarized_utility
+    name: Declared ISAC scalarized utility
+    family: isac
+    unit: utility
+    direction: higher_is_better
+    reduction: mean
+  - id: isac.sensing_weight
+    name: Declared sensing utility weight
+    family: isac
+    unit: ratio
+    direction: neutral
+    reduction: mean
+  - id: near_field.range_rmse_m
+    name: Near-field range RMSE
+    family: sensing
+    unit: m
+    direction: lower_is_better
+    reduction: mean
+  - id: near_field.angle_rmse_deg
+    name: Near-field angle RMSE
+    family: sensing
+    unit: degree
+    direction: lower_is_better
+    reduction: mean
+  - id: near_field.normalized_focusing_gain
+    name: Normalized near-field focusing gain
+    family: beamforming
+    unit: ratio
+    direction: higher_is_better
+    reduction: mean
+  - id: ntn.doppler_mae_hz
+    name: Future Doppler MAE
+    family: channel
+    unit: Hz
+    direction: lower_is_better
+    reduction: mean
+  - id: ntn.beam_handover_accuracy
+    name: Next-beam handover accuracy
+    family: mobility
+    unit: ratio
+    direction: higher_is_better
+    reduction: mean
+  - id: ntn.beam_outage_rate
+    name: Next-beam outage rate
+    family: mobility
+    unit: ratio
+    direction: lower_is_better
+    reduction: mean
+  - id: ntn.pointing_mae_deg
+    name: Future pointing-angle MAE
+    family: mobility
+    unit: degree
+    direction: lower_is_better
+    reduction: mean
+  - id: ntn.prediction_horizon_s
+    name: NTN prediction horizon
+    family: mobility
+    unit: s
+    direction: neutral
+    reduction: mean
   - id: csi_feedback.achieved_spectral_efficiency_bps_hz
     name: Achieved downlink spectral efficiency with reconstructed CSI
     family: link

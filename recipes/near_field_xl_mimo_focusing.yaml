@@ -1,0 +1,65 @@
+schema_version: 1
+execution_profile:
+  id: near_field_range_angle_focusing
+  version: 1
+name: near_field_xl_mimo_range_angle_focusing
+description: Synthetic 28 GHz spherical-wave coherent-pilot estimation with paired range-angle and beam-focusing evaluation.
+suite:
+  id: localization_sensing
+  name: Localization / Sensing
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: synthetic_training_demonstration
+  channel_enabled: true
+  channel_mode: synthetic_spherical_wave
+  seed: 23
+  ui_configured: true
+  research:
+    dataset:
+      id: synthetic_near_field_array
+      modality: wireless
+      version: synthetic-near-field-array-v1
+      split: fixed_seed
+    task:
+      id: near_field_range_angle_focusing
+      kind: estimation_and_beamforming
+      modality: wireless
+      metrics:
+        - near_field.range_rmse_m
+        - near_field.angle_rmse_deg
+        - near_field.normalized_focusing_gain
+        - task.score
+    metrics:
+      - near_field.range_rmse_m
+      - near_field.angle_rmse_deg
+      - near_field.normalized_focusing_gain
+      - task.score
+steps:
+  - id: data
+    op: source.near_field_xl_mimo_scenario
+    params:
+      example_count: 64
+      antennas: 32
+      carrier_frequency_ghz: 28
+      range_min_m: 0.5
+      range_max_m: 5
+      angle_min_deg: -55
+      angle_max_deg: 55
+      snr_db: 15
+      seed: 23001
+
+  - id: estimator
+    op: model.near_field_estimator_adapter
+    inputs:
+      problem: data.problem
+      truth: data.truth
+    params:
+      mode: polar_codebook
+
+  - id: evaluation
+    op: metrics.near_field_focusing
+    inputs:
+      problem: data.problem
+      truth: data.truth
+      estimate: estimator.estimate

@@ -133,6 +133,17 @@ from noema_lab.ops.phase_tracking import (
     PhaseTrackingReceiverAdapterOperation,
     QpskPilotModulateOperation,
 )
+from noema_lab.ops.future_wireless import (
+    IsacOfdmAllocatorOperation,
+    IsacOfdmMetricsOperation,
+    IsacOfdmScenarioOperation,
+    LeoNtnTrackingAdapterOperation,
+    LeoNtnTrackingMetricsOperation,
+    LeoNtnTrackingScenarioOperation,
+    NearFieldEstimatorAdapterOperation,
+    NearFieldMetricsOperation,
+    NearFieldXlMimoScenarioOperation,
+)
 from noema_lab.ops.resource_reliability import (
     NrLdpcOfdmDeliveryMetricsOperation,
     OfdmDelayedCsiOperation,
@@ -283,6 +294,15 @@ def register_builtin_operations(registry: OperationRegistry) -> None:
     registry.register(MusicAoaEstimatorOperation())
     registry.register(AoaEstimatorAdapterOperation())
     registry.register(AoaEstimationMetricsOperation())
+    registry.register(IsacOfdmScenarioOperation())
+    registry.register(IsacOfdmAllocatorOperation())
+    registry.register(IsacOfdmMetricsOperation())
+    registry.register(NearFieldXlMimoScenarioOperation())
+    registry.register(NearFieldEstimatorAdapterOperation())
+    registry.register(NearFieldMetricsOperation())
+    registry.register(LeoNtnTrackingScenarioOperation())
+    registry.register(LeoNtnTrackingAdapterOperation())
+    registry.register(LeoNtnTrackingMetricsOperation())
     registry.register(ResourceAllocationScenarioSourceOperation())
     registry.register(EqualPowerAllocationOperation())
     registry.register(WaterFillingPowerAllocationOperation())

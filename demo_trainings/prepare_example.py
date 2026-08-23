@@ -63,8 +63,11 @@ DEMO_LOSSES = {
     "csi-feedback": CSI_FEEDBACK_EXAMPLE_LOSS,
     "delayed-csi-resource-allocation": DELAYED_CSI_RESOURCE_ALLOCATION_LOSS,
     "deepjscc-image": "image.mse",
+    "isac-joint-allocation": "isac.negative_scalarized_utility",
+    "leo-ntn-tracking": "ntn.future_doppler_mse_plus_beam_cross_entropy",
     "modulation-recognition": MODULATION_CLASSIFICATION_LOSS,
     "mimo-ofdm-channel-estimation": CHANNEL_ESTIMATION_LOSS,
+    "near-field-range-angle": "near_field.normalized_range_angle_mse",
     "neural-receiver": "bit.bce",
     "phase-tracking-receiver": "bit.bce",
     "range-localization": "position.mse",
@@ -986,9 +989,14 @@ def _require_demo_signals(bundle_result: Mapping[str, Any], plan: Any, demo: str
         ]
     elif demo in {"neural-receiver", "modulation-recognition"}:
         expected = [str(plan.feature_reference), str(plan.target_reference)]
-    elif demo in {"range-localization", "aoa-estimation"}:
+    elif demo in {
+        "range-localization",
+        "aoa-estimation",
+        "near-field-range-angle",
+        "leo-ntn-tracking",
+    }:
         expected = [str(plan.feature_reference), str(plan.target_reference)]
-    elif demo == "beam-selection":
+    elif demo in {"beam-selection", "isac-joint-allocation"}:
         expected = [str(plan.feature_reference)]
     if not expected:
         return

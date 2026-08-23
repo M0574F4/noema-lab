@@ -52,3 +52,9 @@ This is not a multi-user, mobility-aware, beam-tracking, or Sionna RT beam-align
 It also does not claim a feedback-bit budget: both current policies observe the realized channel.
 Feedback-constrained beam selection, multi-user ZF/RZF, and beam tracking require separate protocols
 with explicit CSI acquisition, feedback errors, baselines, and channel-use accounting.
+
+The suite now includes one such separate mobility protocol: [LEO-NTN Doppler prediction and beam
+handover](../tutorials/learned_leo_ntn_tracking_demo.md). It fixes a causal observation history,
+one-second horizon, and nine beam sectors, then compares hold-last, linear extrapolation, a portable
+learned tracker, and a future-state oracle. Its bounded kinematic generator is intentionally not
+treated as an orbital or 3GPP NTN channel model.

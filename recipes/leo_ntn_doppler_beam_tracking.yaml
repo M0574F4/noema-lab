@@ -1,0 +1,63 @@
+schema_version: 1
+execution_profile:
+  id: leo_ntn_tracking
+  version: 1
+name: leo_ntn_doppler_beam_tracking
+description: Synthetic bounded-kinematic LEO pass with causal Doppler prediction and next-beam handover at a fixed horizon.
+suite:
+  id: beamforming_precoding
+  name: Beamforming / Precoding
+  status: experimental
+  version: v1-draft
+metadata:
+  research_stage: synthetic_training_demonstration
+  channel_enabled: true
+  channel_mode: synthetic_leo_kinematics
+  seed: 23
+  ui_configured: true
+  research:
+    dataset:
+      id: synthetic_leo_ntn_track
+      modality: wireless
+      version: synthetic-leo-ntn-track-v1
+      split: fixed_seed
+    task:
+      id: leo_ntn_doppler_beam_tracking
+      kind: causal_prediction_and_handover
+      modality: wireless
+      metrics:
+        - ntn.doppler_mae_hz
+        - ntn.beam_handover_accuracy
+        - ntn.beam_outage_rate
+        - task.score
+    metrics:
+      - ntn.doppler_mae_hz
+      - ntn.beam_handover_accuracy
+      - ntn.beam_outage_rate
+      - task.score
+steps:
+  - id: data
+    op: source.leo_ntn_tracking_scenario
+    params:
+      example_count: 64
+      history_length: 6
+      history_step_s: 0.5
+      prediction_horizon_s: 1.0
+      beam_count: 9
+      max_doppler_hz: 48000
+      snr_db: 15
+      seed: 23001
+
+  - id: tracker
+    op: model.leo_ntn_tracking_adapter
+    inputs:
+      problem: data.problem
+      truth: data.truth
+    params:
+      mode: linear_extrapolation
+
+  - id: evaluation
+    op: metrics.leo_ntn_tracking
+    inputs:
+      truth: data.truth
+      decision: tracker.decision

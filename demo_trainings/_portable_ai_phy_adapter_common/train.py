@@ -253,7 +253,13 @@ def _write_manifest(
             "framework": str(config.get("framework") or "torch"),
             "architecture": str((provenance.get("selected_candidate") or {}).get("architecture") or ""),
             "loss": str((config.get("objective") or {}).get("loss") or ""),
-            "supervised_labels_used": task.TASK_ID != "beamforming_precoding",
+            "supervised_labels_used": bool(
+                getattr(
+                    task,
+                    "SUPERVISED_LABELS_USED",
+                    task.TASK_ID != "beamforming_precoding",
+                )
+            ),
             **provenance,
         },
         "evaluation": {

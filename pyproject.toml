@@ -171,6 +171,24 @@ where = ["src"]
   "demo_trainings/beam_selection_supervised_mlp/training_plan.yaml",
   "demo_trainings/beam_selection_supervised_mlp/task.py",
 ]
+"share/noema-lab/demo_trainings/isac_joint_allocation_deepsets" = [
+  "demo_trainings/isac_joint_allocation_deepsets/README.md",
+  "demo_trainings/isac_joint_allocation_deepsets/template.yaml",
+  "demo_trainings/isac_joint_allocation_deepsets/training_plan.yaml",
+  "demo_trainings/isac_joint_allocation_deepsets/task.py",
+]
+"share/noema-lab/demo_trainings/near_field_range_angle_mlp" = [
+  "demo_trainings/near_field_range_angle_mlp/README.md",
+  "demo_trainings/near_field_range_angle_mlp/template.yaml",
+  "demo_trainings/near_field_range_angle_mlp/training_plan.yaml",
+  "demo_trainings/near_field_range_angle_mlp/task.py",
+]
+"share/noema-lab/demo_trainings/leo_ntn_tracking_mlp" = [
+  "demo_trainings/leo_ntn_tracking_mlp/README.md",
+  "demo_trainings/leo_ntn_tracking_mlp/template.yaml",
+  "demo_trainings/leo_ntn_tracking_mlp/training_plan.yaml",
+  "demo_trainings/leo_ntn_tracking_mlp/task.py",
+]
 "share/noema-lab/demo_trainings/mimo_ofdm_channel_estimation_cnn" = [
   "demo_trainings/mimo_ofdm_channel_estimation_cnn/README.md",
   "demo_trainings/mimo_ofdm_channel_estimation_cnn/template.yaml",

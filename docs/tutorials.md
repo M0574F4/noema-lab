@@ -36,6 +36,9 @@ bundle path, trainer details, fair benchmark methods, result views, and publicat
 - [Learned two-dimensional range localization](tutorials/learned_range_localization_demo.md)
 - [Learned narrowband AoA estimation](tutorials/learned_aoa_estimation_demo.md)
 - [Learned MISO beam selection](tutorials/learned_beam_selection_demo.md)
+- [Learned joint ISAC OFDM allocation](tutorials/learned_isac_ofdm_allocation_demo.md)
+- [Learned near-field XL-MIMO range-angle focusing](tutorials/learned_near_field_xl_mimo_demo.md)
+- [Learned LEO-NTN Doppler prediction and beam handover](tutorials/learned_leo_ntn_tracking_demo.md)
 
 ## Run the Kodak Development Benchmark
 

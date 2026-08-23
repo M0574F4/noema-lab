@@ -1,0 +1,28 @@
+schema_version: 1
+kind: noema.demo_training_template
+id: near_field.range_angle_mlp
+name: Near-field XL-MIMO · coherent-array range/angle MLP
+status: reference_only
+operation: model.near_field_estimator_adapter
+framework: torch
+data:
+  owner: noema_capture_contract
+  feature: phase-referenced noisy coherent-pilot array observation
+  target: separately captured range and angle
+model:
+  owner: external_researcher
+  reference_architecture: normalized-array multilayer perceptron with bounded physical outputs
+loss:
+  owner: external_researcher
+  reference_objective: normalized range and angle mean squared error
+artifact_return:
+  schema: noema.trained_block_artifact/v2
+  runtime: onnxruntime
+  application: single_binding
+  entrypoint: near_field_estimator
+post_training:
+  helper: build_benchmark.py
+  output: benchmark_pack.yaml
+  comparison: [far_field_steering, polar_codebook, oracle_focus, learned_near_field_estimator]
+  sweep: channel.snr_db
+  pairing: common held-out spherical-wave scenes and receiver-noise seeds

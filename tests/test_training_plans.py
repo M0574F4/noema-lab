@@ -62,6 +62,18 @@ class TrainingPlanTests(unittest.TestCase):
                 "recipes/beamforming_adapter_baseline.yaml",
                 "demo_trainings/beam_selection_supervised_mlp/training_plan.yaml",
             ),
+            (
+                "recipes/isac_ofdm_joint_allocation.yaml",
+                "demo_trainings/isac_joint_allocation_deepsets/training_plan.yaml",
+            ),
+            (
+                "recipes/near_field_xl_mimo_focusing.yaml",
+                "demo_trainings/near_field_range_angle_mlp/training_plan.yaml",
+            ),
+            (
+                "recipes/leo_ntn_doppler_beam_tracking.yaml",
+                "demo_trainings/leo_ntn_tracking_mlp/training_plan.yaml",
+            ),
         )
         for recipe_name, plan_name in cases:
             with self.subTest(recipe=recipe_name):

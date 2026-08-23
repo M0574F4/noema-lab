@@ -21,6 +21,36 @@ ROOT = Path(__file__).resolve().parents[1]
 
 CASES = (
     (
+        "isac-joint-allocation",
+        "recipes/isac_ofdm_joint_allocation.yaml",
+        "demo_trainings/isac_joint_allocation_deepsets/training_plan.yaml",
+        "allocator",
+        "isac.negative_scalarized_utility",
+        "data.problem",
+        "",
+        "isac_allocator",
+    ),
+    (
+        "near-field-range-angle",
+        "recipes/near_field_xl_mimo_focusing.yaml",
+        "demo_trainings/near_field_range_angle_mlp/training_plan.yaml",
+        "estimator",
+        "near_field.normalized_range_angle_mse",
+        "data.problem",
+        "data.truth",
+        "near_field_estimator",
+    ),
+    (
+        "leo-ntn-tracking",
+        "recipes/leo_ntn_doppler_beam_tracking.yaml",
+        "demo_trainings/leo_ntn_tracking_mlp/training_plan.yaml",
+        "tracker",
+        "ntn.future_doppler_mse_plus_beam_cross_entropy",
+        "data.problem",
+        "data.truth",
+        "ntn_tracker",
+    ),
+    (
         "range-localization",
         "recipes/localization_adapter_baseline.yaml",
         "demo_trainings/localization_supervised_mlp/training_plan.yaml",
@@ -105,8 +135,11 @@ class PortableAiPhyTrainingDemoTests(unittest.TestCase):
                 self.assertFalse(config["data"]["test_split_exposed_to_training"])
                 self.assertIn("trained_artifact.yaml", str(payload["trained_artifacts"]))
 
-    def test_operation_owned_abis_match_the_three_returned_entrypoints(self) -> None:
+    def test_operation_owned_abis_match_the_six_returned_entrypoints(self) -> None:
         expected = {
+            "model.isac_ofdm_allocator_adapter": ("isac_allocator", {"features"}, {"power"}),
+            "model.near_field_estimator_adapter": ("near_field_estimator", {"array_ri"}, {"range_angle"}),
+            "model.leo_ntn_tracking_adapter": ("ntn_tracker", {"track_features"}, {"decision"}),
             "model.localization_adapter": ("localization_estimator", {"anchors", "ranges"}, {"positions"}),
             "model.aoa_estimator_adapter": ("aoa_estimator", {"snapshots_ri"}, {"angles_deg"}),
             "model.beamforming_adapter": ("beam_policy", {"channels_ri"}, {"weights_ri"}),
@@ -151,12 +184,15 @@ class PortableAiPhyTrainingDemoTests(unittest.TestCase):
 
     def test_public_readiness_pages_link_all_three_complete_workflows(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertEqual(readme.count("✅ [Train + compare]"), 12)
+        self.assertEqual(readme.count("✅ [Train + compare]"), 15)
         self.assertNotIn("train/replace adapter not yet available", readme)
         for name in (
             "learned_range_localization_demo",
             "learned_aoa_estimation_demo",
             "learned_beam_selection_demo",
+            "learned_isac_ofdm_allocation_demo",
+            "learned_near_field_xl_mimo_demo",
+            "learned_leo_ntn_tracking_demo",
         ):
             self.assertTrue((ROOT / "docs" / "tutorials" / (name + ".md")).is_file())
             self.assertIn(name + ".html", readme)

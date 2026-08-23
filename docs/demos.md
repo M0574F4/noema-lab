@@ -22,6 +22,7 @@ for the clean installation, contract export, external training, returned model, 
 
 - [Learned OFDM subcarrier allocation](tutorials/ofdm_resource_allocation_demo.md)
 - [Reliability-aware OFDM allocation with delayed CSI](tutorials/reliability_aware_ofdm_allocation_demo.md)
+- [Learned joint ISAC OFDM allocation](tutorials/learned_isac_ofdm_allocation_demo.md)
 
 ## Channel Estimation and Feedback
 
@@ -38,10 +39,12 @@ for the clean installation, contract export, external training, returned model, 
 
 - [Learned two-dimensional range localization](tutorials/learned_range_localization_demo.md)
 - [Learned narrowband AoA estimation](tutorials/learned_aoa_estimation_demo.md)
+- [Learned near-field XL-MIMO range-angle focusing](tutorials/learned_near_field_xl_mimo_demo.md)
 
 ## Beamforming
 
 - [Learned MISO beam selection](tutorials/learned_beam_selection_demo.md)
+- [Learned LEO-NTN Doppler prediction and beam handover](tutorials/learned_leo_ntn_tracking_demo.md)
 
 ## End-to-End Communication
 
@@ -54,6 +57,7 @@ for the clean installation, contract export, external training, returned model, 
 
 tutorials/ofdm_resource_allocation_demo
 tutorials/reliability_aware_ofdm_allocation_demo
+tutorials/learned_isac_ofdm_allocation_demo
 tutorials/learned_mimo_ofdm_channel_estimation_demo
 tutorials/learned_csi_feedback
 tutorials/learned_qpsk_demapper_demo
@@ -62,6 +66,8 @@ tutorials/automatic_modulation_recognition_demo
 tutorials/learned_range_localization_demo
 tutorials/learned_aoa_estimation_demo
 tutorials/learned_beam_selection_demo
+tutorials/learned_near_field_xl_mimo_demo
+tutorials/learned_leo_ntn_tracking_demo
 tutorials/digital_vs_deepjscc_sionna
 tutorials/deepjscc_slow_rayleigh
 ```

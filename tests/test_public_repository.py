@@ -81,7 +81,7 @@ class PublicRepositoryTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
         self.assertIn("## Ready-to-train systems", readme)
-        self.assertEqual(readme.count("✅ [Train + compare]"), 12)
+        self.assertEqual(readme.count("✅ [Train + compare]"), 15)
         self.assertNotIn("🟡 [Benchmark now]", readme)
         for relative in (
             "tutorials/learned_qpsk_demapper_demo.html",

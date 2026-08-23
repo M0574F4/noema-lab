@@ -84,11 +84,14 @@ and experiment protocol fixed.
 | CSI compression and feedback | 128-bit encoder/decoder pair | matched KLT/PCA codec | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_csi_feedback.html) |
 | OFDM subcarrier allocation | power-allocation policy | equal power; water filling | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/ofdm_resource_allocation_demo.html) |
 | Delayed-CSI OFDM allocation | reliability-aware causal allocator | equal power; delayed-CSI and uncertainty-aware water filling | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/reliability_aware_ofdm_allocation_demo.html) |
+| Joint communication and sensing | OFDM power-allocation policy | equal power; communication water filling; iterative scalarized reference | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_isac_ofdm_allocation_demo.html) |
 | Image delivery over AWGN | DeepJSCC image encoder/decoder | capacity-matched JPEG | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/digital_vs_deepjscc_sionna.html) |
 | Image delivery over slow fading | blind, nested-rate DeepJSCC pair | outage-aware capacity-matched JPEG | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/deepjscc_slow_rayleigh.html) |
 | [2D range localization](https://M0574F4.github.io/noema-lab/suites/localization_sensing.html) | geometry-aware residual localizer | linear and regularized trilateration | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_range_localization_demo.html) |
 | Narrowband AoA estimation | covariance-domain array estimator | MUSIC; Bartlett | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_aoa_estimation_demo.html) |
 | MISO beam selection | finite-codebook beam policy | perfect-CSIT MRT; exhaustive DFT-codebook oracle | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_beam_selection_demo.html) |
+| Near-field XL-MIMO focusing | physics-informed range/angle estimator | far-field steering; polar codebook; simulation-truth oracle | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_near_field_xl_mimo_demo.html) |
+| LEO-NTN Doppler and handover | causal Doppler/next-beam tracker | hold-last; linear extrapolation; future-state oracle | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_leo_ntn_tracking_demo.html) |
 
 ## Quickstart
 

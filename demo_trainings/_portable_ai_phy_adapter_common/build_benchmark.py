@@ -215,6 +215,66 @@ def _settings() -> dict[str, Any]:
         "direction": "neutral",
         "definition_version": 1,
     }
+    if task.TASK_ID == "isac_joint_allocation":
+        channel_metric.update(
+            {"source_step": "data", "source_operation": "source.isac_ofdm_scenario"}
+        )
+        return {
+            "benchmark_id": "resource_allocation.learned_isac_joint_allocation_v1",
+            "name": "Learned Joint ISAC OFDM Allocation",
+            "description": "Equal power, communication-only water filling, per-scene scalarized optimization, and a learned policy on paired synthetic communication/sensing gains.",
+            "suite": {"id": "resource_allocation", "name": "Resource Allocation", "status": "experimental", "version": "v1-draft"},
+            "dataset": {"id": "synthetic_isac_frequency_response", "modality": "wireless", "version": "synthetic-isac-frequency-response-v1", "split": "held_out_seeded"},
+            "task": {"id": "joint_isac_resource_allocation", "kind": "link_and_sensing_optimization", "modality": "wireless"},
+            "metrics": [channel_metric, {"id": "isac.scalarized_utility", "family": "isac", "unit": "utility", "direction": "higher_is_better"}, {"id": "isac.communication_rate_bps_hz", "family": "link", "unit": "bit/s/Hz", "direction": "higher_is_better"}, {"id": "isac.sensing_snr_db", "family": "sensing", "unit": "dB", "direction": "higher_is_better"}, {"id": "task.score", "family": "task", "unit": "score", "direction": "higher_is_better"}],
+            "primary_metric": "isac.scalarized_utility",
+            "snr_step": "data",
+            "seed_steps": {"data": 0},
+            "notes": "All methods receive identical held-out per-subcarrier gains, noise, sensing weight, and power budget; the iterative reference is an explicitly labeled numerical oracle for this synthetic objective.",
+            "question": "Can a portable policy recover the declared communication/sensing tradeoff without oracle allocation labels?",
+            "tutorial": "../../../tutorials/learned_isac_ofdm_allocation_demo.html",
+            "held_constant": ["twelve-subcarrier synthetic response", "unit total-power simplex", "paired communication and sensing gains", "fixed scalarized utility"],
+        }
+    if task.TASK_ID == "near_field_range_angle":
+        channel_metric.update(
+            {"source_step": "data", "source_operation": "source.near_field_xl_mimo_scenario"}
+        )
+        return {
+            "benchmark_id": "localization_sensing.learned_near_field_focusing_v1",
+            "name": "Learned Near-Field Range-Angle Focusing",
+            "description": "Far-field steering, polar-codebook search, simulation-truth focusing, and a learned range-angle estimator on paired spherical-wave observations.",
+            "suite": {"id": "localization_sensing", "name": "Localization / Sensing", "status": "experimental", "version": "v1-draft"},
+            "dataset": {"id": "synthetic_near_field_array", "modality": "wireless", "version": "synthetic-near-field-array-v1", "split": "held_out_seeded"},
+            "task": {"id": "near_field_range_angle_focusing", "kind": "estimation_and_beamforming", "modality": "wireless"},
+            "metrics": [channel_metric, {"id": "near_field.normalized_focusing_gain", "family": "beamforming", "unit": "ratio", "direction": "higher_is_better"}, {"id": "near_field.range_rmse_m", "family": "sensing", "unit": "m", "direction": "lower_is_better"}, {"id": "near_field.angle_rmse_deg", "family": "sensing", "unit": "degree", "direction": "lower_is_better"}, {"id": "task.score", "family": "task", "unit": "score", "direction": "higher_is_better"}],
+            "primary_metric": "near_field.normalized_focusing_gain",
+            "snr_step": "data",
+            "seed_steps": {"data": 0},
+            "notes": "All methods receive the same coherent 28 GHz spherical-wave observations; true-position focusing is a simulation-only upper bound.",
+            "question": "Can a learned estimator convert near-field phase curvature into useful range-angle focusing under the same observations as classical searches?",
+            "tutorial": "../../../tutorials/learned_near_field_xl_mimo_demo.html",
+            "held_constant": ["32-element half-wavelength array", "28 GHz carrier", "paired target states and noise", "common physical output bounds"],
+        }
+    if task.TASK_ID == "leo_ntn_tracking":
+        channel_metric.update(
+            {"source_step": "data", "source_operation": "source.leo_ntn_tracking_scenario"}
+        )
+        return {
+            "benchmark_id": "beamforming_precoding.learned_leo_ntn_tracking_v1",
+            "name": "Learned LEO-NTN Doppler and Beam Tracking",
+            "description": "Hold-last, linear extrapolation, future-state oracle, and a learned causal tracker on paired synthetic LEO observation histories.",
+            "suite": {"id": "beamforming_precoding", "name": "Beamforming / Precoding", "status": "experimental", "version": "v1-draft"},
+            "dataset": {"id": "synthetic_leo_ntn_track", "modality": "wireless", "version": "synthetic-leo-ntn-track-v1", "split": "held_out_seeded"},
+            "task": {"id": "leo_ntn_doppler_beam_tracking", "kind": "causal_prediction_and_handover", "modality": "wireless"},
+            "metrics": [channel_metric, {"id": "ntn.beam_handover_accuracy", "family": "mobility", "unit": "ratio", "direction": "higher_is_better"}, {"id": "ntn.doppler_mae_hz", "family": "channel", "unit": "Hz", "direction": "lower_is_better"}, {"id": "ntn.beam_outage_rate", "family": "mobility", "unit": "ratio", "direction": "lower_is_better"}, {"id": "task.score", "family": "task", "unit": "score", "direction": "higher_is_better"}],
+            "primary_metric": "ntn.beam_handover_accuracy",
+            "snr_step": "data",
+            "seed_steps": {"data": 0},
+            "notes": "Every method receives the same causal observation history and must predict at the same one-second horizon; the future-state oracle is simulation-only.",
+            "question": "Can a learned causal history model improve the joint Doppler and next-beam decision under noisy observations?",
+            "tutorial": "../../../tutorials/learned_leo_ntn_tracking_demo.html",
+            "held_constant": ["six-sample causal history", "one-second prediction horizon", "nine fixed beam sectors", "paired synthetic tracks and measurement noise"],
+        }
     if task.TASK_ID == "range_localization":
         channel_metric.update(
             {"source_step": "range_observation", "source_operation": "wireless.range_observation"}

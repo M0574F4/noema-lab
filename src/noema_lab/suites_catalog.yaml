@@ -137,14 +137,14 @@ suites:
     name: Beamforming / Precoding
     status: experimental
     version: v1-draft
-    summary: MISO beam-selection and precoding benchmarks with MRT/codebook baselines and learned-policy adapter points.
+    summary: MISO beam selection, precoding, and causal LEO-NTN beam tracking with classical baselines and learned-policy adapter points.
     docs:
       page: docs/suites/beamforming_precoding.md
     supported_tasks:
       - beamforming_precoding
+      - leo_ntn_doppler_beam_tracking
     planned_tasks:
       - multi_user_precoding
-      - beam_tracking
       - power_aware_beam_selection
     benchmark_packs:
       - id: beamforming_precoding.beam_selection_v1
@@ -155,12 +155,13 @@ suites:
     name: Localization / Sensing
     status: experimental
     version: v1-draft
-    summary: Explicit range-localization and ULA angle-of-arrival scenarios with classical baselines and trainable estimator endpoints.
+    summary: Range localization, angle-of-arrival, and near-field range-angle focusing scenarios with classical baselines and trainable estimator endpoints.
     docs:
       page: docs/suites/localization_sensing.md
     supported_tasks:
       - wireless_localization
       - aoa_estimation
+      - near_field_range_angle_focusing
     planned_tasks:
       - aoa_toa_fusion
       - beam_alignment
@@ -180,11 +181,12 @@ suites:
     name: Resource Allocation
     status: experimental
     version: v1-draft
-    summary: Frequency-selective OFDM subcarrier power-allocation benchmarks with equal-power, theoretical water-filling, and learned-policy adapter points.
+    summary: Communication-only and joint communication/sensing OFDM power-allocation benchmarks with fixed-budget baselines and learned-policy adapter points.
     docs:
       page: docs/suites/resource_allocation.md
     supported_tasks:
       - resource_allocation
+      - joint_isac_resource_allocation
     planned_tasks:
       - scheduling
       - interference_management
