@@ -30,7 +30,7 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 
 <p align="center">
   <strong><a href="https://M0574F4.github.io/noema-lab/break_the_comparison.html">Try the flagship demo</a></strong>
-  · <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">Watch the complete workflow</a>
+  · <a href="https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow">Watch the complete workflow</a>
   · <a href="https://M0574F4.github.io/noema-lab/">Read the documentation</a>
   · <a href="https://M0574F4.github.io/noema-lab/demos.html">Explore demonstrations</a>
   · <a href="https://M0574F4.github.io/noema-lab/launch_assets.html">Inspect launch evidence</a>
@@ -39,26 +39,27 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 ## Watch the complete workflow
 
 <p align="center">
-  <a href="https://M0574F4.github.io/noema-lab/launch_video.html">
-    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-workflow-video-card.svg" alt="Play the complete Noema workflow: export a contract, train a model, and compare it with baselines" width="88%" />
+  <a href="https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow">
+    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-workflow-video-card.svg" alt="Open the complete Noema workflow in the embedded documentation player" width="88%" />
   </a>
 </p>
 
 <p align="center">
-  <strong><a href="https://M0574F4.github.io/noema-lab/launch_video.html">▶ Watch in the embedded documentation player</a></strong>
+  <strong><a href="https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow">▶ Open the playable documentation player</a></strong>
   · <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">Open on YouTube</a>
 </p>
 
-The recorded walkthrough starts from a clean environment and shows contract export, dataset
-capture, external model training, returned-model validation, and the UI comparison against the
-uncompensated and calibrated-oracle baselines.
+GitHub does not render embedded YouTube players in README files, so the card opens the embedded
+player in Noema's documentation. The recorded walkthrough starts from a clean environment and shows
+contract export, dataset capture, external model training, returned-model validation, and the UI
+comparison against the uncompensated and calibrated-oracle baselines.
 
 ## Start here
 
 | I want to… | Start with… |
 | --- | --- |
 | understand the central idea | the interactive [Break the comparison](https://M0574F4.github.io/noema-lab/break_the_comparison.html) evidence lab |
-| watch an external model train, then compare it with Noema | the [learned QPSK I/Q calibration walkthrough](https://M0574F4.github.io/noema-lab/launch_video.html) |
+| watch an external model train, then compare it with Noema | the [learned QPSK I/Q calibration walkthrough](https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow) |
 | **choose a system to train** | **the [ready-to-train matrix](#ready-to-train-systems) below** |
 | run a dependency-light example | the source-checkout quickstart below |
 | bring my own model | the [external adapter SDK](https://M0574F4.github.io/noema-lab/external_adapter_sdk.html) |
@@ -87,7 +88,7 @@ and experiment protocol fixed.
 | Joint communication and sensing | OFDM power-allocation policy | equal power; communication water filling; iterative scalarized reference | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_isac_ofdm_allocation_demo.html) |
 | Image delivery over AWGN | DeepJSCC image encoder/decoder | capacity-matched JPEG | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/digital_vs_deepjscc_sionna.html) |
 | Image delivery over slow fading | blind, nested-rate DeepJSCC pair | outage-aware capacity-matched JPEG | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/deepjscc_slow_rayleigh.html) |
-| [2D range localization](https://M0574F4.github.io/noema-lab/suites/localization_sensing.html) | geometry-aware residual localizer | linear and regularized trilateration | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_range_localization_demo.html) |
+| 2D range localization | geometry-aware residual localizer | linear and regularized trilateration | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_range_localization_demo.html) |
 | Narrowband AoA estimation | covariance-domain array estimator | MUSIC; Bartlett | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_aoa_estimation_demo.html) |
 | MISO beam selection | learned eight-beam codebook | perfect-CSIT MRT; equal-size fixed DFT-codebook sweep | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_beam_selection_demo.html) |
 | Near-field XL-MIMO focusing | physics-informed range/angle estimator | far-field steering; polar codebook; simulation-truth oracle | ✅ [Train + compare](https://M0574F4.github.io/noema-lab/tutorials/learned_near_field_xl_mimo_demo.html) |
