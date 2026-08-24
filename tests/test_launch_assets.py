@@ -66,13 +66,16 @@ class LaunchAssetTests(unittest.TestCase):
                 self.assertIn(title.split()[0], payload)
                 self.assertNotIn("paper/", payload)
 
-    def test_f2_uses_plain_measurement_language(self) -> None:
+    def test_f2_uses_plain_metric_and_verification_language(self) -> None:
         payload = (ASSET_ROOT / "f2-contract-to-evidence.svg").read_text(
             encoding="utf-8"
         )
-        self.assertIn(">Measurements<", payload)
+        self.assertIn(">Metrics<", payload)
         self.assertIn("Bit and block", payload)
         self.assertNotIn(">Accounting<", payload)
+        self.assertNotIn(">Measurements<", payload)
+        self.assertNotIn("moves across tools", payload)
+        self.assertNotIn("does not prove fairness", payload)
 
     def test_f3_and_t0_are_derived_from_every_comparison_cell(self) -> None:
         figure = (ASSET_ROOT / "f3-receiver-ber-vs-snr.svg").read_text(

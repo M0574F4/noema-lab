@@ -23,7 +23,7 @@ class PublicRepositoryTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("https://www.youtube.com/watch?v=bKNXS_vHLHc", readme)
         self.assertIn("logo=youtube", readme)
-        self.assertIn('logo=youtube&logoColor=white" height="40"', readme)
+        self.assertIn('logo=youtube&logoColor=white" width="220"', readme)
         self.assertNotIn("noema-workflow-video-card.svg", readme)
         self.assertNotIn("GitHub does not render embedded YouTube players", readme)
         self.assertNotIn("embedded workflow player", readme)
@@ -65,9 +65,12 @@ class PublicRepositoryTests(unittest.TestCase):
         direct_path = (
             ROOT / "docs" / "_static" / "launch" / "f2-contract-to-evidence.svg"
         ).read_text(encoding="utf-8")
-        self.assertIn(">Measurements<", direct_path)
+        self.assertIn(">Metrics<", direct_path)
         self.assertIn("Bit and block", direct_path)
         self.assertNotIn(">Accounting<", direct_path)
+        self.assertNotIn(">Measurements<", direct_path)
+        self.assertNotIn("moves across tools", direct_path)
+        self.assertNotIn("does not prove fairness", direct_path)
         self.assertTrue((ROOT / "docs" / "_static" / "noema-logo.svg").is_file())
         self.assertTrue(
             (ROOT / "docs" / "_static" / "noema-logo-dark.svg").is_file()

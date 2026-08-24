@@ -295,16 +295,16 @@ def _figure_f1(evidence: Mapping[str, Any]) -> bytes:
 def _figure_f2(evidence: Mapping[str, Any]) -> bytes:
     design = evidence["design"]
     stages = (
-        ("01", "Protocol", "Typed methods, SNR grid, metrics"),
+        ("01", "Protocol", "Typed methods and SNR grid"),
         ("02", "Execution", f'{design["run_count"]} concrete runs'),
-        ("03", "Measurements", "Bit and block error counts"),
+        ("03", "Metrics", "Bit and block error counts"),
         ("04", "Evidence", "Runs, identities, observed ranges"),
         ("05", "Projection", "launch_evidence.json"),
     )
     body = [
         _text(80, 82, "CONTRACT → EVIDENCE", size=19, weight=750, fill=GREEN, tracking=2.5),
         _text(80, 155, "One chain from declared question to retained result.", size=48, weight=740),
-        _text(80, 205, "Noema keeps the declared comparison settings attached while the experiment moves across tools.", size=24, fill=MUTED),
+        _text(80, 205, "Noema links the declared comparison settings to every run and result.", size=24, fill=MUTED),
     ]
     x_positions = (70, 380, 690, 1000, 1310)
     for index, ((number, title, detail), x) in enumerate(zip(stages, x_positions)):
@@ -321,13 +321,13 @@ def _figure_f2(evidence: Mapping[str, Any]) -> bytes:
     body.extend(
         (
             _rect(210, 690, 1180, 118, fill="#0a1b17", stroke=LINE, radius=22),
-            _text(250, 738, "LOCAL VERIFICATION BOUNDARY", size=16, weight=750, fill=AMBER, tracking=1.5),
-            _text(250, 780, "Checks identities and declared relations; does not prove fairness, authenticity, or independent reproduction.", size=22, fill=MUTED),
+            _text(250, 738, "LOCAL VERIFICATION", size=16, weight=750, fill=GREEN, tracking=1.5),
+            _text(250, 780, "Checks declared settings, run identities, and result links.", size=22, fill=MUTED),
         )
     )
     return _svg(
         "From experiment contract to retained evidence",
-        "Five-stage Noema evidence chain from a typed protocol through execution and measurement to a generated launch projection.",
+        "Five-stage Noema evidence chain from a typed protocol through execution and metrics to a generated launch projection.",
         "".join(body),
     )
 

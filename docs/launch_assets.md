@@ -41,7 +41,7 @@ The minimum visual explanation of why the surrounding contract matters more than
 ### F2 · Contract-to-evidence chain
 
 ```{figure} _static/launch/f2-contract-to-evidence.svg
-:alt: Noema chain from typed protocol through execution, measurements, retained evidence, and launch projection
+:alt: Noema chain from typed protocol through execution, metrics, retained evidence, and launch projection
 :class: noema-launch-figure
 
 The system figure for documentation, talks, and the future launch video.
