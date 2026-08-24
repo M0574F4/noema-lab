@@ -7,7 +7,6 @@
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/M0574F4/noema-lab"></a>
   <a href="CITATION.cff"><img alt="Cite" src="https://img.shields.io/badge/cite-CITATION.cff-53b889"></a>
   <a href="https://M0574F4.github.io/noema-lab/"><img alt="Documentation" src="https://img.shields.io/badge/docs-GitHub%20Pages-4eb7c4?logo=githubpages&logoColor=white"></a>
-  <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc"><img alt="YouTube video" src="https://img.shields.io/badge/video-YouTube-FF0000?logo=youtube&logoColor=white"></a>
   <img alt="Pre-release" src="https://img.shields.io/badge/status-pre--release-e2a646">
 </p>
 
@@ -38,21 +37,16 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 
 ## Watch the complete workflow
 
-<p align="center">
-  <a href="https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow">
-    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-workflow-video-card.svg" alt="Open the complete Noema workflow in the embedded documentation player" width="88%" />
-  </a>
-</p>
+GitHub does not render embedded YouTube players inside README files. The complete recording plays
+inline in Noema's documentation:
 
 <p align="center">
-  <strong><a href="https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow">▶ Open the playable documentation player</a></strong>
-  · <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">Open on YouTube</a>
+  <strong><a href="https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow">Open the embedded workflow player →</a></strong>
 </p>
 
-GitHub does not render embedded YouTube players in README files, so the card opens the embedded
-player in Noema's documentation. The recorded walkthrough starts from a clean environment and shows
-contract export, dataset capture, external model training, returned-model validation, and the UI
-comparison against the uncompensated and calibrated-oracle baselines.
+The recorded walkthrough starts from a clean environment and shows contract export, dataset
+capture, external model training, returned-model validation, and the UI comparison against the
+uncompensated and calibrated-oracle baselines.
 
 ## Start here
 
