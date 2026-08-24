@@ -214,7 +214,7 @@ def _figure_f0(evidence: Mapping[str, Any]) -> bytes:
                 96,
                 455,
                 (
-                    "Bind the protocol, execution, accounting, returned model,",
+                    "Bind the protocol, execution, resource tracking, returned model,",
                     "terminal outcome, and retained evidence into one verifiable object.",
                 ),
                 size=27,
@@ -297,7 +297,7 @@ def _figure_f2(evidence: Mapping[str, Any]) -> bytes:
     stages = (
         ("01", "Protocol", "Typed methods, SNR grid, metrics"),
         ("02", "Execution", f'{design["run_count"]} concrete runs'),
-        ("03", "Accounting", "Integer bit / block error counts"),
+        ("03", "Measurements", "Bit and block error counts"),
         ("04", "Evidence", "Runs, identities, observed ranges"),
         ("05", "Projection", "launch_evidence.json"),
     )
@@ -327,7 +327,7 @@ def _figure_f2(evidence: Mapping[str, Any]) -> bytes:
     )
     return _svg(
         "From experiment contract to retained evidence",
-        "Five-stage Noema evidence chain from a typed protocol through execution and accounting to a generated launch projection.",
+        "Five-stage Noema evidence chain from a typed protocol through execution and measurement to a generated launch projection.",
         "".join(body),
     )
 
