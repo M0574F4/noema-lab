@@ -21,16 +21,11 @@ class PublicRepositoryTests(unittest.TestCase):
 
     def test_flagship_demo_and_video_are_public(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn(
-            "GitHub does not render embedded YouTube players inside README files",
-            readme,
-        )
-        self.assertIn(
-            "https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow",
-            readme,
-        )
+        self.assertIn("https://www.youtube.com/watch?v=bKNXS_vHLHc", readme)
+        self.assertIn("logo=youtube", readme)
         self.assertNotIn("noema-workflow-video-card.svg", readme)
-        self.assertNotIn("https://www.youtube.com/watch?v=bKNXS_vHLHc", readme)
+        self.assertNotIn("GitHub does not render embedded YouTube players", readme)
+        self.assertNotIn("embedded workflow player", readme)
         self.assertNotIn("launch_video.html", readme)
         self.assertFalse((ROOT / "docs" / "launch_video.md").exists())
         self.assertLess(
