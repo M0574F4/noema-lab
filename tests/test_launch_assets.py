@@ -66,6 +66,12 @@ class LaunchAssetTests(unittest.TestCase):
                 self.assertIn(title.split()[0], payload)
                 self.assertNotIn("paper/", payload)
 
+    def test_f0_hero_has_no_bottom_disclaimer_panel(self) -> None:
+        payload = (ASSET_ROOT / "f0-launch-hero.svg").read_text(encoding="utf-8")
+        self.assertIn('viewBox="0 0 1600 700"', payload)
+        self.assertNotIn(self.evidence["scientific_status"]["disclosure"], payload)
+        self.assertNotIn('fill="#251f0d"', payload)
+
     def test_f2_uses_plain_metric_and_verification_language(self) -> None:
         payload = (ASSET_ROOT / "f2-contract-to-evidence.svg").read_text(
             encoding="utf-8"

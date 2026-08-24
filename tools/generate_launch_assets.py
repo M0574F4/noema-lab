@@ -241,14 +241,13 @@ def _figure_f0(evidence: Mapping[str, Any]) -> bytes:
                 fill=MUTED,
                 line_height=1.65,
             ),
-            _rect(92, 752, 1398, 82, fill="#251f0d", stroke="#705c23", radius=18),
-            _text(124, 803, evidence["scientific_status"]["disclosure"], size=22, weight=650, fill=AMBER),
         )
     )
     return _svg(
         "Noema: make the comparison traceable",
         "Launch hero showing Noema's contract-first claim and a bounded experimental QPSK receiver result.",
         body,
+        height=700,
     )
 
 
