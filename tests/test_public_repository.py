@@ -45,11 +45,8 @@ class PublicRepositoryTests(unittest.TestCase):
         ):
             self.assertNotIn(removed_heading, readme)
         self.assertIn("docs/_static/noema-logo-dark.svg", readme)
+        self.assertNotIn("docs/_static/launch/f0-launch-hero.svg", readme)
         self.assertNotIn("docs/_static/noema-training-loop.svg", readme)
-        self.assertLess(
-            readme.index("docs/_static/launch/f0-launch-hero.svg"),
-            readme.index("img.shields.io/github/actions/workflow/status"),
-        )
         self.assertLess(
             readme.index("docs/_static/noema-logo-dark.svg"),
             readme.index("img.shields.io/github/actions/workflow/status"),
@@ -75,6 +72,12 @@ class PublicRepositoryTests(unittest.TestCase):
         self.assertTrue(
             (ROOT / "docs" / "_static" / "noema-logo-dark.svg").is_file()
         )
+        expanded_logo = (
+            ROOT / "docs" / "_static" / "noema-logo-dark.svg"
+        ).read_text(encoding="utf-8")
+        self.assertIn('viewBox="0 0 495 102"', expanded_logo)
+        self.assertIn('font-size="62"', expanded_logo)
+        self.assertNotIn("Encode, transmit, recover meaning", expanded_logo)
         self.assertTrue(
             (ROOT / "docs" / "_static" / "noema-training-loop.svg").is_file()
         )
