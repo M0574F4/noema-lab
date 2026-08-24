@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495 102" role="img" aria-labelledby="title desc">
   <title id="title">Noema Semantic Relay expanded logo</title>
   <desc id="desc">The expanded Noema lockup with the Semantic Relay mark and wordmark.</desc>
-  <rect width="760" height="180" fill="#101816"/>
-  <svg x="28" y="42" width="96" height="96" viewBox="0 0 96 96">
+  <rect width="495" height="102" fill="#101816"/>
+  <svg x="8" y="8" width="96" height="96" viewBox="0 0 96 96">
     <defs>
       <mask id="noema-semantic-relay-lockup-cutout" maskUnits="userSpaceOnUse" x="0" y="0" width="96" height="96">
         <rect width="96" height="96" fill="#ffffff"/>
@@ -16,7 +16,6 @@
     <path d="M9 41h10v14H9z" fill="#f08345"/>
     <circle cx="19" cy="48" r="7" fill="#f08345"/>
   </svg>
-  <text x="150" y="86" fill="#eef5f1" font-family="Inter, Aptos, Arial, Helvetica, sans-serif" font-size="54" font-weight="800">Noema</text>
-  <text x="153" y="119" fill="#9dadab" font-family="Inter, Aptos, Arial, Helvetica, sans-serif" font-size="18" font-weight="500">Semantic communication research toolkit</text>
-  <text x="153" y="147" fill="#9dadab" font-family="Inter, Aptos, Arial, Helvetica, sans-serif" font-size="14" font-weight="500">Encode, transmit, recover meaning</text>
+  <text x="124" y="55" fill="#eef5f1" font-family="Inter, Aptos, Arial, Helvetica, sans-serif" font-size="62" font-weight="800">Noema</text>
+  <text x="127" y="87" fill="#9dadab" font-family="Inter, Aptos, Arial, Helvetica, sans-serif" font-size="19" font-weight="500">Semantic communication research toolkit</text>
 </svg>

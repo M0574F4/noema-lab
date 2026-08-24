@@ -1,8 +1,4 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f0-launch-hero.svg" alt="Noema: make the comparison traceable, with bounded experimental launch evidence" width="100%" />
-</p>
-
-<p align="center">
   <a href="https://M0574F4.github.io/noema-lab/">
     <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-logo-dark.svg" alt="Noema — Semantic communication research toolkit" width="420" />
   </a>
