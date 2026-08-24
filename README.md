@@ -29,7 +29,7 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 
 <p align="center">
   <strong><a href="https://M0574F4.github.io/noema-lab/break_the_comparison.html">Try the flagship demo</a></strong>
-  · <a href="https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow">Watch the complete workflow</a>
+  · <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc">Watch the complete workflow</a>
   · <a href="https://M0574F4.github.io/noema-lab/">Read the documentation</a>
   · <a href="https://M0574F4.github.io/noema-lab/demos.html">Explore demonstrations</a>
   · <a href="https://M0574F4.github.io/noema-lab/launch_assets.html">Inspect launch evidence</a>
@@ -37,11 +37,8 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 
 ## Watch the complete workflow
 
-GitHub does not render embedded YouTube players inside README files. The complete recording plays
-inline in Noema's documentation:
-
 <p align="center">
-  <strong><a href="https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow">Open the embedded workflow player →</a></strong>
+  <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc"><img alt="Watch the complete Noema workflow on YouTube" src="https://img.shields.io/badge/Watch-YouTube-FF0000?logo=youtube&logoColor=white"></a>
 </p>
 
 The recorded walkthrough starts from a clean environment and shows contract export, dataset
@@ -53,7 +50,7 @@ uncompensated and calibrated-oracle baselines.
 | I want to… | Start with… |
 | --- | --- |
 | understand the central idea | the interactive [Break the comparison](https://M0574F4.github.io/noema-lab/break_the_comparison.html) evidence lab |
-| watch an external model train, then compare it with Noema | the [learned QPSK I/Q calibration walkthrough](https://M0574F4.github.io/noema-lab/#watch-the-complete-workflow) |
+| watch an external model train, then compare it with Noema | the [learned QPSK I/Q calibration walkthrough](https://www.youtube.com/watch?v=bKNXS_vHLHc) |
 | **choose a system to train** | **the [ready-to-train matrix](#ready-to-train-systems) below** |
 | run a dependency-light example | the source-checkout quickstart below |
 | bring my own model | the [external adapter SDK](https://M0574F4.github.io/noema-lab/external_adapter_sdk.html) |
