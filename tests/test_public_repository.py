@@ -23,6 +23,7 @@ class PublicRepositoryTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("https://www.youtube.com/watch?v=bKNXS_vHLHc", readme)
         self.assertIn("logo=youtube", readme)
+        self.assertIn('logo=youtube&logoColor=white" height="40"', readme)
         self.assertNotIn("noema-workflow-video-card.svg", readme)
         self.assertNotIn("GitHub does not render embedded YouTube players", readme)
         self.assertNotIn("embedded workflow player", readme)
@@ -50,8 +51,8 @@ class PublicRepositoryTests(unittest.TestCase):
             readme.index("img.shields.io/github/actions/workflow/status"),
         )
         self.assertLess(
-            readme.index("img.shields.io/github/actions/workflow/status"),
             readme.index("docs/_static/noema-logo-dark.svg"),
+            readme.index("img.shields.io/github/actions/workflow/status"),
         )
         self.assertLess(
             readme.index("docs/_static/noema-logo-dark.svg"),
@@ -61,6 +62,12 @@ class PublicRepositoryTests(unittest.TestCase):
             readme.count("docs/_static/launch/f2-contract-to-evidence.svg"),
             1,
         )
+        direct_path = (
+            ROOT / "docs" / "_static" / "launch" / "f2-contract-to-evidence.svg"
+        ).read_text(encoding="utf-8")
+        self.assertIn(">Measurements<", direct_path)
+        self.assertIn("Bit and block", direct_path)
+        self.assertNotIn(">Accounting<", direct_path)
         self.assertTrue((ROOT / "docs" / "_static" / "noema-logo.svg").is_file())
         self.assertTrue(
             (ROOT / "docs" / "_static" / "noema-logo-dark.svg").is_file()

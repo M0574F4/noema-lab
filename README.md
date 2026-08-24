@@ -3,6 +3,12 @@
 </p>
 
 <p align="center">
+  <a href="https://M0574F4.github.io/noema-lab/">
+    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-logo-dark.svg" alt="Noema logo" width="96" />
+  </a>
+</p>
+
+<p align="center">
   <a href="https://github.com/M0574F4/noema-lab/actions"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/M0574F4/noema-lab/ci.yml?branch=main&label=ci"></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/M0574F4/noema-lab"></a>
   <a href="CITATION.cff"><img alt="Cite" src="https://img.shields.io/badge/cite-CITATION.cff-53b889"></a>
@@ -10,18 +16,12 @@
   <img alt="Pre-release" src="https://img.shields.io/badge/status-pre--release-e2a646">
 </p>
 
-<p align="center">
-  <a href="https://M0574F4.github.io/noema-lab/">
-    <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/noema-logo-dark.svg" alt="Noema logo" width="96" />
-  </a>
-</p>
-
 # Noema
 
 **Executable experiment contracts for learned-communication comparisons.**
 
 Noema binds a schema-validated comparison protocol to its execution plan, communication-resource
-accounting, returned models, terminal outcomes, and retained evidence. The result is a local,
+tracking, returned models, terminal outcomes, and retained evidence. The result is a local,
 inspectable chain from a declared question to a reported figure.
 
 Noema checks the identities and relations covered by the selected traceability profile. It does
@@ -38,7 +38,7 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 ## Watch the complete workflow
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc"><img alt="Watch the complete Noema workflow on YouTube" src="https://img.shields.io/badge/Watch-YouTube-FF0000?logo=youtube&logoColor=white"></a>
+  <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc"><img alt="Watch the complete Noema workflow on YouTube" src="https://img.shields.io/badge/Watch-YouTube-FF0000?logo=youtube&logoColor=white" height="40"></a>
 </p>
 
 The recorded walkthrough starts from a clean environment and shows contract export, dataset
@@ -113,7 +113,7 @@ large downloads, external datasets, or additional rights review.
 ### Direct benchmark path
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f2-contract-to-evidence.svg" alt="Noema chain from typed protocol through execution, accounting, retained evidence, and launch projection" width="100%" />
+  <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f2-contract-to-evidence.svg" alt="Noema chain from typed protocol through execution, measurements, retained evidence, and launch projection" width="100%" />
 </p>
 
 The diagram above shows the direct path from a declared benchmark to retained evidence and a
@@ -164,7 +164,7 @@ reviewers still assess whether the scientific comparison itself is appropriate.
 - **DeepMIMO** supplies scenario-based channel data for MIMO research.
 - **Noema** binds work across such tools into one comparison contract and retained evidence chain.
 
-Noema does not replace those projects. It is an experiment-contract runner, resource-accounting
+Noema does not replace those projects. It is an experiment-contract runner, resource-tracking
 layer, capture/export bridge, and local evidence verifier. It is not a full model trainer,
 standards-conformance validator, private leaderboard, or guarantee of fairness or reproducibility.
 
