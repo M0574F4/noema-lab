@@ -8,7 +8,7 @@
   },
   "generator": {
     "path": "tools/generate_launch_assets.py",
-    "sha256": "7c489b8cc17bcad4191297b22dc319d35a0cb1c4778c88a914db4218f88e8f9f"
+    "sha256": "64b78c0aca9e31548f32425e95c15894474384e403ba2dbc461616d42443ed43"
   },
   "schema": {
     "path": "schemas/launch_asset_manifest.schema.json",
@@ -19,8 +19,8 @@
       "id": "F0",
       "title": "Make the comparison traceable",
       "path": "docs/_static/launch/f0-launch-hero.svg",
-      "sha256": "cf9c6ebd8cfaaa3a40d0963ed8c2fa1195babc57f8325f218a90a96150116db2",
-      "size_bytes": 4731
+      "sha256": "2c30a83ea7978ad5eadbe7a9543b1b554e77b9da39825794468024f5b5ed07a8",
+      "size_bytes": 4401
     },
     {
       "id": "F1",
