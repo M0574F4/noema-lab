@@ -38,7 +38,7 @@ not prove scientific fairness, standards conformance, authenticity, or independe
 ## Watch the complete workflow
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc"><img alt="Watch the complete Noema workflow on YouTube" src="https://img.shields.io/badge/Watch-YouTube-FF0000?logo=youtube&logoColor=white" height="40"></a>
+  <a href="https://www.youtube.com/watch?v=bKNXS_vHLHc"><img alt="Watch the complete Noema workflow on YouTube" src="https://img.shields.io/badge/Watch-YouTube-FF0000?logo=youtube&logoColor=white" width="220"></a>
 </p>
 
 The recorded walkthrough starts from a clean environment and shows contract export, dataset
@@ -113,7 +113,7 @@ large downloads, external datasets, or additional rights review.
 ### Direct benchmark path
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f2-contract-to-evidence.svg" alt="Noema chain from typed protocol through execution, measurements, retained evidence, and launch projection" width="100%" />
+  <img src="https://raw.githubusercontent.com/M0574F4/noema-lab/main/docs/_static/launch/f2-contract-to-evidence.svg" alt="Noema chain from typed protocol through execution, metrics, retained evidence, and launch projection" width="100%" />
 </p>
 
 The diagram above shows the direct path from a declared benchmark to retained evidence and a

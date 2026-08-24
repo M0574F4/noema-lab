@@ -8,7 +8,7 @@
   },
   "generator": {
     "path": "tools/generate_launch_assets.py",
-    "sha256": "42ed108abd2a67e1af47c05ca2f6a6a7ecf5ce81072661535f1a8ba7533756d3"
+    "sha256": "7c489b8cc17bcad4191297b22dc319d35a0cb1c4778c88a914db4218f88e8f9f"
   },
   "schema": {
     "path": "schemas/launch_asset_manifest.schema.json",
@@ -33,8 +33,8 @@
       "id": "F2",
       "title": "From experiment contract to retained evidence",
       "path": "docs/_static/launch/f2-contract-to-evidence.svg",
-      "sha256": "4adaba0ef57621cad59eb2d588178ee48143c0617da1ecf0909e3330c6776bf2",
-      "size_bytes": 6476
+      "sha256": "c0d9b27fdabaefcaf39dd2c8001aff268b0921258e7ec0935332e63d06bd7296",
+      "size_bytes": 6377
     },
     {
       "id": "F3",
