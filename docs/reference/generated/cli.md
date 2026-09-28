@@ -8,14 +8,14 @@ The command help below is captured from the installed Noema CLI entry point.
 
 ```text
 usage: noema [-h] [--version] [--workspace WORKSPACE] [--adapter ADAPTER]
-             {ops,data,recipe,template,research,suite,benchmark,submission,adapter,runs,differentiable,dataset-capture,ui}
+             {ops,data,recipe,template,research,suite,benchmark,submission,adapter,runs,differentiable,dataset-capture,agentic,ui}
              ...
 
 Run learned-communication experiment contracts and inspect protocol-to-plot
 evidence.
 
 positional arguments:
-  {ops,data,recipe,template,research,suite,benchmark,submission,adapter,runs,differentiable,dataset-capture,ui}
+  {ops,data,recipe,template,research,suite,benchmark,submission,adapter,runs,differentiable,dataset-capture,agentic,ui}
     ops                 Inspect operation contracts
     data                Fetch or inspect sample datasets
     recipe              Validate, graph, or run recipes
@@ -30,6 +30,8 @@ positional arguments:
                         training contracts
     dataset-capture     Generate dataset-capture shards from researcher-
                         selected recipe taps
+    agentic             Validate, run, replay, or verify agentic supervisory
+                        experiments
     ui                  Run the dashboard server
 
 options:
@@ -911,6 +913,97 @@ options:
   --progress            Show capture progress on stderr even when it is not a
                         terminal.
   --no-progress         Disable capture progress.
+```
+
+## `noema agentic`
+
+```text
+usage: noema agentic [-h] {validate,run,verify,replay} ...
+
+positional arguments:
+  {validate,run,verify,replay}
+    validate            Validate an agentic supervisory experiment contract
+    run                 Run an agent and its declared paired comparators
+    verify              Verify a completed agentic campaign and its evidence
+                        bindings
+    replay              Replay recorded effective actions without calling the
+                        model
+
+options:
+  -h, --help            show this help message and exit
+```
+
+## `noema agentic validate`
+
+```text
+usage: noema agentic validate [-h] [--json] path
+
+positional arguments:
+  path
+
+options:
+  -h, --help  show this help message and exit
+  --json      Emit JSON
+```
+
+## `noema agentic run`
+
+```text
+usage: noema agentic run [-h] [--provider PROVIDER] [--model MODEL]
+                         [--model-revision MODEL_REVISION]
+                         [--endpoint ENDPOINT] [--base-url BASE_URL]
+                         [--api-key-env API_KEY_ENV] [--prompt PROMPT]
+                         [--device DEVICE] [--out OUT] [--json]
+                         path
+
+positional arguments:
+  path
+
+options:
+  -h, --help            show this help message and exit
+  --provider PROVIDER   Override the configured decision provider for this
+                        recorded campaign
+  --model MODEL         Override the model identifier
+  --model-revision MODEL_REVISION
+                        Override the immutable local-model revision
+  --endpoint ENDPOINT   Override the Ollama or compatible HTTP endpoint
+  --base-url BASE_URL   Alias for --endpoint for OpenAI-compatible providers
+  --api-key-env API_KEY_ENV
+                        Dedicated NOEMA_AGENT_* environment variable
+                        containing the API key
+  --prompt PROMPT       Override the recorded prompt file
+  --device DEVICE       Override the local Transformers device, for example
+                        cpu
+  --out OUT             Campaign output directory; defaults below
+                        WORKSPACE/agentic
+  --json                Emit JSON
+```
+
+## `noema agentic verify`
+
+```text
+usage: noema agentic verify [-h] [--json] campaign
+
+positional arguments:
+  campaign
+
+options:
+  -h, --help  show this help message and exit
+  --json      Emit JSON
+```
+
+## `noema agentic replay`
+
+```text
+usage: noema agentic replay [-h] [--out OUT] [--json] campaign
+
+positional arguments:
+  campaign
+
+options:
+  -h, --help  show this help message and exit
+  --out OUT   Replay output directory; defaults below WORKSPACE/agentic
+  --json      Emit JSON
 ```
 
 ## `noema ui`

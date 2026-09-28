@@ -601,6 +601,88 @@ def build_parser() -> argparse.ArgumentParser:
     )
     dataset_capture_run.set_defaults(progress=None)
 
+    agentic_parser = subparsers.add_parser(
+        "agentic",
+        help="Validate, run, replay, or verify agentic supervisory experiments",
+    )
+    agentic_subparsers = agentic_parser.add_subparsers(
+        dest="agentic_command",
+        required=True,
+    )
+    agentic_validate = agentic_subparsers.add_parser(
+        "validate",
+        help="Validate an agentic supervisory experiment contract",
+    )
+    agentic_validate.add_argument("path")
+    agentic_validate.add_argument("--json", action="store_true", help="Emit JSON")
+
+    agentic_run = agentic_subparsers.add_parser(
+        "run",
+        help="Run an agent and its declared paired comparators",
+    )
+    agentic_run.add_argument("path")
+    agentic_run.add_argument(
+        "--provider",
+        default=None,
+        help="Override the configured decision provider for this recorded campaign",
+    )
+    agentic_run.add_argument("--model", default=None, help="Override the model identifier")
+    agentic_run.add_argument(
+        "--model-revision",
+        default=None,
+        help="Override the immutable local-model revision",
+    )
+    agentic_run.add_argument(
+        "--endpoint",
+        default=None,
+        help="Override the Ollama or compatible HTTP endpoint",
+    )
+    agentic_run.add_argument(
+        "--base-url",
+        default=None,
+        help="Alias for --endpoint for OpenAI-compatible providers",
+    )
+    agentic_run.add_argument(
+        "--api-key-env",
+        default=None,
+        help="Dedicated NOEMA_AGENT_* environment variable containing the API key",
+    )
+    agentic_run.add_argument(
+        "--prompt",
+        default=None,
+        help="Override the recorded prompt file",
+    )
+    agentic_run.add_argument(
+        "--device",
+        default=None,
+        help="Override the local Transformers device, for example cpu",
+    )
+    agentic_run.add_argument(
+        "--out",
+        default=None,
+        help="Campaign output directory; defaults below WORKSPACE/agentic",
+    )
+    agentic_run.add_argument("--json", action="store_true", help="Emit JSON")
+
+    agentic_verify = agentic_subparsers.add_parser(
+        "verify",
+        help="Verify a completed agentic campaign and its evidence bindings",
+    )
+    agentic_verify.add_argument("campaign")
+    agentic_verify.add_argument("--json", action="store_true", help="Emit JSON")
+
+    agentic_replay = agentic_subparsers.add_parser(
+        "replay",
+        help="Replay recorded effective actions without calling the model",
+    )
+    agentic_replay.add_argument("campaign")
+    agentic_replay.add_argument(
+        "--out",
+        default=None,
+        help="Replay output directory; defaults below WORKSPACE/agentic",
+    )
+    agentic_replay.add_argument("--json", action="store_true", help="Emit JSON")
+
     ui_parser = subparsers.add_parser("ui", help="Run the dashboard server")
     ui_subparsers = ui_parser.add_subparsers(dest="ui_command", required=True)
     ui_serve = ui_subparsers.add_parser("serve", help="Serve the local dashboard")
@@ -1616,6 +1698,87 @@ def main(argv: Optional[List[str]] = None) -> int:
                 print("runs: %d" % len(payload.get("run_ids") or []))
                 print("shards: %d" % payload["number_of_shards"])
             return 0
+
+        if args.command == "agentic":
+            from noema_lab.agentic.contracts import load_agentic_contract
+            from noema_lab.agentic.harness import (
+                replay_agentic_campaign,
+                run_agentic_campaign,
+                verify_agentic_campaign,
+            )
+
+            if args.agentic_command == "validate":
+                contract_path = Path(args.path)
+                contract = load_agentic_contract(
+                    contract_path,
+                    project_root=Path.cwd(),
+                    verify_base_recipe=True,
+                )
+                payload = {
+                    "status": "valid",
+                    "contract": contract.to_dict(),
+                    "contract_sha256": contract.sha256,
+                    "source": str(contract_path),
+                }
+                if args.json:
+                    print(json.dumps(payload, indent=2, sort_keys=True))
+                else:
+                    print("valid agentic contract: %s" % contract.id)
+                    print("contract sha256: %s" % contract.sha256)
+                    print("provider: %s (%s)" % (contract.provider.kind, contract.provider.model))
+                    print(
+                        "episodes: %d x %d decisions"
+                        % (
+                            contract.episodes.count,
+                            contract.episodes.decisions_per_episode,
+                        )
+                    )
+                return 0
+            if args.agentic_command == "run":
+                payload = run_agentic_campaign(
+                    Path(args.path),
+                    workspace,
+                    project_root=Path.cwd(),
+                    provider=args.provider,
+                    model=args.model,
+                    model_revision=args.model_revision,
+                    endpoint=args.endpoint,
+                    base_url=args.base_url,
+                    api_key_env=args.api_key_env,
+                    prompt=Path(args.prompt) if args.prompt else None,
+                    device=args.device,
+                    out=Path(args.out) if args.out else None,
+                )
+                if args.json:
+                    print(json.dumps(payload, indent=2, sort_keys=True))
+                else:
+                    print("completed agentic campaign: %s" % payload["campaign_dir"])
+                    print("runs: %d" % payload["run_count"])
+                    print("decisions: %d" % payload["decision_count"])
+                    print("manifest sha256: %s" % payload["manifest_sha256"])
+                return 0
+            if args.agentic_command == "verify":
+                payload = verify_agentic_campaign(Path(args.campaign))
+                if args.json:
+                    print(json.dumps(payload, indent=2, sort_keys=True))
+                else:
+                    print("verified agentic campaign: %s" % payload["campaign_id"])
+                    print("runs: %d" % payload["run_count"])
+                    print("decisions: %d" % payload["decision_count"])
+                return 0
+            if args.agentic_command == "replay":
+                payload = replay_agentic_campaign(
+                    Path(args.campaign),
+                    workspace,
+                    out=Path(args.out) if args.out else None,
+                )
+                if args.json:
+                    print(json.dumps(payload, indent=2, sort_keys=True))
+                else:
+                    print("completed agentic replay: %s" % payload["replay_dir"])
+                    print("runs: %d" % payload["replayed_run_count"])
+                    print("metric mismatches: %d" % payload["mismatch_count"])
+                return 0 if payload.get("status") == "passed" else 1
 
         if args.command == "ui" and args.ui_command == "serve":
             serve_ui(

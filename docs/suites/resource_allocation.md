@@ -76,3 +76,13 @@ goodput on that later state. In this setting, water filling on the newest delaye
 mismatched baseline rather than an oracle. See
 [the step-by-step demonstration](../tutorials/reliability_aware_ofdm_allocation_demo.md) for the
 training workflow, interactive paired-seed result figures, and immutable benchmark provenance.
+
+## Agentic supervisory demonstration
+
+The [agentic supervisory allocation tutorial](../tutorials/agentic_allocation_supervisor.md) wraps
+the delayed-CSI system at a slower, between-run boundary. A provider selects one of the existing
+causal allocation policies for the next complete run; it does not generate symbol-level power
+values. The tutorial defines timestamped allowlisted observations, bounded actions, a deterministic
+scripted backend, model-provider alternatives, a rule-based supervisor, latency and failure
+accounting, and deterministic fallback behavior. It is an MX-AI-inspired tutorial specification,
+not a reproduction of that paper or a validated agent-performance benchmark.

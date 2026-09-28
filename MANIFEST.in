@@ -44,7 +44,7 @@ prune docs/demo/data/deepjscc_slow_rayleigh/reconstructions
 exclude docs/launch_video.md
 recursive-include benchmarks *.yaml
 recursive-include recipes *.yaml
-recursive-include examples *.py *.yaml
+recursive-include examples *.py *.yaml *.md
 recursive-include demo_trainings *.py *.yaml *.md *.txt
 prune demo_trainings/csi_feedback_autoencoder/.noema
 global-exclude *.py[cod]

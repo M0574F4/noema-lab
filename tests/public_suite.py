@@ -6,6 +6,8 @@ import unittest
 MODULES = (
     "test_public_repository",
     "test_acr_recipe_planner_contracts",
+    "test_agentic_contracts_backends",
+    "test_agentic_harness",
     "test_ai_phy_explicit_pipelines",
     "test_artifact_strict_metadata",
     "test_backend_conformance",

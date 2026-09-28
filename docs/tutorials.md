@@ -28,6 +28,7 @@ bundle path, trainer details, fair benchmark methods, result views, and publicat
 
 - [Learned OFDM subcarrier allocation](tutorials/ofdm_resource_allocation_demo.md)
 - [Reliability-aware OFDM allocation with delayed CSI](tutorials/reliability_aware_ofdm_allocation_demo.md)
+- [Agentic supervisory allocation](tutorials/agentic_allocation_supervisor.md)
 - [Learned 2×2 MIMO-OFDM channel estimation](tutorials/learned_mimo_ofdm_channel_estimation_demo.md)
 - [Learned CSI compression and feedback](tutorials/learned_csi_feedback.md)
 - [Learned QPSK receiver calibration](tutorials/learned_qpsk_demapper_demo.md)
@@ -39,6 +40,13 @@ bundle path, trainer details, fair benchmark methods, result views, and publicat
 - [Learned joint ISAC OFDM allocation](tutorials/learned_isac_ofdm_allocation_demo.md)
 - [Learned near-field XL-MIMO range-angle focusing](tutorials/learned_near_field_xl_mimo_demo.md)
 - [Learned LEO-NTN Doppler prediction and beam handover](tutorials/learned_leo_ntn_tracking_demo.md)
+
+```{toctree}
+:hidden:
+:maxdepth: 1
+
+tutorials/agentic_allocation_supervisor
+```
 
 ## Run the Kodak Development Benchmark
 
