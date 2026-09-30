@@ -146,6 +146,13 @@ where = ["src"]
 "share/noema-lab/schemas" = [
   "schemas/benchmark_pack.schema.json",
 ]
+"share/noema-lab/examples/agentic_allocation" = [
+  "examples/agentic_allocation/contract.yaml",
+  "examples/agentic_allocation/prompt.md",
+]
+"share/noema-lab/recipes" = [
+  "recipes/resource_delayed_csi_finite_blocklength.yaml",
+]
 "share/noema-lab/demo_trainings/_portable_ai_phy_adapter_common" = [
   "demo_trainings/_portable_ai_phy_adapter_common/datamodule.py",
   "demo_trainings/_portable_ai_phy_adapter_common/train.py",

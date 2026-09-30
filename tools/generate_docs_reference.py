@@ -155,6 +155,11 @@ CLI_COMMANDS: Sequence[Sequence[str]] = (
     ("differentiable", "export"),
     ("dataset-capture",),
     ("dataset-capture", "run"),
+    ("agentic",),
+    ("agentic", "validate"),
+    ("agentic", "run"),
+    ("agentic", "verify"),
+    ("agentic", "replay"),
     ("ui",),
     ("ui", "serve"),
 )

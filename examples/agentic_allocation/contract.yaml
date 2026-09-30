@@ -1,0 +1,153 @@
+schema_version: 1
+kind: noema.agentic_supervisory_contract
+id: agentic-allocation-delayed-csi-v1
+
+base_recipe:
+  path: ../../recipes/resource_delayed_csi_finite_blocklength.yaml
+  sha256: 6fa1e1591d00c64e805703202c9e8824c3f7811b5860331490a6f43d26dc922f
+
+objective:
+  id: minimum-power-reliable-link
+  primary_metric: resource.average_transmit_power_budget
+  direction: minimize
+  aggregation: mean
+  description: >-
+    Minimize mean selected average transmit-power budget while satisfying the
+    predicted-BLER ceiling. When two valid controllers use the same mean power,
+    use expected finite-blocklength goodput as the declared reporting tie-break.
+    Predicted BLER is a normal-approximation estimate, not measured decoder BLER.
+  constraints:
+    - metric: resource.finite_blocklength.predicted_bler
+      operator: <=
+      value: 0.25
+  tie_breakers:
+    - metric: resource.finite_blocklength.expected_goodput_bps_hz
+      direction: maximize
+
+episodes:
+  count: 2
+  decisions_per_episode: 2
+  reset_between_episodes: true
+  seed_schedule:
+    - episode: 0
+      seeds:
+        channel: 95101
+        traffic: 195101
+    - episode: 1
+      seeds:
+        channel: 95201
+        traffic: 195201
+
+observations:
+  timestamp_field: observation_timestamp_utc
+  history_decisions: 1
+  allowlist:
+    - observation_timestamp_utc
+    - episode_index
+    - decision_index
+    - available_after_run_id
+    - public_context.noise_variance
+    - public_context.feedback_delay_ofdm_symbols
+    - public_context.csi_history_length
+    - public_context.csi_estimation_snr_db
+    - public_context.mobility_kmh
+    - public_context.ofdm_fft_size
+    - public_context.allocation_ofdm_symbols
+    - recent.run_id
+    - recent.run_started_at_utc
+    - recent.run_completed_at_utc
+    - recent.action.policy
+    - recent.action.power_budget
+    - recent.predicted_bler
+    - recent.expected_goodput_bps_hz
+    - recent.average_power_budget
+    - recent.action_valid
+    - recent.fallback_used
+    - transmitter_csi.oldest_observation_ofdm_symbol_index
+    - transmitter_csi.newest_observation_ofdm_symbol_index
+    - transmitter_csi.newest_observation_nominal_time_s
+    - transmitter_csi.mean_observed_gain
+    - transmitter_csi.p10_observed_gain
+    - transmitter_csi.p50_observed_gain
+    - transmitter_csi.p90_observed_gain
+    - transmitter_csi.mean_history_delta_magnitude
+
+actions:
+  tool: configure_allocator
+  policies:
+    - fixed
+    - observed_csi_water_filling
+    - robust_csi_water_filling
+    - causal_ar_water_filling
+  allowed_power_budgets:
+    - 0.4
+    - 0.6
+    - 0.8
+    - 1.0
+    - 1.4
+
+prompts:
+  system: >-
+    You are a slow supervisory controller for a delayed-CSI OFDM link. You act
+    only between completed Noema runs. Select one existing allocator and one
+    allowed average power budget for the next complete run. Use only the strict
+    observation JSON supplied by the runner. Current or future channel truth,
+    evaluation-only previews, environment seeds, and the outcome of the next
+    run are unavailable. Call configure_allocator exactly once. Do not emit a
+    per-subcarrier power vector or request another tool. The reported BLER is a
+    finite-blocklength normal-approximation prediction, not measured decoder
+    BLER. Prefer the lowest power budget likely to satisfy the declared BLER
+    ceiling; when power is tied, prefer higher expected goodput.
+  user: >-
+    Choose the policy and power_budget for the next complete run from the
+    allowed values. Return only one configure_allocator tool call with exactly
+    the policy and power_budget arguments. Treat missing history as unavailable
+    and do not infer or request hidden channel information.
+
+comparators:
+  policy_actions:
+    - tool: configure_allocator
+      arguments: {policy: fixed, power_budget: 0.8}
+    - tool: configure_allocator
+      arguments: {policy: observed_csi_water_filling, power_budget: 0.8}
+    - tool: configure_allocator
+      arguments: {policy: robust_csi_water_filling, power_budget: 0.8}
+    - tool: configure_allocator
+      arguments: {policy: causal_ar_water_filling, power_budget: 0.8}
+  rule_based:
+    observation: recent.predicted_bler
+    operator: ">"
+    threshold: 0.20
+    if_true:
+      tool: configure_allocator
+      arguments:
+        policy: robust_csi_water_filling
+        power_budget: 1.4
+    if_false:
+      tool: configure_allocator
+      arguments:
+        policy: causal_ar_water_filling
+        power_budget: 0.8
+
+limits:
+  decision_timeout_seconds: 30.0
+  max_tool_calls_per_decision: 1
+  max_output_tokens: 160
+  max_invalid_actions: 0
+
+fallback:
+  "on":
+    - timeout
+    - backend_error
+    - invalid_action
+  action:
+    tool: configure_allocator
+    arguments:
+      policy: fixed
+      power_budget: 1.4
+
+provider:
+  kind: scripted
+  model: deterministic-cycle-v1
+  temperature: 0.0
+  seed: 0
